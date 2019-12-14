@@ -1,2 +1,1 @@
 Dyner
-Dyner
