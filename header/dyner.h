@@ -9,6 +9,7 @@
 #include "header/menu/billhistorywidget.h"
 #include "header/menu/billreqwidget.h"
 #include "header/menu/orderwidget.h"
+#include <QPushButton>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Dyner; }
@@ -30,6 +31,7 @@ public:
     void billHistoryButtonClick();
     void billReqButtonClick();
     void adminButtonClick();
+    void setShadow(QWidget *widget, QColor color);
 
     ~Dyner();
 private slots:
@@ -48,9 +50,10 @@ private slots:
 private:
     Ui::Dyner *ui;
     QWidget* childFrame;
-    QWidget* menuWidget;
+    QWidget* menuButtons;
     enum buttonName{home,order,billHistory,billReq,admin};
     bool isMenuHidden;
+    QPushButton* currentShaddowEffect;
 
 };
 #endif // DYNER_H

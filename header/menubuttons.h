@@ -9,14 +9,13 @@ namespace Ui {
 class menuButtons;
 }
 
-class menuButtons : public QWidget
+class MenuButtons : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit menuButtons(QWidget *parent = nullptr);
-    ~menuButtons();
-    void setShadow(QWidget* widget, QColor color);
+    explicit MenuButtons(QWidget *parent = nullptr);
+    ~MenuButtons();
 
 private slots:
     void on_btnOrder_clicked();

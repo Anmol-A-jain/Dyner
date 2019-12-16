@@ -12,15 +12,20 @@ Dyner::Dyner(QWidget *parent)
     this->setWindowState(Qt::WindowMaximized);
     ui->menuList->hide();
     isMenuHidden = true;
-    menuWidget = new menuButtons(this);
-    childFrame = menuWidget;
+    menuButtons = new MenuButtons(this);
+    childFrame = menuButtons;
     ui->windowContainer->addWidget(childFrame);
 
+
+    currentShaddowEffect = ui->parentButtonHome;
+    this->setShadow(currentShaddowEffect,QColor(139,69,19));
 
 }
 
 Dyner::~Dyner()
 {
+    delete menuButtons;
+    delete currentShaddowEffect;
     delete childFrame;
     delete ui;
 }
@@ -48,7 +53,7 @@ QWidget *Dyner::newFrame(int option)
     {
         case 0 :
         {
-            return new menuButtons(this);
+            return new MenuButtons(this);
         }
         case 1 :
         {
@@ -91,7 +96,7 @@ void Dyner::billHistoryButtonClick()
     emit on_parentButtonBillHistory_clicked();
 }
 
-void Dyner::billReqButtonClick()    
+void Dyner::billReqButtonClick()
 {
     emit on_parentButtonBillRequest_clicked();
 }
@@ -101,11 +106,33 @@ void Dyner::adminButtonClick()
     emit on_parentButtonAdmin_clicked();
 }
 
+void Dyner::setShadow(QWidget *widget, QColor color)
+{
+    auto deleteItLater = currentShaddowEffect->graphicsEffect() ;
+
+    auto effect = new QGraphicsDropShadowEffect();
+    effect->setOffset(0.0);
+    effect->setBlurRadius(30.0);
+    effect->setColor(color);
+    widget->setGraphicsEffect(effect);
+    currentShaddowEffect = static_cast<QPushButton*>(widget);
+
+    ui->widgetTitle->setText(static_cast<QPushButton*>(widget)->text());
+    ui->widgetTitle->setFont(QFont("Arial", 20));r
+    delete deleteItLater;
+}
+
 void Dyner::on_parentButtonHome_clicked()
 {
     showMenuAndDeleteThis(buttonName::home);
     isMenuHidden = true;
     ui->menuList->hide();
+
+    currentShaddowEffect->setGraphicsEffect(nullptr);
+    currentShaddowEffect = ui->parentButtonHome;
+    this->setShadow(currentShaddowEffect,QColor(139,69,19));
+
+
 }
 
 void Dyner::on_parentButtonOrder_clicked()
@@ -116,6 +143,10 @@ void Dyner::on_parentButtonOrder_clicked()
         isMenuHidden = false;
         ui->menuList->show();
     }
+
+    currentShaddowEffect->setGraphicsEffect(nullptr);
+    currentShaddowEffect = ui->parentButtonOrder;
+    this->setShadow(currentShaddowEffect,QColor(139,69,19));
 }
 
 
@@ -127,6 +158,11 @@ void Dyner::on_parentButtonBillHistory_clicked()
         isMenuHidden = false;
         ui->menuList->show();
     }
+
+
+    currentShaddowEffect->setGraphicsEffect(nullptr);
+    currentShaddowEffect = ui->parentButtonBillHistory;
+    this->setShadow(currentShaddowEffect,QColor(139,69,19));
 }
 
 void Dyner::on_parentButtonBillRequest_clicked()
@@ -137,6 +173,11 @@ void Dyner::on_parentButtonBillRequest_clicked()
         isMenuHidden = false;
         ui->menuList->show();
     }
+
+
+    currentShaddowEffect->setGraphicsEffect(nullptr);
+    currentShaddowEffect = ui->parentButtonBillRequest;
+    this->setShadow(currentShaddowEffect,QColor(139,69,19));
 }
 
 void Dyner::on_parentButtonAdmin_clicked()
@@ -147,6 +188,11 @@ void Dyner::on_parentButtonAdmin_clicked()
         isMenuHidden = false;
         ui->menuList->show();
     }
+
+
+    currentShaddowEffect->setGraphicsEffect(nullptr);
+    currentShaddowEffect = ui->parentButtonAdmin;
+    this->setShadow(currentShaddowEffect,QColor(139,69,19));
 }
 
 void Dyner::on_menuButton_clicked()
