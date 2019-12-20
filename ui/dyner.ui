@@ -14,8 +14,8 @@
    <string>Dyner</string>
   </property>
   <property name="windowIcon">
-   <iconset theme=":/img/img/icon.png">
-    <normaloff>.</normaloff>.</iconset>
+   <iconset resource="../res.qrc">
+    <normaloff>:/img/img/icon1.png</normaloff>:/img/img/icon1.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -25,8 +25,11 @@
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: #ffffff;
-background-image: url(:/img/img/background1.jpg);</string>
+    <string notr="true">#centralwidget{
+
+	background-color: #ffffff;
+	background-image: url(:/img/img/background3.jpg);
+}</string>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_4">
     <item>
@@ -46,8 +49,10 @@ background-image: url(:/img/img/background1.jpg);</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-radius:10px;
-background-color:   qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(227, 171, 122, 1), stop:1 rgba(192, 130, 79, 1))</string>
+         <string notr="true">horizontalWidget{
+	border-radius:10px;
+	background-color:   qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(227, 171, 122, 1), stop:1 rgba(192, 130, 79, 1))
+}</string>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
@@ -65,13 +70,11 @@ background-color:   qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border-radius: 10px;
-color : white;
-border-image: url(:/img/img/ButtonBackground.jpg);
+            <string notr="true">border-image: url(:/img/img/menuIcon.png);
 </string>
            </property>
            <property name="text">
-            <string>Menu</string>
+            <string/>
            </property>
           </widget>
          </item>
@@ -97,8 +100,8 @@ border-image: url(:/img/img/ButtonBackground.jpg);
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-image: url(:/img/img/ButtonBackground.jpg);
-color:white;</string>
+            <string notr="true">color:white;
+border-radius:10px;</string>
            </property>
            <property name="text">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;Home&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -128,166 +131,175 @@ color:white;</string>
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QFrame" name="menuList">
-          <property name="minimumSize">
-           <size>
-            <width>250</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>250</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">border-radius:10px;
-background-image: url(:/img/img/background.jpg);</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <item>
-            <widget class="QPushButton" name="parentButtonHome">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-radius: 10px;
-color : white;
-border-image: url(:/img/img/ButtonBackground.jpg);
-</string>
-             </property>
-             <property name="text">
-              <string>Home</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="parentButtonOrder">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-radius: 10px;
-color : white;
-border-image: url(:/img/img/ButtonBackground.jpg);
-</string>
-             </property>
-             <property name="text">
-              <string>ORDER</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="parentButtonBillRequest">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-radius: 10px;
-color : white;
-border-image: url(:/img/img/ButtonBackground.jpg);
-</string>
-             </property>
-             <property name="text">
-              <string>Bill Request</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="parentButtonBillHistory">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-radius: 10px;
-color : white;
-border-image: url(:/img/img/ButtonBackground.jpg);
-</string>
-             </property>
-             <property name="text">
-              <string>Bill History</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="parentButtonAdmin">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-radius: 10px;
-color : white;
-border-image: url(:/img/img/ButtonBackground.jpg);
-</string>
-             </property>
-             <property name="text">
-              <string>Admin</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="verticalSpacer">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QFrame" name="horizontalFrame">
-          <property name="styleSheet">
-           <string notr="true">QFrame{
-	
-	background-image: url(:/img/img/background.jpg);
-	border-radius : 10px;
+       <widget class="QFrame" name="menuAndWindow">
+        <property name="styleSheet">
+         <string notr="true">#menuAndWindow{
+	border-image: url(:/img/img/background2.jpg);
 }</string>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item>
-            <layout class="QHBoxLayout" name="windowContainer"/>
-           </item>
-          </layout>
-         </widget>
-        </item>
-       </layout>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QFrame" name="menuList">
+           <property name="minimumSize">
+            <size>
+             <width>250</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>250</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">#menuList{
+	border-radius:10px;
+}</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QPushButton" name="parentButtonHome">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border-radius: 10px;
+color : brown;
+border-image: url(:/img/img/ButtonBackground.jpg);
+</string>
+              </property>
+              <property name="text">
+               <string>Home</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="parentButtonOrder">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border-radius: 10px;
+color : brown;
+border-image: url(:/img/img/ButtonBackground.jpg);
+</string>
+              </property>
+              <property name="text">
+               <string>ORDER</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="parentButtonBillRequest">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border-radius: 10px;
+color : brown;
+border-image: url(:/img/img/ButtonBackground.jpg);
+</string>
+              </property>
+              <property name="text">
+               <string>Bill Request</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="parentButtonBillHistory">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border-radius: 10px;
+color : brown;
+border-image: url(:/img/img/ButtonBackground.jpg);
+</string>
+              </property>
+              <property name="text">
+               <string>Bill History</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="parentButtonAdmin">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border-radius: 10px;
+color : brown;
+border-image: url(:/img/img/ButtonBackground.jpg);
+</string>
+              </property>
+              <property name="text">
+               <string>Admin</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="horizontalFrame">
+           <property name="styleSheet">
+            <string notr="true">#horizontalFrame{
+	border-radius : 10px;
+	background-color: rgba(238, 238, 236,0.5);
+}</string>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <layout class="QHBoxLayout" name="windowContainer"/>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </item>
      </layout>
     </item>
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res.qrc"/>
+ </resources>
  <connections/>
 </ui>

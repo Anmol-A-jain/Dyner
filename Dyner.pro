@@ -1,4 +1,5 @@
-QT       += core gui
+
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,18 +20,24 @@ SOURCES += \
     cpp/menu/adminwidget.cpp \
     cpp/menu/billhistorywidget.cpp \
     cpp/menu/billreqwidget.cpp \
+    server/dynerserver.cpp \
+    databasecon.cpp \
     main.cpp \
     cpp/dyner.cpp \
     cpp/menubuttons.cpp \
-    cpp/menu/orderwidget.cpp
+    cpp/menu/orderwidget.cpp \
+    server/mytcpsocket.cpp
 
 HEADERS += \
+    databasecon.h \
+    server/dynerserver.h \
     header/menu/adminwidget.h \
     header/menu/billhistorywidget.h \
     header/menu/billreqwidget.h \
     header/dyner.h \
     header/menubuttons.h \
-    header/menu/orderwidget.h
+    header/menu/orderwidget.h \
+    server/mytcpsocket.h
 
 FORMS += \
     ui/menu/adminwidget.ui \

@@ -15,6 +15,7 @@ class MenuButtons : public QWidget
 
 public:
     explicit MenuButtons(QWidget *parent = nullptr);
+    void setShadow(QWidget *widget, QColor color);
     ~MenuButtons();
 
 private slots:
