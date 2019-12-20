@@ -18,8 +18,19 @@ Dyner::Dyner(QWidget *parent)
 
 
     currentShaddowEffect = ui->parentButtonHome;
-    this->setShadow(currentShaddowEffect,QColor(139,69,19));
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
 
+    this->setWindowTitle("Bill Desk");
+
+    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;}");
+
+
+    QFile myfile;
+    myfile.copy(":/DB/database/DynerDB.db",QDir::currentPath() + "/DynerDB.db");
+    qDebug() << QDir::currentPath();
+
+    //server = new DynerServer();
+    server.startServer();
 }
 
 Dyner::~Dyner()
@@ -111,8 +122,8 @@ void Dyner::setShadow(QWidget *widget, QColor color)
     auto deleteItLater = currentShaddowEffect->graphicsEffect() ;
 
     auto effect = new QGraphicsDropShadowEffect();
-    effect->setOffset(0.0);
-    effect->setBlurRadius(30.0);
+    effect->setOffset(3.0);
+    effect->setBlurRadius(10.0);
     effect->setColor(color);
     widget->setGraphicsEffect(effect);
     currentShaddowEffect = static_cast<QPushButton*>(widget);
@@ -130,8 +141,9 @@ void Dyner::on_parentButtonHome_clicked()
 
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonHome;
-    this->setShadow(currentShaddowEffect,QColor(139,69,19));
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
 
+    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: }");
 
 }
 
@@ -146,7 +158,10 @@ void Dyner::on_parentButtonOrder_clicked()
 
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonOrder;
-    this->setShadow(currentShaddowEffect,QColor(139,69,19));
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+
+    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
+
 }
 
 
@@ -159,10 +174,12 @@ void Dyner::on_parentButtonBillHistory_clicked()
         ui->menuList->show();
     }
 
-
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonBillHistory;
-    this->setShadow(currentShaddowEffect,QColor(139,69,19));
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+
+    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
+
 }
 
 void Dyner::on_parentButtonBillRequest_clicked()
@@ -174,10 +191,12 @@ void Dyner::on_parentButtonBillRequest_clicked()
         ui->menuList->show();
     }
 
-
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonBillRequest;
-    this->setShadow(currentShaddowEffect,QColor(139,69,19));
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+
+    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
+
 }
 
 void Dyner::on_parentButtonAdmin_clicked()
@@ -192,7 +211,10 @@ void Dyner::on_parentButtonAdmin_clicked()
 
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonAdmin;
-    this->setShadow(currentShaddowEffect,QColor(139,69,19));
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+
+    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
+
 }
 
 void Dyner::on_menuButton_clicked()

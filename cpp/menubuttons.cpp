@@ -11,11 +11,11 @@ MenuButtons::MenuButtons(QWidget *parent) :
 
     QColor color(0,0,0);
 
-    /*this->setShadow(ui->btnAdmin,color);
+    this->setShadow(ui->btnAdmin,color);
     this->setShadow(ui->btnOrder,color);
     this->setShadow(ui->btnBillReq,color);
     this->setShadow(ui->btnBillHistory,color);
-*/
+
 
     //auto myParent = static_cast<Dyner*>(parent) ;
 
@@ -46,4 +46,13 @@ void MenuButtons::on_btnBillReq_clicked()
 void MenuButtons::on_btnAdmin_clicked()
 {
     static_cast<Dyner*>(parentName)->adminButtonClick();
+}
+
+void MenuButtons::setShadow(QWidget *widget, QColor color)
+{
+    auto effect = new QGraphicsDropShadowEffect();
+    effect->setOffset(.0);
+    effect->setBlurRadius(30.0);
+    effect->setColor(color);
+    widget->setGraphicsEffect(effect);
 }

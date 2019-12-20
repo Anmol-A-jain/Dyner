@@ -10,6 +10,9 @@
 #include "header/menu/billreqwidget.h"
 #include "header/menu/orderwidget.h"
 #include <QPushButton>
+#include <QDir>
+#include <QFile>
+#include "server/dynerserver.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Dyner; }
@@ -54,6 +57,7 @@ private:
     enum buttonName{home,order,billHistory,billReq,admin};
     bool isMenuHidden;
     QPushButton* currentShaddowEffect;
+    DynerServer server;
 
 };
 #endif // DYNER_H
