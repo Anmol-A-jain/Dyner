@@ -1,5 +1,6 @@
 #include "header/menu/adminwidget.h"
 #include "ui_adminwidget.h"
+#include "customWidgets/itemwidget.h"
 
 AdminWidget::AdminWidget(QWidget *parent) :
     QWidget(parent),
