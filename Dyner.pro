@@ -20,6 +20,7 @@ SOURCES += \
     cpp/menu/adminwidget.cpp \
     cpp/menu/billhistorywidget.cpp \
     cpp/menu/billreqwidget.cpp \
+    customWidgets/itemwidget.cpp \
     server/dynerserver.cpp \
     databasecon.cpp \
     main.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
     server/mytcpsocket.cpp
 
 HEADERS += \
+    customWidgets/itemwidget.h \
     databasecon.h \
     server/dynerserver.h \
     header/menu/adminwidget.h \
@@ -40,6 +42,7 @@ HEADERS += \
     server/mytcpsocket.h
 
 FORMS += \
+    customWidgets/itemwidget.ui \
     ui/menu/adminwidget.ui \
     ui/menu/billhistorywidget.ui \
     ui/menu/billreqwidget.ui \
