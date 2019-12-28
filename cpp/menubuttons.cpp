@@ -20,7 +20,6 @@ MenuButtons::MenuButtons(QWidget *parent) :
     //auto myParent = static_cast<Dyner*>(parent) ;
 
     this->parentName = parent;
-
 }
 
 MenuButtons::~MenuButtons()

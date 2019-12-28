@@ -39,14 +39,14 @@
       <widget class="QPushButton" name="btnBillHistory">
        <property name="minimumSize">
         <size>
-         <width>250</width>
-         <height>150</height>
+         <width>300</width>
+         <height>175</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>250</width>
-         <height>150</height>
+         <width>300</width>
+         <height>175</height>
         </size>
        </property>
        <property name="font">
@@ -55,7 +55,7 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">border-radius: 10px;
+        <string notr="true">border-radius: 20px;
 color : white;
 border-image: url(:/img/img/ButtonBackground.jpg);
 </string>
@@ -121,14 +121,14 @@ border-image: url(:/img/img/ButtonBackground.jpg);
       <widget class="QPushButton" name="btnOrder">
        <property name="minimumSize">
         <size>
-         <width>250</width>
-         <height>150</height>
+         <width>300</width>
+         <height>175</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>250</width>
-         <height>150</height>
+         <width>300</width>
+         <height>175</height>
         </size>
        </property>
        <property name="font">
@@ -137,7 +137,7 @@ border-image: url(:/img/img/ButtonBackground.jpg);
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">border-radius: 10px;
+        <string notr="true">border-radius: 20px;
 color : white;
 border-image: url(:/img/img/ButtonBackground.jpg);
 </string>
@@ -151,14 +151,14 @@ border-image: url(:/img/img/ButtonBackground.jpg);
       <widget class="QPushButton" name="btnAdmin">
        <property name="minimumSize">
         <size>
-         <width>250</width>
-         <height>150</height>
+         <width>300</width>
+         <height>175</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>250</width>
-         <height>150</height>
+         <width>300</width>
+         <height>175</height>
         </size>
        </property>
        <property name="font">
@@ -167,7 +167,7 @@ border-image: url(:/img/img/ButtonBackground.jpg);
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">border-radius: 10px;
+        <string notr="true">border-radius: 20px;
 color : white;
 border-image: url(:/img/img/ButtonBackground.jpg);
 </string>
@@ -220,14 +220,14 @@ border-image: url(:/img/img/ButtonBackground.jpg);
       <widget class="QPushButton" name="btnBillReq">
        <property name="minimumSize">
         <size>
-         <width>250</width>
-         <height>150</height>
+         <width>300</width>
+         <height>175</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>250</width>
-         <height>150</height>
+         <width>300</width>
+         <height>175</height>
         </size>
        </property>
        <property name="font">
@@ -236,7 +236,7 @@ border-image: url(:/img/img/ButtonBackground.jpg);
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">border-radius: 10px;
+        <string notr="true">border-radius: 20px;
 color : white;
 border-image: url(:/img/img/ButtonBackground.jpg);
 </string>

@@ -172,6 +172,13 @@ border-radius:10px;</string>
                 <height>50</height>
                </size>
               </property>
+              <property name="font">
+               <font>
+                <pointsize>7</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
               <property name="styleSheet">
                <string notr="true">border-radius: 10px;
 color : brown;
@@ -190,6 +197,13 @@ border-image: url(:/img/img/ButtonBackground.jpg);
                 <width>0</width>
                 <height>50</height>
                </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>7</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
               </property>
               <property name="styleSheet">
                <string notr="true">border-radius: 10px;
@@ -210,6 +224,13 @@ border-image: url(:/img/img/ButtonBackground.jpg);
                 <height>50</height>
                </size>
               </property>
+              <property name="font">
+               <font>
+                <pointsize>7</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
               <property name="styleSheet">
                <string notr="true">border-radius: 10px;
 color : brown;
@@ -229,6 +250,13 @@ border-image: url(:/img/img/ButtonBackground.jpg);
                 <height>50</height>
                </size>
               </property>
+              <property name="font">
+               <font>
+                <pointsize>7</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
               <property name="styleSheet">
                <string notr="true">border-radius: 10px;
 color : brown;
@@ -247,6 +275,12 @@ border-image: url(:/img/img/ButtonBackground.jpg);
                 <width>0</width>
                 <height>50</height>
                </size>
+              </property>
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
               </property>
               <property name="styleSheet">
                <string notr="true">border-radius: 10px;

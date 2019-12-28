@@ -2,6 +2,7 @@
 #include "header/dyner.h"
 #include "header/menubuttons.h"
 #include "ui_dyner.h"
+#include "databasecon.h"
 
 Dyner::Dyner(QWidget *parent)
     : QMainWindow(parent)
@@ -18,7 +19,7 @@ Dyner::Dyner(QWidget *parent)
 
 
     currentShaddowEffect = ui->parentButtonHome;
-    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+    this->setShadow(currentShaddowEffect,QColor(0,0,0));
 
     this->setWindowTitle("Bill Desk");
 
@@ -26,11 +27,17 @@ Dyner::Dyner(QWidget *parent)
 
 
     QFile myfile;
-    myfile.copy(":/DB/database/DynerDB.db",QDir::currentPath() + "/DynerDB.db");
+    QString file = QDir::currentPath() + "/DynerDB.db" ;
+    qDebug() << QFile::exists(file);
+
+    if(!QFile::exists(file))
+    {
+        myfile.copy(":/DB/database/DynerDB.db",file);
+    }
     qDebug() << QDir::currentPath();
 
-    //server = new DynerServer();
     server.startServer();
+
 }
 
 Dyner::~Dyner()
@@ -141,7 +148,7 @@ void Dyner::on_parentButtonHome_clicked()
 
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonHome;
-    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+    this->setShadow(currentShaddowEffect,QColor(0,0,0));
 
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: }");
 
@@ -158,7 +165,7 @@ void Dyner::on_parentButtonOrder_clicked()
 
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonOrder;
-    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+    this->setShadow(currentShaddowEffect,QColor(0,0,0));
 
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
 
@@ -176,7 +183,7 @@ void Dyner::on_parentButtonBillHistory_clicked()
 
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonBillHistory;
-    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+    this->setShadow(currentShaddowEffect,QColor(0,0,0));
 
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
 
@@ -193,7 +200,7 @@ void Dyner::on_parentButtonBillRequest_clicked()
 
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonBillRequest;
-    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+    this->setShadow(currentShaddowEffect,QColor(0,0,0));
 
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
 
@@ -211,7 +218,7 @@ void Dyner::on_parentButtonAdmin_clicked()
 
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonAdmin;
-    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+    this->setShadow(currentShaddowEffect,QColor(0,0,0));
 
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
 
