@@ -26,16 +26,15 @@ class Dyner : public QMainWindow
 
 public:
     Dyner(QWidget *parent = nullptr);
-    Ui::Dyner* getUi();
-    QHBoxLayout* getFrame();
-    QWidget* newFrame(int option);
-    void showMenuAndDeleteThis(int option);
-    void orderButtonClick();
-    void billHistoryButtonClick();
-    void billReqButtonClick();
-    void adminButtonClick();
-    void setShadow(QWidget *widget, QColor color);
-    void setXml(QString xmlFile, QString DBFile);
+    Ui::Dyner* getUi(); // returns ui for this class
+    QWidget* newFrame(int option); // creates new widget and returns it
+    void showMenuAndDeleteThis(int option); // show and hide menu button
+    void orderButtonClick(); // emits order button
+    void billHistoryButtonClick(); // emits bill history button
+    void billReqButtonClick(); // emits bill req button
+    void adminButtonClick(); // emits admin button
+    void setShadow(QWidget *widget, QColor color); // setting shadow to widget and formating widget title
+    void setXml(QString xmlFile, QString DBFile); // writing Database PATh to XML
 
     ~Dyner();
 private slots:
@@ -53,12 +52,11 @@ private slots:
 
 private:
     Ui::Dyner *ui;
-    QWidget* childFrame;
-    QWidget* menuButtons;
-    enum buttonName{home,order,billHistory,billReq,admin};
-    bool isMenuHidden;
-    QPushButton* currentShaddowEffect;
-    DynerServer server;
+    QWidget* childFrame; // to track wich widget is currently in windowContainer
+    enum buttonName{home,order,billHistory,billReq,admin}; // enum for buttons
+    bool isMenuHidden; // track if menu is hidden or not
+    QPushButton* currentShaddowEffect; // to track which button have currently shadow effect
+    DynerServer server; // creating server object
 
 };
 #endif // DYNER_H

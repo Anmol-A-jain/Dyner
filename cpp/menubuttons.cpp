@@ -9,8 +9,8 @@ MenuButtons::MenuButtons(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // setting shadow to all buttons
     QColor color(0,0,0);
-
     this->setShadow(ui->btnAdmin,color);
     this->setShadow(ui->btnOrder,color);
     this->setShadow(ui->btnBillReq,color);

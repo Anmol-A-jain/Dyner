@@ -19,7 +19,6 @@ addItem::~addItem()
 
 void addItem::on_buttonBox_accepted()
 {
-
     QString file = QDir::currentPath() + "/DynerDB.db" ;
     databaseCon d;
     QString cmd = "insert into tblMenu values('" + ui->id->text() + "','" + ui->name->text() + "'," + ui->price->text() + " ,' " + ui->category->text() + "')" ;

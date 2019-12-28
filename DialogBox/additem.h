@@ -16,6 +16,7 @@ public:
     ~addItem();
 
 private slots:
+    // inserting data to database
     void on_buttonBox_accepted();
 
 private:

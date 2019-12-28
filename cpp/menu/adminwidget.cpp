@@ -9,6 +9,7 @@ AdminWidget::AdminWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // added some item widget only for testing delete it leter
     ItemWidget *i = new ItemWidget;
     i->setData("ID","name","category","price");
     ui->verticalLayout_4->addWidget(i);
@@ -27,6 +28,6 @@ AdminWidget::~AdminWidget()
 
 void AdminWidget::on_AddItem_clicked()
 {
-    addItem* add = new addItem ;
-    add->exec();
+    addItem add;// = new addItem ;
+    add.exec();
 }

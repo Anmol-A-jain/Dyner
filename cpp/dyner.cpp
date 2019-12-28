@@ -9,46 +9,51 @@ Dyner::Dyner(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Dyner)
 {
-
     ui->setupUi(this);
     this->setWindowState(Qt::WindowMaximized);
+
+    //hiding menu list and setting menuButton to window container
     ui->menuList->hide();
     isMenuHidden = true;
-    menuButtons = new MenuButtons(this);
+    QWidget* menuButtons  = new MenuButtons(this);
     childFrame = menuButtons;
     ui->windowContainer->addWidget(childFrame);
 
-
+    //setting shadow to homeButton in ui
     currentShaddowEffect = ui->parentButtonHome;
-    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+    this->setShadow(currentShaddowEffect,QColor(150,75,0)); //calling UDF
 
-    this->setWindowTitle("Bill Desk");
-
+    // removing alpha white color from ui->horizontalFrame for first time load
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;}");
 
+
+    //Declaring 2 variable which contains PATH of database file and xml file
     QString DBFile = QDir::currentPath() + "/DynerDB.db" ;
     QString xmlFile = QDir::currentPath() + "/init.xml" ;
 
-
+    // writing database path to XML by colling UDF setXml()
     this->setXml(xmlFile,DBFile);
 
-    qDebug() << QFile::exists(DBFile);
 
+    qDebug() << "Dyner.cpp : Is file exist :" << QFile::exists(DBFile);
+
+    // copy DB file to hard disk from resource file
     if(!QFile::exists(DBFile))
     {
         QFile::copy(":/DB/database/DynerDB.db",DBFile);
         QFile::setPermissions(DBFile, QFileDevice::ReadOwner|QFileDevice::WriteOwner);
     }
-    qDebug() << DBFile ;
+    qDebug() << "Dyner.cpp : DB file location :" << DBFile ;
+
+    // starting TCP server
     server.startServer();
-
-
 
 }
 
 Dyner::~Dyner()
 {
-    delete menuButtons;
+    //deleting all pointer
+
     delete currentShaddowEffect;
     delete childFrame;
     delete ui;
@@ -56,12 +61,8 @@ Dyner::~Dyner()
 
 Ui::Dyner* Dyner::getUi()
 {
+    //returning ui object for this class
     return ui;
-}
-
-QHBoxLayout *Dyner::getFrame()
-{
-    return ui->windowContainer;
 }
 
 QWidget *Dyner::newFrame(int option)

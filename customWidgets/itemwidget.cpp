@@ -7,8 +7,8 @@ ItemWidget::ItemWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // adding unicode icon to delete and edit buttons
     ui->deletebtn->setText(QString("\U0001F5D1"));
-
     ui->editbtn->setText(QString("\U0001F58A"));
 }
 
