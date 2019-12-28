@@ -15,6 +15,9 @@ public:
     explicit AdminWidget(QWidget *parent = nullptr);
     ~AdminWidget();
 
+private slots:
+    void on_AddItem_clicked();
+
 private:
     Ui::AdminWidget *ui;
 };

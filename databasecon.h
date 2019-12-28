@@ -5,11 +5,12 @@
 #include <QString>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QVector>
 
 class databaseCon
 {
 public:
-    databaseCon(QString consr);
+    databaseCon();
     QSqlQuery* excequte(QString cmdstr);
 
 private:

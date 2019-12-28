@@ -3,6 +3,7 @@
 #include "header/menubuttons.h"
 #include "ui_dyner.h"
 #include "databasecon.h"
+#include <QtXml>
 
 Dyner::Dyner(QWidget *parent)
     : QMainWindow(parent)
@@ -19,24 +20,29 @@ Dyner::Dyner(QWidget *parent)
 
 
     currentShaddowEffect = ui->parentButtonHome;
-    this->setShadow(currentShaddowEffect,QColor(0,0,0));
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
 
     this->setWindowTitle("Bill Desk");
 
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;}");
 
+    QString DBFile = QDir::currentPath() + "/DynerDB.db" ;
+    QString xmlFile = QDir::currentPath() + "/init.xml" ;
 
-    QFile myfile;
-    QString file = QDir::currentPath() + "/DynerDB.db" ;
-    qDebug() << QFile::exists(file);
 
-    if(!QFile::exists(file))
+    this->setXml(xmlFile,DBFile);
+
+    qDebug() << QFile::exists(DBFile);
+
+    if(!QFile::exists(DBFile))
     {
-        myfile.copy(":/DB/database/DynerDB.db",file);
+        QFile::copy(":/DB/database/DynerDB.db",DBFile);
+        QFile::setPermissions(DBFile, QFileDevice::ReadOwner|QFileDevice::WriteOwner);
     }
-    qDebug() << QDir::currentPath();
-
+    qDebug() << DBFile ;
     server.startServer();
+
+
 
 }
 
@@ -140,6 +146,25 @@ void Dyner::setShadow(QWidget *widget, QColor color)
     delete deleteItLater;
 }
 
+void Dyner::setXml(QString xmlFile, QString DBFile)
+{
+    //Write xml
+    QDomDocument document;
+    QDomElement root = document.createElement("Dyner");
+    document.appendChild(root);
+    QDomElement db = document.createElement("Database");
+    db.setAttribute("PATH",DBFile);
+    root.appendChild(db);
+
+    QFile myfile(xmlFile);
+    if(myfile.open(QIODevice::WriteOnly | QIODevice::Text) )
+    {
+        QTextStream stream(&myfile);
+        stream << document.toString();
+        myfile.close();
+    }
+}
+
 void Dyner::on_parentButtonHome_clicked()
 {
     showMenuAndDeleteThis(buttonName::home);
@@ -148,7 +173,7 @@ void Dyner::on_parentButtonHome_clicked()
 
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonHome;
-    this->setShadow(currentShaddowEffect,QColor(0,0,0));
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
 
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: }");
 
@@ -165,7 +190,7 @@ void Dyner::on_parentButtonOrder_clicked()
 
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonOrder;
-    this->setShadow(currentShaddowEffect,QColor(0,0,0));
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
 
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
 
@@ -183,7 +208,7 @@ void Dyner::on_parentButtonBillHistory_clicked()
 
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonBillHistory;
-    this->setShadow(currentShaddowEffect,QColor(0,0,0));
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
 
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
 
@@ -200,7 +225,7 @@ void Dyner::on_parentButtonBillRequest_clicked()
 
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonBillRequest;
-    this->setShadow(currentShaddowEffect,QColor(0,0,0));
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
 
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
 
@@ -218,7 +243,7 @@ void Dyner::on_parentButtonAdmin_clicked()
 
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonAdmin;
-    this->setShadow(currentShaddowEffect,QColor(0,0,0));
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
 
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
 

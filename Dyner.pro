@@ -1,5 +1,5 @@
 
-QT       += core gui network sql
+QT       += core gui network sql xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    DialogBox/additem.cpp \
     cpp/menu/adminwidget.cpp \
     cpp/menu/billhistorywidget.cpp \
     cpp/menu/billreqwidget.cpp \
@@ -30,6 +31,7 @@ SOURCES += \
     server/mytcpsocket.cpp
 
 HEADERS += \
+    DialogBox/additem.h \
     customWidgets/itemwidget.h \
     databasecon.h \
     server/dynerserver.h \
@@ -42,6 +44,7 @@ HEADERS += \
     server/mytcpsocket.h
 
 FORMS += \
+    DialogBox/additem.ui \
     customWidgets/itemwidget.ui \
     ui/menu/adminwidget.ui \
     ui/menu/billhistorywidget.ui \

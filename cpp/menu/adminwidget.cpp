@@ -1,6 +1,7 @@
 #include "header/menu/adminwidget.h"
 #include "ui_adminwidget.h"
 #include "customWidgets/itemwidget.h"
+#include "DialogBox/additem.h"
 
 AdminWidget::AdminWidget(QWidget *parent) :
     QWidget(parent),
@@ -22,4 +23,10 @@ AdminWidget::AdminWidget(QWidget *parent) :
 AdminWidget::~AdminWidget()
 {
     delete ui;
+}
+
+void AdminWidget::on_AddItem_clicked()
+{
+    addItem* add = new addItem ;
+    add->exec();
 }

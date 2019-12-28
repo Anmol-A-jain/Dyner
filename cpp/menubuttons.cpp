@@ -16,9 +16,6 @@ MenuButtons::MenuButtons(QWidget *parent) :
     this->setShadow(ui->btnBillReq,color);
     this->setShadow(ui->btnBillHistory,color);
 
-
-    //auto myParent = static_cast<Dyner*>(parent) ;
-
     this->parentName = parent;
 }
 

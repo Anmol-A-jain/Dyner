@@ -35,6 +35,7 @@ public:
     void billReqButtonClick();
     void adminButtonClick();
     void setShadow(QWidget *widget, QColor color);
+    void setXml(QString xmlFile, QString DBFile);
 
     ~Dyner();
 private slots:
