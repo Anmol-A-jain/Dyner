@@ -1,3 +1,3 @@
 Dyner
 
-project for hotel order system
+project for Restaurant order system
