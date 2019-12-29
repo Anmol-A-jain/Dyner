@@ -6,19 +6,13 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QVector>
-#include <QtDebug>
-#include <QSqlError>
-#include <QtXml>
-#include <QDir>
-#include <QFile>
-#include "data/xmlmanipulation.h"
 
 class databaseCon
 {
 public:
     databaseCon();
     static void initDB();
-    QSqlQuery* excequte(QString cmdstr);
+    QSqlQuery* execute(QString cmdstr);
 
 private:
     QString constr;

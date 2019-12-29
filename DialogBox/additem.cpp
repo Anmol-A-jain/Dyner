@@ -3,6 +3,7 @@
 #include <data/databasecon.h>
 #include <QDir>
 #include <QDebug>
+#include <QSqlQuery>
 
 addItem::addItem(QWidget *parent) :
     QDialog(parent),
@@ -21,5 +22,10 @@ void addItem::on_buttonBox_accepted()
 {
     databaseCon d;
     QString cmd = "insert into tblMenu values('" + ui->id->text() + "','" + ui->name->text() + "'," + ui->price->text() + " ,' " + ui->category->text() + "')" ;
-    d.excequte(cmd);
+    QSqlQuery* q = d.execute(cmd);
+    if(q != nullptr)
+    {
+        delete q;
+    }
+
 }

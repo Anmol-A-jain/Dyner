@@ -249,14 +249,14 @@ background-color: rgb(231, 231, 231);</string>
             <widget class="QLabel" name="label_edit">
              <property name="minimumSize">
               <size>
-               <width>40</width>
-               <height>40</height>
+               <width>0</width>
+               <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>40</width>
-               <height>40</height>
+               <width>50</width>
+               <height>16777215</height>
               </size>
              </property>
              <property name="text">
@@ -268,14 +268,14 @@ background-color: rgb(231, 231, 231);</string>
             <widget class="QLabel" name="label_delete">
              <property name="minimumSize">
               <size>
-               <width>40</width>
-               <height>40</height>
+               <width>0</width>
+               <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>40</width>
-               <height>40</height>
+               <width>50</width>
+               <height>16777215</height>
               </size>
              </property>
              <property name="text">
@@ -287,7 +287,7 @@ background-color: rgb(231, 231, 231);</string>
          </widget>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_4"/>
+         <layout class="QVBoxLayout" name="itemListContainer"/>
         </item>
         <item>
          <spacer name="verticalSpacer">

@@ -1,5 +1,10 @@
 #include "data/databasecon.h"
-
+#include <QtDebug>
+#include <QSqlError>
+#include <QtXml>
+#include <QDir>
+#include <QFile>
+#include "data/xmlmanipulation.h"
 
 databaseCon::databaseCon()
 {
@@ -14,7 +19,7 @@ databaseCon::databaseCon()
     {
         qDebug() << "databaseCon.cpp (databaseCon) : connected";
     }
-
+    Database.close();
 }
 
 void databaseCon::initDB()
@@ -34,20 +39,18 @@ void databaseCon::initDB()
     qDebug() << "databaseCon.cpp (initDB) : DB file location :" << DBFile ;
 }
 
-QSqlQuery* databaseCon::excequte(QString cmdstr)
+QSqlQuery* databaseCon::execute(QString cmdstr)
 {
+    Database.open();
     QSqlQuery* q = new QSqlQuery(Database);
-    qDebug() << "databaseCon.cpp (excequte) : exceute : " << Database.databaseName() ;
+    qDebug() << "databaseCon.cpp (execute) : execute : " << Database.databaseName() ;
     if(q->exec(cmdstr))
     {
-        qDebug() << "databaseCon.cpp (excequte) : exceute : " << cmdstr ;
-        if(q->size() > 0)
-        {
-            return q;
-        }
-        return nullptr;
+        qDebug() << "databaseCon.cpp (execute) : execute : " << cmdstr ;
+        return q;
     }
-    qDebug() << "databaseCon.cpp (excequte) : not exceute : " << cmdstr ;
-    qDebug() << "databaseCon.cpp (excequte) :" << q->lastError().databaseText();
+    qDebug() << "databaseCon.cpp (execute) : not execute : " << cmdstr ;
+    qDebug() << "databaseCon.cpp (execute) :" << q->lastError().databaseText();
+    Database.close();
     return nullptr;
 }

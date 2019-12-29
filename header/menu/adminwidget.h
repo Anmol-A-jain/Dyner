@@ -2,6 +2,8 @@
 #define ADMINWIDGET_H
 
 #include <QWidget>
+#include <QVector>
+#include "customWidgets/itemwidget.h"
 
 namespace Ui {
 class AdminWidget;
@@ -13,6 +15,9 @@ class AdminWidget : public QWidget
 
 public:
     explicit AdminWidget(QWidget *parent = nullptr);
+    void loadData();
+    void deleteVecterData();
+
     ~AdminWidget();
 
 private slots:
@@ -20,6 +25,7 @@ private slots:
 
 private:
     Ui::AdminWidget *ui;
+    QVector<ItemWidget*> itemlist;
 };
 
 #endif // ADMINWIDGET_H
