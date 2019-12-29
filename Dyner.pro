@@ -22,8 +22,9 @@ SOURCES += \
     cpp/menu/billhistorywidget.cpp \
     cpp/menu/billreqwidget.cpp \
     customWidgets/itemwidget.cpp \
+    data/xmlmanipulation.cpp \
     server/dynerserver.cpp \
-    databasecon.cpp \
+    data/databasecon.cpp \
     main.cpp \
     cpp/dyner.cpp \
     cpp/menubuttons.cpp \
@@ -33,7 +34,8 @@ SOURCES += \
 HEADERS += \
     DialogBox/additem.h \
     customWidgets/itemwidget.h \
-    databasecon.h \
+    data/databasecon.h \
+    data/xmlmanipulation.h \
     server/dynerserver.h \
     header/menu/adminwidget.h \
     header/menu/billhistorywidget.h \

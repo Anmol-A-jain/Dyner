@@ -1,6 +1,6 @@
 #include "additem.h"
 #include "ui_additem.h"
-#include <databasecon.h>
+#include <data/databasecon.h>
 #include <QDir>
 #include <QDebug>
 
@@ -19,7 +19,6 @@ addItem::~addItem()
 
 void addItem::on_buttonBox_accepted()
 {
-    QString file = QDir::currentPath() + "/DynerDB.db" ;
     databaseCon d;
     QString cmd = "insert into tblMenu values('" + ui->id->text() + "','" + ui->name->text() + "'," + ui->price->text() + " ,' " + ui->category->text() + "')" ;
     d.excequte(cmd);

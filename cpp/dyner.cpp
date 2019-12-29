@@ -2,8 +2,9 @@
 #include "header/dyner.h"
 #include "header/menubuttons.h"
 #include "ui_dyner.h"
-#include "databasecon.h"
+#include "data/databasecon.h"
 #include <QtXml>
+#include "data/xmlmanipulation.h"
 
 Dyner::Dyner(QWidget *parent)
     : QMainWindow(parent)
@@ -26,24 +27,7 @@ Dyner::Dyner(QWidget *parent)
     // removing alpha white color from ui->horizontalFrame for first time load
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;}");
 
-
-    //Declaring 2 variable which contains PATH of database file and xml file
-    QString DBFile = QDir::currentPath() + "/DynerDB.db" ;
-    QString xmlFile = QDir::currentPath() + "/init.xml" ;
-
-    // writing database path to XML by colling UDF setXml()
-    this->setXml(xmlFile,DBFile);
-
-
-    qDebug() << "Dyner.cpp : Is file exist :" << QFile::exists(DBFile);
-
-    // copy DB file to hard disk from resource file
-    if(!QFile::exists(DBFile))
-    {
-        QFile::copy(":/DB/database/DynerDB.db",DBFile);
-        QFile::setPermissions(DBFile, QFileDevice::ReadOwner|QFileDevice::WriteOwner);
-    }
-    qDebug() << "Dyner.cpp : DB file location :" << DBFile ;
+    databaseCon::initDB();
 
     // starting TCP server
     server.startServer();
@@ -145,37 +129,6 @@ void Dyner::setShadow(QWidget *widget, QColor color)
     ui->widgetTitle->setText(static_cast<QPushButton*>(widget)->text());
     ui->widgetTitle->setFont(QFont("Arial", 20));
     delete deleteItLater;
-}
-
-void Dyner::setXml(QString xmlFile, QString DBFile)
-{
-
-
-    qDebug() << "Dyner.cpp : Is xmlfile exist :" << QFile::exists(xmlFile);
-
-    // copy DB file to hard disk from resource file
-    if(!QFile::exists(xmlFile))
-    {
-        //Write xml
-        QDomDocument document;
-        QDomElement root = document.createElement("Dyner");
-        document.appendChild(root);
-        QDomElement db = document.createElement("Database");
-        db.setAttribute("PATH",DBFile);
-        root.appendChild(db);
-
-        QFile myfile(xmlFile);
-        if(myfile.open(QIODevice::WriteOnly | QIODevice::Text) )
-        {
-            QTextStream stream(&myfile);
-            stream << document.toString();
-            myfile.close();
-        }
-    }
-    qDebug() << "Dyner.cpp : xml file location :" << xmlFile ;
-
-
-
 }
 
 void Dyner::on_parentButtonHome_clicked()

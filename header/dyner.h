@@ -34,7 +34,7 @@ public:
     void billReqButtonClick(); // emits bill req button
     void adminButtonClick(); // emits admin button
     void setShadow(QWidget *widget, QColor color); // setting shadow to widget and formating widget title
-    void setXml(QString xmlFile, QString DBFile); // writing Database PATh to XML
+
 
     ~Dyner();
 private slots:

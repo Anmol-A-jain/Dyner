@@ -51,13 +51,21 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>25</pointsize>
+         <family>MS Shell Dlg 2</family>
+         <pointsize>24</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">border-radius: 20px;
-color : white;
-border-image: url(:/img/img/ButtonBackground.jpg);
+        <string notr="true">QPushButton
+{
+	border-radius: 20px;
+	color : white;
+	border-image: url(:/img/img/ButtonBackground.jpg);
+	font: 24pt &quot;MS Shell Dlg 2&quot;;
+}
 </string>
        </property>
        <property name="text">
@@ -133,14 +141,21 @@ border-image: url(:/img/img/ButtonBackground.jpg);
        </property>
        <property name="font">
         <font>
-         <pointsize>25</pointsize>
+         <family>MS Shell Dlg 2</family>
+         <pointsize>24</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">border-radius: 20px;
-color : white;
-border-image: url(:/img/img/ButtonBackground.jpg);
-</string>
+        <string notr="true">QPushButton
+{
+	border-radius: 20px;
+	color : white;
+	border-image: url(:/img/img/ButtonBackground.jpg);
+	font: 24pt &quot;MS Shell Dlg 2&quot;;
+}</string>
        </property>
        <property name="text">
         <string>ORDER</string>
@@ -163,14 +178,21 @@ border-image: url(:/img/img/ButtonBackground.jpg);
        </property>
        <property name="font">
         <font>
-         <pointsize>25</pointsize>
+         <family>MS Shell Dlg 2</family>
+         <pointsize>24</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">border-radius: 20px;
-color : white;
-border-image: url(:/img/img/ButtonBackground.jpg);
-</string>
+        <string notr="true">QPushButton
+{
+	border-radius: 20px;
+	color : white;
+	border-image: url(:/img/img/ButtonBackground.jpg);
+	font: 24pt &quot;MS Shell Dlg 2&quot;;
+}</string>
        </property>
        <property name="text">
         <string>ADMIN</string>
@@ -232,14 +254,21 @@ border-image: url(:/img/img/ButtonBackground.jpg);
        </property>
        <property name="font">
         <font>
-         <pointsize>25</pointsize>
+         <family>MS Shell Dlg 2</family>
+         <pointsize>24</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">border-radius: 20px;
-color : white;
-border-image: url(:/img/img/ButtonBackground.jpg);
-</string>
+        <string notr="true">QPushButton
+{
+	border-radius: 20px;
+	color : white;
+	border-image: url(:/img/img/ButtonBackground.jpg);
+	font: 24pt &quot;MS Shell Dlg 2&quot;;
+}</string>
        </property>
        <property name="text">
         <string>BILL REQUEST</string>

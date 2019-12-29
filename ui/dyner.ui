@@ -18,7 +18,7 @@
     <normaloff>:/img/img/icon1.png</normaloff>:/img/img/icon1.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="autoFillBackground">
@@ -174,9 +174,11 @@ border-radius:10px;</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>7</pointsize>
-                <weight>75</weight>
-                <bold>true</bold>
+                <family>MS Shell Dlg 2</family>
+                <pointsize>12</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="styleSheet">
@@ -200,9 +202,11 @@ border-image: url(:/img/img/ButtonBackground.jpg);
               </property>
               <property name="font">
                <font>
-                <pointsize>7</pointsize>
-                <weight>75</weight>
-                <bold>true</bold>
+                <family>MS Shell Dlg 2</family>
+                <pointsize>12</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="styleSheet">
@@ -226,9 +230,11 @@ border-image: url(:/img/img/ButtonBackground.jpg);
               </property>
               <property name="font">
                <font>
-                <pointsize>7</pointsize>
-                <weight>75</weight>
-                <bold>true</bold>
+                <family>MS Shell Dlg 2</family>
+                <pointsize>12</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="styleSheet">
@@ -252,9 +258,11 @@ border-image: url(:/img/img/ButtonBackground.jpg);
               </property>
               <property name="font">
                <font>
-                <pointsize>7</pointsize>
-                <weight>75</weight>
-                <bold>true</bold>
+                <family>MS Shell Dlg 2</family>
+                <pointsize>12</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="styleSheet">
@@ -278,8 +286,11 @@ border-image: url(:/img/img/ButtonBackground.jpg);
               </property>
               <property name="font">
                <font>
-                <weight>75</weight>
-                <bold>true</bold>
+                <family>MS Shell Dlg 2</family>
+                <pointsize>12</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="styleSheet">
