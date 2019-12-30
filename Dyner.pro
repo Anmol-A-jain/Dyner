@@ -18,10 +18,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     DialogBox/additem.cpp \
+    DialogBox/editcategory.cpp \
+    DialogBox/edititem.cpp \
+    DialogBox/edittablenoanddiscount.cpp \
     cpp/menu/adminwidget.cpp \
     cpp/menu/billhistorywidget.cpp \
     cpp/menu/billreqwidget.cpp \
     customWidgets/itemwidget.cpp \
+    data/globaldata.cpp \
     data/xmlmanipulation.cpp \
     server/dynerserver.cpp \
     data/databasecon.cpp \
@@ -33,8 +37,12 @@ SOURCES += \
 
 HEADERS += \
     DialogBox/additem.h \
+    DialogBox/editcategory.h \
+    DialogBox/edititem.h \
+    DialogBox/edittablenoanddiscount.h \
     customWidgets/itemwidget.h \
     data/databasecon.h \
+    data/globaldata.h \
     data/xmlmanipulation.h \
     server/dynerserver.h \
     header/menu/adminwidget.h \
@@ -47,6 +55,9 @@ HEADERS += \
 
 FORMS += \
     DialogBox/additem.ui \
+    DialogBox/editcategory.ui \
+    DialogBox/edititem.ui \
+    DialogBox/edittablenoanddiscount.ui \
     customWidgets/itemwidget.ui \
     ui/menu/adminwidget.ui \
     ui/menu/billhistorywidget.ui \

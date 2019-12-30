@@ -16,12 +16,23 @@ class AdminWidget : public QWidget
 public:
     explicit AdminWidget(QWidget *parent = nullptr);
     void loadData();
+    void loadInfo();
     void deleteVecterData();
 
     ~AdminWidget();
 
 private slots:
     void on_AddItem_clicked();
+
+    void on_editButton_clicked();
+
+    void on_SearchButton_clicked();
+
+    void on_SearchTextBox_returnPressed();
+
+    void on_SearchTextBox_textChanged(const QString &arg1);
+
+    void on_pushButton_clicked();
 
 private:
     Ui::AdminWidget *ui;

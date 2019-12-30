@@ -13,6 +13,8 @@ Dyner::Dyner(QWidget *parent)
     ui->setupUi(this);
     this->setWindowState(Qt::WindowMaximized);
 
+    QApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
+
     //hiding menu list and setting menuButton to window container
     ui->menuList->hide();
     isMenuHidden = true;

@@ -1,64 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>addItem</class>
- <widget class="QDialog" name="addItem">
+ <class>EditTableNoAndDiscount</class>
+ <widget class="QDialog" name="EditTableNoAndDiscount">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>289</width>
-    <height>212</height>
+    <width>219</width>
+    <height>106</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ADD Item</string>
+   <string>Edit</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../res.qrc">
     <normaloff>:/img/img/icon1.png</normaloff>:/img/img/icon1.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
+     <item row="0" column="0">
+      <widget class="QLabel" name="tableNo">
        <property name="text">
-        <string>Item Name</string>
+        <string>No. Of Table</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_3">
+     <item row="1" column="0">
+      <widget class="QLabel" name="Dicount">
        <property name="text">
-        <string>Category </string>
+        <string>Dicount</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="id"/>
+      <widget class="QSpinBox" name="txtTableNo">
+       <property name="maximum">
+        <number>1000</number>
+       </property>
+      </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="name"/>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Item ID</string>
+      <widget class="QDoubleSpinBox" name="txtDicount">
+       <property name="maximum">
+        <double>100.000000000000000</double>
        </property>
       </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>Price</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QSpinBox" name="price"/>
-     </item>
-     <item row="2" column="1">
-      <widget class="QComboBox" name="category"/>
      </item>
     </layout>
    </item>
@@ -81,7 +69,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>addItem</receiver>
+   <receiver>EditTableNoAndDiscount</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -97,7 +85,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>addItem</receiver>
+   <receiver>EditTableNoAndDiscount</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

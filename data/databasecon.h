@@ -16,7 +16,7 @@ public:
 
 private:
     QString constr;
-    QSqlDatabase Database;
+    QSqlDatabase database;
 };
 
 #endif // DATABASECON_H

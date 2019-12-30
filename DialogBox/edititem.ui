@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>addItem</class>
- <widget class="QDialog" name="addItem">
+ <class>EditItem</class>
+ <widget class="QDialog" name="EditItem">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>289</width>
-    <height>212</height>
+    <width>320</width>
+    <height>240</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ADD Item</string>
+   <string>Edit Item</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../res.qrc">
-    <normaloff>:/img/img/icon1.png</normaloff>:/img/img/icon1.png</iconset>
-  </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Item Name</string>
-       </property>
-      </widget>
-     </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="Category">
        <property name="text">
-        <string>Category </string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="id"/>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="name"/>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Item ID</string>
+        <string>Category</string>
        </property>
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="Price">
        <property name="text">
         <string>Price</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QSpinBox" name="price"/>
+     <item row="0" column="0">
+      <widget class="QLabel" name="id">
+       <property name="text">
+        <string>Item ID</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="name">
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="txtName"/>
      </item>
      <item row="2" column="1">
-      <widget class="QComboBox" name="category"/>
+      <widget class="QLineEdit" name="txtcategory"/>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="txtId">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QDoubleSpinBox" name="txtPrice"/>
      </item>
     </layout>
    </item>
@@ -74,14 +74,18 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../res.qrc"/>
- </resources>
+ <tabstops>
+  <tabstop>txtId</tabstop>
+  <tabstop>txtName</tabstop>
+  <tabstop>txtcategory</tabstop>
+  <tabstop>txtPrice</tabstop>
+ </tabstops>
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>addItem</receiver>
+   <receiver>EditItem</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -97,7 +101,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>addItem</receiver>
+   <receiver>EditItem</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

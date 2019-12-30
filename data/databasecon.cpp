@@ -9,9 +9,16 @@
 databaseCon::databaseCon()
 {
     this->constr = XmlManipulation::getData("Database","PATH");
-    Database = QSqlDatabase::addDatabase("QSQLITE");
-    Database.setDatabaseName(this->constr);
-    if (!Database.open())
+    if(!QSqlDatabase::contains())
+    {
+        database = QSqlDatabase::addDatabase("QSQLITE");
+    }
+    else
+    {
+        database = QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false);
+    }
+    database.setDatabaseName(this->constr);
+    if (!database.open())
     {
         qDebug() << "databaseCon.cpp (databaseCon) : not connected";
     }
@@ -19,7 +26,6 @@ databaseCon::databaseCon()
     {
         qDebug() << "databaseCon.cpp (databaseCon) : connected";
     }
-    Database.close();
 }
 
 void databaseCon::initDB()
@@ -41,9 +47,8 @@ void databaseCon::initDB()
 
 QSqlQuery* databaseCon::execute(QString cmdstr)
 {
-    Database.open();
-    QSqlQuery* q = new QSqlQuery(Database);
-    qDebug() << "databaseCon.cpp (execute) : execute : " << Database.databaseName() ;
+    QSqlQuery* q = new QSqlQuery(database);
+    qDebug() << "databaseCon.cpp (execute) : DatabaseName : " << database.databaseName() ;
     if(q->exec(cmdstr))
     {
         qDebug() << "databaseCon.cpp (execute) : execute : " << cmdstr ;
@@ -51,6 +56,5 @@ QSqlQuery* databaseCon::execute(QString cmdstr)
     }
     qDebug() << "databaseCon.cpp (execute) : not execute : " << cmdstr ;
     qDebug() << "databaseCon.cpp (execute) :" << q->lastError().databaseText();
-    Database.close();
     return nullptr;
 }
