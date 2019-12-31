@@ -3,7 +3,7 @@
 #include "data/databasecon.h"
 #include "DialogBox/additem.h"
 #include "DialogBox/edittablenoanddiscount.h"
-#include "DialogBox/EditCategory.h"
+#include "DialogBox/editcategory.h"
 #include <QSqlRecord>
 #include <QDebug>
 #include <QMessageBox>
@@ -75,7 +75,7 @@ void AdminWidget::on_editButton_clicked()
 
 void AdminWidget::on_SearchButton_clicked()
 {
-    QString key;
+    QString columnName;
     QString cmd;
     QString searchText = ui->SearchTextBox->text();
     bool isPrice = false, isName = false, isAll = false;
@@ -88,30 +88,30 @@ void AdminWidget::on_SearchButton_clicked()
         }
         else if(ui->menuColumn->currentText() == ui->menuColumn->itemText(1))
         {
-            key = "id";
+            columnName = "id";
         }
         else if(ui->menuColumn->currentText() == ui->menuColumn->itemText(2))
         {
-            key = "itemName";
+            columnName = "itemName";
             isName = true;
         }
         else if(ui->menuColumn->currentText() == ui->menuColumn->itemText(3))
         {
-            key = "category";
+            columnName = "category";
         }
         else if(ui->menuColumn->currentText() == ui->menuColumn->itemText(4))
         {
-            key = "Price";
+            columnName = "Price";
             isPrice = true;
         }
 
         if(isPrice)
         {
-            cmd = "SELECT * FROM tblMenu WHERE "+ key +" = "+ searchText +" ORDER BY id" ;
+            cmd = "SELECT * FROM tblMenu WHERE "+ columnName +" = "+ searchText +" ORDER BY id" ;
         }
         else if(isName)
         {
-            cmd = "SELECT * FROM tblMenu WHERE "+ key +" LIKE '%"+ searchText +"%' ORDER BY id" ;
+            cmd = "SELECT * FROM tblMenu WHERE "+ columnName +" LIKE '%"+ searchText +"%' ORDER BY id" ;
         }
         else if(isAll)
         {
@@ -119,7 +119,7 @@ void AdminWidget::on_SearchButton_clicked()
         }
         else
         {
-            cmd = "SELECT * FROM tblMenu WHERE "+ key +" LIKE '%"+ ui->SearchTextBox->text() +"%' ORDER BY id" ;
+            cmd = "SELECT * FROM tblMenu WHERE "+ columnName +" LIKE '%"+ ui->SearchTextBox->text() +"%' ORDER BY id" ;
         }
 
     }
@@ -131,7 +131,7 @@ void AdminWidget::on_SearchButton_clicked()
     this->deleteVecterData();
     databaseCon d;
     QSqlQuery* q = d.execute(cmd);
-    while( q->next())
+    while( q->next() )
     {
         ItemWidget *item = new ItemWidget(this);
         itemlist.push_back(item);
@@ -152,8 +152,8 @@ void AdminWidget::on_SearchTextBox_textChanged(const QString &arg1)
     emit on_SearchButton_clicked();
 }
 
-void AdminWidget::on_pushButton_clicked()
+void AdminWidget::on_btnEditCategory_clicked()
 {
-    EditCategory e;
+    EditCategory e(this);
     e.exec();
 }

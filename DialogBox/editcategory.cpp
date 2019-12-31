@@ -3,12 +3,15 @@
 #include "data/databasecon.h"
 #include <QPushButton>
 #include <QDebug>
+#include <QMessageBox>
+#include "header/menu/adminwidget.h"
 
 EditCategory::EditCategory(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::EditCategory)
 {
     ui->setupUi(this);
+    this->myParent = parent;
 
     this->loadData();
 }
@@ -17,7 +20,7 @@ void EditCategory::loadData()
 {
     ui->CategoryList->clear();
     databaseCon d;
-    QString cmd = "SELECT category FROM categoryList ORDER BY category" ;
+    QString cmd = "SELECT category FROM tblCategoryList ORDER BY category" ;
     QSqlQuery* q = d.execute(cmd);
 
     while(q->next())
@@ -38,10 +41,11 @@ void EditCategory::on_add_clicked()
     databaseCon d;
     if(!ui->CategoryText->text().isEmpty())
     {
-        QString cmd = "INSERT INTO categoryList VALUES('"+ui->CategoryText->text()+"') ";
+        QString cmd = "INSERT INTO tblCategoryList VALUES('"+ui->CategoryText->text()+"') ";
         QSqlQuery* q = d.execute(cmd);
         delete q;
         this->loadData();
+        QMessageBox::information(this,"Information","category has been added");
     }
 }
 
@@ -57,11 +61,11 @@ void EditCategory::on_searchBox_textChanged(const QString &arg1)
     QString cmd ;
     if(!ui->searchBox->text().isEmpty())
     {
-       cmd = "SELECT category FROM categoryList WHERE category LIKE '%"+ui->searchBox->text()+"%' ORDER BY category";
+       cmd = "SELECT category FROM tblCategoryList WHERE category LIKE '%"+ui->searchBox->text()+"%' ORDER BY category";
     }
     else
     {
-        cmd = "SELECT category FROM categoryList ORDER BY category" ;
+        cmd = "SELECT category FROM tblCategoryList ORDER BY category" ;
     }
     QSqlQuery* q = d.execute(cmd);
 
@@ -76,11 +80,21 @@ void EditCategory::on_searchBox_textChanged(const QString &arg1)
 
 void EditCategory::on_remove_clicked()
 {
-    databaseCon d;
-    QString cmd = "DELETE FROM categoryList WHERE category = '"+ ui->CategoryList->currentText() +"' " ;
-    QSqlQuery* q = d.execute(cmd);
-    delete q;
-    this->loadData();
+    int reply = QMessageBox::critical(this,"Delete Whole Category","<h3>Do you want to Remove Category</h3>\nall the item user this category will be get deleted",QMessageBox::StandardButton::Yes|QMessageBox::StandardButton::No);
+    if(QMessageBox::Yes == reply)
+    {
+        databaseCon d;
+        QString cmd = "DELETE FROM tblCategoryList WHERE category = '"+ ui->CategoryList->currentText() +"' " ;
+        QSqlQuery* q = d.execute(cmd);
+        delete q;
+
+        cmd = "DELETE FROM tblMenu WHERE category = '"+ui->CategoryList->currentText()+"'  ";
+        q = d.execute(cmd);
+        delete q;
+
+        static_cast<AdminWidget*>(myParent)->loadData();
+        this->loadData();
+    }
 }
 
 void EditCategory::on_update_clicked()
@@ -88,9 +102,15 @@ void EditCategory::on_update_clicked()
     databaseCon d;
     if(!ui->CategoryText->text().isEmpty())
     {
-        QString cmd = "UPDATE categoryList SET category = '"+ui->CategoryText->text() +"' WHERE category = '"+ui->CategoryList->currentText()+"' " ;
+        QString cmd = "UPDATE tblCategoryList SET category = '"+ui->CategoryText->text() +"' WHERE category = '"+ui->CategoryList->currentText()+"' " ;
         QSqlQuery* q = d.execute(cmd);
         delete q;
+
+        cmd = "UPDATE tblMenu SET category = '"+ui->CategoryText->text() +"' WHERE category = '"+ui->CategoryList->currentText()+"'  ";
+        q = d.execute(cmd);
+        delete q;
+
+        static_cast<AdminWidget*>(myParent)->loadData();
         this->loadData();
     }
 }

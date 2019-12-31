@@ -2,7 +2,8 @@
 #define EDITCATEGORY_H
 
 #include <QDialog>
-#include <QAbstractButton>
+#include <QWidget>
+
 
 namespace Ui {
 class EditCategory;
@@ -31,6 +32,7 @@ private slots:
 
 private:
     Ui::EditCategory *ui;
+    QWidget* myParent;
 };
 
 #endif // EDITCATEGORY_H

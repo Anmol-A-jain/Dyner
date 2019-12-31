@@ -2,6 +2,7 @@
 #define ADDITEM_H
 
 #include <QDialog>
+#include <QAbstractButton>
 
 namespace Ui {
 class addItem;
@@ -16,8 +17,8 @@ public:
     ~addItem();
 
 private slots:
-    // inserting data to database
-    void on_buttonBox_accepted();
+    // inserting data to database  
+    void on_btnAdd_clicked();
 
 private:
     Ui::addItem *ui;

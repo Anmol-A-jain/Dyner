@@ -230,4 +230,3 @@ void Dyner::on_menuButton_clicked()
         ui->menuList->hide();
     }
 }
-

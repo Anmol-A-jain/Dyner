@@ -32,7 +32,7 @@ private slots:
 
     void on_SearchTextBox_textChanged(const QString &arg1);
 
-    void on_pushButton_clicked();
+    void on_btnEditCategory_clicked();
 
 private:
     Ui::AdminWidget *ui;
