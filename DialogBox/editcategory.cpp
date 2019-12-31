@@ -110,6 +110,7 @@ void EditCategory::on_update_clicked()
         q = d.execute(cmd);
         delete q;
 
+        QMessageBox::information(this,"Information","category has been Updated");
         static_cast<AdminWidget*>(myParent)->loadData();
         this->loadData();
     }

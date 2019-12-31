@@ -16,7 +16,7 @@ public:
     ~EditItem();
 
 private slots:
-    void on_buttonBox_accepted();
+    void on_btnUpdate_clicked();
 
 private:
     Ui::EditItem *ui;

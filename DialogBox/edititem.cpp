@@ -3,6 +3,7 @@
 #include "data/databasecon.h"
 #include "header/menu/adminwidget.h"
 #include <QSqlQuery>
+#include <QMessageBox>
 
 EditItem::EditItem(QString id,QString name,QString category, double price ,QWidget *parent) :
     QDialog(parent),
@@ -38,7 +39,7 @@ EditItem::~EditItem()
     delete ui;
 }
 
-void EditItem::on_buttonBox_accepted()
+void EditItem::on_btnUpdate_clicked()
 {
     databaseCon d;
 
@@ -53,5 +54,26 @@ void EditItem::on_buttonBox_accepted()
         QSqlQuery* q = d.execute(cmd);
         delete q;
         static_cast<AdminWidget*>(myParent)->loadData();
+        QMessageBox::information(this,"Information","Item Data Has Been Updated");
+        emit this->accept();
+    }
+    else
+    {
+        QString errormsg = "Following Fields are emply : \n";
+        if(id.isEmpty())
+        {
+            errormsg.append("\nPlease enter Id");
+        }
+
+        if(name.isEmpty())
+        {
+            errormsg.append("\nPlease enter Name");
+        }
+
+        if(category.isEmpty())
+        {
+            errormsg.append("\nPlease enter Categoty");
+        }
+        QMessageBox::critical(this,"Error",errormsg);
     }
 }

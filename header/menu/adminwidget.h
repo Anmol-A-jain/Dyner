@@ -18,6 +18,8 @@ public:
     void loadData();
     void loadInfo();
     void deleteVecterData();
+    void paintEvent(QPaintEvent *event) override;
+    void loadComboBoxData();
 
     ~AdminWidget();
 
@@ -33,6 +35,10 @@ private slots:
     void on_SearchTextBox_textChanged(const QString &arg1);
 
     void on_btnEditCategory_clicked();
+
+    void on_menuColumn_currentIndexChanged(int index);
+
+    void on_categoryList_currentIndexChanged(int index);
 
 private:
     Ui::AdminWidget *ui;

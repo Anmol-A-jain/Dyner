@@ -15,9 +15,10 @@ AdminWidget::AdminWidget(QWidget *parent) :
     ui(new Ui::AdminWidget)
 {
     ui->setupUi(this);
-
+    ui->categoryList->hide();
     this->loadData();
     this->loadInfo();
+    this->loadComboBoxData();
 }
 
 void AdminWidget::loadData()
@@ -53,6 +54,28 @@ void AdminWidget::deleteVecterData()
     qDebug() << "AdminWidget.cpp (deleteVecterData) : vector data has been deleted";
 }
 
+void AdminWidget::paintEvent(QPaintEvent *event)
+{
+    QWidget::paintEvent(event);
+    ui->categoryList->setSizePolicy(ui->SearchTextBox->sizePolicy());
+}
+
+void AdminWidget::loadComboBoxData()
+{
+    ui->categoryList->clear();
+    ui->categoryList->addItem("All item");
+    databaseCon d;
+    QString cmd = "SELECT category FROM tblCategoryList ORDER BY category" ;
+    QSqlQuery* q = d.execute(cmd);
+
+    while(q->next())
+    {
+        qDebug() << "AdminWidget.cpp (deleteVecterData) : combo box :" << q->value("category").toString();
+        ui->categoryList->addItem(q->value("category").toString());
+    }
+    delete q;
+}
+
 AdminWidget::~AdminWidget()
 {
     this->deleteVecterData();
@@ -78,9 +101,9 @@ void AdminWidget::on_SearchButton_clicked()
     QString columnName;
     QString cmd;
     QString searchText = ui->SearchTextBox->text();
-    bool isPrice = false, isName = false, isAll = false;
+    bool isPrice = false, isName = false, isCategory = false, isAll = false;
 
-    if(!ui->SearchTextBox->text().isEmpty())
+    if(!ui->SearchTextBox->text().isEmpty() || !ui->categoryList->isHidden() )
     {
         if(ui->menuColumn->currentText() == ui->menuColumn->itemText(0))
         {
@@ -98,6 +121,7 @@ void AdminWidget::on_SearchButton_clicked()
         else if(ui->menuColumn->currentText() == ui->menuColumn->itemText(3))
         {
             columnName = "category";
+            isCategory = true;
         }
         else if(ui->menuColumn->currentText() == ui->menuColumn->itemText(4))
         {
@@ -116,6 +140,10 @@ void AdminWidget::on_SearchButton_clicked()
         else if(isAll)
         {
             cmd = "SELECT * FROM tblMenu WHERE id = '"+searchText+"' OR itemName LIKE '%"+ searchText +"%' OR category LIKE '%"+ searchText +"%' OR Price = '"+ searchText +"' ORDER BY id" ;
+        }
+        else if(isCategory)
+        {
+            cmd = "SELECT * FROM tblMenu WHERE "+ columnName +" = '"+ ui->categoryList->currentText() +"' ORDER BY id" ;
         }
         else
         {
@@ -156,4 +184,33 @@ void AdminWidget::on_btnEditCategory_clicked()
 {
     EditCategory e(this);
     e.exec();
+    this->loadComboBoxData();
+}
+
+void AdminWidget::on_menuColumn_currentIndexChanged(int index)
+{
+    if(index == 3 )
+    {
+        ui->categoryList->show();
+        ui->SearchTextBox->hide();
+    }
+    else
+    {
+        ui->categoryList->hide();
+        ui->SearchTextBox->show();
+    }
+}
+
+
+void AdminWidget::on_categoryList_currentIndexChanged(int index)
+{
+    qDebug() << "AdminWidget.cpp (on_categoryList_currentIndexChanged) : index changed : " <<index;
+    if(index != 0)
+    {
+        emit on_SearchButton_clicked();
+    }
+    else
+    {
+        this->loadData();
+    }
 }

@@ -87,7 +87,7 @@ void addItem::on_btnAdd_clicked()
         delete q;
 
         QMessageBox::information(this,"Item Added","Item "+name+" has been added");
-        this->accept();
+        emit this->accept();
     }
     else
     {
