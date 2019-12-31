@@ -54,11 +54,15 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QSpinBox" name="price"/>
-     </item>
      <item row="2" column="1">
       <widget class="QComboBox" name="category"/>
+     </item>
+     <item row="3" column="1">
+      <widget class="QDoubleSpinBox" name="price">
+       <property name="maximum">
+        <double>99999.000000000000000</double>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
