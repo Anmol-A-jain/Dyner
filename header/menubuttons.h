@@ -28,8 +28,8 @@ private slots:
     void on_btnAdmin_clicked();
 
 private:
-    void showMenuAndDeleteThis(int option);
     Ui::menuButtons *ui;
+    // storing parent object
     QWidget* parentName;
 };
 

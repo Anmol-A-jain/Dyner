@@ -1,5 +1,5 @@
 
-QT       += core gui network
+QT       += core gui network sql xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,12 +17,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    DialogBox/additem.cpp \
+    DialogBox/editcategory.cpp \
+    DialogBox/edititem.cpp \
+    DialogBox/edittablenoanddiscount.cpp \
     cpp/menu/adminwidget.cpp \
     cpp/menu/billhistorywidget.cpp \
     cpp/menu/billreqwidget.cpp \
     customWidgets/itemwidget.cpp \
+    data/globaldata.cpp \
+    data/xmlmanipulation.cpp \
     server/dynerserver.cpp \
-    databasecon.cpp \
+    data/databasecon.cpp \
     main.cpp \
     cpp/dyner.cpp \
     cpp/menubuttons.cpp \
@@ -30,8 +36,14 @@ SOURCES += \
     server/mytcpsocket.cpp
 
 HEADERS += \
+    DialogBox/additem.h \
+    DialogBox/editcategory.h \
+    DialogBox/edititem.h \
+    DialogBox/edittablenoanddiscount.h \
     customWidgets/itemwidget.h \
-    databasecon.h \
+    data/databasecon.h \
+    data/globaldata.h \
+    data/xmlmanipulation.h \
     server/dynerserver.h \
     header/menu/adminwidget.h \
     header/menu/billhistorywidget.h \
@@ -42,6 +54,10 @@ HEADERS += \
     server/mytcpsocket.h
 
 FORMS += \
+    DialogBox/additem.ui \
+    DialogBox/editcategory.ui \
+    DialogBox/edititem.ui \
+    DialogBox/edittablenoanddiscount.ui \
     customWidgets/itemwidget.ui \
     ui/menu/adminwidget.ui \
     ui/menu/billhistorywidget.ui \

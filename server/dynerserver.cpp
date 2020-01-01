@@ -11,7 +11,7 @@ DynerServer::DynerServer(QObject *parent)
 void DynerServer::incomingConnection(qintptr socketDescriptor)
 {
     // We have a new connection
-    qDebug() << socketDescriptor << " Connecting...";
+    qDebug() << "DynerServer (incomingConnection) : " << socketDescriptor << " Connecting...";
 
     MyTcpSocket *thread = new MyTcpSocket(socketDescriptor, this);
 
@@ -30,13 +30,12 @@ void DynerServer::startServer()
 
     if(!this->listen(QHostAddress::Any,port))
     {
-        qDebug() << "Could not start server";
+        qDebug() << "DynerServer (startServer) : " << "Could not start server";
     }
     else
     {
-        qDebug() << "Listening to port " << port << "...";
+        qDebug() << "DynerServer (startServer) : " << "Listening to port " << port << "...";
     }
-
 }
 
 

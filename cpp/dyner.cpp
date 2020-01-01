@@ -2,40 +2,44 @@
 #include "header/dyner.h"
 #include "header/menubuttons.h"
 #include "ui_dyner.h"
+#include "data/databasecon.h"
+#include <QtXml>
+#include "data/xmlmanipulation.h"
 
 Dyner::Dyner(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Dyner)
 {
-
     ui->setupUi(this);
     this->setWindowState(Qt::WindowMaximized);
+
+    QApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
+
+    //hiding menu list and setting menuButton to window container
     ui->menuList->hide();
     isMenuHidden = true;
-    menuButtons = new MenuButtons(this);
+    QWidget* menuButtons  = new MenuButtons(this);
     childFrame = menuButtons;
     ui->windowContainer->addWidget(childFrame);
 
-
+    //setting shadow to homeButton in ui
     currentShaddowEffect = ui->parentButtonHome;
-    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+    this->setShadow(currentShaddowEffect,QColor(150,75,0)); //calling UDF
 
-    this->setWindowTitle("Bill Desk");
-
+    // removing alpha white color from ui->horizontalFrame for first time load
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;}");
 
+    databaseCon::initDB();
 
-    QFile myfile;
-    myfile.copy(":/DB/database/DynerDB.db",QDir::currentPath() + "/DynerDB.db");
-    qDebug() << QDir::currentPath();
-
-    //server = new DynerServer();
+    // starting TCP server
     server.startServer();
+
 }
 
 Dyner::~Dyner()
 {
-    delete menuButtons;
+    //deleting all pointer
+
     delete currentShaddowEffect;
     delete childFrame;
     delete ui;
@@ -43,12 +47,8 @@ Dyner::~Dyner()
 
 Ui::Dyner* Dyner::getUi()
 {
+    //returning ui object for this class
     return ui;
-}
-
-QHBoxLayout *Dyner::getFrame()
-{
-    return ui->windowContainer;
 }
 
 QWidget *Dyner::newFrame(int option)
@@ -230,4 +230,3 @@ void Dyner::on_menuButton_clicked()
         ui->menuList->hide();
     }
 }
-

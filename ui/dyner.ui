@@ -11,14 +11,14 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dyner</string>
+   <string>Dyner : Bill Desk</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../res.qrc">
     <normaloff>:/img/img/icon1.png</normaloff>:/img/img/icon1.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">font: 10pt &quot;MS Shell Dlg 2&quot;;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="autoFillBackground">
@@ -99,12 +99,26 @@
              <height>0</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <family>MS Shell Dlg 2</family>
+             <pointsize>20</pointsize>
+             <weight>50</weight>
+             <italic>false</italic>
+             <bold>false</bold>
+            </font>
+           </property>
            <property name="styleSheet">
-            <string notr="true">color:white;
-border-radius:10px;</string>
+            <string notr="true">#widgetTitle
+{
+	color:white;
+	border-radius:10px;
+	
+	font: 20pt &quot;MS Shell Dlg 2&quot;;
+}</string>
            </property>
            <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;Home&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Home&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="textFormat">
             <enum>Qt::RichText</enum>
@@ -172,6 +186,15 @@ border-radius:10px;</string>
                 <height>50</height>
                </size>
               </property>
+              <property name="font">
+               <font>
+                <family>MS Shell Dlg 2</family>
+                <pointsize>10</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
               <property name="styleSheet">
                <string notr="true">border-radius: 10px;
 color : brown;
@@ -190,6 +213,15 @@ border-image: url(:/img/img/ButtonBackground.jpg);
                 <width>0</width>
                 <height>50</height>
                </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>MS Shell Dlg 2</family>
+                <pointsize>10</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
               </property>
               <property name="styleSheet">
                <string notr="true">border-radius: 10px;
@@ -210,6 +242,15 @@ border-image: url(:/img/img/ButtonBackground.jpg);
                 <height>50</height>
                </size>
               </property>
+              <property name="font">
+               <font>
+                <family>MS Shell Dlg 2</family>
+                <pointsize>10</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
               <property name="styleSheet">
                <string notr="true">border-radius: 10px;
 color : brown;
@@ -229,6 +270,15 @@ border-image: url(:/img/img/ButtonBackground.jpg);
                 <height>50</height>
                </size>
               </property>
+              <property name="font">
+               <font>
+                <family>MS Shell Dlg 2</family>
+                <pointsize>10</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
               <property name="styleSheet">
                <string notr="true">border-radius: 10px;
 color : brown;
@@ -247,6 +297,15 @@ border-image: url(:/img/img/ButtonBackground.jpg);
                 <width>0</width>
                 <height>50</height>
                </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>MS Shell Dlg 2</family>
+                <pointsize>10</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
               </property>
               <property name="styleSheet">
                <string notr="true">border-radius: 10px;

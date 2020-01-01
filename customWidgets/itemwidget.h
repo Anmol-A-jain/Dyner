@@ -13,11 +13,18 @@ class ItemWidget : public QWidget
 
 public:
     explicit ItemWidget(QWidget *parent = nullptr);
+    //setting data to id, name, category, price
     void setData(QString id,QString name,QString category,QString price);
     ~ItemWidget();
 
+private slots:
+    void on_editbtn_clicked();
+
+    void on_deletebtn_clicked();
+
 private:
     Ui::ItemWidget *ui;
+    QWidget* myParent;
 };
 
 #endif // ITEMWIDGET_H

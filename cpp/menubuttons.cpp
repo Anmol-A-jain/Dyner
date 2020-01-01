@@ -9,18 +9,14 @@ MenuButtons::MenuButtons(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // setting shadow to all buttons
     QColor color(0,0,0);
-
     this->setShadow(ui->btnAdmin,color);
     this->setShadow(ui->btnOrder,color);
     this->setShadow(ui->btnBillReq,color);
     this->setShadow(ui->btnBillHistory,color);
 
-
-    //auto myParent = static_cast<Dyner*>(parent) ;
-
     this->parentName = parent;
-
 }
 
 MenuButtons::~MenuButtons()
