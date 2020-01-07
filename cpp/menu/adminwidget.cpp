@@ -10,11 +10,15 @@
 #include "data/xmlmanipulation.h"
 #include "data/globaldata.h"
 
+
 AdminWidget::AdminWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AdminWidget)
 {
     ui->setupUi(this);
+    scroll = new QScrollArea;
+    //scroll->setWidget(ui->itemFrame);
+    //ui->itemFrame->show();
     ui->categoryList->hide();
     this->loadData();
     this->loadInfo();
@@ -76,6 +80,11 @@ void AdminWidget::loadComboBoxData()
     delete q;
 }
 
+void AdminWidget::btnEditCategoryClicked()
+{
+    emit on_btnEditCategory_clicked();
+}
+
 AdminWidget::~AdminWidget()
 {
     this->deleteVecterData();
@@ -84,7 +93,7 @@ AdminWidget::~AdminWidget()
 
 void AdminWidget::on_AddItem_clicked()
 {
-    addItem add;
+    addItem add(this);
     add.exec() ;
     this->loadData();
 }
@@ -149,7 +158,6 @@ void AdminWidget::on_SearchButton_clicked()
         {
             cmd = "SELECT * FROM tblMenu WHERE "+ columnName +" LIKE '%"+ ui->SearchTextBox->text() +"%' ORDER BY id" ;
         }
-
     }
     else
     {

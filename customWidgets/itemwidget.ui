@@ -38,7 +38,7 @@
    <item>
     <widget class="QFrame" name="frame">
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(85, 255, 255);</string>
+      <string notr="true">background-color: #fef8ec;</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -96,18 +96,18 @@
          <widget class="QPushButton" name="editbtn">
           <property name="minimumSize">
            <size>
-            <width>50</width>
-            <height>50</height>
+            <width>35</width>
+            <height>35</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>50</width>
-            <height>50</height>
+            <width>35</width>
+            <height>35</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">background-color: rgb(64, 121, 255);
+           <string notr="true">background-color: #00CCFF;
 border-radius:5px;</string>
           </property>
           <property name="text">
@@ -135,14 +135,14 @@ border-radius:5px;</string>
          <widget class="QPushButton" name="deletebtn">
           <property name="minimumSize">
            <size>
-            <width>50</width>
-            <height>50</height>
+            <width>35</width>
+            <height>35</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>50</width>
-            <height>50</height>
+            <width>35</width>
+            <height>35</height>
            </size>
           </property>
           <property name="styleSheet">

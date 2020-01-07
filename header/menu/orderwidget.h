@@ -15,6 +15,9 @@ public:
     explicit OrderWidget(QWidget *parent = nullptr);
     ~OrderWidget();
 
+private slots:
+    void on_cmbOrrderType_currentIndexChanged(int index);
+
 private:
     Ui::OrderWidget *ui;
 };

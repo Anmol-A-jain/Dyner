@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QVector>
 #include "customWidgets/itemwidget.h"
+#include <QScrollArea>
+#include <QVBoxLayout>
 
 namespace Ui {
 class AdminWidget;
@@ -20,6 +22,7 @@ public:
     void deleteVecterData();
     void paintEvent(QPaintEvent *event) override;
     void loadComboBoxData();
+    void btnEditCategoryClicked();
 
     ~AdminWidget();
 
@@ -43,6 +46,7 @@ private slots:
 private:
     Ui::AdminWidget *ui;
     QVector<ItemWidget*> itemlist;
+    QScrollArea *scroll;
 };
 
 #endif // ADMINWIDGET_H

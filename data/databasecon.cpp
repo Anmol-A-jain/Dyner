@@ -56,5 +56,5 @@ QSqlQuery* databaseCon::execute(QString cmdstr)
     }
     qDebug() << "databaseCon.cpp (execute) : not execute : " << cmdstr ;
     qDebug() << "databaseCon.cpp (execute) :" << q->lastError().databaseText();
-    return nullptr;
+    return q;
 }

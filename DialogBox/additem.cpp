@@ -1,4 +1,5 @@
 #include "additem.h"
+#include "header/menu/adminwidget.h"
 #include "ui_additem.h"
 #include <data/databasecon.h>
 #include <QDir>
@@ -6,6 +7,7 @@
 #include <QSqlQuery>
 #include <QMessageBox>
 #include <QSqlError>
+#include <QKeyEvent>
 
 addItem::addItem(QWidget *parent) :
     QDialog(parent),
@@ -13,20 +15,16 @@ addItem::addItem(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->category->clear();
+    int size = ui->category->height() - 5 ;
+
+    ui->btnAddcategory->setMinimumSize(size,size);
+    ui->btnAddcategory->setMaximumSize(size,size);
+
+    this->loadCategory();
+
     databaseCon d;
-    QString cmd = "SELECT category FROM tblCategoryList ORDER BY category" ;
+    QString cmd = "SELECT id FROM tblMenu ORDER BY id" ;
     QSqlQuery* q = d.execute(cmd);
-
-    while(q->next())
-    {
-        ui->category->addItem(q->value("category").toString());
-    }
-    delete q;
-
-    cmd = "SELECT id FROM tblMenu ORDER BY id" ;
-    q = d.execute(cmd);
-
 
     while(q->next())
     {
@@ -53,11 +51,50 @@ addItem::addItem(QWidget *parent) :
     }
     delete q;
 
+
+    myParent = parent;
+
+    if(myParent)
+    {
+        if(ui->category->count() == 0)
+        {
+            QMessageBox::warning(this,"Warning","<h3>Empty Category List</h3>\nThere is no category available. please enter at least one category");
+            static_cast<AdminWidget*>(myParent)->btnEditCategoryClicked();
+            this->loadCategory();
+        }
+
+        cmd = "SELECT category FROM tblCategoryList ORDER BY category" ;
+        q = d.execute(cmd);
+
+        if(q->size() == 0)
+        {
+            QMessageBox::warning(this,"Warning","<h3>Empty Category List</h3>\nYou have not add any data in category.");
+
+            QKeyEvent *event = new QKeyEvent( QEvent::KeyPress, Qt::Key_Escape ,Qt::NoModifier);
+            QCoreApplication::postEvent (this, event);
+        }
+    }
+
+    delete q;
 }
 
 addItem::~addItem()
 {
     delete ui;
+}
+
+void addItem::loadCategory()
+{
+    ui->category->clear();
+    databaseCon d;
+    QString cmd = "SELECT category FROM tblCategoryList ORDER BY category" ;
+    QSqlQuery* q = d.execute(cmd);
+
+    while(q->next())
+    {
+        ui->category->addItem(q->value("category").toString());
+    }
+    delete q;
 }
 
 void addItem::on_btnAdd_clicked()
@@ -109,4 +146,11 @@ void addItem::on_btnAdd_clicked()
 
         QMessageBox::critical(this,"Error",errormsg);
     }
+}
+
+
+void addItem::on_btnAddcategory_clicked()
+{
+    static_cast<AdminWidget*>(myParent)->btnEditCategoryClicked();
+    this->loadCategory();
 }

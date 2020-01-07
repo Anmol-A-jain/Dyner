@@ -41,11 +41,26 @@ void EditCategory::on_add_clicked()
     databaseCon d;
     if(!ui->CategoryText->text().isEmpty())
     {
-        QString cmd = "INSERT INTO tblCategoryList VALUES('"+ui->CategoryText->text()+"') ";
-        QSqlQuery* q = d.execute(cmd);
-        delete q;
-        this->loadData();
-        QMessageBox::information(this,"Information","category has been added");
+        bool isContains = false;
+
+        for(int i = ui->CategoryList->count(); i >= 0 ; --i )
+        {
+            if(ui->CategoryList->itemText(i) == ui->CategoryText->text())
+            {
+                isContains = true;
+                QMessageBox::critical(this,"Information","Category already exist");
+                return;
+            }
+        }
+
+        if(!isContains)
+        {
+            QString cmd = "INSERT INTO tblCategoryList VALUES('"+ui->CategoryText->text()+"') ";
+            QSqlQuery* q = d.execute(cmd);
+            delete q;
+            this->loadData();
+            QMessageBox::information(this,"Information","category has been added");
+        }
     }
 }
 
