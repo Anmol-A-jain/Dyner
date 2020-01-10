@@ -1,9 +1,9 @@
 #include "header/menu/adminwidget.h"
 #include "ui_adminwidget.h"
 #include "data/databasecon.h"
-#include "DialogBox/additem.h"
-#include "DialogBox/edittablenoanddiscount.h"
-#include "DialogBox/editcategory.h"
+#include "DialogBox/admin/additem.h"
+#include "DialogBox/admin/edittablenoanddiscount.h"
+#include "DialogBox/admin/editcategory.h"
 #include <QSqlRecord>
 #include <QDebug>
 #include <QMessageBox>
@@ -16,9 +16,7 @@ AdminWidget::AdminWidget(QWidget *parent) :
     ui(new Ui::AdminWidget)
 {
     ui->setupUi(this);
-    scroll = new QScrollArea;
-    //scroll->setWidget(ui->itemFrame);
-    //ui->itemFrame->show();
+
     ui->categoryList->hide();
     this->loadData();
     this->loadInfo();
@@ -36,8 +34,9 @@ void AdminWidget::loadData()
         ItemWidget *item = new ItemWidget(this);
         itemlist.push_back(item);
         item->setData(q->value("id").toString(),q->value("itemName").toString(),q->value("category").toString(),q->value("Price").toString());
-        ui->itemListContainer->addWidget(item);
+        ui->displayAddMenu->addWidget(item);
     }
+
     delete q;
 }
 
@@ -74,7 +73,7 @@ void AdminWidget::loadComboBoxData()
 
     while(q->next())
     {
-        qDebug() << "AdminWidget.cpp (deleteVecterData) : combo box :" << q->value("category").toString();
+        qDebug() << "AdminWidget.cpp (loadComboBoxData) : combo box :" << q->value("category").toString();
         ui->categoryList->addItem(q->value("category").toString());
     }
     delete q;
@@ -172,7 +171,7 @@ void AdminWidget::on_SearchButton_clicked()
         ItemWidget *item = new ItemWidget(this);
         itemlist.push_back(item);
         item->setData(q->value("id").toString(),q->value("itemName").toString(),q->value("category").toString(),q->value("Price").toString());
-        ui->itemListContainer->addWidget(item);
+        ui->displayAddMenu->addWidget(item);
     }
     delete q;
 }

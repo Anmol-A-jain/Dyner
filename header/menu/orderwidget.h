@@ -2,6 +2,8 @@
 #define ORDERWIDGET_H
 
 #include <QWidget>
+#include <customWidgets/order/orderitemdata.h>
+#include <QVector>
 
 namespace Ui {
 class OrderWidget;
@@ -17,6 +19,10 @@ public:
 
 private slots:
     void on_cmbOrrderType_currentIndexChanged(int index);
+
+    void on_pushButton_clicked();
+
+     QVector<OrderItemData> orderStore ;
 
 private:
     Ui::OrderWidget *ui;

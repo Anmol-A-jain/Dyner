@@ -1,6 +1,5 @@
 #include "header/menubuttons.h"
 #include "ui_menubuttons.h"
-#include "ui_dyner.h"
 #include "header/dyner.h"
 
 MenuButtons::MenuButtons(QWidget *parent) :

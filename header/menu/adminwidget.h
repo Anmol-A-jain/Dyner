@@ -3,9 +3,12 @@
 
 #include <QWidget>
 #include <QVector>
-#include "customWidgets/itemwidget.h"
+#include "customWidgets/admin/itemwidget.h"
 #include <QScrollArea>
 #include <QVBoxLayout>
+#include <QWidget>
+#include <QSpacerItem>
+
 
 namespace Ui {
 class AdminWidget;
@@ -46,7 +49,6 @@ private slots:
 private:
     Ui::AdminWidget *ui;
     QVector<ItemWidget*> itemlist;
-    QScrollArea *scroll;
 };
 
 #endif // ADMINWIDGET_H

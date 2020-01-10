@@ -1,6 +1,10 @@
 #include <QDebug>
 #include "header/dyner.h"
 #include "header/menubuttons.h"
+#include "header/menu/adminwidget.h"
+#include "header/menu/billhistorywidget.h"
+#include "header/menu/billreqwidget.h"
+#include "header/menu/orderwidget.h"
 #include "ui_dyner.h"
 #include "data/databasecon.h"
 #include <QtXml>

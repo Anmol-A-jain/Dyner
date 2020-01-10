@@ -3,6 +3,7 @@
 #include <QDebug>
 #include "data/globaldata.h"
 #include "data/xmlmanipulation.h"
+#include "DialogBox/order/addorderitem.h"
 
 OrderWidget::OrderWidget(QWidget *parent) :
     QWidget(parent),
@@ -67,4 +68,11 @@ void OrderWidget::on_cmbOrrderType_currentIndexChanged(int index)
             break;
         }
     }
+}
+
+void OrderWidget::on_pushButton_clicked()
+{
+   AddOrderItem aoi(this);
+   aoi.exec();
+
 }
