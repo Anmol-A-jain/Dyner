@@ -27,7 +27,7 @@ void AdminWidget::loadData()
 {
     this->deleteVecterData();
     databaseCon d;
-    QString cmd = "select * from tblMenu order by id" ;
+    QString cmd = "select * from mstTblMenu order by id" ;
     QSqlQuery* q = d.execute(cmd);
     while( q->next())
     {
@@ -139,28 +139,28 @@ void AdminWidget::on_SearchButton_clicked()
 
         if(isPrice)
         {
-            cmd = "SELECT * FROM tblMenu WHERE "+ columnName +" = "+ searchText +" ORDER BY id" ;
+            cmd = "SELECT * FROM mstTblMenu WHERE "+ columnName +" = "+ searchText +" ORDER BY id" ;
         }
         else if(isName)
         {
-            cmd = "SELECT * FROM tblMenu WHERE "+ columnName +" LIKE '%"+ searchText +"%' ORDER BY id" ;
+            cmd = "SELECT * FROM mstTblMenu WHERE "+ columnName +" LIKE '%"+ searchText +"%' ORDER BY id" ;
         }
         else if(isAll)
         {
-            cmd = "SELECT * FROM tblMenu WHERE id = '"+searchText+"' OR itemName LIKE '%"+ searchText +"%' OR category LIKE '%"+ searchText +"%' OR Price = '"+ searchText +"' ORDER BY id" ;
+            cmd = "SELECT * FROM mstTblMenu WHERE id = '"+searchText+"' OR itemName LIKE '%"+ searchText +"%' OR category LIKE '%"+ searchText +"%' OR Price = '"+ searchText +"' ORDER BY id" ;
         }
         else if(isCategory)
         {
-            cmd = "SELECT * FROM tblMenu WHERE "+ columnName +" = '"+ ui->categoryList->currentText() +"' ORDER BY id" ;
+            cmd = "SELECT * FROM mstTblMenu WHERE "+ columnName +" = '"+ ui->categoryList->currentText() +"' ORDER BY id" ;
         }
         else
         {
-            cmd = "SELECT * FROM tblMenu WHERE "+ columnName +" LIKE '%"+ ui->SearchTextBox->text() +"%' ORDER BY id" ;
+            cmd = "SELECT * FROM mstTblMenu WHERE "+ columnName +" LIKE '%"+ ui->SearchTextBox->text() +"%' ORDER BY id" ;
         }
     }
     else
     {
-        cmd = "SELECT * FROM tblMenu ORDER BY id";
+        cmd = "SELECT * FROM mstTblMenu ORDER BY id";
     }
 
     this->deleteVecterData();

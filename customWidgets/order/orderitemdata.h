@@ -15,6 +15,9 @@ public:
     explicit OrderItemData(QString id,QString name,QString category,QString prc,QWidget *parent = nullptr);
     ~OrderItemData();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::OrderItemData *ui;
 

@@ -50,7 +50,7 @@ void EditItem::on_btnUpdate_clicked()
 
     if(!id.isEmpty() && !name.isEmpty() && !price.isEmpty() && !category.isEmpty())
     {
-        QString cmd = "UPDATE tblMenu SET itemName = '"+name+"' , category = '"+category+"' , Price = "+price + " where id = '"+id+"' " ;
+        QString cmd = "UPDATE mstTblMenu SET itemName = '"+name+"' , category = '"+category+"' , Price = "+price + " where id = '"+id+"' " ;
         QSqlQuery* q = d.execute(cmd);
         delete q;
         static_cast<AdminWidget*>(myParent)->loadData();

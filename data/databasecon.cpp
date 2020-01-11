@@ -25,6 +25,7 @@ databaseCon::databaseCon()
     else
     {
         qDebug() << "databaseCon.cpp (databaseCon) : connected";
+        delete this->execute("PRAGMA foreign_keys = ON;");
     }
 }
 

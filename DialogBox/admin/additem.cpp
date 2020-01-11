@@ -23,7 +23,7 @@ addItem::addItem(QWidget *parent) :
     this->loadCategory();
 
     databaseCon d;
-    QString cmd = "SELECT id FROM tblMenu ORDER BY id" ;
+    QString cmd = "SELECT id FROM mstTblMenu ORDER BY id" ;
     QSqlQuery* q = d.execute(cmd);
 
     while(q->next())
@@ -103,7 +103,7 @@ void addItem::on_btnAdd_clicked()
 
     QString id = ui->id->text();
 
-    QString cmd = "SELECT * FROM tblMenu WHERE id = '"+id+"' " ;
+    QString cmd = "SELECT * FROM mstTblMenu WHERE id = '"+id+"' " ;
 
     QSqlQuery* q = d.execute(cmd);
     while (q->next())
@@ -119,7 +119,7 @@ void addItem::on_btnAdd_clicked()
 
     if(!id.isEmpty() && !name.isEmpty() && !price.isEmpty() && !category.isEmpty() )
     {
-        cmd = "insert into tblMenu values('" + id + "','" + name + "'," + price + " ,'" + category + "')" ;
+        cmd = "insert into mstTblMenu values('" + id + "','" + name + "'," + price + " ,'" + category + "')" ;
         q = d.execute(cmd);
         delete q;
 

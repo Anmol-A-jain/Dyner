@@ -348,6 +348,30 @@
              <height>629</height>
             </rect>
            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QWidget" name="widget" native="true">
+              <layout class="QVBoxLayout" name="verticalLayout_5">
+               <item>
+                <layout class="QVBoxLayout" name="displaOrderRow"/>
+               </item>
+               <item>
+                <spacer name="verticalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>582</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>

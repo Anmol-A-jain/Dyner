@@ -103,9 +103,9 @@ void EditCategory::on_remove_clicked()
         QSqlQuery* q = d.execute(cmd);
         delete q;
 
-        cmd = "DELETE FROM tblMenu WHERE category = '"+ui->CategoryList->currentText()+"'  ";
+        /*cmd = "DELETE FROM mstTblMenu WHERE category = '"+ui->CategoryList->currentText()+"'  ";
         q = d.execute(cmd);
-        delete q;
+        delete q;*/
 
         static_cast<AdminWidget*>(myParent)->loadData();
         this->loadData();
@@ -119,10 +119,6 @@ void EditCategory::on_update_clicked()
     {
         QString cmd = "UPDATE tblCategoryList SET category = '"+ui->CategoryText->text() +"' WHERE category = '"+ui->CategoryList->currentText()+"' " ;
         QSqlQuery* q = d.execute(cmd);
-        delete q;
-
-        cmd = "UPDATE tblMenu SET category = '"+ui->CategoryText->text() +"' WHERE category = '"+ui->CategoryList->currentText()+"'  ";
-        q = d.execute(cmd);
         delete q;
 
         QMessageBox::information(this,"Information","category has been Updated");

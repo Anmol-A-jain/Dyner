@@ -1,7 +1,6 @@
 #include "orderitemdata.h"
 #include "ui_orderitemdata.h"
 
-
 OrderItemData::OrderItemData(QString id,QString name,QString category,QString prc, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::OrderItemData)
@@ -18,3 +17,8 @@ OrderItemData::~OrderItemData()
     delete ui;
 }
 
+
+void OrderItemData::on_pushButton_clicked()
+{
+    //TO-DO
+}

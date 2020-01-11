@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <customWidgets/order/orderitemdata.h>
-#include <QVector>
 
 namespace Ui {
 class OrderWidget;
@@ -22,7 +21,6 @@ private slots:
 
     void on_pushButton_clicked();
 
-     QVector<OrderItemData> orderStore ;
 
 private:
     Ui::OrderWidget *ui;

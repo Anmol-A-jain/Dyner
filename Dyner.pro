@@ -26,9 +26,9 @@ SOURCES += \
     cpp/menu/billhistorywidget.cpp \
     cpp/menu/billreqwidget.cpp \
     customWidgets/admin/itemwidget.cpp \
+    customWidgets/order/displaywidget.cpp \
     customWidgets/order/orderitemdata.cpp \
     data/globaldata.cpp \
-    data/ordercart.cpp \
     data/xmlmanipulation.cpp \
     server/dynerserver.cpp \
     data/databasecon.cpp \
@@ -45,10 +45,10 @@ HEADERS += \
     DialogBox/admin/edittablenoanddiscount.h \
     DialogBox/order/addorderitem.h \
     customWidgets/admin/itemwidget.h \
+    customWidgets/order/displaywidget.h \
     customWidgets/order/orderitemdata.h \
     data/databasecon.h \
     data/globaldata.h \
-    data/ordercart.h \
     data/xmlmanipulation.h \
     server/dynerserver.h \
     header/menu/adminwidget.h \
@@ -66,6 +66,7 @@ FORMS += \
     DialogBox/admin/edittablenoanddiscount.ui \
     DialogBox/order/addorderitem.ui \
     customWidgets/admin/itemwidget.ui \
+    customWidgets/order/displaywidget.ui \
     customWidgets/order/orderitemdata.ui \
     ui/menu/adminwidget.ui \
     ui/menu/billhistorywidget.ui \
