@@ -1,6 +1,6 @@
 #include "itemwidget.h"
 #include "ui_itemwidget.h"
-#include "DialogBox/edititem.h"
+#include "DialogBox/admin/edititem.h"
 #include "data/databasecon.h"
 #include "header/menu/adminwidget.h"
 #include <QMessageBox>
@@ -49,7 +49,7 @@ void ItemWidget::on_deletebtn_clicked()
     if (reply == QMessageBox::Yes) {
       databaseCon d;
 
-      QString cmd = "DELETE FROM tblMenu WHERE id = '"+ ui->ItemId->text() +"'" ;
+      QString cmd = "DELETE FROM mstTblMenu WHERE id = '"+ ui->ItemId->text() +"'" ;
       QSqlQuery* q = d.execute(cmd);
       if(q != nullptr)
       {

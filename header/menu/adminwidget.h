@@ -3,7 +3,12 @@
 
 #include <QWidget>
 #include <QVector>
-#include "customWidgets/itemwidget.h"
+#include "customWidgets/admin/itemwidget.h"
+#include <QScrollArea>
+#include <QVBoxLayout>
+#include <QWidget>
+#include <QSpacerItem>
+
 
 namespace Ui {
 class AdminWidget;
@@ -20,6 +25,7 @@ public:
     void deleteVecterData();
     void paintEvent(QPaintEvent *event) override;
     void loadComboBoxData();
+    void btnEditCategoryClicked();
 
     ~AdminWidget();
 

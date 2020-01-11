@@ -15,13 +15,17 @@ class addItem : public QDialog
 public:
     explicit addItem(QWidget *parent = nullptr);
     ~addItem();
+    void loadCategory();
 
 private slots:
     // inserting data to database  
     void on_btnAdd_clicked();
 
+    void on_btnAddcategory_clicked();
+
 private:
     Ui::addItem *ui;
+    QWidget* myParent;
 };
 
 #endif // ADDITEM_H

@@ -2,6 +2,7 @@
 #define ORDERWIDGET_H
 
 #include <QWidget>
+#include <customWidgets/order/orderitemdata.h>
 
 namespace Ui {
 class OrderWidget;
@@ -14,6 +15,12 @@ class OrderWidget : public QWidget
 public:
     explicit OrderWidget(QWidget *parent = nullptr);
     ~OrderWidget();
+
+private slots:
+    void on_cmbOrrderType_currentIndexChanged(int index);
+
+    void on_pushButton_clicked();
+
 
 private:
     Ui::OrderWidget *ui;

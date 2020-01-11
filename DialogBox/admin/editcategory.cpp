@@ -41,11 +41,26 @@ void EditCategory::on_add_clicked()
     databaseCon d;
     if(!ui->CategoryText->text().isEmpty())
     {
-        QString cmd = "INSERT INTO tblCategoryList VALUES('"+ui->CategoryText->text()+"') ";
-        QSqlQuery* q = d.execute(cmd);
-        delete q;
-        this->loadData();
-        QMessageBox::information(this,"Information","category has been added");
+        bool isContains = false;
+
+        for(int i = ui->CategoryList->count(); i >= 0 ; --i )
+        {
+            if(ui->CategoryList->itemText(i) == ui->CategoryText->text())
+            {
+                isContains = true;
+                QMessageBox::critical(this,"Information","Category already exist");
+                return;
+            }
+        }
+
+        if(!isContains)
+        {
+            QString cmd = "INSERT INTO tblCategoryList VALUES('"+ui->CategoryText->text()+"') ";
+            QSqlQuery* q = d.execute(cmd);
+            delete q;
+            this->loadData();
+            QMessageBox::information(this,"Information","category has been added");
+        }
     }
 }
 
@@ -88,9 +103,9 @@ void EditCategory::on_remove_clicked()
         QSqlQuery* q = d.execute(cmd);
         delete q;
 
-        cmd = "DELETE FROM tblMenu WHERE category = '"+ui->CategoryList->currentText()+"'  ";
+        /*cmd = "DELETE FROM mstTblMenu WHERE category = '"+ui->CategoryList->currentText()+"'  ";
         q = d.execute(cmd);
-        delete q;
+        delete q;*/
 
         static_cast<AdminWidget*>(myParent)->loadData();
         this->loadData();
@@ -104,10 +119,6 @@ void EditCategory::on_update_clicked()
     {
         QString cmd = "UPDATE tblCategoryList SET category = '"+ui->CategoryText->text() +"' WHERE category = '"+ui->CategoryList->currentText()+"' " ;
         QSqlQuery* q = d.execute(cmd);
-        delete q;
-
-        cmd = "UPDATE tblMenu SET category = '"+ui->CategoryText->text() +"' WHERE category = '"+ui->CategoryList->currentText()+"'  ";
-        q = d.execute(cmd);
         delete q;
 
         QMessageBox::information(this,"Information","category has been Updated");

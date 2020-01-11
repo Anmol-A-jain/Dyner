@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QGraphicsDropShadowEffect>
-#include "ui_dyner.h"
 
 namespace Ui {
 class menuButtons;

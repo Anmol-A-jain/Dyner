@@ -3,12 +3,6 @@
 
 #include <QMainWindow>
 #include <QHBoxLayout>
-
-
-#include "header/menu/adminwidget.h"
-#include "header/menu/billhistorywidget.h"
-#include "header/menu/billreqwidget.h"
-#include "header/menu/orderwidget.h"
 #include <QPushButton>
 #include <QDir>
 #include <QFile>

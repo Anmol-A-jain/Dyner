@@ -17,14 +17,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    DialogBox/additem.cpp \
-    DialogBox/editcategory.cpp \
-    DialogBox/edititem.cpp \
-    DialogBox/edittablenoanddiscount.cpp \
+    DialogBox/admin/additem.cpp \
+    DialogBox/admin/editcategory.cpp \
+    DialogBox/admin/edititem.cpp \
+    DialogBox/admin/edittablenoanddiscount.cpp \
+    DialogBox/order/addorderitem.cpp \
     cpp/menu/adminwidget.cpp \
     cpp/menu/billhistorywidget.cpp \
     cpp/menu/billreqwidget.cpp \
-    customWidgets/itemwidget.cpp \
+    customWidgets/admin/itemwidget.cpp \
+    customWidgets/order/displaywidget.cpp \
+    customWidgets/order/orderitemdata.cpp \
     data/globaldata.cpp \
     data/xmlmanipulation.cpp \
     server/dynerserver.cpp \
@@ -36,11 +39,14 @@ SOURCES += \
     server/mytcpsocket.cpp
 
 HEADERS += \
-    DialogBox/additem.h \
-    DialogBox/editcategory.h \
-    DialogBox/edititem.h \
-    DialogBox/edittablenoanddiscount.h \
-    customWidgets/itemwidget.h \
+    DialogBox/admin/additem.h \
+    DialogBox/admin/editcategory.h \
+    DialogBox/admin/edititem.h \
+    DialogBox/admin/edittablenoanddiscount.h \
+    DialogBox/order/addorderitem.h \
+    customWidgets/admin/itemwidget.h \
+    customWidgets/order/displaywidget.h \
+    customWidgets/order/orderitemdata.h \
     data/databasecon.h \
     data/globaldata.h \
     data/xmlmanipulation.h \
@@ -54,11 +60,14 @@ HEADERS += \
     server/mytcpsocket.h
 
 FORMS += \
-    DialogBox/additem.ui \
-    DialogBox/editcategory.ui \
-    DialogBox/edititem.ui \
-    DialogBox/edittablenoanddiscount.ui \
-    customWidgets/itemwidget.ui \
+    DialogBox/admin/additem.ui \
+    DialogBox/admin/editcategory.ui \
+    DialogBox/admin/edititem.ui \
+    DialogBox/admin/edittablenoanddiscount.ui \
+    DialogBox/order/addorderitem.ui \
+    customWidgets/admin/itemwidget.ui \
+    customWidgets/order/displaywidget.ui \
+    customWidgets/order/orderitemdata.ui \
     ui/menu/adminwidget.ui \
     ui/menu/billhistorywidget.ui \
     ui/menu/billreqwidget.ui \

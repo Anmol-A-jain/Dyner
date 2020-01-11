@@ -25,6 +25,7 @@ databaseCon::databaseCon()
     else
     {
         qDebug() << "databaseCon.cpp (databaseCon) : connected";
+        delete this->execute("PRAGMA foreign_keys = ON;");
     }
 }
 
@@ -56,5 +57,5 @@ QSqlQuery* databaseCon::execute(QString cmdstr)
     }
     qDebug() << "databaseCon.cpp (execute) : not execute : " << cmdstr ;
     qDebug() << "databaseCon.cpp (execute) :" << q->lastError().databaseText();
-    return nullptr;
+    return q;
 }
