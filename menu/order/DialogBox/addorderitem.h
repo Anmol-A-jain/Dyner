@@ -1,9 +1,8 @@
 #ifndef ADDORDERITEM_H
 #define ADDORDERITEM_H
-#include "customWidgets/order/orderitemdata.h"
+#include "../customWidget/orderitemdata.h"
 #include <QVector>
 #include <QDialog>
-#include <QVBoxLayout>
 
 namespace Ui {
 class AddOrderItem;
@@ -22,8 +21,6 @@ public:
 private:
     Ui::AddOrderItem *ui;
     QWidget *myParent;
-    QVBoxLayout *layout;
-    QWidget *itemList;
     QVector<OrderItemData*> itemlist;
 };
 

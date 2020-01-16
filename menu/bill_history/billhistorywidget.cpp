@@ -1,4 +1,4 @@
-#include "header/menu/billhistorywidget.h"
+#include "billhistorywidget.h"
 #include "ui_billhistorywidget.h"
 
 BillHistoryWidget::BillHistoryWidget(QWidget *parent) :

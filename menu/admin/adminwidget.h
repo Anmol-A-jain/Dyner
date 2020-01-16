@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QVector>
-#include "customWidgets/admin/itemwidget.h"
+#include "customWidget/itemwidget.h"
 #include <QScrollArea>
 #include <QVBoxLayout>
 #include <QWidget>

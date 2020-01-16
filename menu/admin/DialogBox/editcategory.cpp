@@ -4,7 +4,7 @@
 #include <QPushButton>
 #include <QDebug>
 #include <QMessageBox>
-#include "header/menu/adminwidget.h"
+#include "../adminwidget.h"
 
 EditCategory::EditCategory(QWidget *parent) :
     QDialog(parent),

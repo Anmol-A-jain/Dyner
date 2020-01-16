@@ -1,4 +1,4 @@
-#include "header/menu/orderwidget.h"
+#include "orderwidget.h"
 #include "ui_orderwidget.h"
 #include <QDebug>
 #include "data/globaldata.h"
@@ -22,11 +22,23 @@ OrderWidget::OrderWidget(QWidget *parent) :
     {
         ui->cmbTblNo->addItem(QString::number(i));
     }
+    this->loadData();
 }
 
 OrderWidget::~OrderWidget()
 {
     delete ui;
+}
+
+int OrderWidget::getTblNo()
+{
+    return ui->cmbTblNo->currentData().toInt();
+}
+
+void OrderWidget::loadData()
+{
+    displayWidget* itemData = new displayWidget("101","xyz","indian",10,10.10);
+    ui->displayOrderRow->addWidget(itemData);
 }
 
 void OrderWidget::on_cmbOrrderType_currentIndexChanged(int index)

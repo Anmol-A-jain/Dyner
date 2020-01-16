@@ -1,4 +1,4 @@
-#include "header/dyner.h"
+#include "dyner.h"
 
 #include <QApplication>
 

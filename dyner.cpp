@@ -1,14 +1,17 @@
-#include <QDebug>
-#include "header/dyner.h"
-#include "header/menubuttons.h"
-#include "header/menu/adminwidget.h"
-#include "header/menu/billhistorywidget.h"
-#include "header/menu/billreqwidget.h"
-#include "header/menu/orderwidget.h"
-#include "ui_dyner.h"
+#include "dyner.h"
+
+#include "menu/menu_buttons/menubuttons.h"
+#include "menu/admin/adminwidget.h"
+#include "menu/bill_history/billhistorywidget.h"
+#include "menu/bill_request/billreqwidget.h"
+#include "menu/order/orderwidget.h"
+
 #include "data/databasecon.h"
-#include <QtXml>
 #include "data/xmlmanipulation.h"
+
+#include "ui_dyner.h"
+#include <QDebug>
+#include <QtXml>
 
 Dyner::Dyner(QWidget *parent)
     : QMainWindow(parent)

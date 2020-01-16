@@ -16,11 +16,12 @@ public:
     ~OrderItemData();
 
 private slots:
-    void on_pushButton_clicked();
+
+    void on_btnAddOrder_clicked();
 
 private:
     Ui::OrderItemData *ui;
-
+    QWidget *myparent;
 };
 
 #endif // ORDERITEMDATA_H
