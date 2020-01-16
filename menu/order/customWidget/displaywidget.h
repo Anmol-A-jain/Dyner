@@ -1,5 +1,6 @@
 #ifndef DISPLAYWIDGET_H
 #define DISPLAYWIDGET_H
+// display data for header/menu/orderWidget
 
 #include <QWidget>
 
@@ -12,7 +13,7 @@ class displayWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit displayWidget(QWidget *parent = nullptr);
+    explicit displayWidget(QString id,QString name, QString category, int Qty, double rate ,QWidget *parent = nullptr);
     ~displayWidget();
 
 private:

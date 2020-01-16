@@ -1,6 +1,5 @@
 #include "addorderitem.h"
 #include "ui_addorderitem.h"
-#include "customWidgets/order/orderitemdata.h"
 #include "data/databasecon.h"
 #include <QDebug>
 
@@ -11,12 +10,6 @@ AddOrderItem::AddOrderItem(QWidget *parent) :
     ui->setupUi(this);
     myParent = parent;
 
-    itemList = new QWidget;
-    layout = new QVBoxLayout;
-
-    itemList->setLayout(layout);
-    //ui->scrollArea->setWidget(itemList);
-
     this->loadData();
 
 }
@@ -25,8 +18,6 @@ AddOrderItem::AddOrderItem(QWidget *parent) :
 AddOrderItem::~AddOrderItem()
 {
     delete ui;
-    itemList->deleteLater();
-    layout->deleteLater();
 }
 
 void AddOrderItem::loadData()
@@ -34,7 +25,7 @@ void AddOrderItem::loadData()
 
     this->deleteVecterData();
     databaseCon d;
-    QString cmd = "select * from tblMenu order by id" ;
+    QString cmd = "select * from mstTblMenu order by id" ;
     QSqlQuery* q = d.execute(cmd);
 
     qDebug() << "AddOrderItem.cpp (loadData) : data size" << q->size() ;

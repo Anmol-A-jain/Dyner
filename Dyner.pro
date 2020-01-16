@@ -17,63 +17,64 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    DialogBox/admin/additem.cpp \
-    DialogBox/admin/editcategory.cpp \
-    DialogBox/admin/edititem.cpp \
-    DialogBox/admin/edittablenoanddiscount.cpp \
-    DialogBox/order/addorderitem.cpp \
-    cpp/menu/adminwidget.cpp \
-    cpp/menu/billhistorywidget.cpp \
-    cpp/menu/billreqwidget.cpp \
-    customWidgets/admin/itemwidget.cpp \
-    customWidgets/order/displaywidget.cpp \
-    customWidgets/order/orderitemdata.cpp \
+    dyner.cpp \
+    main.cpp \
+    data/databasecon.cpp \
     data/globaldata.cpp \
     data/xmlmanipulation.cpp \
+    menu/admin/adminwidget.cpp \
+    menu/admin/customWidget/itemwidget.cpp \
+    menu/admin/DialogBox/additem.cpp \
+    menu/admin/DialogBox/editcategory.cpp \
+    menu/admin/DialogBox/edititem.cpp \
+    menu/admin/DialogBox/edittablenoanddiscount.cpp \
+    menu/bill_history/billhistorywidget.cpp \
+    menu/bill_request/billreqwidget.cpp \
+    menu/menu_buttons/menubuttons.cpp \
+    menu/order/customWidget/displaywidget.cpp \
+    menu/order/customWidget/orderitemdata.cpp \
+    menu/order/DialogBox/addorderitem.cpp \
+    menu/order/orderwidget.cpp \
     server/dynerserver.cpp \
-    data/databasecon.cpp \
-    main.cpp \
-    cpp/dyner.cpp \
-    cpp/menubuttons.cpp \
-    cpp/menu/orderwidget.cpp \
     server/mytcpsocket.cpp
 
+
 HEADERS += \
-    DialogBox/admin/additem.h \
-    DialogBox/admin/editcategory.h \
-    DialogBox/admin/edititem.h \
-    DialogBox/admin/edittablenoanddiscount.h \
-    DialogBox/order/addorderitem.h \
-    customWidgets/admin/itemwidget.h \
-    customWidgets/order/displaywidget.h \
-    customWidgets/order/orderitemdata.h \
+    dyner.h \
     data/databasecon.h \
     data/globaldata.h \
     data/xmlmanipulation.h \
+    menu/admin/adminwidget.h \
+    menu/admin/customWidget/itemwidget.h \
+    menu/admin/DialogBox/additem.h \
+    menu/admin/DialogBox/editcategory.h \
+    menu/admin/DialogBox/edititem.h \
+    menu/admin/DialogBox/edittablenoanddiscount.h \
+    menu/bill_history/billhistorywidget.h \
+    menu/bill_request/billreqwidget.h \
+    menu/menu_buttons/menubuttons.h \
+    menu/order/DialogBox/addorderitem.h \
+    menu/order/customWidget/displaywidget.h \
+    menu/order/customWidget/orderitemdata.h \
+    menu/order/orderwidget.h \
     server/dynerserver.h \
-    header/menu/adminwidget.h \
-    header/menu/billhistorywidget.h \
-    header/menu/billreqwidget.h \
-    header/dyner.h \
-    header/menubuttons.h \
-    header/menu/orderwidget.h \
     server/mytcpsocket.h
 
 FORMS += \
-    DialogBox/admin/additem.ui \
-    DialogBox/admin/editcategory.ui \
-    DialogBox/admin/edititem.ui \
-    DialogBox/admin/edittablenoanddiscount.ui \
-    DialogBox/order/addorderitem.ui \
-    customWidgets/admin/itemwidget.ui \
-    customWidgets/order/displaywidget.ui \
-    customWidgets/order/orderitemdata.ui \
-    ui/menu/adminwidget.ui \
-    ui/menu/billhistorywidget.ui \
-    ui/menu/billreqwidget.ui \
-    ui/dyner.ui \
-    ui/menubuttons.ui \
-    ui/menu/orderwidget.ui
+    dyner.ui \
+    menu/admin/adminwidget.ui \
+    menu/admin/customWidget/itemwidget.ui \
+    menu/admin/DialogBox/additem.ui \
+    menu/admin/DialogBox/editcategory.ui \
+    menu/admin/DialogBox/edititem.ui \
+    menu/admin/DialogBox/edittablenoanddiscount.ui \
+    menu/bill_history/billhistorywidget.ui \
+    menu/bill_request/billreqwidget.ui \
+    menu/menu_buttons/menubuttons.ui \
+    menu/order/orderwidget.ui\
+    menu/order/customWidget/displaywidget.ui \
+    menu/order/customWidget/orderitemdata.ui \
+    menu/order/DialogBox/addorderitem.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

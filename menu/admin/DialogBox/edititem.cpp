@@ -1,7 +1,7 @@
 #include "edititem.h"
 #include "ui_edititem.h"
 #include "data/databasecon.h"
-#include "header/menu/adminwidget.h"
+#include "../adminwidget.h"
 #include <QSqlQuery>
 #include <QMessageBox>
 

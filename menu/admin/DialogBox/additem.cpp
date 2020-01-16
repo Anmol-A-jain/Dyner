@@ -1,5 +1,5 @@
 #include "additem.h"
-#include "header/menu/adminwidget.h"
+#include "../adminwidget.h"
 #include "ui_additem.h"
 #include <data/databasecon.h>
 #include <QDir>

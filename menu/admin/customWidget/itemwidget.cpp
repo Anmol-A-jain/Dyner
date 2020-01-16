@@ -1,8 +1,8 @@
 #include "itemwidget.h"
 #include "ui_itemwidget.h"
-#include "DialogBox/admin/edititem.h"
+#include "menu/admin/DialogBox/edititem.h"
 #include "data/databasecon.h"
-#include "header/menu/adminwidget.h"
+#include "../adminwidget.h"
 #include <QMessageBox>
 
 

@@ -1,9 +1,9 @@
-#include "header/menu/adminwidget.h"
+#include "adminwidget.h"
 #include "ui_adminwidget.h"
 #include "data/databasecon.h"
-#include "DialogBox/admin/additem.h"
-#include "DialogBox/admin/edittablenoanddiscount.h"
-#include "DialogBox/admin/editcategory.h"
+#include "DialogBox/additem.h"
+#include "DialogBox/edittablenoanddiscount.h"
+#include "DialogBox/editcategory.h"
 #include <QSqlRecord>
 #include <QDebug>
 #include <QMessageBox>

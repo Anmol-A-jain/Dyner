@@ -353,7 +353,7 @@
              <widget class="QWidget" name="widget" native="true">
               <layout class="QVBoxLayout" name="verticalLayout_5">
                <item>
-                <layout class="QVBoxLayout" name="displaOrderRow"/>
+                <layout class="QVBoxLayout" name="displayOrderRow"/>
                </item>
                <item>
                 <spacer name="verticalSpacer">
