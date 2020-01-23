@@ -19,6 +19,8 @@ private slots:
 
     void on_btnAddOrder_clicked();
 
+    void on_doubleSpinBox_valueChanged(double arg1);
+
 private:
     Ui::OrderItemData *ui;
     QWidget *myparent;

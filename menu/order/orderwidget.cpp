@@ -3,7 +3,8 @@
 #include <QDebug>
 #include "data/globaldata.h"
 #include "data/xmlmanipulation.h"
-#include "DialogBox/order/addorderitem.h"
+#include "DialogBox/addorderitem.h"
+#include "data/databasecon.h"
 
 OrderWidget::OrderWidget(QWidget *parent) :
     QWidget(parent),
@@ -32,13 +33,43 @@ OrderWidget::~OrderWidget()
 
 int OrderWidget::getTblNo()
 {
-    return ui->cmbTblNo->currentData().toInt();
+    qDebug() << "orderwidget.cpp (getTblNo ) : index : " << ui->cmbTblNo->currentText().toInt();
+    return ui->cmbTblNo->currentText().toInt();
 }
 
 void OrderWidget::loadData()
 {
-    displayWidget* itemData = new displayWidget("101","xyz","indian",10,10.10);
-    ui->displayOrderRow->addWidget(itemData);
+    this->deleterVecterData();
+    databaseCon d;
+    QString cmd = "SELECT a.*, b.itemName , b.Price , b.category  FROM tblTempOrder a LEFT JOIN mstTblMenu b ON a.item_id = b.id;" ;
+    QSqlQuery* q = d.execute(cmd);
+
+    while (q->next())
+    {
+
+        if(q->value(0).toInt() == this->getTblNo() && ui->cmbOrrderType->currentText() == "Table No" )
+        {
+            QString id = q->value(1).toString();
+            double qty = q->value(2).toDouble();
+            QString name = q->value(3).toString();
+            double price = q->value(4).toDouble();
+            QString category = q->value(5).toString();
+
+            displayWidget* itemData = new displayWidget(id,name,category,qty,price,this->getTblNo(),this);
+            ui->displayOrderRow->addWidget(itemData);
+            list.push_back(itemData);
+        }
+
+    }
+}
+
+void OrderWidget::deleterVecterData()
+{
+    for (int i = 0; i < list.count(); ++i)
+    {
+        delete list[i];
+    }
+    list.clear();
 }
 
 void OrderWidget::on_cmbOrrderType_currentIndexChanged(int index)
@@ -87,4 +118,18 @@ void OrderWidget::on_pushButton_clicked()
    AddOrderItem aoi(this);
    aoi.exec();
 
+}
+
+void OrderWidget::on_cmbTblNo_currentTextChanged(const QString &arg1)
+{
+    qDebug() << "orderwidget.cpp (on_cmbTblNo_currentTextChanged) : cmbTblNo changed : " << arg1 ;
+    this->deleterVecterData();
+    this->loadData();
+}
+
+void OrderWidget::on_cmbOrrderType_currentTextChanged(const QString &arg1)
+{
+    qDebug() << "orderwidget.cpp (on_cmbOrrderType_currentTextChanged) : cmbTblNo changed : " << arg1 ;
+    this->deleterVecterData();
+    this->loadData();
 }

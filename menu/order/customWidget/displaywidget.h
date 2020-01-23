@@ -13,11 +13,18 @@ class displayWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit displayWidget(QString id,QString name, QString category, int Qty, double rate ,QWidget *parent = nullptr);
+    explicit displayWidget(QString idString,QString name, QString category, double Qty, double price, int tblNo ,QWidget *parent = nullptr);
     ~displayWidget();
+
+private slots:
+    void on_doubleSpinBox_valueChanged(double arg1);
 
 private:
     Ui::displayWidget *ui;
+    QString idString,id,name,category;
+    double Qty,price,amt;
+    QWidget* myparent;
+    int tblNo;
 };
 
 #endif // DISPLAYWIDGET_H

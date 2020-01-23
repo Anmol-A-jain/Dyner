@@ -99,9 +99,9 @@ QWidget *Dyner::newFrame(int option)
 
 void Dyner::showMenuAndDeleteThis(int option)
 {
-    delete childFrame;
-    childFrame = newFrame(option);
-    ui->windowContainer->addWidget( childFrame );
+    delete this->childFrame;
+    this->childFrame = newFrame(option);
+    ui->windowContainer->addWidget( this->childFrame );
 }
 
 void Dyner::orderButtonClick()
