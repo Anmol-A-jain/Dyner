@@ -2,8 +2,8 @@
 
 #include "menu/menu_buttons/menubuttons.h"
 #include "menu/admin/adminwidget.h"
-#include "menu/bill_history/billhistorywidget.h"
-#include "menu/bill_request/billreqwidget.h"
+//#include "menu/bill_history/billhistorywidget.h"
+//#include "menu/bill_request/billreqwidget.h"
 #include "menu/order/orderwidget.h"
 
 #include "data/databasecon.h"
@@ -80,12 +80,12 @@ QWidget *Dyner::newFrame(int option)
 
         case 2 :
         {
-            return new BillHistoryWidget;
+            //return new BillHistoryWidget;
         }
 
         case 3 :
         {
-            return new BillReqWidget;
+            //return new BillReqWidget;
         }
 
         case 4 :
@@ -174,35 +174,35 @@ void Dyner::on_parentButtonOrder_clicked()
 
 void Dyner::on_parentButtonBillHistory_clicked()
 {
-    showMenuAndDeleteThis(buttonName::billHistory);
-    if(isMenuHidden)
-    {
-        isMenuHidden = false;
-        ui->menuList->show();
-    }
+//    showMenuAndDeleteThis(buttonName::billHistory);
+//    if(isMenuHidden)
+//    {
+//        isMenuHidden = false;
+//        ui->menuList->show();
+//    }
 
-    currentShaddowEffect->setGraphicsEffect(nullptr);
-    currentShaddowEffect = ui->parentButtonBillHistory;
-    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+//    currentShaddowEffect->setGraphicsEffect(nullptr);
+//    currentShaddowEffect = ui->parentButtonBillHistory;
+//    this->setShadow(currentShaddowEffect,QColor(150,75,0));
 
-    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
+//    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
 
 }
 
 void Dyner::on_parentButtonBillRequest_clicked()
 {
-    showMenuAndDeleteThis(buttonName::billReq);
-    if(isMenuHidden)
-    {
-        isMenuHidden = false;
-        ui->menuList->show();
-    }
+//    showMenuAndDeleteThis(buttonName::billReq);
+//    if(isMenuHidden)
+//    {
+//        isMenuHidden = false;
+//        ui->menuList->show();
+//    }
 
-    currentShaddowEffect->setGraphicsEffect(nullptr);
-    currentShaddowEffect = ui->parentButtonBillRequest;
-    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+//    currentShaddowEffect->setGraphicsEffect(nullptr);
+//    currentShaddowEffect = ui->parentButtonBillRequest;
+//    this->setShadow(currentShaddowEffect,QColor(150,75,0));
 
-    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
+//    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
 
 }
 

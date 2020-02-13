@@ -65,7 +65,7 @@ void OrderItemData::on_btnAddOrder_clicked()
                 cmd = "UPDATE tblTempOrder SET qty = '"+ui->doubleSpinBox->text()+"' WHERE item_id = '"+ui->lblId->text()+"' AND table_no ="+ QString::number(tblNo) +" ";
                 q = d.execute(cmd);
                 delete q;
-                //QMessageBox::information(this,"Info","Quantity is updated");
+                QMessageBox::information(this,"Info","Quantity is updated");
                 static_cast<OrderWidget*>(myparent)->loadData();
                 return;
             }
@@ -80,9 +80,3 @@ void OrderItemData::on_btnAddOrder_clicked()
     static_cast<OrderWidget*>(myparent)->loadData();
 }
 
-void OrderItemData::on_doubleSpinBox_valueChanged(double arg1)
-{
-
-    qDebug() << "orderwidget.cpp (on_doubleSpinBox_valueChanged) : value from DB : " << arg1;
-    emit on_btnAddOrder_clicked();
-}
