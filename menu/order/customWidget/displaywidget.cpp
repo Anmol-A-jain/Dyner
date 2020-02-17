@@ -38,6 +38,11 @@ displayWidget::~displayWidget()
     delete ui;
 }
 
+double displayWidget::getTotal()
+{
+    return (this->price * this->Qty);
+}
+
 void displayWidget::on_doubleSpinBox_valueChanged(double arg1)
 {
     double amt = arg1 * this->price ;
@@ -49,19 +54,7 @@ void displayWidget::on_doubleSpinBox_valueChanged(double arg1)
 
     qDebug() << "displayWidget.cpp (on_doubleSpinBox_valueChanged) : value changed " << arg1;
 
-    /*while (q->next())
-    {
-        int currentTblNo = q->value("table_no").toInt();
-        if( currentTblNo == tblNo )
-        {
-            if(q->value("item_id").toString() == ui->lblId->text() )
-            {
-                cmd = "UPDATE tblTempOrder SET qty = '"+ui->doubleSpinBox->text()+"' WHERE item_id = '"+ui->lblId->text()+"' AND table_no ="+ QString::number(tblNo) +" ";
-                q = d.execute(cmd);
-                delete q;
-                return;
-            }
-        }
-    }*/
+    //static_cast<OrderWidget*>(myparent)->updateTax();
+
     delete q;
 }

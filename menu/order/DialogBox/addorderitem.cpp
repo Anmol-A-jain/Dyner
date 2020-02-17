@@ -11,7 +11,6 @@ AddOrderItem::AddOrderItem(QWidget *parent) :
     ui->setupUi(this);
     myParent = parent;
 
-
     ui->categoryList->hide();
     this->loadData();
 

@@ -15,6 +15,7 @@ class displayWidget : public QWidget
 public:
     explicit displayWidget(QString idString,QString name, QString category, double Qty, double price, int tblNo ,QWidget *parent = nullptr);
     ~displayWidget();
+    double getTotal();
 
 private slots:
     void on_doubleSpinBox_valueChanged(double arg1);

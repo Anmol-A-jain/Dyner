@@ -20,16 +20,19 @@ public:
     int getTblNo();
     void loadData();
     void deleterVecterData();
+    void updateTotalAmmount();
+    void updateTax();
 
 private slots:
     void on_cmbOrrderType_currentIndexChanged(int index);
 
     void on_pushButton_clicked();
 
-
     void on_cmbTblNo_currentTextChanged(const QString &arg1);
 
     void on_cmbOrrderType_currentTextChanged(const QString &arg1);
+
+    void on_txtTax_valueChanged(double arg1);
 
 private:
     Ui::OrderWidget *ui;

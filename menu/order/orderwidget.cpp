@@ -44,6 +44,8 @@ void OrderWidget::loadData()
     QString cmd = "SELECT a.*, b.itemName , b.Price , b.category  FROM tblTempOrder a LEFT JOIN mstTblMenu b ON a.item_id = b.id;" ;
     QSqlQuery* q = d.execute(cmd);
 
+    int tblNo = this->getTblNo();
+
     while (q->next())
     {
 
@@ -55,12 +57,12 @@ void OrderWidget::loadData()
             double price = q->value(4).toDouble();
             QString category = q->value(5).toString();
 
-            displayWidget* itemData = new displayWidget(id,name,category,qty,price,this->getTblNo(),this);
+            displayWidget* itemData = new displayWidget(id,name,category,qty,price,tblNo,this);
             ui->displayOrderRow->addWidget(itemData);
             list.push_back(itemData);
         }
-
     }
+    this->updateTotalAmmount();
 }
 
 void OrderWidget::deleterVecterData()
@@ -70,6 +72,33 @@ void OrderWidget::deleterVecterData()
         delete list[i];
     }
     list.clear();
+}
+
+void OrderWidget::updateTotalAmmount()
+{
+    double amount = 0;
+    for (int i = 0; i < list.count(); ++i)
+    {
+        amount += list[i]->getTotal();
+    }
+    ui->txtAmount->setText(QString::number(amount));
+    double taxValue = ui->txtTax->text().toDouble();
+    double tax = (amount * taxValue) / 100;
+
+    ui->txtTaxAmount->setText(QString::number(tax));
+    double totalAmount = tax + amount;
+    ui->txtTotalAmount->setText(QString::number(totalAmount));
+}
+
+void OrderWidget::updateTax()
+{
+    double taxValue = ui->txtTax->text().toDouble();
+    double amount = ui->txtAmount->text().toDouble();
+    double tax = (amount * taxValue) / 100;
+    double totalAmount = amount + tax;
+
+    ui->txtTaxAmount->setText(QString::number(tax));
+    ui->txtTotalAmount->setText(QString::number(totalAmount));
 }
 
 void OrderWidget::on_cmbOrrderType_currentIndexChanged(int index)
@@ -132,4 +161,10 @@ void OrderWidget::on_cmbOrrderType_currentTextChanged(const QString &arg1)
     qDebug() << "orderwidget.cpp (on_cmbOrrderType_currentTextChanged) : cmbTblNo changed : " << arg1 ;
     this->deleterVecterData();
     this->loadData();
+}
+
+void OrderWidget::on_txtTax_valueChanged(double arg1)
+{
+    this->updateTax();
+    qDebug() << "orderwidget.cpp (on_doubleSpinBox_valueChanged) : cmbTblNo changed : " << arg1 ;
 }
