@@ -264,6 +264,23 @@
             </widget>
            </item>
            <item>
+            <widget class="QLabel" name="label">
+             <property name="maximumSize">
+              <size>
+               <width>250</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border-right:2px solid white;
+</string>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;CATEGORY&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QLabel" name="lblQty">
              <property name="maximumSize">
               <size>
@@ -307,7 +324,7 @@
             <widget class="QLabel" name="lblAmt">
              <property name="maximumSize">
               <size>
-               <width>300</width>
+               <width>250</width>
                <height>16777215</height>
               </size>
              </property>
@@ -349,11 +366,45 @@
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_2">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item>
              <widget class="QWidget" name="widget" native="true">
               <layout class="QVBoxLayout" name="verticalLayout_5">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
                <item>
-                <layout class="QVBoxLayout" name="displayOrderRow"/>
+                <layout class="QVBoxLayout" name="displayOrderRow">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                </layout>
                </item>
                <item>
                 <spacer name="verticalSpacer">

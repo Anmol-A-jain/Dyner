@@ -6,27 +6,37 @@
 #include <QFile>
 #include "data/xmlmanipulation.h"
 
+QSqlDatabase databaseCon::database = (!QSqlDatabase::contains()) ? QSqlDatabase::addDatabase("QSQLITE") : QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false) ;
+bool databaseCon::isOpen = false;
+
 databaseCon::databaseCon()
 {
     this->constr = XmlManipulation::getData("Database","PATH");
-    if(!QSqlDatabase::contains())
+    /*if(!QSqlDatabase::contains())
     {
         database = QSqlDatabase::addDatabase("QSQLITE");
     }
     else
     {
         database = QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false);
-    }
-    database.setDatabaseName(this->constr);
-    if (!database.open())
+    }*/
+
+    if(!isOpen)
     {
-        qDebug() << "databaseCon.cpp (databaseCon) : not connected";
+        database.setDatabaseName(this->constr);
+        if (!database.open())
+        {
+            qDebug() << "databaseCon.cpp (databaseCon) : not connected";
+        }
+        else
+        {
+            qDebug() << "databaseCon.cpp (databaseCon) : connected";
+            delete this->execute("PRAGMA foreign_keys = ON;");
+        }
+        isOpen = true;
     }
-    else
-    {
-        qDebug() << "databaseCon.cpp (databaseCon) : connected";
-        delete this->execute("PRAGMA foreign_keys = ON;");
-    }
+
+
 }
 
 void databaseCon::initDB()
@@ -48,7 +58,7 @@ void databaseCon::initDB()
 
 QSqlQuery* databaseCon::execute(QString cmdstr)
 {
-    QSqlQuery* q = new QSqlQuery(database);
+    q = new QSqlQuery(database);
     qDebug() << "databaseCon.cpp (execute) : DatabaseName : " << database.databaseName() ;
     if(q->exec(cmdstr))
     {
