@@ -28,8 +28,8 @@ SOURCES += \
     menu/admin/DialogBox/editcategory.cpp \
     menu/admin/DialogBox/edititem.cpp \
     menu/admin/DialogBox/edittablenoanddiscount.cpp \
-#    menu/bill_history/billhistorywidget.cpp \
-#    menu/bill_request/billreqwidget.cpp \
+    menu/bill_history/billhistorywidget.cpp \
+    menu/bill_request/billreqwidget.cpp \
     menu/menu_buttons/menubuttons.cpp \
     menu/order/customWidget/displaywidget.cpp \
     menu/order/customWidget/orderitemdata.cpp \
@@ -50,8 +50,8 @@ HEADERS += \
     menu/admin/DialogBox/editcategory.h \
     menu/admin/DialogBox/edititem.h \
     menu/admin/DialogBox/edittablenoanddiscount.h \
-#    menu/bill_history/billhistorywidget.h \
-#    menu/bill_request/billreqwidget.h \
+    menu/bill_history/billhistorywidget.h \
+    menu/bill_request/billreqwidget.h \
     menu/menu_buttons/menubuttons.h \
     menu/order/DialogBox/addorderitem.h \
     menu/order/customWidget/displaywidget.h \
@@ -68,8 +68,8 @@ FORMS += \
     menu/admin/DialogBox/editcategory.ui \
     menu/admin/DialogBox/edititem.ui \
     menu/admin/DialogBox/edittablenoanddiscount.ui \
-#    menu/bill_history/billhistorywidget.ui \
-#    menu/bill_request/billreqwidget.ui \
+    menu/bill_history/billhistorywidget.ui \
+    menu/bill_request/billreqwidget.ui \
     menu/menu_buttons/menubuttons.ui \
     menu/order/orderwidget.ui\
     menu/order/customWidget/displaywidget.ui \
