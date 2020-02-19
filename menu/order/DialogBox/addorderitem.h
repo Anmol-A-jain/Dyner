@@ -19,6 +19,7 @@ public:
     void loadData();
     void deleteVecterData();    
     void paintEvent(QPaintEvent *event) override;
+    void updateCategorylist();
 
 private slots:
     void on_menuColumn_currentIndexChanged(int index);
@@ -28,6 +29,8 @@ private slots:
     void on_SearchTextBox_returnPressed();
 
     void on_SearchTextBox_textChanged(const QString &arg1);
+
+    void on_categoryList_currentIndexChanged(int index);
 
 private:
     Ui::AddOrderItem *ui;

@@ -13,8 +13,6 @@ OrderWidget::OrderWidget(QWidget *parent) :
     ui->setupUi(this);
     ui-> lblTblNo->hide();
     ui->cmbTblNo->hide();
-    ui->lblAddres->hide();
-    ui->cmbAdderess->hide();
 
     GlobalData g;
     int totalTable = XmlManipulation::getData(g.getTagName(g.QtyTable),g.getattribute(g.QtyTable)).toInt();
@@ -23,6 +21,7 @@ OrderWidget::OrderWidget(QWidget *parent) :
     {
         ui->cmbTblNo->addItem(QString::number(i));
     }
+
     this->loadData();
 }
 
@@ -33,8 +32,15 @@ OrderWidget::~OrderWidget()
 
 int OrderWidget::getTblNo()
 {
-    qDebug() << "orderwidget.cpp (getTblNo ) : index : " << ui->cmbTblNo->currentText().toInt();
-    return ui->cmbTblNo->currentText().toInt();
+    if(this->getOrderTypeIndex() == 1)
+    {
+        qDebug() << "orderwidget.cpp (getTblNo ) : index : " << ui->cmbTblNo->currentText().toInt();
+        return ui->cmbTblNo->currentText().toInt();
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 void OrderWidget::loadData()
@@ -48,8 +54,7 @@ void OrderWidget::loadData()
 
     while (q->next())
     {
-
-        if(q->value(0).toInt() == this->getTblNo() && ui->cmbOrrderType->currentText() == "Table No" )
+        if(q->value(0).toInt() == tblNo )
         {
             QString id = q->value(1).toString();
             double qty = q->value(2).toDouble();
@@ -63,6 +68,10 @@ void OrderWidget::loadData()
         }
     }
     this->updateTotalAmmount();
+
+    for (int i = 0; i < list.count(); ++i) {
+       list[i]->setFlag(true);
+    }
 }
 
 void OrderWidget::deleterVecterData()
@@ -79,8 +88,11 @@ void OrderWidget::updateTotalAmmount()
     double amount = 0;
     for (int i = 0; i < list.count(); ++i)
     {
+
+        qDebug() << "orderwidget.cpp (updateTotalAmmount ) :  Updated total amount : " << list[i]->getTotal() ;
         amount += list[i]->getTotal();
     }
+
     ui->txtAmount->setText(QString::number(amount));
     double taxValue = ui->txtTax->text().toDouble();
     double tax = (amount * taxValue) / 100;
@@ -88,6 +100,8 @@ void OrderWidget::updateTotalAmmount()
     ui->txtTaxAmount->setText(QString::number(tax));
     double totalAmount = tax + amount;
     ui->txtTotalAmount->setText(QString::number(totalAmount));
+
+    qDebug() << "orderwidget.cpp (updateTotalAmmount ) :  Updated total amount : " << totalAmount ;
 }
 
 void OrderWidget::updateTax()
@@ -99,6 +113,11 @@ void OrderWidget::updateTax()
 
     ui->txtTaxAmount->setText(QString::number(tax));
     ui->txtTotalAmount->setText(QString::number(totalAmount));
+}
+
+int OrderWidget::getOrderTypeIndex()
+{
+    return ui->cmbOrrderType->currentIndex();
 }
 
 void OrderWidget::on_cmbOrrderType_currentIndexChanged(int index)
@@ -113,30 +132,15 @@ void OrderWidget::on_cmbOrrderType_currentIndexChanged(int index)
 
             ui-> lblTblNo->hide();
             ui->cmbTblNo->hide();
-            ui->lblAddres->hide();
-            ui->cmbAdderess->hide();
             break;
         }
         case 1:
-        {
-            // Delivery
-            qDebug() << "orderwidget.cpp (on_cmbOrrderType_currentIndexChanged ) : switch  case 0 : pickup selected ";
-
-            ui-> lblTblNo->hide();
-            ui->cmbTblNo->hide();
-            ui->lblAddres->show();
-            ui->cmbAdderess->show();
-            break;
-        }
-        case 2:
         {
             // Table no
             qDebug() << "orderwidget.cpp (on_cmbOrrderType_currentIndexChanged ) : switch  case 0 : pickup selected ";
 
             ui-> lblTblNo->show();
             ui->cmbTblNo->show();
-            ui->lblAddres->hide();
-            ui->cmbAdderess->hide();
             break;
         }
     }

@@ -3,7 +3,8 @@
 #include <QDebug>
 #include <QSqlQuery>
 #include "data/databasecon.h"
-#include "menu/order/orderwidget.h"
+#include "../orderwidget.h"
+#include <QMessageBox>
 
 displayWidget::displayWidget(QString id,QString name, QString category, double Qty, double price, int tblNo ,QWidget *parent) :
     QWidget(parent),
@@ -11,24 +12,19 @@ displayWidget::displayWidget(QString id,QString name, QString category, double Q
 {
     ui->setupUi(this);
 
-    this->id = id;
-    this->idString = "<p align='center'>"+id+"</p>";
-    this->name = "<p align='center'>"+name+"</p>";
-    this->category = "<p align='center'>"+category+"</p>";
-    this->price = price;
-    this->Qty = Qty;
+    this->flag = false;
+
+    ui->btnDelete->setText(QString("\U0001F5D1"));
+
     this->amt = Qty * price ;
     this->tblNo = tblNo;
 
-    QString protoPrice = "<p align='center'>"+QString::number(price)+"</p>";
-    QString protoAmt = "<p align='center'>"+QString::number(this->amt)+"</p>";
-
-    ui->lblId->setText(this->idString);
-    ui->lblName->setText(this->name);
-    ui->lblCategory->setText(this->category);
-    ui->doubleSpinBox->setValue(this->Qty);
-    ui->lblPrice->setText(protoPrice);
-    ui->lblamt->setText(protoAmt);
+    ui->lblId->setText(id);
+    ui->lblName->setText(name);
+    ui->lblCategory->setText(category);
+    ui->doubleSpinBox->setValue(Qty);
+    ui->lblPrice->setText(QString::number(price));
+    ui->lblamt->setText(QString::number(this->amt));
 
     myparent = parent;
 }
@@ -40,21 +36,45 @@ displayWidget::~displayWidget()
 
 double displayWidget::getTotal()
 {
-    return (this->price * this->Qty);
+    return (ui->lblPrice->text().toDouble() * ui->doubleSpinBox->text().toDouble() );
+}
+
+void displayWidget::setFlag(bool flag)
+{
+    this->flag = flag;
 }
 
 void displayWidget::on_doubleSpinBox_valueChanged(double arg1)
 {
-    double amt = arg1 * this->price ;
-    ui->lblamt->setText("<p align='center'>"+QString::number(amt)+"</p>");
 
-    databaseCon d;
-    QString cmd = "UPDATE tblTempOrder SET qty = '"+ui->doubleSpinBox->text()+"' WHERE item_id = '"+this->id+"' AND table_no ="+ QString::number(tblNo) +" " ;//"SELECT * FROM tblTempOrder";
-    QSqlQuery* q = d.execute(cmd);
+    if(this->flag == true)
+    {
+        double amt = arg1 * ui->lblPrice->text().toDouble() ;
+        ui->lblamt->setText(QString::number(amt));
 
-    qDebug() << "displayWidget.cpp (on_doubleSpinBox_valueChanged) : value changed " << arg1;
+        databaseCon d;
+        QString cmd = "UPDATE tblTempOrder SET qty = '"+ui->doubleSpinBox->text()+"' WHERE item_id = '"+ui->lblId->text()+"' AND table_no ="+ QString::number(tblNo) +" " ;//"SELECT * FROM tblTempOrder";
+        QSqlQuery* q = d.execute(cmd);
 
-    //static_cast<OrderWidget*>(myparent)->updateTax();
+        qDebug() << "displayWidget.cpp (on_doubleSpinBox_valueChanged) : value changed " << arg1;
 
-    delete q;
+        delete q;
+
+        static_cast<OrderWidget*>(myparent)->updateTotalAmmount();
+    }
+}
+
+void displayWidget::on_btnDelete_clicked()
+{
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::warning(this, "Delete", "Do You Want To Delete " + ui->lblName->text() ,QMessageBox::No|QMessageBox::Yes,QMessageBox::No);
+    if (reply == QMessageBox::Yes)
+    {
+        databaseCon d;
+
+        QString cmd = "DELETE FROM tblTempOrder WHERE item_id = '"+ ui->lblId->text() +"'" ;
+        QSqlQuery* q = d.execute(cmd);
+        delete q;
+        static_cast<OrderWidget*>(this->myparent)->loadData();
+    }
 }

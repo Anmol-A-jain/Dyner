@@ -22,6 +22,7 @@ public:
     void deleterVecterData();
     void updateTotalAmmount();
     void updateTax();
+    int getOrderTypeIndex();
 
 private slots:
     void on_cmbOrrderType_currentIndexChanged(int index);

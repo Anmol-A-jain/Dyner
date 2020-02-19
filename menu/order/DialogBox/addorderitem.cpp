@@ -13,7 +13,6 @@ AddOrderItem::AddOrderItem(QWidget *parent) :
 
     ui->categoryList->hide();
     this->loadData();
-
 }
 
 AddOrderItem::~AddOrderItem()
@@ -63,12 +62,28 @@ void AddOrderItem::paintEvent(QPaintEvent *event)
     ui->categoryList->setSizePolicy(ui->SearchTextBox->sizePolicy());
 }
 
+void AddOrderItem::updateCategorylist()
+{
+    ui->categoryList->clear();
+    databaseCon d;
+    QString cmd = "SELECT category FROM tblCategoryList ORDER BY category" ;
+    QSqlQuery* q = d.execute(cmd);
+
+    while(q->next())
+    {
+        qDebug() << "AdminWidget.cpp (loadComboBoxData) : combo box :" << q->value("category").toString();
+        ui->categoryList->addItem(q->value("category").toString());
+    }
+    delete q;
+}
+
 void AddOrderItem::on_menuColumn_currentIndexChanged(int index)
 {
     if(index == 3 )
     {
         ui->categoryList->show();
         ui->SearchTextBox->hide();
+        this->updateCategorylist();
     }
     else
     {
@@ -161,5 +176,11 @@ void AddOrderItem::on_SearchTextBox_returnPressed()
 void AddOrderItem::on_SearchTextBox_textChanged(const QString &arg1)
 {
     qDebug() << "AddOrderItem.cpp (on_SearchTextBox_textChanged) : argument " << arg1 ;
+    emit on_btnSearch_clicked();
+}
+
+void AddOrderItem::on_categoryList_currentIndexChanged(int index)
+{
+    qDebug() << "AddOrderItem.cpp (on_categoryList_currentIndexChanged) : argument " << index ;
     emit on_btnSearch_clicked();
 }

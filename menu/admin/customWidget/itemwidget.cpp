@@ -46,7 +46,8 @@ void ItemWidget::on_deletebtn_clicked()
 {
     QMessageBox::StandardButton reply;
     reply = QMessageBox::warning(this, "Delete", "Do You Want To Delete " + ui->name->text() ,QMessageBox::No|QMessageBox::Yes,QMessageBox::No);
-    if (reply == QMessageBox::Yes) {
+    if (reply == QMessageBox::Yes)
+    {
       databaseCon d;
 
       QString cmd = "DELETE FROM mstTblMenu WHERE id = '"+ ui->ItemId->text() +"'" ;

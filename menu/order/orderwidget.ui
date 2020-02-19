@@ -42,11 +42,6 @@
            </item>
            <item>
             <property name="text">
-             <string>Delivery</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
              <string>Table No</string>
             </property>
            </item>
@@ -128,40 +123,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="cmbCustName"/>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_6">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QLabel" name="lblAddres">
-           <property name="text">
-            <string>Address</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="cmbAdderess">
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
+          <widget class="QLineEdit" name="custName"/>
          </item>
          <item>
           <spacer name="horizontalSpacer">
@@ -362,7 +324,7 @@
              <x>0</x>
              <y>0</y>
              <width>1016</width>
-             <height>623</height>
+             <height>629</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_2">
