@@ -46,7 +46,6 @@ void displayWidget::setFlag(bool flag)
 
 void displayWidget::on_doubleSpinBox_valueChanged(double arg1)
 {
-
     if(this->flag == true)
     {
         double amt = arg1 * ui->lblPrice->text().toDouble() ;

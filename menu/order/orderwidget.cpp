@@ -13,6 +13,10 @@ OrderWidget::OrderWidget(QWidget *parent) :
     ui->setupUi(this);
     ui-> lblTblNo->hide();
     ui->cmbTblNo->hide();
+    r1 = new QRegExpValidator(QRegExp("[0-9]*"), ui->txtMblNo);
+    r2 = new QRegExpValidator(QRegExp("[A-Za-z ]*"), ui->txtMblNo);
+    ui->txtMblNo->setValidator(r1);
+    ui->txtCustName->setValidator(r2);
 
     GlobalData g;
     int totalTable = XmlManipulation::getData(g.getTagName(g.QtyTable),g.getattribute(g.QtyTable)).toInt();
@@ -22,11 +26,15 @@ OrderWidget::OrderWidget(QWidget *parent) :
         ui->cmbTblNo->addItem(QString::number(i));
     }
 
+
+    ui->txtDiscount->setText(XmlManipulation::getData(g.getTagName(g.Discount),g.getattribute(g.Discount)));
     this->loadData();
 }
 
 OrderWidget::~OrderWidget()
 {
+    delete r1;
+    delete r2;
     delete ui;
 }
 
@@ -94,10 +102,19 @@ void OrderWidget::updateTotalAmmount()
     }
 
     ui->txtAmount->setText(QString::number(amount));
+
+    double discount = ui->txtDiscount->text().toDouble();
+
+    double discountValue = (amount * discount) / 100;
+
+    amount -= discountValue;
+
     double taxValue = ui->txtTax->text().toDouble();
     double tax = (amount * taxValue) / 100;
 
-    ui->txtTaxAmount->setText(QString::number(tax));
+    //ui->txtTaxAmount->setText(QString::number(tax));
+
+
     double totalAmount = tax + amount;
     ui->txtTotalAmount->setText(QString::number(totalAmount));
 
@@ -111,7 +128,7 @@ void OrderWidget::updateTax()
     double tax = (amount * taxValue) / 100;
     double totalAmount = amount + tax;
 
-    ui->txtTaxAmount->setText(QString::number(tax));
+    //ui->txtTaxAmount->setText(QString::number(tax));
     ui->txtTotalAmount->setText(QString::number(totalAmount));
 }
 

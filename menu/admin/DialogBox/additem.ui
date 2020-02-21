@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>246</width>
-    <height>157</height>
+    <height>159</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>ADD Item</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../res.qrc">
+   <iconset resource="../../../res.qrc">
     <normaloff>:/img/img/icon1.png</normaloff>:/img/img/icon1.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -119,11 +119,13 @@
  <tabstops>
   <tabstop>id</tabstop>
   <tabstop>name</tabstop>
+  <tabstop>category</tabstop>
+  <tabstop>btnAddcategory</tabstop>
   <tabstop>price</tabstop>
   <tabstop>btnAdd</tabstop>
  </tabstops>
  <resources>
-  <include location="../res.qrc"/>
+  <include location="../../../res.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -133,12 +135,12 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>235</x>
+     <y>148</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
-     <y>274</y>
+     <y>158</y>
     </hint>
    </hints>
   </connection>
@@ -149,12 +151,12 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>235</x>
+     <y>148</y>
     </hint>
     <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
+     <x>245</x>
+     <y>158</y>
     </hint>
    </hints>
   </connection>

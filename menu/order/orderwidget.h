@@ -5,6 +5,7 @@
 #include <QVector>
 #include "customWidget/orderitemdata.h"
 #include "customWidget/displaywidget.h"
+#include <QRegExpValidator>
 
 namespace Ui {
 class OrderWidget;
@@ -38,6 +39,8 @@ private slots:
 private:
     Ui::OrderWidget *ui;
     QVector<displayWidget*> list;
+    QRegExpValidator* r1;
+    QRegExpValidator* r2;
 };
 
 #endif // ORDERWIDGET_H
