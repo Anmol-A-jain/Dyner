@@ -14,7 +14,7 @@
    <string>Edit</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../res.qrc">
+   <iconset>
     <normaloff>:/img/img/icon1.png</normaloff>:/img/img/icon1.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -24,13 +24,6 @@
       <widget class="QLabel" name="tableNo">
        <property name="text">
         <string>No. Of Table</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="Dicount">
-       <property name="text">
-        <string>Dicount</string>
        </property>
       </widget>
      </item>
@@ -47,12 +40,29 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="Dicount">
+       <property name="text">
+        <string>Dicount</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="1">
       <widget class="QDoubleSpinBox" name="txtDicount">
        <property name="maximum">
         <double>100.000000000000000</double>
        </property>
       </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>TAX (GST %)</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QDoubleSpinBox" name="txtTax"/>
      </item>
     </layout>
    </item>
@@ -68,9 +78,7 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../../../res.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>

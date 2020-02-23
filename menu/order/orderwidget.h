@@ -21,6 +21,8 @@ public:
     int getTblNo();
     void loadData();
     void deleterVecterData();
+    void deleteCustomerData();
+    void resetTotalAmount();
     void updateTotalAmmount();
     void updateTax();
     int getOrderTypeIndex();
@@ -28,19 +30,22 @@ public:
 private slots:
     void on_cmbOrrderType_currentIndexChanged(int index);
 
-    void on_pushButton_clicked();
-
     void on_cmbTblNo_currentTextChanged(const QString &arg1);
 
     void on_cmbOrrderType_currentTextChanged(const QString &arg1);
 
     void on_txtTax_valueChanged(double arg1);
 
+    void on_btnPlaceOrder_clicked();
+
+    void on_btnAddOrder_clicked();
+
 private:
     Ui::OrderWidget *ui;
     QVector<displayWidget*> list;
     QRegExpValidator* r1;
     QRegExpValidator* r2;
+
 };
 
 #endif // ORDERWIDGET_H

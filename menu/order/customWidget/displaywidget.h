@@ -3,10 +3,21 @@
 // display data for header/menu/orderWidget
 
 #include <QWidget>
+#include <QLabel>
+#include <QDoubleSpinBox>
 
 namespace Ui {
 class displayWidget;
 }
+
+struct OrderData
+{
+    QLabel* id;
+    QLabel* name;
+    QLabel* category;
+    QDoubleSpinBox* qty;
+    QLabel* price;
+};
 
 class displayWidget : public QWidget
 {
@@ -17,6 +28,7 @@ public:
     ~displayWidget();
     double getTotal();
     void setFlag(bool flag);
+    struct OrderData getData();
 
 private slots:
     void on_doubleSpinBox_valueChanged(double arg1);
@@ -30,6 +42,7 @@ private:
     QWidget* myparent;
     int tblNo;
     bool flag;
+    struct OrderData orderData;
 };
 
 #endif // DISPLAYWIDGET_H

@@ -9,7 +9,7 @@ public:
     GlobalData();
     QString getTagName(int tagname);
     QString getattribute(int tagname);
-    enum data{QtyTable,Discount};
+    enum data{QtyTable,Discount,Tax};
 
 private:
     QHash<int,QString> tagname;

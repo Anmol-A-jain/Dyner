@@ -133,7 +133,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="txtCustName"/>
+          <widget class="QLineEdit" name="txtCustName">
+           <property name="readOnly">
+            <bool>false</bool>
+           </property>
+          </widget>
          </item>
          <item>
           <spacer name="horizontalSpacer">
@@ -149,7 +153,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="btnAddOrder">
            <property name="minimumSize">
             <size>
              <width>50</width>
@@ -433,7 +437,7 @@
                    </spacer>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="pushButton_2">
+                   <widget class="QPushButton" name="btnPlaceOrder">
                     <property name="minimumSize">
                      <size>
                       <width>100</width>
@@ -647,7 +651,7 @@ border-radius:5px;</string>
                         </spacer>
                        </item>
                        <item>
-                        <widget class="QDoubleSpinBox" name="txtTax">
+                        <widget class="QLineEdit" name="taxValue">
                          <property name="minimumSize">
                           <size>
                            <width>100</width>
@@ -660,14 +664,8 @@ border-radius:5px;</string>
                            <height>16777215</height>
                           </size>
                          </property>
-                         <property name="alignment">
-                          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                         </property>
-                         <property name="maximum">
-                          <double>100.000000000000000</double>
-                         </property>
-                         <property name="value">
-                          <double>18.000000000000000</double>
+                         <property name="readOnly">
+                          <bool>true</bool>
                          </property>
                         </widget>
                        </item>
@@ -737,7 +735,7 @@ border-radius:5px;</string>
                           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                          </property>
                          <property name="readOnly">
-                          <bool>false</bool>
+                          <bool>true</bool>
                          </property>
                         </widget>
                        </item>
@@ -763,6 +761,18 @@ border-radius:5px;</string>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>cmbOrrderType</tabstop>
+  <tabstop>cmbTblNo</tabstop>
+  <tabstop>txtMblNo</tabstop>
+  <tabstop>txtCustName</tabstop>
+  <tabstop>btnAddOrder</tabstop>
+  <tabstop>btnPlaceOrder</tabstop>
+  <tabstop>txtAmount</tabstop>
+  <tabstop>txtDiscount</tabstop>
+  <tabstop>txtTotalAmount</tabstop>
+  <tabstop>scrollArea</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

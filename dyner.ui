@@ -14,7 +14,7 @@
    <string>Dyner : Bill Desk</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../res.qrc">
+   <iconset resource="res.qrc">
     <normaloff>:/img/img/icon1.png</normaloff>:/img/img/icon1.png</iconset>
   </property>
   <property name="styleSheet">
@@ -358,7 +358,7 @@ border-image: url(:/img/img/ButtonBackground.jpg);
   </widget>
  </widget>
  <resources>
-  <include location="../res.qrc"/>
+  <include location="res.qrc"/>
  </resources>
  <connections/>
 </ui>

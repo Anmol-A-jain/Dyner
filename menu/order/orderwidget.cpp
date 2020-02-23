@@ -5,6 +5,8 @@
 #include "data/xmlmanipulation.h"
 #include "DialogBox/addorderitem.h"
 #include "data/databasecon.h"
+#include "DialogBox/paymentmathod.h"
+#include <QMessageBox>
 
 OrderWidget::OrderWidget(QWidget *parent) :
     QWidget(parent),
@@ -26,9 +28,10 @@ OrderWidget::OrderWidget(QWidget *parent) :
         ui->cmbTblNo->addItem(QString::number(i));
     }
 
-
     ui->txtDiscount->setText(XmlManipulation::getData(g.getTagName(g.Discount),g.getattribute(g.Discount)));
+    ui->taxValue->setText(XmlManipulation::getData(g.getTagName(g.Tax),g.getattribute(g.Tax)));
     this->loadData();
+    ui->txtMblNo->setFocus();
 }
 
 OrderWidget::~OrderWidget()
@@ -91,6 +94,20 @@ void OrderWidget::deleterVecterData()
     list.clear();
 }
 
+void OrderWidget::deleteCustomerData()
+{
+    ui->txtMblNo->clear();
+    ui->txtCustName->clear();
+}
+
+void OrderWidget::resetTotalAmount()
+{
+    ui->txtAmount->clear();
+    ui->txtDiscount->clear();
+    ui->taxValue->clear();
+    ui->txtTotalAmount->clear();
+}
+
 void OrderWidget::updateTotalAmmount()
 {
     double amount = 0;
@@ -109,11 +126,8 @@ void OrderWidget::updateTotalAmmount()
 
     amount -= discountValue;
 
-    double taxValue = ui->txtTax->text().toDouble();
+    double taxValue = ui->taxValue->text().toDouble();
     double tax = (amount * taxValue) / 100;
-
-    //ui->txtTaxAmount->setText(QString::number(tax));
-
 
     double totalAmount = tax + amount;
     ui->txtTotalAmount->setText(QString::number(totalAmount));
@@ -123,7 +137,7 @@ void OrderWidget::updateTotalAmmount()
 
 void OrderWidget::updateTax()
 {
-    double taxValue = ui->txtTax->text().toDouble();
+    double taxValue = ui->taxValue->text().toDouble();
     double amount = ui->txtAmount->text().toDouble();
     double tax = (amount * taxValue) / 100;
     double totalAmount = amount + tax;
@@ -163,12 +177,6 @@ void OrderWidget::on_cmbOrrderType_currentIndexChanged(int index)
     }
 }
 
-void OrderWidget::on_pushButton_clicked()
-{
-   AddOrderItem aoi(this);
-   aoi.exec();
-
-}
 
 void OrderWidget::on_cmbTblNo_currentTextChanged(const QString &arg1)
 {
@@ -188,4 +196,51 @@ void OrderWidget::on_txtTax_valueChanged(double arg1)
 {
     this->updateTax();
     qDebug() << "orderwidget.cpp (on_doubleSpinBox_valueChanged) : cmbTblNo changed : " << arg1 ;
+}
+
+void OrderWidget::on_btnPlaceOrder_clicked()
+{
+    if(!list.count())
+    {
+        QMessageBox::information(this,"Information","Cart Is Empty");
+        ui->txtMblNo->setFocus();
+        return;
+    }
+
+    QString custNo = ui->txtMblNo->text();
+    QString custName = ui->txtCustName->text();
+
+    if(custNo == "")
+    {
+        QMessageBox::critical(this,"Information","Please enter Customer Phone Number");
+        ui->txtMblNo->setFocus();
+    }
+    else if(custName == "")
+    {
+        QMessageBox::critical(this,"Information","Please enter both Customer Name");
+        ui->txtCustName->setFocus();
+    }
+    else if(custNo.count() != 10)
+    {
+        QMessageBox::critical(this,"Information","Please enter 10 Digit Mobile Number ");
+        ui->txtMblNo->setFocus();
+    }
+    else
+    {
+        QString orderType = ui->cmbOrrderType->currentText();
+        double netAmt = ui->txtTotalAmount->text().toDouble();
+        double discount = ui->txtDiscount->text().toDouble();
+        double tax = ui->taxValue->text().toDouble();
+
+        paymentMathod* p = new paymentMathod(netAmt,discount,tax,this->getTblNo(),custNo,orderType,custName,this->list,this);
+        p->exec();
+    }
+}
+
+void OrderWidget::on_btnAddOrder_clicked()
+{
+
+    AddOrderItem aoi(this);
+    aoi.exec();
+
 }

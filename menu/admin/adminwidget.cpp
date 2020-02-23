@@ -45,6 +45,7 @@ void AdminWidget::loadInfo()
     GlobalData g;
     ui->noOfTable->setText(XmlManipulation::getData(g.getTagName(g.QtyTable),g.getattribute(g.QtyTable) ) );
     ui->discount->setText(XmlManipulation::getData(g.getTagName(g.Discount),g.getattribute(g.Discount)));
+    ui->txtTax->setText(XmlManipulation::getData( g.getTagName(g.Tax),g.getattribute(g.Tax) ) );
 }
 
 void AdminWidget::deleteVecterData()

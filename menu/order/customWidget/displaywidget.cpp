@@ -27,6 +27,12 @@ displayWidget::displayWidget(QString id,QString name, QString category, double Q
     ui->lblamt->setText(QString::number(this->amt));
 
     myparent = parent;
+
+    orderData.id = ui->lblId;
+    orderData.name = ui->lblName;
+    orderData.category = ui->lblCategory;
+    orderData.price = ui->lblPrice;
+    orderData.qty = ui->doubleSpinBox;
 }
 
 displayWidget::~displayWidget()
@@ -42,6 +48,11 @@ double displayWidget::getTotal()
 void displayWidget::setFlag(bool flag)
 {
     this->flag = flag;
+}
+
+OrderData displayWidget::getData()
+{
+    return this->orderData;
 }
 
 void displayWidget::on_doubleSpinBox_valueChanged(double arg1)

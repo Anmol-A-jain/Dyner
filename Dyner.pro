@@ -35,6 +35,7 @@ SOURCES += \
     menu/order/customWidget/orderitemdata.cpp \
     menu/order/DialogBox/addorderitem.cpp \
     menu/order/orderwidget.cpp \
+    menu/order/DialogBox/paymentmathod.cpp \
     server/dynerserver.cpp \
     server/mytcpsocket.cpp
 
@@ -57,6 +58,7 @@ HEADERS += \
     menu/order/customWidget/displaywidget.h \
     menu/order/customWidget/orderitemdata.h \
     menu/order/orderwidget.h \
+    menu/order/DialogBox/paymentmathod.h \
     server/dynerserver.h \
     server/mytcpsocket.h
 
@@ -74,7 +76,8 @@ FORMS += \
     menu/order/orderwidget.ui\
     menu/order/customWidget/displaywidget.ui \
     menu/order/customWidget/orderitemdata.ui \
-    menu/order/DialogBox/addorderitem.ui
+    menu/order/DialogBox/addorderitem.ui \
+    menu/order/DialogBox/paymentmathod.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
