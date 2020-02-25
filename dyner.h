@@ -25,7 +25,6 @@ public:
     void showMenuAndDeleteThis(int option); // show and hide menu button
     void orderButtonClick(); // emits order button
     void billHistoryButtonClick(); // emits bill history button
-    void billReqButtonClick(); // emits bill req button
     void adminButtonClick(); // emits admin button
     void setShadow(QWidget *widget, QColor color); // setting shadow to widget and formating widget title
 
@@ -36,8 +35,6 @@ private slots:
 
     void on_parentButtonBillHistory_clicked();
 
-    void on_parentButtonBillRequest_clicked();
-
     void on_parentButtonAdmin_clicked();
 
     void on_menuButton_clicked();
@@ -47,7 +44,7 @@ private slots:
 private:
     Ui::Dyner *ui;
     QWidget* childFrame; // to track wich widget is currently in windowContainer
-    enum buttonName{home,order,billHistory,billReq,admin}; // enum for buttons
+    enum buttonName{home,order,billHistory,admin}; // enum for buttons
     bool isMenuHidden; // track if menu is hidden or not
     QPushButton* currentShaddowEffect; // to track which button have currently shadow effect
     DynerServer server; // creating server object

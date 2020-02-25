@@ -12,7 +12,6 @@ MenuButtons::MenuButtons(QWidget *parent) :
     QColor color(0,0,0);
     this->setShadow(ui->btnAdmin,color);
     this->setShadow(ui->btnOrder,color);
-    this->setShadow(ui->btnBillReq,color);
     this->setShadow(ui->btnBillHistory,color);
 
     this->parentName = parent;
@@ -31,11 +30,6 @@ void MenuButtons::on_btnOrder_clicked()
 void MenuButtons::on_btnBillHistory_clicked()
 {
     static_cast<Dyner*>(parentName)->billHistoryButtonClick();
-}
-
-void MenuButtons::on_btnBillReq_clicked()
-{
-    static_cast<Dyner*>(parentName)->billReqButtonClick();
 }
 
 void MenuButtons::on_btnAdmin_clicked()

@@ -22,8 +22,6 @@ private slots:
 
     void on_btnBillHistory_clicked();
 
-    void on_btnBillReq_clicked();
-
     void on_btnAdmin_clicked();
 
 private:

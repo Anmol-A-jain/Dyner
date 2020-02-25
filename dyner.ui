@@ -26,7 +26,6 @@
    </property>
    <property name="styleSheet">
     <string notr="true">#centralwidget{
-
 	background-color: #ffffff;
 	background-image: url(:/img/img/background3.jpg);
 }</string>
@@ -231,34 +230,6 @@ border-image: url(:/img/img/ButtonBackground.jpg);
               </property>
               <property name="text">
                <string>ORDER</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="parentButtonBillRequest">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>50</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>MS Shell Dlg 2</family>
-                <pointsize>10</pointsize>
-                <weight>50</weight>
-                <italic>false</italic>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">border-radius: 10px;
-color : brown;
-border-image: url(:/img/img/ButtonBackground.jpg);
-</string>
-              </property>
-              <property name="text">
-               <string>Bill Request</string>
               </property>
              </widget>
             </item>

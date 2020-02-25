@@ -6,12 +6,13 @@
 #include <QFile>
 #include "data/xmlmanipulation.h"
 
-QSqlDatabase databaseCon::database = (!QSqlDatabase::contains()) ? QSqlDatabase::addDatabase("QSQLITE") : QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false) ;
+QSqlDatabase databaseCon::database = QSqlDatabase::addDatabase("QSQLITE");// (!QSqlDatabase::contains()) ? QSqlDatabase::addDatabase("QSQLITE") : QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false) ;
 bool databaseCon::isOpen = false;
 
 databaseCon::databaseCon()
 {
     this->constr = XmlManipulation::getData("Database","PATH");
+
     /*if(!QSqlDatabase::contains())
     {
         database = QSqlDatabase::addDatabase("QSQLITE");
@@ -35,8 +36,6 @@ databaseCon::databaseCon()
         }
         isOpen = true;
     }
-
-
 }
 
 void databaseCon::initDB()
@@ -52,6 +51,10 @@ void databaseCon::initDB()
     {
         QFile::copy(":/DB/database/DynerDB.db",DBFile);
         QFile::setPermissions(DBFile, QFileDevice::ReadOwner|QFileDevice::WriteOwner);
+    }
+    else
+    {
+        qDebug() << "databaseCon.cpp (initDB) : DB file Exist :" << DBFile ;
     }
     qDebug() << "databaseCon.cpp (initDB) : DB file location :" << DBFile ;
 }

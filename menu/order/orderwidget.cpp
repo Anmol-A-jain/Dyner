@@ -58,7 +58,7 @@ void OrderWidget::loadData()
 {
     this->deleterVecterData();
     databaseCon d;
-    QString cmd = "SELECT a.*, b.itemName , b.Price , b.category  FROM tblTempOrder a LEFT JOIN mstTblMenu b ON a.item_id = b.id;" ;
+    QString cmd = "SELECT a.*, b.itemName , b.Price , b.category FROM tblTempOrder a LEFT JOIN mstTblMenu b ON a.item_id = b.id;" ;
     QSqlQuery* q = d.execute(cmd);
 
     int tblNo = this->getTblNo();
@@ -135,17 +135,6 @@ void OrderWidget::updateTotalAmmount()
     qDebug() << "orderwidget.cpp (updateTotalAmmount ) :  Updated total amount : " << totalAmount ;
 }
 
-void OrderWidget::updateTax()
-{
-    double taxValue = ui->taxValue->text().toDouble();
-    double amount = ui->txtAmount->text().toDouble();
-    double tax = (amount * taxValue) / 100;
-    double totalAmount = amount + tax;
-
-    //ui->txtTaxAmount->setText(QString::number(tax));
-    ui->txtTotalAmount->setText(QString::number(totalAmount));
-}
-
 int OrderWidget::getOrderTypeIndex()
 {
     return ui->cmbOrrderType->currentIndex();
@@ -192,12 +181,6 @@ void OrderWidget::on_cmbOrrderType_currentTextChanged(const QString &arg1)
     this->loadData();
 }
 
-void OrderWidget::on_txtTax_valueChanged(double arg1)
-{
-    this->updateTax();
-    qDebug() << "orderwidget.cpp (on_doubleSpinBox_valueChanged) : cmbTblNo changed : " << arg1 ;
-}
-
 void OrderWidget::on_btnPlaceOrder_clicked()
 {
     if(!list.count())
@@ -242,5 +225,24 @@ void OrderWidget::on_btnAddOrder_clicked()
 
     AddOrderItem aoi(this);
     aoi.exec();
+
+}
+
+void OrderWidget::on_btnClear_clicked()
+{
+    if(!list.count())
+    {
+        QMessageBox::critical(this,"Information","Cart Is Empty! : (");
+        return;
+    }
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::critical(this,"Information","Do you Want to Clear Cart",QMessageBox::Yes|QMessageBox::No,QMessageBox::No);
+    if(reply == QMessageBox::Yes)
+    {
+        databaseCon d;
+        QString cmd = "DELETE FROM tblTempOrder WHERE table_no = "+QString::number(this->getTblNo())+";" ;
+        delete d.execute(cmd);
+        this->deleterVecterData();
+    }
 
 }

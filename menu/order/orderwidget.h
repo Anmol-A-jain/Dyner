@@ -24,7 +24,6 @@ public:
     void deleteCustomerData();
     void resetTotalAmount();
     void updateTotalAmmount();
-    void updateTax();
     int getOrderTypeIndex();
 
 private slots:
@@ -34,11 +33,11 @@ private slots:
 
     void on_cmbOrrderType_currentTextChanged(const QString &arg1);
 
-    void on_txtTax_valueChanged(double arg1);
-
     void on_btnPlaceOrder_clicked();
 
     void on_btnAddOrder_clicked();
+
+    void on_btnClear_clicked();
 
 private:
     Ui::OrderWidget *ui;

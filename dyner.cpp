@@ -3,7 +3,6 @@
 #include "menu/menu_buttons/menubuttons.h"
 #include "menu/admin/adminwidget.h"
 #include "menu/bill_history/billhistorywidget.h"
-#include "menu/bill_request/billreqwidget.h"
 #include "menu/order/orderwidget.h"
 
 #include "data/databasecon.h"
@@ -33,7 +32,7 @@ Dyner::Dyner(QWidget *parent)
     currentShaddowEffect = ui->parentButtonHome;
     this->setShadow(currentShaddowEffect,QColor(150,75,0)); //calling UDF
 
-    // removing alpha white color from ui->horizontalFrame for first time load
+    // removing alpha color from ui->horizontalFrame for first time load
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;}");
 
     databaseCon::initDB();
@@ -69,26 +68,21 @@ QWidget *Dyner::newFrame(int option)
 
     switch (option)
     {
-        case 0 :
+        case buttonName::home :
         {
             return new MenuButtons(this);
         }
-        case 1 :
+        case buttonName::order :
         {
             return new OrderWidget;
         }
 
-        case 2 :
+        case buttonName::billHistory :
         {
             return new BillHistoryWidget;
         }
 
-        case 3 :
-        {
-            return new BillReqWidget;
-        }
-
-        case 4 :
+        case buttonName::admin :
         {
             return new AdminWidget;
         }
@@ -112,11 +106,6 @@ void Dyner::orderButtonClick()
 void Dyner::billHistoryButtonClick()
 {
     emit on_parentButtonBillHistory_clicked();
-}
-
-void Dyner::billReqButtonClick()
-{
-    emit on_parentButtonBillRequest_clicked();
 }
 
 void Dyner::adminButtonClick()
@@ -189,23 +178,6 @@ void Dyner::on_parentButtonBillHistory_clicked()
 
 }
 
-void Dyner::on_parentButtonBillRequest_clicked()
-{
-    showMenuAndDeleteThis(buttonName::billReq);
-    if(isMenuHidden)
-    {
-        isMenuHidden = false;
-        ui->menuList->show();
-    }
-
-    currentShaddowEffect->setGraphicsEffect(nullptr);
-    currentShaddowEffect = ui->parentButtonBillRequest;
-    this->setShadow(currentShaddowEffect,QColor(150,75,0));
-
-    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
-
-}
-
 void Dyner::on_parentButtonAdmin_clicked()
 {
     showMenuAndDeleteThis(buttonName::admin);
@@ -214,7 +186,6 @@ void Dyner::on_parentButtonAdmin_clicked()
         isMenuHidden = false;
         ui->menuList->show();
     }
-
 
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonAdmin;
