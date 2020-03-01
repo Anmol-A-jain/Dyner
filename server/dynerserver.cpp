@@ -13,6 +13,7 @@ void DynerServer::incomingConnection(qintptr socketDescriptor)
     // We have a new connection
     qDebug() << "DynerServer (incomingConnection) : " << socketDescriptor << " Connecting...";
 
+    //creating a new thread and passing this class as parameter
     MyTcpSocket *thread = new MyTcpSocket(socketDescriptor, this);
 
     // connect signal/slot
