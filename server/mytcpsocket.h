@@ -10,6 +10,7 @@ class MyTcpSocket : public QThread
 public:
     explicit MyTcpSocket(qintptr sockectdescriptor , QObject *parent = nullptr );
     void run();
+    QByteArray setAction(int action,QString msg);
 
 public slots:
     void myReadyRead();
@@ -18,7 +19,6 @@ public slots:
 private:
     QTcpSocket *socket;
     qintptr socketDescriptor;
-
 };
 
 #endif // MYTCPSOCKET_H

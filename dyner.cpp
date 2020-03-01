@@ -88,10 +88,9 @@ QWidget *Dyner::newFrame(int option)
         }
     }
     return childFrame;
-
 }
 
-void Dyner::showMenuAndDeleteThis(int option)
+void Dyner::loadWidgetWindow(int option)
 {
     delete this->childFrame;
     this->childFrame = newFrame(option);
@@ -131,7 +130,7 @@ void Dyner::setShadow(QWidget *widget, QColor color)
 
 void Dyner::on_parentButtonHome_clicked()
 {
-    showMenuAndDeleteThis(buttonName::home);
+    loadWidgetWindow(buttonName::home);
     isMenuHidden = true;
     ui->menuList->hide();
 
@@ -145,7 +144,7 @@ void Dyner::on_parentButtonHome_clicked()
 
 void Dyner::on_parentButtonOrder_clicked()
 {
-    showMenuAndDeleteThis(buttonName::order);
+    loadWidgetWindow(buttonName::order);
     if(isMenuHidden)
     {
         isMenuHidden = false;
@@ -163,7 +162,7 @@ void Dyner::on_parentButtonOrder_clicked()
 
 void Dyner::on_parentButtonBillHistory_clicked()
 {
-    showMenuAndDeleteThis(buttonName::billHistory);
+    loadWidgetWindow(buttonName::billHistory);
     if(isMenuHidden)
     {
         isMenuHidden = false;
@@ -180,7 +179,7 @@ void Dyner::on_parentButtonBillHistory_clicked()
 
 void Dyner::on_parentButtonAdmin_clicked()
 {
-    showMenuAndDeleteThis(buttonName::admin);
+    loadWidgetWindow(buttonName::admin);
     if(isMenuHidden)
     {
         isMenuHidden = false;

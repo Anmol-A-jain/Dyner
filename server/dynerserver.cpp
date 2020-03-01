@@ -1,6 +1,6 @@
 #include "server/dynerserver.h"
 #include "server/mytcpsocket.h"
-
+#include <QtNetwork>
 
 DynerServer::DynerServer(QObject *parent)
     :QTcpServer(parent)
@@ -26,7 +26,17 @@ void DynerServer::startServer()
 {
     clientlist = new QVector<MyTcpSocket*>;
 
-    quint16 port(4444);
+    quint16 port(1812);
+
+    const QHostAddress &localhost = QHostAddress::LocalHost;
+    QStringList ipaddress;
+    for(const QHostAddress &address : QNetworkInterface::allAddresses() )
+    {
+        if(address != localhost && address.protocol() == QAbstractSocket::IPv4Protocol )
+        {
+            ipaddress << address.toString();
+        }
+    }
 
     if(!this->listen(QHostAddress::Any,port))
     {
@@ -35,6 +45,7 @@ void DynerServer::startServer()
     else
     {
         qDebug() << "DynerServer (startServer) : " << "Listening to port " << port << "...";
+        qDebug() << "DynerServer (startServer) : " << "ip address " << ipaddress << "...";
     }
 }
 

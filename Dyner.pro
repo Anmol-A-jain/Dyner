@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    data/allaction.cpp \
     dyner.cpp \
     main.cpp \
     data/databasecon.cpp \
@@ -41,6 +42,7 @@ SOURCES += \
 
 
 HEADERS += \
+    data/allaction.h \
     dyner.h \
     data/databasecon.h \
     data/globaldata.h \
