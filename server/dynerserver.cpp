@@ -23,6 +23,15 @@ void DynerServer::incomingConnection(qintptr socketDescriptor)
     thread->start();
 }
 
+DynerServer::~DynerServer()
+{
+    for(int i = 0 ; clientlist->length() > i ; ++i)
+    {
+        delete clientlist->at(i);
+    }
+    delete clientlist;
+}
+
 void DynerServer::startServer()
 {
     clientlist = new QVector<MyTcpSocket*>;

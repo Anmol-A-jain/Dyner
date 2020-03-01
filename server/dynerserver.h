@@ -14,6 +14,7 @@ private:
     QVector<MyTcpSocket*>* clientlist;
 
 public:
+    ~DynerServer();
     void startServer();
     void sendMessageToClients(QString message);
     DynerServer(QObject *parent = nullptr);

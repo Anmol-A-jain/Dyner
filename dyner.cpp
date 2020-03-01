@@ -92,9 +92,9 @@ QWidget *Dyner::newFrame(int option)
 
 void Dyner::loadWidgetWindow(int option)
 {
-    delete this->childFrame;
-    this->childFrame = newFrame(option);
-    ui->windowContainer->addWidget( this->childFrame );
+    childFrame->deleteLater();
+    childFrame = newFrame(option);
+    ui->windowContainer->addWidget( childFrame );
 }
 
 void Dyner::orderButtonClick()
