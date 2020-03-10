@@ -18,6 +18,7 @@ public:
     void startServer();
     void sendMessageToClients(QString message);
     DynerServer(QObject *parent = nullptr);
+    void closeAllConnection();
 protected:
     void incomingConnection(qintptr socketDescriptor) override;
 

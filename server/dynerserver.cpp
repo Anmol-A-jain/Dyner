@@ -8,6 +8,15 @@ DynerServer::DynerServer(QObject *parent)
 
 }
 
+void DynerServer::closeAllConnection()
+{
+    for(int i = 0 ; clientlist->length() > i ; ++i)
+    {
+        clientlist->at(i)->exit(0);
+    }
+    delete clientlist;
+}
+
 void DynerServer::incomingConnection(qintptr socketDescriptor)
 {
     // We have a new connection
@@ -25,11 +34,7 @@ void DynerServer::incomingConnection(qintptr socketDescriptor)
 
 DynerServer::~DynerServer()
 {
-    for(int i = 0 ; clientlist->length() > i ; ++i)
-    {
-        delete clientlist->at(i);
-    }
-    delete clientlist;
+    closeAllConnection();
 }
 
 void DynerServer::startServer()

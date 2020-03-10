@@ -64,7 +64,6 @@ void BillHistoryWidget::SelectionChange()
         QString month = QString::number(QDate::currentDate().month());
         QString day = QString::number(QDate::currentDate().day()-dayOfWeek);
 
-
         if(day.length() == 1)
         {
             day = "0"+day;

@@ -2,6 +2,7 @@
 #include "data/allaction.h"
 #include "data/xmlmanipulation.h"
 #include "data/globaldata.h"
+#include "data/databasecon.h"
 
 MyTcpSocket::MyTcpSocket(qintptr ID , QObject *parent )
     :QThread(parent)
@@ -44,6 +45,87 @@ void MyTcpSocket::run()
 void MyTcpSocket::myReadyRead()
 {
     // get the information
+    QByteArray dataIn = socket->readAll();
+    qDebug() << socketDescriptor << " Data in: " << dataIn;
+
+    QDataStream in(&dataIn,QIODevice::ReadWrite);
+
+
+    qint16 action;
+    in >> action;
+
+    qDebug() << socketDescriptor << " Data in: " << dataIn << ":" << action;
+
+    qDebug() << "serverConnection (myReadReady) : action : " << action;
+
+    switch (action)
+    {
+        case ALLAction::error :
+        {
+            qDebug() << "serverConnection (myReadReady) : list : " << dataIn;
+            break;
+        }
+        case ALLAction::getTotaltableNo :
+        {
+            //sending total table Quantity..
+
+            QByteArray dataOut ;
+
+            QDataStream out(&dataOut,QIODevice::ReadWrite);
+
+            GlobalData g;
+            qint16 tblNo =  XmlManipulation::getData(g.getTagName(g.QtyTable),g.getattribute(g.QtyTable) ).toInt();
+            qint16 i = ALLAction::getTotaltableNo;
+
+            //sending action and total table no
+            out << i;
+            out << tblNo;
+
+            qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << dataOut ;
+            int size = socket->write(dataOut);
+
+            qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : sending msg size : " << size ;
+
+            break;
+
+        }
+        case ALLAction::menuData :
+        {
+            //sending total table Quantity..
+            QByteArray dataOut ;
+            QDataStream out(&dataOut,QIODevice::ReadWrite);
+
+            qint16 i = ALLAction::menuData;
+            out << i;
+
+            databaseCon d;
+            QString cmd = "select * from mstTblMenu order by id" ;
+            QSqlQuery* q = d.execute(cmd);
+
+            qint16 count = 0 ;
+            for( ; q->next() ; ++count);
+            out << count;
+
+            q->seek(-1);
+
+            while( q->next())
+            {
+                out << q->value("id").toString() << q->value("itemName").toString() << q->value("category").toString() << q->value("Price").toDouble();
+            }
+
+            qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << dataOut ;
+            socket->write(dataOut);
+
+            delete q;
+            break;
+        }
+        default:
+        {
+            qDebug() << "serverConnection (myReadReady) : default case called : " << dataIn;
+        }
+    }
+
+    /*// get the information
     QString data = socket->readAll();
     qDebug() << socketDescriptor << " Data in: " << data;
 
@@ -86,6 +168,7 @@ void MyTcpSocket::myReadyRead()
 
             qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << msg ;
             socket->write(msg);
+
             break;
         }
         default:
@@ -94,8 +177,7 @@ void MyTcpSocket::myReadyRead()
         }
     }
 
-
-    // will write on server side window
+    // will write on server side window*/
 }
 
 void MyTcpSocket::myDisconnected()

@@ -45,7 +45,7 @@ Dyner::Dyner(QWidget *parent)
 Dyner::~Dyner()
 {
     //deleting all pointer
-
+    server.closeAllConnection();
     delete currentShaddowEffect;
     delete childFrame;
     delete ui;
