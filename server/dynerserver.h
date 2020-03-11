@@ -11,14 +11,16 @@ class DynerServer : public QTcpServer
 {
     Q_OBJECT
 private:
-    QVector<MyTcpSocket*>* clientlist;
+    static QVector<MyTcpSocket*>* clientlist;
 
 public:
     ~DynerServer();
     void startServer();
     void sendMessageToClients(QString message);
     DynerServer(QObject *parent = nullptr);
-    void closeAllConnection();
+    static void closeAllConnection();
+
+
 protected:
     void incomingConnection(qintptr socketDescriptor) override;
 

@@ -51,12 +51,6 @@ Dyner::~Dyner()
     delete ui;
 }
 
-Ui::Dyner* Dyner::getUi()
-{
-    //returning ui object for this class
-    return ui;
-}
-
 QWidget *Dyner::newFrame(int option)
 {
     /*

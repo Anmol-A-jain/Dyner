@@ -11,6 +11,7 @@ public:
     explicit MyTcpSocket(qintptr sockectdescriptor , QObject *parent = nullptr );
     void run();
     QByteArray setAction(int action,QString msg);
+    void disconnectSocket();
 
 public slots:
     void myReadyRead();

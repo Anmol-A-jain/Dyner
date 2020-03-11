@@ -2,6 +2,8 @@
 #include "server/mytcpsocket.h"
 #include <QtNetwork>
 
+QVector<MyTcpSocket*>* DynerServer::clientlist;
+
 DynerServer::DynerServer(QObject *parent)
     :QTcpServer(parent)
 {
@@ -12,6 +14,7 @@ void DynerServer::closeAllConnection()
 {
     for(int i = 0 ; clientlist->length() > i ; ++i)
     {
+        clientlist->at(i)->disconnectSocket();
         clientlist->at(i)->exit(0);
     }
     delete clientlist;

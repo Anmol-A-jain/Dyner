@@ -83,6 +83,7 @@ void MyTcpSocket::myReadyRead()
 
             qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << dataOut ;
             int size = socket->write(dataOut);
+            socket->flush();
 
             qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : sending msg size : " << size ;
 
@@ -115,6 +116,7 @@ void MyTcpSocket::myReadyRead()
 
             qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << dataOut ;
             socket->write(dataOut);
+            socket->flush();
 
             delete q;
             break;
@@ -193,4 +195,9 @@ QByteArray MyTcpSocket::setAction(int action, QString msg)
     QByteArray data = QByteArray::number(action) + "~" ;
     data.append(msg);
     return data;
+}
+
+void MyTcpSocket::disconnectSocket()
+{
+    socket->disconnectFromHost();
 }

@@ -20,7 +20,6 @@ class Dyner : public QMainWindow
 
 public:
     Dyner(QWidget *parent = nullptr);
-    Ui::Dyner* getUi(); // returns ui for this class
     QWidget* newFrame(int option); // creates new widget and returns it
     void loadWidgetWindow(int option); // show and hide menu button
     void orderButtonClick(); // emits order button
