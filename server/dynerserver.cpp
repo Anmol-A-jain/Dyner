@@ -12,10 +12,11 @@ DynerServer::DynerServer(QObject *parent)
 
 void DynerServer::closeAllConnection()
 {
-    for(int i = 0 ; clientlist->length() > i ; ++i)
+    qDebug() << "DynerServer (closeAllConnection) : size : " << clientlist->size();
+    for(int i = 0 ; clientlist->size() > i ; ++i)
     {
         clientlist->at(i)->disconnectSocket();
-        clientlist->at(i)->exit(0);
+        qDebug() << "DynerServer (closeAllConnection) : is running : " << clientlist->at(i)->isRunning();
     }
     delete clientlist;
 }
@@ -33,11 +34,7 @@ void DynerServer::incomingConnection(qintptr socketDescriptor)
     connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
 
     thread->start();
-}
-
-DynerServer::~DynerServer()
-{
-    closeAllConnection();
+    clientlist->push_back(thread);
 }
 
 void DynerServer::startServer()

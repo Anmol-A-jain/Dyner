@@ -26,6 +26,7 @@ public:
     void billHistoryButtonClick(); // emits bill history button
     void adminButtonClick(); // emits admin button
     void setShadow(QWidget *widget, QColor color); // setting shadow to widget and formating widget title
+    void closeEvent(QCloseEvent *event) override;
 
 
     ~Dyner();

@@ -200,4 +200,5 @@ QByteArray MyTcpSocket::setAction(int action, QString msg)
 void MyTcpSocket::disconnectSocket()
 {
     socket->disconnectFromHost();
+    exit(0);
 }

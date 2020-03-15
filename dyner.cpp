@@ -11,6 +11,7 @@
 #include "ui_dyner.h"
 #include <QDebug>
 #include <QtXml>
+#include <QCloseEvent>
 
 Dyner::Dyner(QWidget *parent)
     : QMainWindow(parent)
@@ -45,7 +46,6 @@ Dyner::Dyner(QWidget *parent)
 Dyner::~Dyner()
 {
     //deleting all pointer
-    server.closeAllConnection();
     delete currentShaddowEffect;
     delete childFrame;
     delete ui;
@@ -120,6 +120,12 @@ void Dyner::setShadow(QWidget *widget, QColor color)
     ui->widgetTitle->setText(static_cast<QPushButton*>(widget)->text());
     ui->widgetTitle->setFont(QFont("Arial", 20));
     delete deleteItLater;
+}
+
+void Dyner::closeEvent(QCloseEvent *event)
+{
+    DynerServer::closeAllConnection();
+    event->accept();
 }
 
 void Dyner::on_parentButtonHome_clicked()
