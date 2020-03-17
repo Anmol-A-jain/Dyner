@@ -121,61 +121,83 @@ void MyTcpSocket::myReadyRead()
             delete q;
             break;
         }
+        case ALLAction::getCustInfo:
+        {
+            int tblNo ;
+            in >> tblNo;
+
+            QByteArray dataOut ;
+            QDataStream out(&dataOut,QIODevice::ReadWrite);
+            GlobalData g;
+            QString attribute = g.getattribute(GlobalData::customerNameMblNo);
+            QStringList list = attribute.split("-");
+
+            QString name =  XmlManipulation::getData(g.getTagName(g.customerNameMblNo)+QString::number(tblNo),list.at(0));
+            QString mblNo =  XmlManipulation::getData(g.getTagName(g.customerNameMblNo)+QString::number(tblNo),list.at(1));
+            qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : customer data : " << name <<":"<< mblNo ;
+
+            qint16 i = ALLAction::getCustInfo;
+            out << i << name << mblNo;
+
+            qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << dataOut ;
+            socket->write(dataOut);
+            socket->flush();
+            break;
+        }
+        case ALLAction::cartData :
+        {
+            int tblNo = -1,count = 0 ;
+            in >> tblNo >> count;
+
+            qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : table no : " << tblNo;
+            qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : total item : " << count;
+
+            for (int i = 0; i < count; ++i)
+            {
+                QString id;
+                double qty;
+                in >> id >> qty;
+                qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : item id : " << id;
+                qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : item qty : " << qty;
+                double preQty = 0;
+
+                ItemData* item = new ItemData;
+                item->id = id;
+                item->qty = qty;
+
+                CartData* cart = new CartData;
+                cart->tblNO = tblNo;
+                cart->item = item;
+
+                currentOrder.push_back(cart);
+
+                databaseCon d;
+                QString cmd = "select * from tblTempOrder WHERE table_no =" + QString::number(tblNo) +" AND item_id = " + id;
+                QSqlQuery* q = d.execute(cmd);
+
+                int size;
+                for (size = 0; size < q->next(); ++size)
+                {
+                    preQty = q->value("qty").toDouble();
+                }
+
+                if(size == 0)
+                {
+                    cmd = "INSERT INTO tblTempOrder VALUES("+QString::number(tblNo)+",'"+id+"','"+QString::number(qty)+"')" ;
+                    q = d.execute(cmd);
+                }
+                else
+                {
+                    cmd = "UPDATE tblTempOrder SET qty = '"+QString::number(qty+preQty)+"' WHERE item_id = '"+id+"' ";
+                    q = d.execute(cmd);
+                }
+                delete q;
+            }
+            break;
+        }
         default:
         {
             qDebug() << "serverConnection (myReadReady) : default case called : " << dataIn;
-        }
-    }
-
-    /*// get the information
-    QString data = socket->readAll();
-    qDebug() << socketDescriptor << " Data in: " << data;
-
-    QStringList list = data.split('~');
-
-    bool isFirst = true;
-    QStringList dataList ;
-    int action;
-
-    for(int i = 0 ;i < list.length() ; ++i)
-    {
-        if(isFirst)
-        {
-            action = list.at(i).toInt() ;
-            isFirst = false;
-        }
-        else
-        {
-            dataList.push_back(list.at(i));
-        }
-    }
-
-    qDebug() << "serverConnection (myReadReady) : action : " << action;
-    qDebug() << "serverConnection (myReadReady) : value : " << dataList;
-
-    switch (action)
-    {
-        case ALLAction::error :
-        {
-            qDebug() << "serverConnection (myReadReady) : list : " << list;
-            break;
-        }
-        case ALLAction::getTotaltableNo :
-        {
-            //sending total table Quantity..
-            GlobalData g;
-            QString tblNo =  XmlManipulation::getData(g.getTagName(g.QtyTable),g.getattribute(g.QtyTable) );
-
-            QByteArray msg = setAction(ALLAction::getTotaltableNo,tblNo);
-
-            qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << msg ;
-            socket->write(msg);
-
-            break;
-        }
-        default:
-        {
-            qDebug() << "serverConnection (myReadReady) : default case called : " << data;
         }
     }
 

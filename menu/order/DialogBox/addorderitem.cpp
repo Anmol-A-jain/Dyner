@@ -28,10 +28,8 @@ void AddOrderItem::loadData()
     QString cmd = "select * from mstTblMenu order by id" ;
     QSqlQuery* q = d.execute(cmd);
 
-
     while( q->next() )
     {
-
         QString id = q->value("id").toString();
         QString itemName = q->value("itemName").toString();
         QString category = q->value("category").toString();
@@ -41,7 +39,6 @@ void AddOrderItem::loadData()
         OrderItemData *item = new OrderItemData(id,itemName,category,price,myParent);
         itemlist.push_back(item);
         ui->displayAddOrder->addWidget(item);
-
     }
 
     delete q;

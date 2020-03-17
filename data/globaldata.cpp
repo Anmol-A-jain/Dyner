@@ -10,6 +10,9 @@ GlobalData::GlobalData()
 
     this->tagname.insert(data::Tax,"Tax");
     this->attribute.insert(data::Tax,"value");
+
+    this->tagname.insert(data::customerNameMblNo,"tableNo:");
+    this->attribute.insert(data::customerNameMblNo,"MblNo-Name");
 }
 
 QString GlobalData::getTagName(int tagname)

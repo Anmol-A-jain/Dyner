@@ -5,6 +5,19 @@
 #include <QDebug>
 #include <QTcpSocket>
 
+
+struct ItemData
+{
+    QString id;
+    double qty;
+};
+
+struct CartData
+{
+    int tblNO;
+    ItemData* item;
+};
+
 class MyTcpSocket : public QThread
 {
 public:
@@ -20,6 +33,7 @@ public slots:
 private:
     QTcpSocket *socket;
     qintptr socketDescriptor;
+    QVector<CartData*> currentOrder;
 };
 
 #endif // MYTCPSOCKET_H

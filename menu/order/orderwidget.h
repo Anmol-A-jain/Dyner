@@ -39,6 +39,10 @@ private slots:
 
     void on_btnClear_clicked();
 
+    void on_txtMblNo_textChanged(const QString &arg1);
+
+    void on_txtCustName_textChanged(const QString &arg1);
+
 private:
     Ui::OrderWidget *ui;
     QVector<displayWidget*> list;

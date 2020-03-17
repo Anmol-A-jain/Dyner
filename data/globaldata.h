@@ -9,11 +9,13 @@ public:
     GlobalData();
     QString getTagName(int tagname);
     QString getattribute(int tagname);
-    enum data{QtyTable,Discount,Tax};
+    enum data{QtyTable,Discount,Tax,customerNameMblNo};
+
 
 private:
     QHash<int,QString> tagname;
     QHash<int,QString> attribute;
+
 };
 
 #endif // GLOBALDATA_H

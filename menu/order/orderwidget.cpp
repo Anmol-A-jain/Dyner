@@ -8,6 +8,7 @@
 #include "DialogBox/paymentmathod.h"
 #include <QMessageBox>
 
+
 OrderWidget::OrderWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::OrderWidget)
@@ -22,6 +23,14 @@ OrderWidget::OrderWidget(QWidget *parent) :
 
     GlobalData g;
     int totalTable = XmlManipulation::getData(g.getTagName(g.QtyTable),g.getattribute(g.QtyTable)).toInt();
+
+    QString attribute = g.getattribute(GlobalData::customerNameMblNo);
+    QStringList list = attribute.split("-");
+    QString name = XmlManipulation::getData(g.getTagName(g.customerNameMblNo)+QString::number(getTblNo()),list.at(1));
+    QString mbl = XmlManipulation::getData(g.getTagName(g.customerNameMblNo)+QString::number(getTblNo()),list.at(0));
+
+    ui->txtCustName->setText(name);
+    ui->txtMblNo->setText(mbl);
 
     for (int i = 1 ; i <= totalTable ; ++i )
     {
@@ -152,6 +161,16 @@ void OrderWidget::on_cmbOrrderType_currentIndexChanged(int index)
 
             ui-> lblTblNo->hide();
             ui->cmbTblNo->hide();
+
+            GlobalData g;
+            QString attribute = g.getattribute(GlobalData::customerNameMblNo);
+            QStringList list = attribute.split("-");
+            QString name = XmlManipulation::getData(g.getTagName(g.customerNameMblNo)+QString::number(getTblNo()),list.at(1));
+            QString mbl = XmlManipulation::getData(g.getTagName(g.customerNameMblNo)+QString::number(getTblNo()),list.at(0));
+
+            ui->txtCustName->setText(name);
+            ui->txtMblNo->setText(mbl);
+
             break;
         }
         case 1:
@@ -161,6 +180,16 @@ void OrderWidget::on_cmbOrrderType_currentIndexChanged(int index)
 
             ui-> lblTblNo->show();
             ui->cmbTblNo->show();
+
+            GlobalData g;
+            QString attribute = g.getattribute(GlobalData::customerNameMblNo);
+            QStringList list = attribute.split("-");
+            QString name = XmlManipulation::getData(g.getTagName(g.customerNameMblNo)+QString::number(getTblNo()),list.at(1));
+            QString mbl = XmlManipulation::getData(g.getTagName(g.customerNameMblNo)+QString::number(getTblNo()),list.at(0));
+
+            ui->txtCustName->setText(name);
+            ui->txtMblNo->setText(mbl);
+
             break;
         }
     }
@@ -172,6 +201,17 @@ void OrderWidget::on_cmbTblNo_currentTextChanged(const QString &arg1)
     qDebug() << "orderwidget.cpp (on_cmbTblNo_currentTextChanged) : cmbTblNo changed : " << arg1 ;
     this->deleterVecterData();
     this->loadData();
+    if(!ui->cmbTblNo->isHidden())
+    {
+        GlobalData g;
+        QString attribute = g.getattribute(GlobalData::customerNameMblNo);
+        QStringList list = attribute.split("-");
+        QString name = XmlManipulation::getData(g.getTagName(g.customerNameMblNo)+QString::number(getTblNo()),list.at(1));
+        QString mbl = XmlManipulation::getData(g.getTagName(g.customerNameMblNo)+QString::number(getTblNo()),list.at(0));
+
+        ui->txtCustName->setText(name);
+        ui->txtMblNo->setText(mbl);
+    }
 }
 
 void OrderWidget::on_cmbOrrderType_currentTextChanged(const QString &arg1)
@@ -222,10 +262,8 @@ void OrderWidget::on_btnPlaceOrder_clicked()
 
 void OrderWidget::on_btnAddOrder_clicked()
 {
-
     AddOrderItem aoi(this);
     aoi.exec();
-
 }
 
 void OrderWidget::on_btnClear_clicked()
@@ -244,5 +282,30 @@ void OrderWidget::on_btnClear_clicked()
         delete d.execute(cmd);
         this->deleterVecterData();
     }
+    GlobalData g;
+    QString attribute = g.getattribute(GlobalData::customerNameMblNo);
+    QStringList list = attribute.split("-");
 
+    XmlManipulation::setData(g.getTagName(GlobalData::customerNameMblNo)+QString::number(getTblNo()),list.at(0),"");
+    XmlManipulation::setData(g.getTagName(GlobalData::customerNameMblNo)+QString::number(getTblNo()),list.at(1),"");
+}
+
+void OrderWidget::on_txtMblNo_textChanged(const QString &arg1)
+{
+    GlobalData g;
+    QString attribute = g.getattribute(GlobalData::customerNameMblNo);
+    QStringList list = attribute.split("-");
+
+    XmlManipulation::setData(g.getTagName(GlobalData::customerNameMblNo)+QString::number(getTblNo()),list.at(0),arg1);
+    qDebug() << "orderwidget.cpp (on_cmbOrrderType_currentTextChanged) : MblNo changed : " << arg1 ;
+}
+
+void OrderWidget::on_txtCustName_textChanged(const QString &arg1)
+{
+    GlobalData g;
+    QString attribute = g.getattribute(GlobalData::customerNameMblNo);
+    QStringList list = attribute.split("-");
+
+    XmlManipulation::setData(g.getTagName(GlobalData::customerNameMblNo)+QString::number(getTblNo()),list.at(1),arg1);
+    qDebug() << "orderwidget.cpp (on_txtCustName_textChanged) : name changed : " << arg1 ;
 }
