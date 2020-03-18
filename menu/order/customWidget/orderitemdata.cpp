@@ -4,6 +4,7 @@
 #include "../orderwidget.h"
 #include <QDebug>
 #include <QMessageBox>
+#include "data/globaldata.h"
 
 OrderItemData::OrderItemData(QString id,QString name,QString category,QString prc, QWidget *parent) :
     QWidget(parent),
@@ -36,6 +37,9 @@ OrderItemData::OrderItemData(QString id,QString name,QString category,QString pr
         }
     }
     delete q;
+
+    GlobalData::setShadow(this);
+    GlobalData::setShadow(ui->btnAddOrder);
 }
 
 OrderItemData::~OrderItemData()

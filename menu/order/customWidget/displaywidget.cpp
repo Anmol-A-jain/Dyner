@@ -5,6 +5,7 @@
 #include "data/databasecon.h"
 #include "../orderwidget.h"
 #include <QMessageBox>
+#include "data/globaldata.h"
 
 displayWidget::displayWidget(QString id,QString name, QString category, double Qty, double price, int tblNo ,QWidget *parent) :
     QWidget(parent),
@@ -33,6 +34,8 @@ displayWidget::displayWidget(QString id,QString name, QString category, double Q
     orderData.category = ui->lblCategory;
     orderData.price = ui->lblPrice;
     orderData.qty = ui->doubleSpinBox;
+
+    GlobalData::setShadow(this);
 }
 
 displayWidget::~displayWidget()

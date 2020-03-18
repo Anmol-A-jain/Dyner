@@ -41,6 +41,14 @@ OrderWidget::OrderWidget(QWidget *parent) :
     ui->taxValue->setText(XmlManipulation::getData(g.getTagName(g.Tax),g.getattribute(g.Tax)));
     this->loadData();
     ui->txtMblNo->setFocus();
+    GlobalData::setShadow(ui->txtMblNo);
+    GlobalData::setShadow(ui->txtCustName);
+    GlobalData::setShadow(ui->btnAddOrder);
+    GlobalData::setShadow(ui->btnClear);
+    GlobalData::setShadow(ui->btnPlaceOrder);
+    GlobalData::setShadow(ui->cmbTblNo);
+    GlobalData::setShadow(ui->cmbOrrderType);
+    GlobalData::setShadow(ui->txtTotalAmount);
 
 }
 
@@ -139,6 +147,7 @@ void OrderWidget::updateTotalAmmount()
     double taxValue = ui->taxValue->text().toDouble();
     double tax = (amount * taxValue) / 100;
 
+    ui->taxValue->setText(QString::number(tax));
     double totalAmount = tax + amount;
     ui->txtTotalAmount->setText(QString::number(totalAmount));
 

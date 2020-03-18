@@ -1,4 +1,5 @@
 #include "globaldata.h"
+#include <QGraphicsDropShadowEffect>
 
 GlobalData::GlobalData()
 {
@@ -23,4 +24,13 @@ QString GlobalData::getTagName(int tagname)
 QString GlobalData::getattribute(int tagname)
 {
     return this->attribute[tagname];
+}
+
+void GlobalData::setShadow(QWidget *widget)
+{
+    auto effect = new QGraphicsDropShadowEffect();
+    effect->setOffset(0.5);
+    effect->setBlurRadius(5.0);
+    effect->setColor(QColor(0,0,0));
+    widget->setGraphicsEffect(effect);
 }

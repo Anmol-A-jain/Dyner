@@ -2,6 +2,8 @@
 #define GLOBALDATA_H
 
 #include <QHash>
+#include <QVector>
+#include <QWidget>
 
 class GlobalData
 {
@@ -10,6 +12,8 @@ public:
     QString getTagName(int tagname);
     QString getattribute(int tagname);
     enum data{QtyTable,Discount,Tax,customerNameMblNo};
+
+    static void setShadow(QWidget* widget);
 
 
 private:

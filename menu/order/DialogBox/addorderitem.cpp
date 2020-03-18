@@ -3,6 +3,7 @@
 #include "data/databasecon.h"
 #include <QDebug>
 #include "../orderwidget.h"
+#include "data/globaldata.h"
 
 AddOrderItem::AddOrderItem(QWidget *parent) :
     QDialog(parent),

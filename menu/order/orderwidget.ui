@@ -345,7 +345,7 @@
              <x>0</x>
              <y>0</y>
              <width>1016</width>
-             <height>499</height>
+             <height>500</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -385,7 +385,7 @@
                <item>
                 <layout class="QVBoxLayout" name="displayOrderRow">
                  <property name="spacing">
-                  <number>0</number>
+                  <number>6</number>
                  </property>
                 </layout>
                </item>

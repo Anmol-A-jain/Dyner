@@ -13,6 +13,12 @@
   <property name="windowTitle">
    <string>Add To Cart</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">#AddOrderItem
+{
+	background-color: rgb(255, 255, 255);
+}</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
@@ -30,7 +36,7 @@
           <x>0</x>
           <y>0</y>
           <width>712</width>
-          <height>415</height>
+          <height>416</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">

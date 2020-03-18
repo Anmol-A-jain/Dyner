@@ -4,7 +4,7 @@
 #include "data/databasecon.h"
 #include "../adminwidget.h"
 #include <QMessageBox>
-
+#include "data/globaldata.h"
 
 ItemWidget::ItemWidget(QWidget *parent) :
     QWidget(parent),
@@ -16,6 +16,8 @@ ItemWidget::ItemWidget(QWidget *parent) :
     // adding unicode icon to delete and edit buttons
     ui->deletebtn->setText(QString("\U0001F5D1"));
     ui->editbtn->setText(QString("\U0001F58A"));
+    GlobalData::setShadow(this);
+
 }
 
 void ItemWidget::setData(QString id, QString name, QString category, QString price)
