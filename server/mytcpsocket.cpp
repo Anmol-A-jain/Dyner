@@ -132,8 +132,8 @@ void MyTcpSocket::myReadyRead()
             QString attribute = g.getattribute(GlobalData::customerNameMblNo);
             QStringList list = attribute.split("-");
 
-            QString name =  XmlManipulation::getData(g.getTagName(g.customerNameMblNo)+QString::number(tblNo),list.at(0));
-            QString mblNo =  XmlManipulation::getData(g.getTagName(g.customerNameMblNo)+QString::number(tblNo),list.at(1));
+            QString name =  XmlManipulation::getData(g.getTagName(g.customerNameMblNo)+QString::number(tblNo),list.at(1));
+            QString mblNo =  XmlManipulation::getData(g.getTagName(g.customerNameMblNo)+QString::number(tblNo),list.at(0));
             qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : customer data : " << name <<":"<< mblNo ;
 
             qint16 i = ALLAction::getCustInfo;
@@ -146,8 +146,20 @@ void MyTcpSocket::myReadyRead()
         }
         case ALLAction::cartData :
         {
-            int tblNo = -1,count = 0 ;
-            in >> tblNo >> count;
+            qint16 tblNo = -1,count = 0 ;
+            QString mblNo,name;
+            in >> tblNo;
+            in >> count;
+
+            in >> name;
+            in >> mblNo;
+
+            GlobalData g;
+            QString attribute = g.getattribute(GlobalData::customerNameMblNo);
+            QStringList list = attribute.split("-");
+
+            XmlManipulation::setData(g.getTagName(GlobalData::customerNameMblNo)+QString::number(tblNo),list.at(0),mblNo);
+            XmlManipulation::setData(g.getTagName(GlobalData::customerNameMblNo)+QString::number(tblNo),list.at(1),name);
 
             qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : table no : " << tblNo;
             qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : total item : " << count;
@@ -172,7 +184,7 @@ void MyTcpSocket::myReadyRead()
                 currentOrder.push_back(cart);
 
                 databaseCon d;
-                QString cmd = "select * from tblTempOrder WHERE table_no =" + QString::number(tblNo) +" AND item_id = " + id;
+                QString cmd = "select * from tblTempOrder WHERE table_no =" + QString::number(tblNo) +" AND item_id = '" + id + "'";
                 QSqlQuery* q = d.execute(cmd);
 
                 int size;

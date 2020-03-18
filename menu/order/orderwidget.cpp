@@ -41,6 +41,7 @@ OrderWidget::OrderWidget(QWidget *parent) :
     ui->taxValue->setText(XmlManipulation::getData(g.getTagName(g.Tax),g.getattribute(g.Tax)));
     this->loadData();
     ui->txtMblNo->setFocus();
+
 }
 
 OrderWidget::~OrderWidget()

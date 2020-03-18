@@ -14,6 +14,7 @@ BillHistoryWidget::BillHistoryWidget(QWidget *parent) :
 
     ui->deToDate->setDate(QDate::currentDate());
     ui->deFromDate->setDate(QDate::currentDate());
+
 }
 
 BillHistoryWidget::~BillHistoryWidget()

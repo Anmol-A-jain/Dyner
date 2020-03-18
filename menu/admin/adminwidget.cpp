@@ -7,6 +7,7 @@
 #include <QSqlRecord>
 #include <QDebug>
 #include <QMessageBox>
+#include <QScrollBar>
 #include "data/xmlmanipulation.h"
 #include "data/globaldata.h"
 

@@ -13,6 +13,7 @@ AddOrderItem::AddOrderItem(QWidget *parent) :
 
     ui->categoryList->hide();
     this->loadData();
+
 }
 
 AddOrderItem::~AddOrderItem()
