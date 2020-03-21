@@ -4,19 +4,8 @@
 #include <QThread>
 #include <QDebug>
 #include <QTcpSocket>
-
-
-struct ItemData
-{
-    QString id;
-    double qty;
-};
-
-struct CartData
-{
-    int tblNO;
-    ItemData* item;
-};
+#include "data/globaldata.h"
+#include <QWidget>
 
 class MyTcpSocket : public QThread
 {
@@ -26,6 +15,9 @@ public:
     QByteArray setAction(int action,QString msg);
     void disconnectSocket();
 
+    qintptr getSocketDescriptor() const;
+    QString getClientName() const;
+
 public slots:
     void myReadyRead();
     void myDisconnected();
@@ -33,7 +25,8 @@ public slots:
 private:
     QTcpSocket *socket;
     qintptr socketDescriptor;
-    QVector<CartData*> currentOrder;
+    QObject* myParent;
+    QString clientName;
 };
 
 #endif // MYTCPSOCKET_H

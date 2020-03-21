@@ -1,5 +1,7 @@
 #include "server/dynerserver.h"
 #include "server/mytcpsocket.h"
+#include "dyner.h"
+#include "menu/ServerManagement/servermanagement.h"
 #include <QtNetwork>
 
 QVector<MyTcpSocket*>* DynerServer::clientlist;
@@ -7,7 +9,12 @@ QVector<MyTcpSocket*>* DynerServer::clientlist;
 DynerServer::DynerServer(QObject *parent)
     :QTcpServer(parent)
 {
+    this->myParent = parent;
+}
 
+DynerServer::~DynerServer()
+{
+    delete clientlist;
 }
 
 void DynerServer::closeAllConnection()
@@ -18,7 +25,11 @@ void DynerServer::closeAllConnection()
         clientlist->at(i)->disconnectSocket();
         qDebug() << "DynerServer (closeAllConnection) : is running : " << clientlist->at(i)->isRunning();
     }
-    delete clientlist;
+    static QVector<WaiterName*>* q = &GlobalData::waiter;
+    for (int i = 0; i < q->count(); ++i)
+    {
+        q->remove(i);
+    }
 }
 
 void DynerServer::incomingConnection(qintptr socketDescriptor)
@@ -27,7 +38,7 @@ void DynerServer::incomingConnection(qintptr socketDescriptor)
     qDebug() << "DynerServer (incomingConnection) : " << socketDescriptor << " Connecting...";
 
     //creating a new thread and passing this class as parameter
-    MyTcpSocket *thread = new MyTcpSocket(socketDescriptor, this);
+    MyTcpSocket *thread = new MyTcpSocket(socketDescriptor,this);
 
     // connect signal/slot
     // once a thread is not needed, it will be beleted later
@@ -35,6 +46,11 @@ void DynerServer::incomingConnection(qintptr socketDescriptor)
 
     thread->start();
     clientlist->push_back(thread);
+}
+
+QVector<MyTcpSocket *> *DynerServer::getClientlist()
+{
+    return clientlist;
 }
 
 void DynerServer::startServer()

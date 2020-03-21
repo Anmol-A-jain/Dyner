@@ -24,6 +24,8 @@ private slots:
 
     void on_btnAdmin_clicked();
 
+    void on_btnServer_clicked();
+
 private:
     Ui::menuButtons *ui;
     // storing parent object

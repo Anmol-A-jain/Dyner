@@ -1,6 +1,9 @@
 #include "globaldata.h"
 #include <QGraphicsDropShadowEffect>
 
+QVector<CartData*> GlobalData::currentOrder;
+QVector<WaiterName*> GlobalData::waiter;
+
 GlobalData::GlobalData()
 {
     this->tagname.insert(data::QtyTable,"QtyTable");
@@ -26,11 +29,22 @@ QString GlobalData::getattribute(int tagname)
     return this->attribute[tagname];
 }
 
-void GlobalData::setShadow(QWidget *widget)
+void GlobalData::setShadow(QWidget *widget,QColor color,qreal real,qreal radius  )
 {
     auto effect = new QGraphicsDropShadowEffect();
-    effect->setOffset(0.5);
-    effect->setBlurRadius(5.0);
-    effect->setColor(QColor(0,0,0));
+    effect->setOffset(real);
+    effect->setBlurRadius(radius);
+    effect->setColor(color);
     widget->setGraphicsEffect(effect);
+}
+
+int GlobalData::contain(int tbl)
+{
+    QVector<CartData*>* q = &currentOrder;
+
+    for (int i = 0; i < q->count(); ++i)
+    {
+        if(q->at(i)->tblNO == tbl) return i;
+    }
+    return 0;
 }

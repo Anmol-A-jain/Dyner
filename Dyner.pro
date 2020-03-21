@@ -23,6 +23,7 @@ SOURCES += \
     data/databasecon.cpp \
     data/globaldata.cpp \
     data/xmlmanipulation.cpp \
+    menu/ServerManagement/servermanagement.cpp \
     menu/admin/adminwidget.cpp \
     menu/admin/customWidget/itemwidget.cpp \
     menu/admin/DialogBox/additem.cpp \
@@ -38,7 +39,8 @@ SOURCES += \
     menu/order/orderwidget.cpp \
     menu/order/DialogBox/paymentmathod.cpp \
     server/dynerserver.cpp \
-    server/mytcpsocket.cpp
+    server/mytcpsocket.cpp \
+    menu/ServerManagement/customWidget/waiterinformation.cpp
 
 
 HEADERS += \
@@ -47,6 +49,7 @@ HEADERS += \
     data/databasecon.h \
     data/globaldata.h \
     data/xmlmanipulation.h \
+    menu/ServerManagement/servermanagement.h \
     menu/admin/adminwidget.h \
     menu/admin/customWidget/itemwidget.h \
     menu/admin/DialogBox/additem.h \
@@ -62,10 +65,12 @@ HEADERS += \
     menu/order/orderwidget.h \
     menu/order/DialogBox/paymentmathod.h \
     server/dynerserver.h \
-    server/mytcpsocket.h
+    server/mytcpsocket.h \
+    menu/ServerManagement/customWidget/waiterinformation.h
 
 FORMS += \
     dyner.ui \
+    menu/ServerManagement/servermanagement.ui \
     menu/admin/adminwidget.ui \
     menu/admin/customWidget/itemwidget.ui \
     menu/admin/DialogBox/additem.ui \
@@ -79,7 +84,8 @@ FORMS += \
     menu/order/customWidget/displaywidget.ui \
     menu/order/customWidget/orderitemdata.ui \
     menu/order/DialogBox/addorderitem.ui \
-    menu/order/DialogBox/paymentmathod.ui
+    menu/order/DialogBox/paymentmathod.ui \
+    menu/ServerManagement/customWidget/waiterinformation.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

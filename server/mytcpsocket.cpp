@@ -1,4 +1,6 @@
 #include "mytcpsocket.h"
+#include "server/dynerserver.h"
+#include "dyner.h"
 #include "data/allaction.h"
 #include "data/xmlmanipulation.h"
 #include "data/globaldata.h"
@@ -8,6 +10,7 @@ MyTcpSocket::MyTcpSocket(qintptr ID , QObject *parent )
     :QThread(parent)
 {
     this->socketDescriptor = ID;
+    this->myParent = parent;
 }
 
 void MyTcpSocket::run()
@@ -30,7 +33,7 @@ void MyTcpSocket::run()
         // This makes the slot to be invoked immediately, when the signal is emitted.
 
         connect(socket, &QTcpSocket::readyRead, this, &MyTcpSocket::myReadyRead, Qt::DirectConnection);
-        connect(socket, &QTcpSocket::disconnected , this, &MyTcpSocket::myDisconnected  );
+        connect(socket, &QTcpSocket::disconnected , this, &MyTcpSocket::myDisconnected );
 
         // We'll have multiple clients, we want to know which is which
         qDebug() << socketDescriptor << " Client connected";
@@ -57,6 +60,7 @@ void MyTcpSocket::myReadyRead()
     qDebug() << socketDescriptor << " Data in: " << dataIn << ":" << action;
 
     qDebug() << "serverConnection (myReadReady) : action : " << action;
+    qDebug() << "serverConnection (myReadReady) : action : " << action;
 
     switch (action)
     {
@@ -68,6 +72,17 @@ void MyTcpSocket::myReadyRead()
         case ALLAction::getTotaltableNo :
         {
             //sending total table Quantity..
+
+            QVector<WaiterName*>* q = &GlobalData::waiter;
+
+            QString name;
+            in >> name;
+
+            WaiterName* waiter = new WaiterName;
+            waiter->ID = this->socketDescriptor;
+            waiter->name = name;
+
+            q->push_back(waiter);
 
             QByteArray dataOut ;
 
@@ -115,8 +130,9 @@ void MyTcpSocket::myReadyRead()
             }
 
             qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << dataOut ;
-            socket->write(dataOut);
+            int bytes = socket->write(dataOut);
             socket->flush();
+            qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : sending total byets : " << bytes ;
 
             delete q;
             break;
@@ -177,11 +193,18 @@ void MyTcpSocket::myReadyRead()
                 item->id = id;
                 item->qty = qty;
 
-                CartData* cart = new CartData;
-                cart->tblNO = tblNo;
-                cart->item = item;
-
-                currentOrder.push_back(cart);
+                int index = GlobalData::contain(tblNo);
+                if(index != 0)
+                {
+                    GlobalData::currentOrder.at(index)->item.push_back(item);
+                }
+                else
+                {
+                    CartData* cart = new CartData;
+                    cart->tblNO = tblNo;
+                    cart->item.push_back(item);
+                    GlobalData::currentOrder.push_back(cart);
+                }
 
                 databaseCon d;
                 QString cmd = "select * from tblTempOrder WHERE table_no =" + QString::number(tblNo) +" AND item_id = '" + id + "'";
@@ -218,10 +241,31 @@ void MyTcpSocket::myReadyRead()
 
 void MyTcpSocket::myDisconnected()
 {
-    qDebug() << socketDescriptor << " Disconnected";
+    qDebug() << "MyTcpSocket (myDisconnected) : id :" << socketDescriptor << " Disconnected";
+
+    QVector<WaiterName*>* q = &GlobalData::waiter;
+
+    for (int i = 0; i < q->count(); ++i)
+    {
+        if(q->at(i)->ID == this->socketDescriptor)
+        {
+            delete q->at(i);
+            q->remove(i);
+        }
+    }
 
     socket->deleteLater();
     exit(0);
+}
+
+QString MyTcpSocket::getClientName() const
+{
+    return clientName;
+}
+
+qintptr MyTcpSocket::getSocketDescriptor() const
+{
+    return socketDescriptor;
 }
 
 QByteArray MyTcpSocket::setAction(int action, QString msg)

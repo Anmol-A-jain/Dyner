@@ -4,6 +4,7 @@
 #include "menu/admin/adminwidget.h"
 #include "menu/bill_history/billhistorywidget.h"
 #include "menu/order/orderwidget.h"
+#include "menu/ServerManagement/servermanagement.h"
 
 #include "data/databasecon.h"
 #include "data/xmlmanipulation.h"
@@ -16,6 +17,7 @@
 Dyner::Dyner(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Dyner)
+    ,server(this)
 {
     ui->setupUi(this);
     this->setWindowState(Qt::WindowMaximized);
@@ -64,21 +66,31 @@ QWidget *Dyner::newFrame(int option)
     {
         case buttonName::home :
         {
-            return new MenuButtons(this);
+            menuWindow = new MenuButtons(this);
+            return menuWindow;
         }
         case buttonName::order :
         {
-            return new OrderWidget;
+            orderWindow = new OrderWidget;
+            return orderWindow;
         }
 
         case buttonName::billHistory :
         {
-            return new BillHistoryWidget;
+            historyWindow = new BillHistoryWidget;
+            return historyWindow;
         }
 
         case buttonName::admin :
         {
-            return new AdminWidget;
+            adminWindow = new AdminWidget;
+            return adminWindow;
+        }
+        case buttonName::serverManagement :
+        {
+
+            serverWindow = new ServerManagement;
+            return serverWindow;
         }
     }
     return childFrame;
@@ -104,6 +116,11 @@ void Dyner::billHistoryButtonClick()
 void Dyner::adminButtonClick()
 {
     emit on_parentButtonAdmin_clicked();
+}
+
+void Dyner::serverrButtonClick()
+{
+    emit on_parentButtonManagement_clicked();
 }
 
 void Dyner::setShadow(QWidget *widget, QColor color)
@@ -206,4 +223,20 @@ void Dyner::on_menuButton_clicked()
         isMenuHidden = true;
         ui->menuList->hide();
     }
+}
+
+void Dyner::on_parentButtonManagement_clicked()
+{
+    loadWidgetWindow(buttonName::serverManagement);
+    if(isMenuHidden)
+    {
+        isMenuHidden = false;
+        ui->menuList->show();
+    }
+
+    currentShaddowEffect->setGraphicsEffect(nullptr);
+    currentShaddowEffect = ui->parentButtonManagement;
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+
+    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
 }
