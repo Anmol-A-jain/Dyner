@@ -7,7 +7,6 @@
 #include "QMessageBox"
 #include <QDebug>
 
-
 ServerManagement::ServerManagement(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ServerManagement)

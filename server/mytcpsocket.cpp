@@ -243,14 +243,14 @@ void MyTcpSocket::myDisconnected()
 {
     qDebug() << "MyTcpSocket (myDisconnected) : id :" << socketDescriptor << " Disconnected";
 
-    QVector<WaiterName*>* q = &GlobalData::waiter;
+    QVector<MyTcpSocket*>* list =DynerServer::getClientlist();
 
-    for (int i = 0; i < q->count(); ++i)
+    for (int i = 0; i < list->count(); ++i)
     {
-        if(q->at(i)->ID == this->socketDescriptor)
+        if(list->at(i)->getSocketDescriptor() == socketDescriptor)
         {
-            delete q->at(i);
-            q->remove(i);
+            list->at(i)->disconnectSocket();
+            list->remove(i);
         }
     }
 

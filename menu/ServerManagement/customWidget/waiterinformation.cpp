@@ -37,7 +37,7 @@ int WaiterInformation::getId()
 
 void WaiterInformation::on_btnDisconnect_clicked()
 {
-    int reply = QMessageBox::critical(this,"Disconnected","Do you want to Disconnect " + this->name + "("+QString::number(this->id)+")",QMessageBox::StandardButton::Yes|QMessageBox::StandardButton::No,QMessageBox::StandardButton::No);
+    int reply = QMessageBox::warning(this,"Disconnected","Do you want to Disconnect " + this->name + "("+QString::number(this->id)+")",QMessageBox::StandardButton::Yes|QMessageBox::StandardButton::No,QMessageBox::StandardButton::No);
     if(reply == QMessageBox::StandardButton::No)
     {
         return;
