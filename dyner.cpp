@@ -17,7 +17,6 @@
 Dyner::Dyner(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Dyner)
-    ,server(this)
 {
     ui->setupUi(this);
     this->setWindowState(Qt::WindowMaximized);
@@ -41,7 +40,8 @@ Dyner::Dyner(QWidget *parent)
     databaseCon::initDB();
 
     // starting TCP server
-    server.startServer();
+    server = new DynerServer(this);
+    server->startServer();
 
 }
 
@@ -118,7 +118,7 @@ void Dyner::adminButtonClick()
     emit on_parentButtonAdmin_clicked();
 }
 
-void Dyner::serverrButtonClick()
+void Dyner::serverButtonClick()
 {
     emit on_parentButtonManagement_clicked();
 }

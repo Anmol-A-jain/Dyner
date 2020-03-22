@@ -50,13 +50,12 @@ void WaiterInformation::on_btnDisconnect_clicked()
         int id =clientlist->at(i)->getSocketDescriptor();
         if(id == ui->lblId->text().toInt())
         {
-            if(clientlist->at(i) != nullptr)
+            if(clientlist->at(i) == nullptr)
             {
                 qDebug() << "WaiterInformation (on_btnDisconnect_clicked) : nullptr at " << i;
                 return;
             }
             clientlist->at(i)->disconnectSocket();
-            clientlist->remove(i);
             static_cast<ServerManagement*>(myParent)->removeData(id);
             return;
         }

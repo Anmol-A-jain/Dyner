@@ -11,6 +11,7 @@ MyTcpSocket::MyTcpSocket(qintptr ID , QObject *parent )
 {
     this->socketDescriptor = ID;
     this->myParent = parent;
+    this->isKitchen = false;
 }
 
 void MyTcpSocket::run()
@@ -47,9 +48,32 @@ void MyTcpSocket::run()
 
 void MyTcpSocket::myReadyRead()
 {
+
     // get the information
-    QByteArray dataIn = socket->readAll();
-    qDebug() << socketDescriptor << " Data in: " << dataIn;
+    //serverClient->waitForReadyRead(1000);
+    int bytes = socket->bytesAvailable();
+    QByteArray dataIn ;//= serverClient->readAll();
+    qDebug() << "serverConnection (myReadReady) : Data available count: " << bytes;
+
+    while(bytes != 0)
+    {
+        if(bytes < 1000 )
+        {
+            dataIn.append(socket->readAll());
+            bytes = 0;
+        }
+        else
+        {
+            dataIn.append(socket->read(1000));
+            bytes -= 1000;
+        }
+        qDebug() << "serverConnection (myReadReady) : Data in: " << dataIn;
+        qDebug() << "serverConnection (myReadReady) : Data count: " << bytes;
+    }
+
+    // get the information
+    /*QByteArray dataIn = socket->readAll();
+    qDebug() << socketDescriptor << " Data in: " << dataIn;*/
 
     QDataStream in(&dataIn,QIODevice::ReadWrite);
 
@@ -64,6 +88,8 @@ void MyTcpSocket::myReadyRead()
 
     switch (action)
     {
+
+        // android management
         case ALLAction::error :
         {
             qDebug() << "serverConnection (myReadReady) : list : " << dataIn;
@@ -77,6 +103,9 @@ void MyTcpSocket::myReadyRead()
 
             QString name;
             in >> name;
+
+            qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : client name : " << name ;
+
 
             WaiterName* waiter = new WaiterName;
             waiter->ID = this->socketDescriptor;
@@ -105,6 +134,8 @@ void MyTcpSocket::myReadyRead()
             break;
 
         }
+
+
         case ALLAction::menuData :
         {
             //sending total table Quantity..
@@ -163,12 +194,13 @@ void MyTcpSocket::myReadyRead()
         case ALLAction::cartData :
         {
             qint16 tblNo = -1,count = 0 ;
-            QString mblNo,name;
+            QString mblNo,name,note;
             in >> tblNo;
             in >> count;
 
             in >> name;
             in >> mblNo;
+            in >> note;
 
             GlobalData g;
             QString attribute = g.getattribute(GlobalData::customerNameMblNo);
@@ -179,6 +211,12 @@ void MyTcpSocket::myReadyRead()
 
             qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : table no : " << tblNo;
             qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : total item : " << count;
+
+            QByteArray dataOut ;
+            QDataStream out(&dataOut,QIODevice::ReadWrite);
+
+            int action = ALLAction::individual;
+            out << action;
 
             for (int i = 0; i < count; ++i)
             {
@@ -193,6 +231,10 @@ void MyTcpSocket::myReadyRead()
                 item->id = id;
                 item->qty = qty;
 
+                //checking if table exist or not
+                //if exist inseting more data in ItemData Strucure
+                //if not exist creating data and inserting table no and ItemData Strucure
+
                 int index = GlobalData::contain(tblNo);
                 if(index != 0)
                 {
@@ -205,6 +247,8 @@ void MyTcpSocket::myReadyRead()
                     cart->item.push_back(item);
                     GlobalData::currentOrder.push_back(cart);
                 }
+
+                out << id << qty ;
 
                 databaseCon d;
                 QString cmd = "select * from tblTempOrder WHERE table_no =" + QString::number(tblNo) +" AND item_id = '" + id + "'";
@@ -228,8 +272,46 @@ void MyTcpSocket::myReadyRead()
                 }
                 delete q;
             }
+
+            static_cast<DynerServer*>(myParent)->sendToKitchren(dataOut);
+
             break;
         }
+
+
+        // kitchen management
+        case ALLAction::kitchenInfo:
+        {
+            QVector<WaiterName*>* q = &GlobalData::waiter;
+
+            QString name;
+            in >> name;
+
+            qDebug() << "serverConnection (myReadReady) : ALLAction::kitchenInfo : name  : " << name ;
+            WaiterName* waiter = new WaiterName;
+            waiter->ID = this->socketDescriptor;
+            waiter->name = name;
+            q->push_back(waiter);
+
+
+            QString kitchenName = "kitchen";
+
+            if(name == kitchenName)
+            {
+                isKitchen = true ;
+            }
+
+            qDebug() << "serverConnection (myReadReady) : ALLAction::kitchenInfo : is kichen : " << isKitchen ;
+
+
+            qDebug() << "serverConnection (myReadReady) : ALLAction::kitchenInfo : name  : " << q->count() ;
+            break;
+        }
+        case ALLAction::individual:
+        {
+
+        }
+
         default:
         {
             qDebug() << "serverConnection (myReadReady) : default case called : " << dataIn;
@@ -251,6 +333,17 @@ void MyTcpSocket::myDisconnected()
         {
             list->at(i)->disconnectSocket();
             list->remove(i);
+            break;
+        }
+    }
+
+    static QVector<WaiterName*>* q = &GlobalData::waiter;
+
+    for (int i = 0; i < q->count(); ++i)
+    {
+        if(q->at(i)->ID == socketDescriptor)
+        {
+            q->remove(i);
         }
     }
 
@@ -258,21 +351,28 @@ void MyTcpSocket::myDisconnected()
     exit(0);
 }
 
+bool MyTcpSocket::isKitchenSocket()
+{
+    return isKitchen;
+}
+
 QString MyTcpSocket::getClientName() const
 {
     return clientName;
 }
 
+void MyTcpSocket::sendToKitchen(QByteArray data)
+{
+    qDebug() << "serverConnection (sendToKitchen) : sending msg to kitchen : " << data;
+    qDebug() << "serverConnection (sendToKitchen) : is this kitchen thread : " << isKitchenSocket();
+    int sendBytes = socket->write("hello fron android");
+    socket->flush();
+    qDebug() << "serverConnection (sendToKitchen) : size of send data : " << sendBytes;
+}
+
 qintptr MyTcpSocket::getSocketDescriptor() const
 {
     return socketDescriptor;
-}
-
-QByteArray MyTcpSocket::setAction(int action, QString msg)
-{
-    QByteArray data = QByteArray::number(action) + "~" ;
-    data.append(msg);
-    return data;
 }
 
 void MyTcpSocket::disconnectSocket()

@@ -23,7 +23,8 @@ ServerManagement::ServerManagement(QWidget *parent) :
     }
     this->loadData();
 
-    GlobalData::setShadow(ui->btnRefresh,QColor(255,0,0),0,10);
+    GlobalData::setShadow(ui->btnDisconnect,QColor(255,0,0),0,10);
+    GlobalData::setShadow(ui->btnRefresh,QColor(67, 134, 244),0,10);
 }
 
 ServerManagement::~ServerManagement()
@@ -64,6 +65,31 @@ void ServerManagement::removeData(qintptr id)
 
             return;
         }
+    }
+}
+
+void ServerManagement::on_btnDisconnect_clicked()
+{
+    int reply = QMessageBox::warning(this,"Disconnected All","Do you want to Disconnect All Devices",QMessageBox::StandardButton::Yes|QMessageBox::StandardButton::No,QMessageBox::StandardButton::No);
+    if(reply == QMessageBox::StandardButton::No)
+    {
+        return;
+    }
+
+    QVector<MyTcpSocket *>* clientlist = DynerServer::getClientlist();
+
+    for (int i = 0; i < clientlist->count(); ++i)
+    {
+        int id =clientlist->at(i)->getSocketDescriptor();
+        if(clientlist->at(i) == nullptr)
+        {
+            qDebug() << "WaiterInformation (on_btnDisconnect_clicked) : nullptr at " << i;
+            return;
+        }
+        clientlist->at(i)->disconnectSocket();
+        removeData(id);
+        return;
+
     }
 }
 

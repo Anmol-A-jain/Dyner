@@ -25,7 +25,7 @@ public:
     void orderButtonClick(); // emits order button
     void billHistoryButtonClick(); // emits bill history button
     void adminButtonClick(); // emits admin button
-    void serverrButtonClick(); // emits server button
+    void serverButtonClick(); // emits server button
     void setShadow(QWidget *widget, QColor color); // setting shadow to widget and formating widget title
     void closeEvent(QCloseEvent *event) override;
 
@@ -49,7 +49,7 @@ private:
     enum buttonName{home,order,billHistory,admin,serverManagement}; // enum for buttons
     bool isMenuHidden; // track if menu is hidden or not
     QPushButton* currentShaddowEffect; // to track which button have currently shadow effect
-    DynerServer server; // creating server object
+    DynerServer* server; // creating server object
     QWidget* serverWindow;
     QWidget* menuWindow;
     QWidget* orderWindow;

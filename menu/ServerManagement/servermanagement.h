@@ -20,6 +20,8 @@ public:
     void removeData(qintptr id);
 
 private slots:
+    void on_btnDisconnect_clicked();
+
     void on_btnRefresh_clicked();
 
 private:

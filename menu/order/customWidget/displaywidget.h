@@ -1,4 +1,4 @@
-#ifndef DISPLAYWIDGET_H
+        #ifndef DISPLAYWIDGET_H
 #define DISPLAYWIDGET_H
 // display data for header/menu/orderWidget
 

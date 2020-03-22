@@ -40,7 +40,7 @@ void MenuButtons::on_btnAdmin_clicked()
 
 void MenuButtons::on_btnServer_clicked()
 {
-    static_cast<Dyner*>(parentName)->serverrButtonClick();
+    static_cast<Dyner*>(parentName)->serverButtonClick();
 }
 
 void MenuButtons::setShadow(QWidget *widget, QColor color)

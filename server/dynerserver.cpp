@@ -1,10 +1,9 @@
 #include "server/dynerserver.h"
 #include "server/mytcpsocket.h"
 #include "dyner.h"
-#include "menu/ServerManagement/servermanagement.h"
 #include <QtNetwork>
 
-QVector<MyTcpSocket*>* DynerServer::clientlist;
+QVector<MyTcpSocket*>* DynerServer::clientlist = new QVector<MyTcpSocket*>;
 
 DynerServer::DynerServer(QObject *parent)
     :QTcpServer(parent)
@@ -23,12 +22,24 @@ void DynerServer::closeAllConnection()
     for(int i = 0 ; clientlist->size() > i ; ++i)
     {
         clientlist->at(i)->disconnectSocket();
-        qDebug() << "DynerServer (closeAllConnection) : is running : " << clientlist->at(i)->isRunning();
     }
     static QVector<WaiterName*>* q = &GlobalData::waiter;
     for (int i = 0; i < q->count(); ++i)
     {
         q->remove(i);
+    }
+}
+
+void DynerServer::sendToKitchren(QByteArray &data)
+{
+    for (int i = 0; i < clientlist->count(); ++i)
+    {
+        qDebug() << "DynerServer (sendToKitchren) : is kitchen " << i << " : " << clientlist->at(i)->isKitchenSocket()  ;
+        if(clientlist->at(i)->isKitchenSocket() == true)
+        {
+            qDebug() << "DynerServer (sendToKitchren) : data at " << i << " : " << data ;
+            clientlist->at(i)->sendToKitchen(data);
+        }
     }
 }
 
@@ -46,6 +57,18 @@ void DynerServer::incomingConnection(qintptr socketDescriptor)
 
     thread->start();
     clientlist->push_back(thread);
+
+    for (int i = 0; i < clientlist->count(); ++i)
+    {
+        int id =clientlist->at(i)->getSocketDescriptor();
+        if(id == socketDescriptor)
+        {
+            if(clientlist->at(i) == nullptr)
+            {
+                qDebug() << "WaiterInformation (on_btnDisconnect_clicked) : nullptr at " << i;
+            }
+        }
+    }
 }
 
 QVector<MyTcpSocket *> *DynerServer::getClientlist()
@@ -55,7 +78,7 @@ QVector<MyTcpSocket *> *DynerServer::getClientlist()
 
 void DynerServer::startServer()
 {
-    clientlist = new QVector<MyTcpSocket*>;
+    //clientlist = new QVector<MyTcpSocket*>;
 
     quint16 port(1812);
 
