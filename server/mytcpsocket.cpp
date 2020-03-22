@@ -212,11 +212,6 @@ void MyTcpSocket::myReadyRead()
             qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : table no : " << tblNo;
             qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : total item : " << count;
 
-            QByteArray dataOut ;
-            QDataStream out(&dataOut,QIODevice::ReadWrite);
-
-            int action = ALLAction::individual;
-            out << action;
 
             for (int i = 0; i < count; ++i)
             {
@@ -227,28 +222,6 @@ void MyTcpSocket::myReadyRead()
                 qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : item qty : " << qty;
                 double preQty = 0;
 
-                ItemData* item = new ItemData;
-                item->id = id;
-                item->qty = qty;
-
-                //checking if table exist or not
-                //if exist inseting more data in ItemData Strucure
-                //if not exist creating data and inserting table no and ItemData Strucure
-
-                int index = GlobalData::contain(tblNo);
-                if(index != 0)
-                {
-                    GlobalData::currentOrder.at(index)->item.push_back(item);
-                }
-                else
-                {
-                    CartData* cart = new CartData;
-                    cart->tblNO = tblNo;
-                    cart->item.push_back(item);
-                    GlobalData::currentOrder.push_back(cart);
-                }
-
-                out << id << qty ;
 
                 databaseCon d;
                 QString cmd = "select * from tblTempOrder WHERE table_no =" + QString::number(tblNo) +" AND item_id = '" + id + "'";
@@ -273,8 +246,7 @@ void MyTcpSocket::myReadyRead()
                 delete q;
             }
 
-            static_cast<DynerServer*>(myParent)->sendToKitchren(dataOut);
-
+            //static_cast<DynerServer*>(myParent)->sendToKitchren(dataOut);
             break;
         }
 
@@ -361,11 +333,11 @@ QString MyTcpSocket::getClientName() const
     return clientName;
 }
 
-void MyTcpSocket::sendToKitchen(QByteArray data)
+void MyTcpSocket::sendToKitchen(QByteArray &data)
 {
     qDebug() << "serverConnection (sendToKitchen) : sending msg to kitchen : " << data;
     qDebug() << "serverConnection (sendToKitchen) : is this kitchen thread : " << isKitchenSocket();
-    int sendBytes = socket->write("hello fron android");
+    int sendBytes = socket->write(data);
     socket->flush();
     qDebug() << "serverConnection (sendToKitchen) : size of send data : " << sendBytes;
 }

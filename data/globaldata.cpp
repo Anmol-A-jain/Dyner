@@ -1,7 +1,6 @@
 #include "globaldata.h"
 #include <QGraphicsDropShadowEffect>
 
-QVector<CartData*> GlobalData::currentOrder;
 QVector<WaiterName*> GlobalData::waiter;
 
 GlobalData::GlobalData()
@@ -36,15 +35,4 @@ void GlobalData::setShadow(QWidget *widget,QColor color,qreal real,qreal radius 
     effect->setBlurRadius(radius);
     effect->setColor(color);
     widget->setGraphicsEffect(effect);
-}
-
-int GlobalData::contain(int tbl)
-{
-    QVector<CartData*>* q = &currentOrder;
-
-    for (int i = 0; i < q->count(); ++i)
-    {
-        if(q->at(i)->tblNO == tbl) return i;
-    }
-    return 0;
 }

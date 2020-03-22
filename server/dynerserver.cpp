@@ -30,7 +30,7 @@ void DynerServer::closeAllConnection()
     }
 }
 
-void DynerServer::sendToKitchren(QByteArray &data)
+void DynerServer::sendToKitchren(QByteArray data)
 {
     for (int i = 0; i < clientlist->count(); ++i)
     {
@@ -54,6 +54,7 @@ void DynerServer::incomingConnection(qintptr socketDescriptor)
     // connect signal/slot
     // once a thread is not needed, it will be beleted later
     connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
+    connect(thread, SIGNAL(dataForKitchen(QByteArray)), this, SLOT(sendToKitchren(QByteArray)));
 
     thread->start();
     clientlist->push_back(thread);

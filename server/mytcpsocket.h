@@ -9,6 +9,7 @@
 
 class MyTcpSocket : public QThread
 {
+    Q_OBJECT
 public:
     explicit MyTcpSocket(qintptr sockectdescriptor , QObject *parent = nullptr );
     void run();
@@ -17,7 +18,7 @@ public:
 
     qintptr getSocketDescriptor() const;
     QString getClientName() const;
-    void sendToKitchen(QByteArray data);
+    void sendToKitchen(QByteArray &data);
     bool isKitchenSocket();
 
 
@@ -27,7 +28,7 @@ public slots:
     void myDisconnected();
 
 signals:
-    //void dataForKitchen();
+    void dataForKitchen(QByteArray &data);
 
 
 private:

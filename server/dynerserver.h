@@ -21,7 +21,9 @@ public:
     DynerServer(QObject *parent = nullptr);
     ~DynerServer();
     static void closeAllConnection();
-    void sendToKitchren(QByteArray &data);
+
+public slots:
+    void sendToKitchren(QByteArray data);
 
     static QVector<MyTcpSocket *>* getClientlist();
 
