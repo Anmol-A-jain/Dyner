@@ -113,6 +113,8 @@ void MyTcpSocket::myReadyRead()
 
             q->push_back(waiter);
 
+            emit addItemInServerManagement();
+
             QByteArray dataOut ;
 
             QDataStream out(&dataOut,QIODevice::ReadWrite);
@@ -194,13 +196,13 @@ void MyTcpSocket::myReadyRead()
         case ALLAction::cartData :
         {
             qint16 tblNo = -1,count = 0 ;
-            QString mblNo,name,note;
+            QString mblNo,name;
+
             in >> tblNo;
             in >> count;
 
             in >> name;
             in >> mblNo;
-            in >> note;
 
             GlobalData g;
             QString attribute = g.getattribute(GlobalData::customerNameMblNo);
@@ -215,17 +217,26 @@ void MyTcpSocket::myReadyRead()
 
             for (int i = 0; i < count; ++i)
             {
-                QString id;
+                QString id,note;
                 double qty;
-                in >> id >> qty;
+
+                in >> id;
+                in >> note;
+                in >> qty;
+
                 qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : item id : " << id;
+                qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : item note : " << note;
                 qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : item qty : " << qty;
+
                 double preQty = 0;
 
-
                 databaseCon d;
-                QString cmd = "select * from tblTempOrder WHERE table_no =" + QString::number(tblNo) +" AND item_id = '" + id + "'";
-                QSqlQuery* q = d.execute(cmd);
+
+                QString cmd = "INSERT INTO oderDataFromWaiter (note,status,tblNo,qty,Item_id) VALUES ( '"+note+"','sending',"+QString::number(tblNo)+","+QString::number(qty)+",'"+id+"');";
+                QSqlQuery* q = d.execute(cmd) ;
+
+                cmd = "select * from tblTempOrder WHERE table_no =" + QString::number(tblNo) +" AND item_id = '" + id + "'";
+                q= d.execute(cmd);
 
                 int size;
                 for (size = 0; size < q->next(); ++size)
@@ -309,7 +320,7 @@ void MyTcpSocket::myDisconnected()
         }
     }
 
-    static QVector<WaiterName*>* q = &GlobalData::waiter;
+    QVector<WaiterName*>* q = &GlobalData::waiter;
 
     for (int i = 0; i < q->count(); ++i)
     {
@@ -319,6 +330,7 @@ void MyTcpSocket::myDisconnected()
         }
     }
 
+    emit addItemInServerManagement();
     socket->deleteLater();
     exit(0);
 }

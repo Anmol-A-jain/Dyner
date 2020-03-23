@@ -21,11 +21,12 @@ public:
     DynerServer(QObject *parent = nullptr);
     ~DynerServer();
     static void closeAllConnection();
+    static QVector<MyTcpSocket *>* getClientlist();
 
 public slots:
     void sendToKitchren(QByteArray data);
 
-    static QVector<MyTcpSocket *>* getClientlist();
+    void addItemInServerManagement();
 
 protected:
     void incomingConnection(qintptr socketDescriptor) override;

@@ -29,6 +29,8 @@ public:
     void setShadow(QWidget *widget, QColor color); // setting shadow to widget and formating widget title
     void closeEvent(QCloseEvent *event) override;
 
+    void serverSideAddItem();
+
     ~Dyner();
 private slots:
     void on_parentButtonOrder_clicked();

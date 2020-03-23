@@ -28,8 +28,8 @@ public slots:
     void myDisconnected();
 
 signals:
-    void dataForKitchen(QByteArray &data);
-
+    void dataForKitchen(QByteArray data);
+    void addItemInServerManagement();
 
 private:
     QTcpSocket *socket;

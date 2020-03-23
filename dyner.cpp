@@ -145,6 +145,11 @@ void Dyner::closeEvent(QCloseEvent *event)
     event->accept();
 }
 
+void Dyner::serverSideAddItem()
+{
+    if(childFrame == serverWindow) static_cast<ServerManagement*>(serverWindow)->loadData();
+}
+
 void Dyner::on_parentButtonHome_clicked()
 {
     loadWidgetWindow(buttonName::home);

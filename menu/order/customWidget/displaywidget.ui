@@ -85,7 +85,7 @@
          <string>name</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
@@ -112,7 +112,7 @@
        <widget class="QDoubleSpinBox" name="doubleSpinBox">
         <property name="maximumSize">
          <size>
-          <width>70</width>
+          <width>150</width>
           <height>16777215</height>
          </size>
         </property>

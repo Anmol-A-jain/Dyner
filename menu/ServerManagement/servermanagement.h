@@ -18,6 +18,7 @@ public:
     void loadData();
     void deleteVectordata();
     void removeData(qintptr id);
+    void addDevice(qintptr id);
 
 private slots:
     void on_btnDisconnect_clicked();

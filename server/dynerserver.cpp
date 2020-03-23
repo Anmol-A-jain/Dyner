@@ -43,6 +43,11 @@ void DynerServer::sendToKitchren(QByteArray data)
     }
 }
 
+void DynerServer::addItemInServerManagement()
+{
+    static_cast<Dyner*>(myParent)->serverSideAddItem();
+}
+
 void DynerServer::incomingConnection(qintptr socketDescriptor)
 {
     // We have a new connection
@@ -55,6 +60,7 @@ void DynerServer::incomingConnection(qintptr socketDescriptor)
     // once a thread is not needed, it will be beleted later
     connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
     connect(thread, SIGNAL(dataForKitchen(QByteArray)), this, SLOT(sendToKitchren(QByteArray)));
+    connect(thread, SIGNAL(addItemInServerManagement()), this, SLOT(addItemInServerManagement()));
 
     thread->start();
     clientlist->push_back(thread);
