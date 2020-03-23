@@ -189,7 +189,7 @@ void BillHistoryWidget::SelectionChange()
 
     QSqlQuery* q = d.execute(cmd);
 
-    for(int i = 1;q->next();++i)
+    for(int i = 0;q->next();++i)
     {
         QString billId = q->value("billId").toString();
         QString custName = q->value("Name").toString();

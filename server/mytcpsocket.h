@@ -18,7 +18,7 @@ public:
 
     qintptr getSocketDescriptor() const;
     QString getClientName() const;
-    void sendToKitchen(QByteArray &data);
+    void sendToKitchen(int orderNo,int tblNo);
     bool isKitchenSocket();
 
 
@@ -28,7 +28,7 @@ public slots:
     void myDisconnected();
 
 signals:
-    void dataForKitchen(QByteArray data);
+    void dataForKitchen(int orderNo,int tblNo);
     void addItemInServerManagement();
 
 private:
@@ -37,6 +37,8 @@ private:
     QObject* myParent;
     QString clientName;
     bool isKitchen;
+    static bool isKitchenConnected;
+    static int connectedKitchen;
 };
 
 #endif // MYTCPSOCKET_H

@@ -24,7 +24,7 @@ public:
     static QVector<MyTcpSocket *>* getClientlist();
 
 public slots:
-    void sendToKitchren(QByteArray data);
+    void sendToKitchren(int orderNo,int tblNo);
 
     void addItemInServerManagement();
 

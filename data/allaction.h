@@ -7,7 +7,7 @@ class ALLAction
 public:
     ALLAction();
     enum androidAction{error,getTotaltableNo,menuData,getCustInfo,cartData};
-    enum kitchen{kitchenInfo = 101,individual = 102,wholeData = 103};
+    enum kitchen{kitchenInfo = 101,individual = 102};
 };
 
 #endif // ALLACTION_H

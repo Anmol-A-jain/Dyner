@@ -21,7 +21,16 @@ WaiterInformation::WaiterInformation(qintptr id,QString name,QWidget *parent) :
     this->id = id;
 
     GlobalData::setShadow(ui->btnDisconnect,QColor(255,0,0),0,10);
-    GlobalData::setShadow(this,QColor(0,0,0),0,10);
+
+    if(name == QString("kitchen"))
+    {
+        GlobalData::setShadow(this,QColor(255,0,0),0,10);
+    }
+    else
+    {
+        GlobalData::setShadow(this,QColor(0,0,0),0,10);
+    }
+
 
 }
 

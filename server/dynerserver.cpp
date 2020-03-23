@@ -30,15 +30,15 @@ void DynerServer::closeAllConnection()
     }
 }
 
-void DynerServer::sendToKitchren(QByteArray data)
+void DynerServer::sendToKitchren(int orderNo,int tblNo)
 {
     for (int i = 0; i < clientlist->count(); ++i)
     {
         qDebug() << "DynerServer (sendToKitchren) : is kitchen " << i << " : " << clientlist->at(i)->isKitchenSocket()  ;
         if(clientlist->at(i)->isKitchenSocket() == true)
         {
-            qDebug() << "DynerServer (sendToKitchren) : data at " << i << " : " << data ;
-            clientlist->at(i)->sendToKitchen(data);
+            qDebug() << "DynerServer (sendToKitchren) : data at " << i << " : " << orderNo << ":" << tblNo ;
+            clientlist->at(i)->sendToKitchen(orderNo,tblNo);
         }
     }
 }
@@ -59,7 +59,7 @@ void DynerServer::incomingConnection(qintptr socketDescriptor)
     // connect signal/slot
     // once a thread is not needed, it will be beleted later
     connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
-    connect(thread, SIGNAL(dataForKitchen(QByteArray)), this, SLOT(sendToKitchren(QByteArray)));
+    connect(thread, SIGNAL(dataForKitchen(int,int)), this, SLOT(sendToKitchren(int,int)));
     connect(thread, SIGNAL(addItemInServerManagement()), this, SLOT(addItemInServerManagement()));
 
     thread->start();

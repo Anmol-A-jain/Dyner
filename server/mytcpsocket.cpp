@@ -6,6 +6,9 @@
 #include "data/globaldata.h"
 #include "data/databasecon.h"
 
+bool MyTcpSocket::isKitchenConnected = false;
+int MyTcpSocket::connectedKitchen = 0;
+
 MyTcpSocket::MyTcpSocket(qintptr ID , QObject *parent )
     :QThread(parent)
 {
@@ -81,6 +84,11 @@ void MyTcpSocket::myReadyRead()
     qint16 action;
     in >> action;
 
+    if(!isKitchenConnected && action == ALLAction::cartData)
+    {
+        action = ALLAction::error;
+    }
+
     qDebug() << socketDescriptor << " Data in: " << dataIn << ":" << action;
 
     qDebug() << "serverConnection (myReadReady) : action : " << action;
@@ -92,6 +100,17 @@ void MyTcpSocket::myReadyRead()
         // android management
         case ALLAction::error :
         {
+            QByteArray dataOut;
+
+            QDataStream out(&dataOut,QIODevice::ReadWrite);
+            QString errMsg = "Kitchen is Not connected";
+
+            out << ALLAction::error;
+
+            out << errMsg;
+
+            socket->write(dataOut);
+
             qDebug() << "serverConnection (myReadReady) : list : " << dataIn;
             break;
         }
@@ -232,11 +251,23 @@ void MyTcpSocket::myReadyRead()
 
                 databaseCon d;
 
-                QString cmd = "INSERT INTO oderDataFromWaiter (note,status,tblNo,qty,Item_id) VALUES ( '"+note+"','sending',"+QString::number(tblNo)+","+QString::number(qty)+",'"+id+"');";
+                QString cmd = "SELECT orderID FROM oderDataFromWaiter ORDER BY orderID desc LIMIT 1 " ;
                 QSqlQuery* q = d.execute(cmd) ;
+
+                int lastID = 1;
+
+                if(q->next())
+                {
+                    lastID = q->value("orderID").toInt() + 1;
+                }
+
+                cmd = "INSERT INTO oderDataFromWaiter VALUES('"+id+"' ,"+QString::number(qty)+","+QString::number(tblNo)+",'sending','"+note+"',"+QString::number(lastID)+" );";
+                q = d.execute(cmd) ;
 
                 cmd = "select * from tblTempOrder WHERE table_no =" + QString::number(tblNo) +" AND item_id = '" + id + "'";
                 q= d.execute(cmd);
+
+                emit dataForKitchen(lastID,tblNo);
 
                 int size;
                 for (size = 0; size < q->next(); ++size)
@@ -288,11 +319,24 @@ void MyTcpSocket::myReadyRead()
 
 
             qDebug() << "serverConnection (myReadReady) : ALLAction::kitchenInfo : name  : " << q->count() ;
+
+            emit addItemInServerManagement();
+
+            isKitchenConnected = true;
+            connectedKitchen++;
+
             break;
         }
         case ALLAction::individual:
         {
+            int orderNo;
+            in >> orderNo ;
 
+            databaseCon d;
+
+            QString cmd = "UPDATE oderDataFromWaiter SET status = 'preparing' WHERE orderID = "+QString::number(orderNo)+";";
+            delete d.execute(cmd) ;
+            break;
         }
 
         default:
@@ -330,6 +374,15 @@ void MyTcpSocket::myDisconnected()
         }
     }
 
+    if(isKitchenSocket())
+    {
+        connectedKitchen--;
+        if(connectedKitchen == 0)
+        {
+            isKitchenConnected = false;
+        }
+    }
+
     emit addItemInServerManagement();
     socket->deleteLater();
     exit(0);
@@ -345,13 +398,44 @@ QString MyTcpSocket::getClientName() const
     return clientName;
 }
 
-void MyTcpSocket::sendToKitchen(QByteArray &data)
+void MyTcpSocket::sendToKitchen(int orderNo,int tblNo)
 {
-    qDebug() << "serverConnection (sendToKitchen) : sending msg to kitchen : " << data;
+    qDebug() << "serverConnection (sendToKitchen) : sending msg to kitchen : " << orderNo;
+    qDebug() << "serverConnection (sendToKitchen) : sending msg to kitchen : " << tblNo;
     qDebug() << "serverConnection (sendToKitchen) : is this kitchen thread : " << isKitchenSocket();
-    int sendBytes = socket->write(data);
+
+    QByteArray dataOut;
+    QDataStream out(&dataOut,QIODevice::ReadWrite);
+
+    databaseCon d;
+
+    QString cmd = "SELECT a.*,b.itemName FROM oderDataFromWaiter a LEFT JOIN mstTblMenu b ON a.Item_id = b.id WHERE orderID = "+QString::number(orderNo)+" AND tblNo = "+QString::number(tblNo)+" " ;
+    QSqlQuery* q = d.execute(cmd) ;
+
+    qint16 action = ALLAction::individual;
+    out << action ;
+
+    out << orderNo;
+    out << tblNo;
+
+    qint16 count = 0 ;
+    for( ; q->next() ; ++count);
+    q->seek(-1);
+
+    out << count;
+
+    for (int i = 0; i < q->next(); ++i)
+    {
+        QString itemName = q->value("itemName").toString();
+        double qty = q->value("qty").toDouble();
+
+        out << itemName << qty;
+    }
+
+    int sendBytes = socket->write(dataOut);
     socket->flush();
     qDebug() << "serverConnection (sendToKitchen) : size of send data : " << sendBytes;
+    delete q;
 }
 
 qintptr MyTcpSocket::getSocketDescriptor() const
