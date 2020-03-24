@@ -30,9 +30,9 @@ void DynerServer::closeAllConnection()
     }
 }
 
-void DynerServer::sendToKitchren(qint16 orderNo, qint16 tblNo)
+void DynerServer::sendToKitchren(qint16 orderNo, qint16 tblNo, QString name)
 {
-    emit sendToKitchenParentThread(orderNo,tblNo);
+    emit sendToKitchenParentThread(orderNo,tblNo,name);
 }
 
 void DynerServer::addItemInServerManagement()
@@ -51,9 +51,9 @@ void DynerServer::incomingConnection(qintptr socketDescriptor)
     // connect signal/slot
     // once a thread is not needed, it will be beleted later
     connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
-    connect(thread, SIGNAL(dataForKitchen(qint16,qint16)), this, SLOT(sendToKitchren(qint16,qint16)));
+    connect(thread, SIGNAL(dataForKitchen(qint16,qint16,QString)), this, SLOT(sendToKitchren(qint16,qint16,QString)));
     connect(thread, SIGNAL(addItemInServerManagement()), this, SLOT(addItemInServerManagement()));
-    connect(this, SIGNAL(sendToKitchenParentThread(qint16,qint16)), thread, SLOT(sendToKitchenChildThread(qint16,qint16)));
+    connect(this, SIGNAL(sendToKitchenParentThread(qint16,qint16,QString)), thread, SLOT(sendToKitchenChildThread(qint16,qint16,QString)));
 
     thread->start();
     clientlist->push_back(thread);

@@ -21,15 +21,15 @@ public:
     qintptr getSocketDescriptor() const;
     QString getClientName() const;
     bool isKitchenSocket();
-    QSqlQuery* execute(QString cmdstr);
+    //QSqlQuery* execute(QString cmdstr);
 
 public slots:
     void myReadyRead();
     void myDisconnected();
-    void sendToKitchenChildThread(qint16 orderNo,qint16 tblNo);
+    void sendToKitchenChildThread(qint16 orderNo, qint16 tblNo, QString name);
 
 signals:
-    void dataForKitchen(qint16 orderNo,qint16 tblNo);
+    void dataForKitchen(qint16 orderNo,qint16 tblNo,QString name);
     void addItemInServerManagement();
 
 private:
