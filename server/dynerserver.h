@@ -24,9 +24,12 @@ public:
     static QVector<MyTcpSocket *>* getClientlist();
 
 public slots:
-    void sendToKitchren(int orderNo,int tblNo);
+    void sendToKitchren(qint16 orderNo,qint16 tblNo);
 
     void addItemInServerManagement();
+
+signals:
+    void sendToKitchenParentThread(qint16 orderNo,qint16 tblNo);
 
 protected:
     void incomingConnection(qintptr socketDescriptor) override;

@@ -61,7 +61,7 @@ void databaseCon::initDB()
 
 QSqlQuery* databaseCon::execute(QString cmdstr)
 {
-    q = new QSqlQuery(database);
+    QSqlQuery* q = new QSqlQuery(database);
     qDebug() << "databaseCon.cpp (execute) : DatabaseName : " << database.databaseName() ;
     if(q->exec(cmdstr))
     {
@@ -71,4 +71,9 @@ QSqlQuery* databaseCon::execute(QString cmdstr)
     qDebug() << "databaseCon.cpp (execute) : not execute : " << cmdstr ;
     qDebug() << "databaseCon.cpp (execute) :" << q->lastError().databaseText();
     return q;
+}
+
+QSqlDatabase &databaseCon::getDatabase()
+{
+    return database;
 }
