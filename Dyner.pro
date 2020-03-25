@@ -33,7 +33,10 @@ SOURCES += \
     menu/bill_history/billhistorywidget.cpp \
     menu/bill_history/customWidget/history.cpp \
     menu/menu_buttons/menubuttons.cpp \
+    menu/order/DialogBox/statusdialogbox.cpp \
     menu/order/customWidget/displaywidget.cpp \
+    menu/order/customWidget/nestedCustomWidget/statusorderitem.cpp \
+    menu/order/customWidget/orderdatawidget.cpp \
     menu/order/customWidget/orderitemdata.cpp \
     menu/order/DialogBox/addorderitem.cpp \
     menu/order/orderwidget.cpp \
@@ -60,7 +63,10 @@ HEADERS += \
     menu/bill_history/customWidget/history.h \
     menu/menu_buttons/menubuttons.h \
     menu/order/DialogBox/addorderitem.h \
+    menu/order/DialogBox/statusdialogbox.h \
     menu/order/customWidget/displaywidget.h \
+    menu/order/customWidget/nestedCustomWidget/statusorderitem.h \
+    menu/order/customWidget/orderdatawidget.h \
     menu/order/customWidget/orderitemdata.h \
     menu/order/orderwidget.h \
     menu/order/DialogBox/paymentmathod.h \
@@ -80,6 +86,9 @@ FORMS += \
     menu/bill_history/billhistorywidget.ui \
     menu/bill_history/customWidget/history.ui \
     menu/menu_buttons/menubuttons.ui \
+    menu/order/DialogBox/statusdialogbox.ui \
+    menu/order/customWidget/nestedCustomWidget/statusorderitem.ui \
+    menu/order/customWidget/orderdatawidget.ui \
     menu/order/orderwidget.ui\
     menu/order/customWidget/displaywidget.ui \
     menu/order/customWidget/orderitemdata.ui \

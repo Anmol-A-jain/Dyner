@@ -71,7 +71,7 @@ QWidget *Dyner::newFrame(int option)
         }
         case buttonName::order :
         {
-            orderWindow = new OrderWidget;
+            orderWindow = new OrderWidget(this);
             return orderWindow;
         }
 
@@ -143,6 +143,11 @@ void Dyner::closeEvent(QCloseEvent *event)
 {
     DynerServer::closeAllConnection();
     event->accept();
+}
+
+void Dyner::sendToDataKitchen(qint16 orderNo, qint16 tblNo, QString name)
+{
+    server->sendToKitchren(orderNo,tblNo,name);
 }
 
 void Dyner::serverSideAddItem()

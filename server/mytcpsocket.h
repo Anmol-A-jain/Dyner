@@ -23,6 +23,8 @@ public:
     bool isKitchenSocket();
     //QSqlQuery* execute(QString cmdstr);
 
+    static bool getIsKitchenConnected();
+
 public slots:
     void myReadyRead();
     void myDisconnected();

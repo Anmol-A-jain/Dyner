@@ -29,6 +29,7 @@ public:
     void setShadow(QWidget *widget, QColor color); // setting shadow to widget and formating widget title
     void closeEvent(QCloseEvent *event) override;
 
+    void sendToDataKitchen(qint16 orderNo, qint16 tblNo, QString name);
     void serverSideAddItem();
 
     ~Dyner();

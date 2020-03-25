@@ -26,6 +26,8 @@ public:
     void updateTotalAmmount();
     int getOrderTypeIndex();
 
+    void sendToDataKitchen(qint16 orderNo, qint16 tblNo, QString name);
+
 private slots:
     void on_cmbOrrderType_currentIndexChanged(int index);
 
@@ -43,11 +45,15 @@ private slots:
 
     void on_txtCustName_textChanged(const QString &arg1);
 
+    void on_btnStatus_clicked();
+
 private:
     Ui::OrderWidget *ui;
     QVector<displayWidget*> list;
     QRegExpValidator* r1;
     QRegExpValidator* r2;
+
+    QWidget* myParent;
 
 };
 

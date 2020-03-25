@@ -6,7 +6,9 @@
 #include "DialogBox/addorderitem.h"
 #include "data/databasecon.h"
 #include "DialogBox/paymentmathod.h"
+#include "DialogBox/statusdialogbox.h"
 #include <QMessageBox>
+#include "dyner.h"
 
 
 OrderWidget::OrderWidget(QWidget *parent) :
@@ -14,6 +16,8 @@ OrderWidget::OrderWidget(QWidget *parent) :
     ui(new Ui::OrderWidget)
 {
     ui->setupUi(this);
+    this->myParent = parent;
+
     ui-> lblTblNo->hide();
     ui->cmbTblNo->hide();
     r1 = new QRegExpValidator(QRegExp("[0-9]*"), ui->txtMblNo);
@@ -157,6 +161,11 @@ void OrderWidget::updateTotalAmmount()
 int OrderWidget::getOrderTypeIndex()
 {
     return ui->cmbOrrderType->currentIndex();
+}
+
+void OrderWidget::sendToDataKitchen(qint16 orderNo, qint16 tblNo, QString name)
+{
+    static_cast<Dyner*>(myParent)->sendToDataKitchen(orderNo,tblNo,name);
 }
 
 void OrderWidget::on_cmbOrrderType_currentIndexChanged(int index)
@@ -318,4 +327,10 @@ void OrderWidget::on_txtCustName_textChanged(const QString &arg1)
 
     XmlManipulation::setData(g.getTagName(GlobalData::customerNameMblNo)+QString::number(getTblNo()),list.at(1),arg1);
     qDebug() << "orderwidget.cpp (on_txtCustName_textChanged) : name changed : " << arg1 ;
+}
+
+void OrderWidget::on_btnStatus_clicked()
+{
+    StatusDialogBox s(getTblNo(),this);
+    s.exec();
 }

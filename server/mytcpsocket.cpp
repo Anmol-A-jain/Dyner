@@ -491,6 +491,11 @@ void MyTcpSocket::sendToKitchenChildThread(qint16 orderNo,qint16 tblNo,QString n
     delete q;
 }
 
+bool MyTcpSocket::getIsKitchenConnected()
+{
+    return isKitchenConnected;
+}
+
 qintptr MyTcpSocket::getSocketDescriptor() const
 {
     return socketDescriptor;

@@ -5,6 +5,7 @@
 #include <QDate>
 #include <QMessageBox>
 #include "../orderwidget.h"
+#include "server/mytcpsocket.h"
 
 paymentMathod::paymentMathod(double netamt,double discount,double tax,int tblno,QString custno,QString ordertype,QString custnm,QVector<displayWidget*> list,QWidget *parent) :
     QDialog(parent),
@@ -33,6 +34,12 @@ paymentMathod::~paymentMathod()
 
 void paymentMathod::insertData(QString paymentType)
 {
+    if(!MyTcpSocket::getIsKitchenConnected())
+    {
+        QMessageBox::critical(this,"Critical","Kitchen Is Not Connected");
+        return;
+    }
+
     databaseCon d;
 
     QString cmd = "SELECT billId FROM mstTblBill ORDER BY billId desc LIMIT 1 " ;
@@ -61,6 +68,7 @@ void paymentMathod::insertData(QString paymentType)
     if(!q->next())
     {
         cmd = "INSERT INTO mstTblcust VALUES('"+this->custno+"','"+this->custnm+"');";
+        delete q;
         delete d.execute(cmd);
     }
 
@@ -86,7 +94,8 @@ void paymentMathod::insertData(QString paymentType)
     }
     delete d.execute(cmd);
 
-    for (int i = 0; i < list.count(); ++i) {
+    for (int i = 0; i < list.count(); ++i)
+    {
         struct OrderData orderData = list[i]->getData();
 
         QString id = orderData.id->text();
@@ -105,12 +114,50 @@ void paymentMathod::insertData(QString paymentType)
     cmd = "DELETE FROM tblTempOrder WHERE table_no = "+QString::number(this->tblno)+";" ;
     delete d.execute(cmd);
 
+
+    cmd =  "SELECT orderID FROM oderDataFromWaiter ORDER BY orderID desc LIMIT 1 " ;
+    q = d.execute(cmd) ;
+
+    int orderLastID = 1;
+
+    if(q->next() )
+    {
+        orderLastID = q->value("orderID").toInt() + 1;
+    }
+
+    if(tblno == 0)
+    {
+        for (int i = 0; i < list.count(); ++i)
+        {
+            QString id;
+            double qty;
+
+            id = list.at(i)->getData().id->text();
+            qty = list.at(i)->getData().qty->value();
+
+            qDebug() << "OrderWidget (on_btnPlaceOrder_clicked) : item id : " << id;
+            qDebug() << "OrderWidget (on_btnPlaceOrder_clicked) : item qty : " << qty;
+
+            cmd = "DELETE FROM oderDataFromWaiter WHERE orderID = "+QString::number(orderLastID)+" AND tblNo = "+QString::number(tblno)+" AND Item_id = '"+id+"' ";
+            q = d.execute(cmd) ;
+
+            cmd = "INSERT INTO oderDataFromWaiter VALUES('"+id+"' ,"+QString::number(qty)+","+QString::number(tblno)+",'sending','',"+QString::number(orderLastID)+" );";
+            q = d.execute(cmd) ;
+        }
+
+        delete q;
+
+        OrderWidget* parent = static_cast<OrderWidget*>(myparent);
+        parent->sendToDataKitchen(orderLastID,tblno,custnm);
+    }
+
+
     OrderWidget* parent = static_cast<OrderWidget*>(myparent);
     parent->deleterVecterData();
     parent->deleteCustomerData();
     parent->resetTotalAmount();
 
-    QMessageBox::information(this,"Information","Order has been Placed by <span style='color:green'>"+paymentType+"</span>");
+    QMessageBox::information(this,"Information","Order has been Placed by <span style='color:green'>"+paymentType+"</span>\nOrder NO : " + QString::number(orderLastID) );
     this->accept();
 }
 
