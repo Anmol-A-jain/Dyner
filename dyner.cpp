@@ -136,7 +136,7 @@ void Dyner::setShadow(QWidget *widget, QColor color)
 
     ui->widgetTitle->setText(static_cast<QPushButton*>(widget)->text());
     ui->widgetTitle->setFont(QFont("Arial", 20));
-    delete deleteItLater;
+    deleteItLater->deleteLater();
 }
 
 void Dyner::closeEvent(QCloseEvent *event)

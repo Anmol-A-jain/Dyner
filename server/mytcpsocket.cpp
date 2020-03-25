@@ -287,7 +287,7 @@ void MyTcpSocket::myReadyRead()
 
             QDataStream out(&dataOut,QIODevice::ReadWrite);
             type = informative;
-            msg = "Order Has been placed";
+            msg = "Order Has been placed \n Order No : " + QString::number(lastID);
             qint16 actionOut = ALLAction::showNotification;
             out << actionOut;
 
@@ -353,9 +353,10 @@ void MyTcpSocket::myReadyRead()
         case ALLAction::individual:
         {
             qint16 orderNo;
-            in >> orderNo ;
+            QString status ;
+            in >> orderNo >> status;
             databaseCon d;
-            QString cmd = "UPDATE oderDataFromWaiter SET status = 'sent' WHERE orderID = "+QString::number(orderNo)+";";
+            QString cmd = "UPDATE oderDataFromWaiter SET status = '"+status+"' WHERE orderID = "+QString::number(orderNo)+";";
             delete d.execute(cmd) ;
             break;
         }
@@ -474,16 +475,14 @@ void MyTcpSocket::sendToKitchenChildThread(qint16 orderNo,qint16 tblNo,QString n
     while(q->next())
     {
         QString itemName = q->value(iName).toString();
-        QString id = q->value(i_id).toString();
         QString note = q->value(inote).toString();
         double qty = q->value(iqty).toDouble();
 
         qDebug() << "serverConnection (sendToKitchen) : name : " << itemName;
-        qDebug() << "serverConnection (sendToKitchen) : id : " << id;
         qDebug() << "serverConnection (sendToKitchen) : qty : " << qty;
         qDebug() << "serverConnection (sendToKitchen) : qty : " << note;
 
-        out << id << itemName << qty << note;
+        out << itemName << qty << note;
     }
 
     int sendBytes = socket->write(dataOut);
