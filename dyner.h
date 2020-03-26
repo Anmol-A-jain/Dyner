@@ -34,6 +34,7 @@ public:
 
     ~Dyner();
     static DynerServer *getServer();
+    static QWidget* childFrame; // to track wich widget is currently in windowContainer
 
 private slots:
     void on_parentButtonOrder_clicked();
@@ -50,7 +51,6 @@ private slots:
 
 private:
     Ui::Dyner *ui;
-    QWidget* childFrame; // to track wich widget is currently in windowContainer
     enum buttonName{home,order,billHistory,admin,serverManagement}; // enum for buttons
     bool isMenuHidden; // track if menu is hidden or not
     QPushButton* currentShaddowEffect; // to track which button have currently shadow effect

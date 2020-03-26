@@ -16,6 +16,8 @@
 
 DynerServer* Dyner::server;
 
+QWidget* Dyner::childFrame;
+
 Dyner::Dyner(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Dyner)

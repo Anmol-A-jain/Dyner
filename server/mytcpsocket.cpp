@@ -422,22 +422,6 @@ bool MyTcpSocket::isKitchenSocket()
     return isKitchen;
 }
 
-//QSqlQuery *MyTcpSocket::execute(QString cmdstr)
-//{
-//    QSqlDatabase &database = databaseCon::getDatabase();
-//    database = (!QSqlDatabase::contains()) ? QSqlDatabase::addDatabase("QSQLITE") : QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false) ;
-//    QSqlQuery* q = new QSqlQuery(database);
-//    qDebug() << "MyTcpSocket.cpp (execute) : DatabaseName : " << database.databaseName() ;
-//    if(q->exec(cmdstr))
-//    {
-//        qDebug() << "MyTcpSocket.cpp (execute) : execute : " << cmdstr ;
-//        return q;
-//    }
-//    qDebug() << "MyTcpSocket.cpp (execute) : not execute : " << cmdstr ;
-//    qDebug() << "MyTcpSocket.cpp (execute) :" << q->lastError().databaseText();
-//    return q;
-//}
-
 QString MyTcpSocket::getClientName() const
 {
     return clientName;
