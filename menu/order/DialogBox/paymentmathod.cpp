@@ -114,19 +114,24 @@ void paymentMathod::insertData(QString paymentType)
     cmd = "DELETE FROM tblTempOrder WHERE table_no = "+QString::number(this->tblno)+";" ;
     delete d.execute(cmd);
 
-
-    cmd =  "SELECT orderID FROM oderDataFromWaiter ORDER BY orderID desc LIMIT 1 " ;
-    q = d.execute(cmd) ;
-
     int orderLastID = 1;
 
-    if(q->next() )
+    if(tblno != 0)
     {
-        orderLastID = q->value("orderID").toInt() + 1;
+        cmd = "DELETE FROM oderDataFromWaiter WHERE tblNo = "+QString::number(tblno)+" ";
+        delete d.execute(cmd) ;
     }
-
-    if(tblno == 0)
+    else
     {
+
+        cmd =  "SELECT orderID FROM oderDataFromWaiter ORDER BY orderID desc LIMIT 1 " ;
+        q = d.execute(cmd) ;
+
+        if(q->next() )
+        {
+            orderLastID = q->value("orderID").toInt() + 1;
+        }
+
         for (int i = 0; i < list.count(); ++i)
         {
             QString id;
@@ -138,9 +143,6 @@ void paymentMathod::insertData(QString paymentType)
             qDebug() << "OrderWidget (on_btnPlaceOrder_clicked) : item id : " << id;
             qDebug() << "OrderWidget (on_btnPlaceOrder_clicked) : item qty : " << qty;
 
-            cmd = "DELETE FROM oderDataFromWaiter WHERE orderID = "+QString::number(orderLastID)+" AND tblNo = "+QString::number(tblno)+" AND Item_id = '"+id+"' ";
-            q = d.execute(cmd) ;
-
             cmd = "INSERT INTO oderDataFromWaiter VALUES('"+id+"' ,"+QString::number(qty)+","+QString::number(tblno)+",'sending','',"+QString::number(orderLastID)+" );";
             q = d.execute(cmd) ;
         }
@@ -149,6 +151,8 @@ void paymentMathod::insertData(QString paymentType)
 
         OrderWidget* parent = static_cast<OrderWidget*>(myparent);
         parent->sendToDataKitchen(orderLastID,tblno,custnm);
+        QMessageBox::information(this,"Information","Order has been Placed by <span style='color:green'>"+paymentType+"</span>\nOrder NO : " + QString::number(orderLastID) );
+
     }
 
 
@@ -157,7 +161,6 @@ void paymentMathod::insertData(QString paymentType)
     parent->deleteCustomerData();
     parent->resetTotalAmount();
 
-    QMessageBox::information(this,"Information","Order has been Placed by <span style='color:green'>"+paymentType+"</span>\nOrder NO : " + QString::number(orderLastID) );
     this->accept();
 }
 

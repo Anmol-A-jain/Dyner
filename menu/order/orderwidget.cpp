@@ -42,7 +42,7 @@ OrderWidget::OrderWidget(QWidget *parent) :
     }
 
     ui->txtDiscount->setText(XmlManipulation::getData(g.getTagName(g.Discount),g.getattribute(g.Discount)));
-    ui->taxValue->setText(XmlManipulation::getData(g.getTagName(g.Tax),g.getattribute(g.Tax)));
+    //ui->taxValue->setText(XmlManipulation::getData(g.getTagName(g.Tax),g.getattribute(g.Tax)));
     this->loadData();
     ui->txtMblNo->setFocus();
     GlobalData::setShadow(ui->txtMblNo);
@@ -53,6 +53,9 @@ OrderWidget::OrderWidget(QWidget *parent) :
     GlobalData::setShadow(ui->cmbTblNo);
     GlobalData::setShadow(ui->cmbOrrderType);
     GlobalData::setShadow(ui->txtTotalAmount);
+
+    GlobalData::setShadow(ui->btnPlaceOrder,QColor(255,0,0),0,10);
+    GlobalData::setShadow(ui->btnStatus,QColor(67, 134, 244),0,10);
 
 }
 
@@ -80,7 +83,9 @@ void OrderWidget::loadData()
 {
     this->deleterVecterData();
     databaseCon d;
-    QString cmd = "SELECT a.*, b.itemName , b.Price , b.category FROM tblTempOrder a LEFT JOIN mstTblMenu b ON a.item_id = b.id;" ;
+    QString cmd = "DELETE FROM tblTempOrder WHERE qty = 0";
+    delete d.execute(cmd);
+    cmd = "SELECT a.*, b.itemName , b.Price , b.category FROM tblTempOrder a LEFT JOIN mstTblMenu b ON a.item_id = b.id;" ;
     QSqlQuery* q = d.execute(cmd);
 
     int tblNo = this->getTblNo();
@@ -135,7 +140,6 @@ void OrderWidget::updateTotalAmmount()
     double amount = 0;
     for (int i = 0; i < list.count(); ++i)
     {
-
         qDebug() << "orderwidget.cpp (updateTotalAmmount ) :  Updated total amount : " << list[i]->getTotal() ;
         amount += list[i]->getTotal();
     }
@@ -148,7 +152,8 @@ void OrderWidget::updateTotalAmmount()
 
     amount -= discountValue;
 
-    double taxValue = ui->taxValue->text().toDouble();
+    GlobalData g;
+    double taxValue = XmlManipulation::getData(g.getTagName(g.Tax),g.getattribute(g.Tax)).toDouble() ;//ui->taxValue->text().toDouble();
     double tax = (amount * taxValue) / 100;
 
     ui->taxValue->setText(QString::number(tax));
@@ -235,6 +240,13 @@ void OrderWidget::on_cmbTblNo_currentTextChanged(const QString &arg1)
 
 void OrderWidget::on_cmbOrrderType_currentTextChanged(const QString &arg1)
 {
+    ui->btnAddOrder->show();
+    ui->btnClear->show();
+    if(ui->cmbOrrderType->currentIndex() == 1)
+    {
+        ui->btnAddOrder->hide();
+        ui->btnClear->hide();
+    }
     qDebug() << "orderwidget.cpp (on_cmbOrrderType_currentTextChanged) : cmbTblNo changed : " << arg1 ;
     this->deleterVecterData();
     this->loadData();

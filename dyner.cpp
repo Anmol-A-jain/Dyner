@@ -14,6 +14,8 @@
 #include <QtXml>
 #include <QCloseEvent>
 
+DynerServer* Dyner::server;
+
 Dyner::Dyner(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Dyner)
@@ -77,19 +79,19 @@ QWidget *Dyner::newFrame(int option)
 
         case buttonName::billHistory :
         {
-            historyWindow = new BillHistoryWidget;
+            historyWindow = new BillHistoryWidget(this);
             return historyWindow;
         }
 
         case buttonName::admin :
         {
-            adminWindow = new AdminWidget;
+            adminWindow = new AdminWidget(this);
             return adminWindow;
         }
         case buttonName::serverManagement :
         {
 
-            serverWindow = new ServerManagement;
+            serverWindow = new ServerManagement(this);
             return serverWindow;
         }
     }
@@ -249,4 +251,9 @@ void Dyner::on_parentButtonManagement_clicked()
     this->setShadow(currentShaddowEffect,QColor(150,75,0));
 
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
+}
+
+DynerServer *Dyner::getServer()
+{
+    return server;
 }

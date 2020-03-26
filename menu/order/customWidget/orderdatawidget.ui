@@ -26,10 +26,16 @@
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
        <widget class="QWidget" name="header" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>50</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>40</height>
+          <height>50</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -58,7 +64,38 @@ color:white;</string>
             <string>Order No : </string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignCenter</set>
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lblStatus">
+           <property name="text">
+            <string>Status : </string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnDelete">
+           <property name="minimumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:white;
+background-color: red;
+border-radius:5px;</string>
+           </property>
+           <property name="text">
+            <string/>
            </property>
           </widget>
          </item>

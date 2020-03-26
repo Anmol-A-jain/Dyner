@@ -33,6 +33,8 @@ public:
     void serverSideAddItem();
 
     ~Dyner();
+    static DynerServer *getServer();
+
 private slots:
     void on_parentButtonOrder_clicked();
 
@@ -52,7 +54,7 @@ private:
     enum buttonName{home,order,billHistory,admin,serverManagement}; // enum for buttons
     bool isMenuHidden; // track if menu is hidden or not
     QPushButton* currentShaddowEffect; // to track which button have currently shadow effect
-    DynerServer* server; // creating server object
+    static DynerServer* server; // creating server object
     QWidget* serverWindow;
     QWidget* menuWindow;
     QWidget* orderWindow;

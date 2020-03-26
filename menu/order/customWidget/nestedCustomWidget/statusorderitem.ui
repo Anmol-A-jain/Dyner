@@ -63,22 +63,6 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QLabel" name="lblStatus">
-        <property name="maximumSize">
-         <size>
-          <width>150</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>status</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>

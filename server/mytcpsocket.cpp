@@ -89,7 +89,7 @@ void MyTcpSocket::myReadyRead()
     qint16 type = 0;
 
     enum msgType{warning,informative,critical};
-    if(!isKitchenConnected && action == ALLAction::cartData)
+    if((!isKitchenConnected && action == ALLAction::cartData) || (!isKitchenConnected && action == ALLAction::getCustInfo) )
     {
         action = ALLAction::showNotification;
         type = critical;
@@ -230,7 +230,16 @@ void MyTcpSocket::myReadyRead()
 
 
             int lastID = 1;
-            bool hasIdFound = false;
+
+            databaseCon d;
+            QString cmd = "SELECT orderID FROM oderDataFromWaiter ORDER BY orderID desc LIMIT 1 " ;
+            QSqlQuery* q = d.execute(cmd) ;
+
+            if(q->next())
+            {
+                lastID = q->value("orderID").toInt() + 1;
+            }
+
             for (int i = 0; i < count; ++i)
             {
                 QString id,note;
@@ -246,15 +255,6 @@ void MyTcpSocket::myReadyRead()
 
                 double preQty = 0;
 
-                databaseCon d;
-                QString cmd = "SELECT orderID FROM oderDataFromWaiter ORDER BY orderID desc LIMIT 1 " ;
-                QSqlQuery* q = d.execute(cmd) ;
-
-                if(q->next() && !hasIdFound)
-                {
-                    lastID = q->value("orderID").toInt() + 1;
-                    hasIdFound = true;
-                }
 
                 cmd = "INSERT INTO oderDataFromWaiter VALUES('"+id+"' ,"+QString::number(qty)+","+QString::number(tblNo)+",'sending','"+note+"',"+QString::number(lastID)+" );";
                 q = d.execute(cmd) ;
@@ -358,9 +358,16 @@ void MyTcpSocket::myReadyRead()
             databaseCon d;
             QString cmd = "UPDATE oderDataFromWaiter SET status = '"+status+"' WHERE orderID = "+QString::number(orderNo)+";";
             delete d.execute(cmd) ;
+
+            emit updateStatusOfOrder(status,orderNo);
+
             break;
         }
+        case ALLAction::deleteOrder:
+        {
 
+            break;
+        }
         default:
         {
             qDebug() << "serverConnection (myReadReady) : default case called : " << dataIn;
@@ -489,6 +496,27 @@ void MyTcpSocket::sendToKitchenChildThread(qint16 orderNo,qint16 tblNo,QString n
     socket->flush();
     qDebug() << "serverConnection (sendToKitchen) : size of send data : " << sendBytes;
     delete q;
+}
+
+void MyTcpSocket::deleteOrderFromKitchen(qint16 orderNo)
+{
+    if(!isKitchen)
+    {
+        qDebug() << "serverConnection (deleteOrderFromKitchen) : not kitchen : " << clientName;
+        return;
+    }
+
+    QByteArray dataOut;
+    QDataStream out(&dataOut,QIODevice::ReadWrite);
+
+    qint16 action = ALLAction::deleteOrder;
+
+    out << action << orderNo;
+
+    socket->write(dataOut);
+    socket->flush();
+    qDebug() << "serverConnection (deleteOrderFromKitchen) : data to send : " << dataOut;
+
 }
 
 bool MyTcpSocket::getIsKitchenConnected()

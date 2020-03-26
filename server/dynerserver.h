@@ -23,13 +23,21 @@ public:
     static void closeAllConnection();
     static QVector<MyTcpSocket *>* getClientlist();
 
+    void deleteOrderSignal(qint16 orderNo);
+
 public slots:
     void sendToKitchren(qint16 orderNo, qint16 tblNo, QString name );
+
+    void updateStatusOfOrder(QString status,int orderNo);
 
     void addItemInServerManagement();
 
 signals:
     void sendToKitchenParentThread(qint16 orderNo,qint16 tblNo,QString name);
+
+    void updateStatusInOrderWidget(QString status,int orderNo);
+
+    void deleteOrderFromKitchen(qint16);
 
 protected:
     void incomingConnection(qintptr socketDescriptor) override;

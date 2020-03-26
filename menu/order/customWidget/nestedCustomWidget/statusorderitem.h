@@ -12,8 +12,12 @@ class statusOrderItem : public QWidget
     Q_OBJECT
 
 public:
-    explicit statusOrderItem(QString id,QString name,QString status, QString qty, QWidget *parent = nullptr);
+    explicit statusOrderItem(QString id, QString name, QString qty, QWidget *parent = nullptr);
     ~statusOrderItem();
+
+    QString getId() const;
+
+    QString getQty() const;
 
 private:
     Ui::statusOrderItem *ui;

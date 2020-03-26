@@ -16,11 +16,14 @@ public:
     explicit StatusDialogBox(int tblno,QWidget *parent = nullptr);
     ~StatusDialogBox();
     void deleteVectorData();
+    void loadData();
 
 private slots:
     void on_orderNoList_currentIndexChanged(const QString &arg1);
 
     void on_btnComplete_clicked();
+
+    void refresh();
 
 private:
     Ui::StatusDialogBox *ui;

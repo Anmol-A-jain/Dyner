@@ -29,10 +29,12 @@ public slots:
     void myReadyRead();
     void myDisconnected();
     void sendToKitchenChildThread(qint16 orderNo, qint16 tblNo, QString name);
+    void deleteOrderFromKitchen(qint16 orderNo);
 
 signals:
     void dataForKitchen(qint16 orderNo,qint16 tblNo,QString name);
     void addItemInServerManagement();
+    void updateStatusOfOrder(QString status,int orderNo);
 
 private:
     QTcpSocket *socket;

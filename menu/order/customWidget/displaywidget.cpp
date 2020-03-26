@@ -36,6 +36,14 @@ displayWidget::displayWidget(QString id,QString name, QString category, double Q
     orderData.qty = ui->doubleSpinBox;
 
     GlobalData::setShadow(this);
+
+    ui->btnMargin->hide();
+    if(tblNo != 0)
+    {
+        ui->doubleSpinBox->setReadOnly(true);
+        ui->btnDelete->hide();
+        ui->btnMargin->show();
+    }
 }
 
 displayWidget::~displayWidget()

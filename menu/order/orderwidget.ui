@@ -458,7 +458,8 @@
              </property>
              <property name="styleSheet">
               <string notr="true">background-color: #00CCFF;
-border-radius:15px;</string>
+border-radius:15px;
+color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string>Status</string>
@@ -496,7 +497,8 @@ border-radius:15px;</string>
              </property>
              <property name="styleSheet">
               <string notr="true">background-color: red;
-border-radius:15px;</string>
+border-radius:15px;
+color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string>Place Order</string>
@@ -675,7 +677,7 @@ border-radius:15px;</string>
                    </font>
                   </property>
                   <property name="text">
-                   <string>TAX (GST in %)</string>
+                   <string>TAX (GST in Rs.)</string>
                   </property>
                  </widget>
                 </item>

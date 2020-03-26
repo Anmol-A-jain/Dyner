@@ -39,7 +39,7 @@ OrderItemData::OrderItemData(QString id,QString name,QString category,QString pr
     delete q;
 
     GlobalData::setShadow(this);
-        GlobalData::setShadow(ui->btnAddOrder,QColor(67, 134, 244),0,10);
+    GlobalData::setShadow(ui->btnAddOrder,QColor(67, 134, 244),0,10);
 }
 
 OrderItemData::~OrderItemData()
