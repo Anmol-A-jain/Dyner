@@ -5,10 +5,8 @@
 #include <QDir>
 #include <QFile>
 #include "data/xmlmanipulation.h"
-#include "dyner.h"
-#include <QMessageBox>
 
-//QSqlDatabase databaseCon::database = QSqlDatabase::addDatabase("QSQLITE");// (!QSqlDatabase::contains()) ? QSqlDatabase::addDatabase("QSQLITE") : QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false) ;
+QSqlDatabase databaseCon::database = QSqlDatabase::addDatabase("QSQLITE");// (!QSqlDatabase::contains()) ? QSqlDatabase::addDatabase("QSQLITE") : QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false) ;
 bool databaseCon::isOpen = false;
 
 databaseCon::databaseCon()
@@ -23,8 +21,6 @@ databaseCon::databaseCon()
     {
         database = QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false);
     }*/
-
-    database = (!QSqlDatabase::contains()) ? QSqlDatabase::addDatabase("QSQLITE") : QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false) ;
 
     if(!isOpen)
     {
@@ -73,7 +69,11 @@ QSqlQuery* databaseCon::execute(QString cmdstr)
         return q;
     }
     qDebug() << "databaseCon.cpp (execute) : not execute : " << cmdstr ;
-    qDebug() << "databaseCon.cpp (execute) : not execute : " << q->lastError().databaseText();
-    QMessageBox::critical(Dyner::childFrame,"DB Error",cmdstr +"\n"+q->lastError().databaseText());
+    qDebug() << "databaseCon.cpp (execute) :" << q->lastError().databaseText();
     return q;
+}
+
+QSqlDatabase &databaseCon::getDatabase()
+{
+    return database;
 }

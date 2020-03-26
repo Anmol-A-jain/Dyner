@@ -34,8 +34,8 @@ public:
 
     ~Dyner();
     static DynerServer *getServer();
-    static QWidget* childFrame; // to track wich widget is currently in windowContainer
 
+    static QWidget* childFrame; // to track wich widget is currently in windowContainer
 private slots:
     void on_parentButtonOrder_clicked();
 

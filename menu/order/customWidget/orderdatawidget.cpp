@@ -110,10 +110,7 @@ void orderDataWidget::updateStatus(QString status, int orderNo)
     qDebug() << "orderDataWidget (updateStatus) : status :" << status;
     ui->lblStatus->setText("Status : " + status);
 
-    if(this->status == "accepted" || this->status == "finished")
-    {
-        ui->btnDelete->hide();
-    }
+    ui->btnDelete->hide();
 }
 
 void orderDataWidget::on_btnDelete_clicked()

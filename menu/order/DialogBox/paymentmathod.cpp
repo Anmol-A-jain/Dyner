@@ -161,6 +161,7 @@ void paymentMathod::insertData(QString paymentType)
     parent->deleteCustomerData();
     parent->resetTotalAmount();
 
+    QMessageBox::information(this,"Information","Order has been Placed by <span style='color:green'>"+paymentType+"</span>");
     this->accept();
 }
 

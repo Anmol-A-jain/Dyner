@@ -15,7 +15,6 @@
 #include <QCloseEvent>
 
 DynerServer* Dyner::server;
-
 QWidget* Dyner::childFrame;
 
 Dyner::Dyner(QWidget *parent)

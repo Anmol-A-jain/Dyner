@@ -14,9 +14,11 @@ public:
     static void initDB();
     QSqlQuery* execute(QString cmdstr);
 
+    static QSqlDatabase &getDatabase();
+
 private:
     QString constr;
-    QSqlDatabase database;
+    static QSqlDatabase database;
     static bool isOpen;
     QSqlQuery* q;
 };
