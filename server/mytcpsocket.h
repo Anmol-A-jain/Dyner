@@ -25,6 +25,8 @@ public:
 
     static bool getIsKitchenConnected();
 
+    QSqlQuery* runSqlQuery(QString cmd);
+
 public slots:
     void myReadyRead();
     void myDisconnected();
@@ -44,6 +46,8 @@ private:
     bool isKitchen;
     static bool isKitchenConnected;
     static int connectedKitchen;
+
+    QSqlDatabase database;
 };
 
 #endif // MYTCPSOCKET_H

@@ -161,9 +161,9 @@ void MyTcpSocket::myReadyRead()
             qint16 i = ALLAction::menuData;
             out << i;
 
-            databaseCon d;
+            //databaseCon d;
             QString cmd = "select * from mstTblMenu order by id" ;
-            QSqlQuery* q = d.execute(cmd);
+            QSqlQuery* q = runSqlQuery(cmd); //d.execute(cmd);
 
             qint16 count = 0 ;
             for( ; q->next() ; ++count);
@@ -231,9 +231,9 @@ void MyTcpSocket::myReadyRead()
 
             int lastID = 1;
 
-            databaseCon d;
+            //databaseCon d;
             QString cmd = "SELECT orderID FROM oderDataFromWaiter ORDER BY orderID desc LIMIT 1 " ;
-            QSqlQuery* q = d.execute(cmd) ;
+            QSqlQuery* q = runSqlQuery(cmd);//d.execute(cmd) ;
 
             if(q->next())
             {
@@ -257,10 +257,10 @@ void MyTcpSocket::myReadyRead()
 
 
                 cmd = "INSERT INTO oderDataFromWaiter VALUES('"+id+"' ,"+QString::number(qty)+","+QString::number(tblNo)+",'sending','"+note+"',"+QString::number(lastID)+" );";
-                q = d.execute(cmd) ;
+                q = runSqlQuery(cmd);//d.execute(cmd) ;
 
                 cmd = "select * from tblTempOrder WHERE table_no =" + QString::number(tblNo) +" AND item_id = '" + id + "'";
-                q= d.execute(cmd);
+                q= runSqlQuery(cmd);// d.execute(cmd);
 
                 int size;
                 for (size = 0; size < q->next(); ++size)
@@ -271,12 +271,12 @@ void MyTcpSocket::myReadyRead()
                 if(size == 0)
                 {
                     cmd = "INSERT INTO tblTempOrder VALUES("+QString::number(tblNo)+",'"+id+"','"+QString::number(qty)+"')" ;
-                    q = d.execute(cmd);
+                    q = runSqlQuery(cmd);// d.execute(cmd);
                 }
                 else
                 {
                     cmd = "UPDATE tblTempOrder SET qty = '"+QString::number(qty+preQty)+"' WHERE item_id = '"+id+"' ";
-                    q = d.execute(cmd);
+                    q = runSqlQuery(cmd);// d.execute(cmd);
                 }
                 delete q;
             }
@@ -355,9 +355,9 @@ void MyTcpSocket::myReadyRead()
             qint16 orderNo;
             QString status ;
             in >> orderNo >> status;
-            databaseCon d;
+            //databaseCon d;
             QString cmd = "UPDATE oderDataFromWaiter SET status = '"+status+"' WHERE orderID = "+QString::number(orderNo)+";";
-            delete d.execute(cmd) ;
+            delete runSqlQuery(cmd);//d.execute(cmd) ;
 
             emit updateStatusOfOrder(status,orderNo);
 
@@ -457,10 +457,12 @@ void MyTcpSocket::sendToKitchenChildThread(qint16 orderNo,qint16 tblNo,QString n
     QByteArray dataOut;
     QDataStream out(&dataOut,QIODevice::ReadWrite);
 
-    databaseCon d;
+    //databaseCon d;
 
     QString cmd = "SELECT a.*,b.itemName FROM oderDataFromWaiter a LEFT JOIN mstTblMenu b ON a.Item_id = b.id WHERE orderID = "+QString::number(orderNo)+"" ;
-    QSqlQuery* q = d.execute(cmd) ;
+    //QSqlQuery* q = d.execute(cmd) ;
+
+    QSqlQuery* q = runSqlQuery(cmd);
 
     qint16 action = ALLAction::individual;
     qint16 count = 0 ;
@@ -522,6 +524,53 @@ void MyTcpSocket::deleteOrderFromKitchen(qint16 orderNo)
 bool MyTcpSocket::getIsKitchenConnected()
 {
     return isKitchenConnected;
+}
+
+QSqlQuery *MyTcpSocket::runSqlQuery(QString cmd)
+{
+    database = QSqlDatabase::addDatabase("QSQLITE");
+    QString constr = XmlManipulation::getData("Database","PATH");
+
+    database.setDatabaseName(constr);
+
+    QSqlQuery* q = new QSqlQuery(database);
+
+    if(!database.isOpen())
+    {
+        if (!database.open())
+        {
+            qDebug() << "MyTcpSocket.cpp (runSqlQuery) : not connected";
+        }
+        else
+        {
+            qDebug() << "MyTcpSocket.cpp (runSqlQuery) : connected";
+
+
+            qDebug() << "MyTcpSocket.cpp (runSqlQuery) : DatabaseName : " << database.databaseName() ;
+
+            QString PROGMA = "PRAGMA foreign_keys = ON;";
+
+            if(q->exec(PROGMA))
+            {
+                qDebug() << "MyTcpSocket.cpp (runSqlQuery) : execute : " << PROGMA ;
+            }
+            else
+            {
+                qDebug() << "MyTcpSocket.cpp (runSqlQuery) : not execute : " << PROGMA ;
+            }
+            if(q->exec(cmd))
+            {
+                qDebug() << "MyTcpSocket.cpp (runSqlQuery) : execute : " << cmd ;
+                return q;
+            }
+            qDebug() << "MyTcpSocket.cpp (runSqlQuery) : not execute : " << cmd ;
+            qDebug() << "MyTcpSocket.cpp (runSqlQuery) :" << q->lastError().databaseText();
+            return q;
+
+            //delete this->execute("PRAGMA foreign_keys = ON;");
+        }
+    }
+    return q;
 }
 
 qintptr MyTcpSocket::getSocketDescriptor() const
