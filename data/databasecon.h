@@ -12,7 +12,7 @@ class databaseCon
 public:
     databaseCon();
     static void initDB();
-    QSqlQuery* execute(QString cmdstr);
+    QSqlQuery* execute(QString cmd);
 
     static QSqlDatabase &getDatabase();
 

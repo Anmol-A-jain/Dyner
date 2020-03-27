@@ -26,22 +26,31 @@ orderDataWidget::orderDataWidget(int orderNo, int tblNo, QWidget *parent) :
 
     ui->label->setText(ui->label->text().append(QString::number(orderNo)));
 
-    databaseCon d;
+    //databaseCon d;
+    QSqlDatabase &database = databaseCon::getDatabase();
+
     QString cmd = "SELECT a.*,b.itemName FROM oderDataFromWaiter a LEFT JOIN mstTblMenu b ON a.Item_id = b.id WHERE orderID = "+QString::number(orderNo)+"" ;
-    QSqlQuery* q = d.execute(cmd);
+    QSqlQuery* q = new QSqlQuery(database); //d.execute(cmd);
 
     enum column{i_id,iqty,itblNumber,istatus,inote,iorderID,iName};
 
-    while (q->next())
+    if(q->exec(cmd))
     {
-        QString id = q->value(i_id).toString();
-        status = q->value(istatus).toString();
-        QString itemName = q->value(iName).toString();
-        QString qty = q->value(iqty).toString();
+        while (q->next())
+        {
+            QString id = q->value(i_id).toString();
+            status = q->value(istatus).toString();
+            QString itemName = q->value(iName).toString();
+            QString qty = q->value(iqty).toString();
 
-        statusOrderItem* item = new statusOrderItem(id,itemName,qty,this);
-        ui->orderItemContainer->addWidget(item);
-        list.push_back(item);
+            statusOrderItem* item = new statusOrderItem(id,itemName,qty,this);
+            ui->orderItemContainer->addWidget(item);
+            list.push_back(item);
+        }
+    }
+    else
+    {
+        qDebug() << "OrderItemData (OrderItemData) : not execute :" << cmd;
     }
 
     ui->lblStatus->setText(ui->lblStatus->text() + status);
@@ -129,7 +138,7 @@ void orderDataWidget::on_btnDelete_clicked()
             QString id = list.at(i)->getId();
             QString qty = list.at(i)->getQty();
 
-            cmd = "UPDATE tblTempOrder SET qty = ((SELECT qty FROM tblTempOrder WHERE item_id = "+id+"  AND table_no = "+QString::number(tblNo)+")-"+qty+") WHERE item_id = "+id+"  AND table_no = "+QString::number(tblNo)+"";
+            cmd = "UPDATE tblTempOrder SET qty = ((SELECT qty FROM tblTempOrder WHERE item_id = '"+id+"'  AND table_no = "+QString::number(tblNo)+")-"+qty+") WHERE item_id = '"+id+"'  AND table_no = "+QString::number(tblNo)+"";
             delete d.execute(cmd);
         }
 

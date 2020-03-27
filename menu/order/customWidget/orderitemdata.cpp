@@ -20,22 +20,31 @@ OrderItemData::OrderItemData(QString id,QString name,QString category,QString pr
 
     databaseCon d;
 
+    QSqlDatabase &database = databaseCon::getDatabase();
     int tblNo = static_cast<OrderWidget*>(myparent)->getTblNo();
 
     QString cmd = "select * from tblTempOrder WHERE table_no =" + QString::number(tblNo) ;
 
-    QSqlQuery* q = d.execute(cmd);
+    QSqlQuery* q = new QSqlQuery(database); //d.execute(cmd);
 
-    while( q->next() )
+    if(q->exec(cmd))
     {
-
-        QString myId = q->value("item_id").toString();
-        double qty = q->value("qty").toDouble();
-        if(id == myId)
+        while( q->next() )
         {
-            ui->doubleSpinBox->setValue(qty);
+
+            QString myId = q->value("item_id").toString();
+            double qty = q->value("qty").toDouble();
+            if(id == myId)
+            {
+                ui->doubleSpinBox->setValue(qty);
+            }
         }
     }
+    else
+    {
+        qDebug() << "OrderItemData (OrderItemData) : not execute :" << cmd;
+    }
+
     delete q;
 
     GlobalData::setShadow(this);

@@ -15,6 +15,7 @@ AddOrderItem::AddOrderItem(QWidget *parent) :
     ui->categoryList->hide();
     this->loadData();
 
+    ui->btnSearch->hide();
 }
 
 AddOrderItem::~AddOrderItem()
