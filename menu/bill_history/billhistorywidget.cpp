@@ -201,7 +201,7 @@ void BillHistoryWidget::SelectionChange()
         QString tax = q->value("tax").toString();
         QString netAmount = q->value("netAmount").toString();
 
-        History* item = new History(i,billId,custName,date,tblNo,orderType,paymentMode,Discount,tax,netAmount,this);
+        History* item = new History(i+1,billId,custName,date,tblNo,orderType,paymentMode,Discount,tax,netAmount,this);
         ui->displayOrderRow->addWidget(item);
 
         list.push_back(item);

@@ -78,6 +78,7 @@ void StatusDialogBox::on_orderNoList_currentIndexChanged(const QString &arg1)
     orderDataWidget* item = new orderDataWidget(arg1.toInt(),tblno);
     ui->orderContainer->addWidget(item);
     list.push_back(item);
+
     connect(item,SIGNAL(refresh()),this,SLOT(refresh()));
 }
 
