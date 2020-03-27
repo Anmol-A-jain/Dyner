@@ -19,7 +19,6 @@ public:
 private:
     QString constr;
     static QSqlDatabase database;
-    static bool isOpen;
     QSqlQuery* q;
 };
 

@@ -22,7 +22,6 @@ public:
     ~DynerServer();
     static void closeAllConnection();
     static QVector<MyTcpSocket *>* getClientlist();
-
     void deleteOrderSignal(qint16 orderNo);
 
 public slots:

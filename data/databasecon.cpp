@@ -7,7 +7,6 @@
 #include "data/xmlmanipulation.h"
 
 QSqlDatabase databaseCon::database;// = QSqlDatabase::addDatabase("QSQLITE");// (!QSqlDatabase::contains()) ? QSqlDatabase::addDatabase("QSQLITE") : QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false) ;
-bool databaseCon::isOpen = false;
 
 databaseCon::databaseCon()
 {
