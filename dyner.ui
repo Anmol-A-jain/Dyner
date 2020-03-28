@@ -13,10 +13,6 @@
   <property name="windowTitle">
    <string>Dyner : Bill Desk</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="res.qrc">
-    <normaloff>:/img/img/icon1.png</normaloff>:/img/img/icon1.png</iconset>
-  </property>
   <property name="styleSheet">
    <string notr="true">font: 10pt &quot;MS Shell Dlg 2&quot;;</string>
   </property>
@@ -356,8 +352,6 @@ border-image: url(:/img/img/ButtonBackground.jpg);
    </layout>
   </widget>
  </widget>
- <resources>
-  <include location="res.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

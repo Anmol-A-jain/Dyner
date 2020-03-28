@@ -10,20 +10,11 @@ QSqlDatabase databaseCon::database;// = QSqlDatabase::addDatabase("QSQLITE");// 
 
 databaseCon::databaseCon()
 {
-    /*this->constr = XmlManipulation::getData("Database","PATH");
+    this->constr = XmlManipulation::getData("Database","PATH");
 
     database = (!QSqlDatabase::contains()) ? QSqlDatabase::addDatabase("QSQLITE") : QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false) ;
 
-//    if(!QSqlDatabase::contains())
-//    {
-//        database = QSqlDatabase::addDatabase("QSQLITE");
-//    }
-//    else
-//    {
-//        database = QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false);
-//    }
-
-    if(!isOpen)
+    if(!database.isOpen())
     {
         database.setDatabaseName(this->constr);
         if (!database.open())
@@ -35,8 +26,7 @@ databaseCon::databaseCon()
             qDebug() << "databaseCon.cpp (databaseCon) : connected";
             delete this->execute("PRAGMA foreign_keys = ON;");
         }
-        isOpen = true;
-    }*/
+    }
 }
 
 void databaseCon::initDB()
@@ -62,60 +52,60 @@ void databaseCon::initDB()
 
 QSqlQuery* databaseCon::execute(QString cmd)
 {
-//    QSqlQuery* q = new QSqlQuery(database);
-//    qDebug() << "databaseCon.cpp (execute) : DatabaseName : " << database.databaseName() ;
-//    if(q->exec(cmdstr))
-//    {
-//        qDebug() << "databaseCon.cpp (execute) : execute : " << cmdstr ;
-//        return q;
-//    }
-//    qDebug() << "databaseCon.cpp (execute) : not execute : " << cmdstr ;
-//    qDebug() << "databaseCon.cpp (execute) :" << q->lastError().databaseText();
-//    return q;
-
-    database = QSqlDatabase::addDatabase("QSQLITE");
-    QString constr = XmlManipulation::getData("Database","PATH");
-
-    database.setDatabaseName(constr);
-
     QSqlQuery* q = new QSqlQuery(database);
-
-    if(!database.isOpen())
+    qDebug() << "databaseCon.cpp (execute) : DatabaseName : " << database.databaseName() ;
+    if(q->exec(cmd))
     {
-        if (!database.open())
-        {
-            qDebug() << "databaseCon.cpp (execute) : not connected";
-        }
-        else
-        {
-            qDebug() << "databaseCon.cpp (execute) : connected";
-
-
-            qDebug() << "databaseCon.cpp (execute) : DatabaseName : " << database.databaseName() ;
-
-            QString PROGMA = "PRAGMA foreign_keys = ON;";
-
-            if(q->exec(PROGMA))
-            {
-                qDebug() << "databaseCon.cpp (execute) : execute : " << PROGMA ;
-            }
-            else
-            {
-                qDebug() << "MyTcpSocket.cpp (execute) : not execute : " << PROGMA ;
-            }
-            if(q->exec(cmd))
-            {
-                qDebug() << "MyTcpSocket.cpp (execute) : execute : " << cmd ;
-                return q;
-            }
-            qDebug() << "MyTcpSocket.cpp (execute) : not execute : " << cmd ;
-            qDebug() << "MyTcpSocket.cpp (execute) :" << q->lastError().databaseText();
-            return q;
-
-            //delete this->execute("PRAGMA foreign_keys = ON;");
-        }
+        qDebug() << "databaseCon.cpp (execute) : execute : " << cmd ;
+        return q;
     }
+    qDebug() << "databaseCon.cpp (execute) : not execute : " << cmd ;
+    qDebug() << "databaseCon.cpp (execute) :" << q->lastError().databaseText();
     return q;
+
+//    database = QSqlDatabase::addDatabase("QSQLITE");
+//    QString constr = XmlManipulation::getData("Database","PATH");
+
+//    database.setDatabaseName(constr);
+
+//    QSqlQuery* q = new QSqlQuery(database);
+
+//    if(!database.isOpen())
+//    {
+//        if (!database.open())
+//        {
+//            qDebug() << "databaseCon.cpp (execute) : not connected";
+//        }
+//        else
+//        {
+//            qDebug() << "databaseCon.cpp (execute) : connected";
+
+
+//            qDebug() << "databaseCon.cpp (execute) : DatabaseName : " << database.databaseName() ;
+
+//            QString PROGMA = "PRAGMA foreign_keys = ON;";
+
+//            if(q->exec(PROGMA))
+//            {
+//                qDebug() << "databaseCon.cpp (execute) : execute : " << PROGMA ;
+//            }
+//            else
+//            {
+//                qDebug() << "MyTcpSocket.cpp (execute) : not execute : " << PROGMA ;
+//            }
+//            if(q->exec(cmd))
+//            {
+//                qDebug() << "MyTcpSocket.cpp (execute) : execute : " << cmd ;
+//                return q;
+//            }
+//            qDebug() << "MyTcpSocket.cpp (execute) : not execute : " << cmd ;
+//            qDebug() << "MyTcpSocket.cpp (execute) :" << q->lastError().databaseText();
+//            return q;
+
+//            //delete this->execute("PRAGMA foreign_keys = ON;");
+//        }
+//    }
+//    return q;
 }
 
 QSqlDatabase &databaseCon::getDatabase()

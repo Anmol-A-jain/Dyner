@@ -5,6 +5,7 @@
 #include <QDate>
 #include <QMessageBox>
 #include "../orderwidget.h"
+#include "dyner.h"
 #include "server/mytcpsocket.h"
 
 paymentMathod::paymentMathod(double netamt,double discount,double tax,int tblno,QString custno,QString ordertype,QString custnm,QVector<displayWidget*> list,QWidget *parent) :
@@ -106,7 +107,7 @@ void paymentMathod::insertData(QString paymentType)
 
         QString billId = QString::number(lastID);
 
-        cmd = "INSERT INTO tblBill VALUES("+billId+","+id+",'"+name+"',"+qty+",'"+price+"','"+category+"');" ;
+        cmd = "INSERT INTO tblBill VALUES("+billId+",'"+id+"','"+name+"',"+qty+",'"+price+"','"+category+"');" ;
         delete d.execute(cmd);
     }
 
@@ -143,14 +144,15 @@ void paymentMathod::insertData(QString paymentType)
             qDebug() << "OrderWidget (on_btnPlaceOrder_clicked) : item id : " << id;
             qDebug() << "OrderWidget (on_btnPlaceOrder_clicked) : item qty : " << qty;
 
-            cmd = "INSERT INTO oderDataFromWaiter VALUES('"+id+"' ,"+QString::number(qty)+","+QString::number(tblno)+",'sending','',"+QString::number(orderLastID)+" );";
+            cmd = "INSERT INTO oderDataFromWaiter VALUES('"+id+"' ,"+QString::number(qty)+",'"+QString::number(tblno)+"','sending','',"+QString::number(orderLastID)+" );";
             q = d.execute(cmd) ;
         }
 
         delete q;
 
-        OrderWidget* parent = static_cast<OrderWidget*>(myparent);
-        parent->sendToDataKitchen(orderLastID,tblno,custnm);
+        //OrderWidget* parent = static_cast<OrderWidget*>(myparent);
+        //parent->sendToDataKitchen(orderLastID,tblno,custnm);
+        Dyner::getServer()->sendToKitchenParentThread(orderLastID,tblno,custnm);
         QMessageBox::information(this,"Information","Order has been Placed by <span style='color:green'>"+paymentType+"</span>\nOrder NO : " + QString::number(orderLastID) );
 
     }

@@ -16,6 +16,34 @@ MyTcpSocket::MyTcpSocket(qintptr ID , QObject *parent )
     this->socketDescriptor = ID;
     this->myParent = parent;
     this->isKitchen = false;
+
+    // thread starts here
+    qDebug() << " Thread started";
+
+    socket = new QTcpSocket();
+
+    // set the ID
+    if(!socket->setSocketDescriptor(this->socketDescriptor))
+    {
+        // something's wrong, we just emit a signal
+        qDebug() << "error!!" ;
+        return;
+    }
+
+    // connect socket and signal
+    // note - Qt::DirectConnection is used because it's multithreaded
+    // This makes the slot to be invoked immediately, when the signal is emitted.
+
+    connect(socket, &QTcpSocket::readyRead, this, &MyTcpSocket::myReadyRead, Qt::DirectConnection);
+    connect(socket, &QTcpSocket::disconnected , this, &MyTcpSocket::myDisconnected );
+
+    // We'll have multiple clients, we want to know which is which
+    qDebug() << socketDescriptor << " Client connected";
+
+    // make this thread a loop,
+    // thread will stay alive so that signal/slot to function properly
+    // not dropped out in the middle when thread dies
+
 }
 
 void MyTcpSocket::run()
@@ -57,7 +85,7 @@ void MyTcpSocket::myReadyRead()
     //serverClient->waitForReadyRead(1000);
     int bytes = socket->bytesAvailable();
     QByteArray dataIn ;//= serverClient->readAll();
-    qDebug() << "serverConnection (myReadReady) : Data available count: " << bytes;
+    qDebug() << "MyTcpSocket (myReadReady) : Data available count: " << bytes;
 
     while(bytes != 0)
     {
@@ -71,8 +99,8 @@ void MyTcpSocket::myReadyRead()
             dataIn.append(socket->read(1000));
             bytes -= 1000;
         }
-        qDebug() << "serverConnection (myReadReady) : Data in: " << dataIn;
-        qDebug() << "serverConnection (myReadReady) : Data count: " << bytes;
+        qDebug() << "MyTcpSocket (myReadReady) : Data in: " << dataIn;
+        qDebug() << "MyTcpSocket (myReadReady) : Data count: " << bytes;
     }
 
     // get the information
@@ -98,8 +126,8 @@ void MyTcpSocket::myReadyRead()
 
     qDebug() << socketDescriptor << " Data in: " << dataIn << ":" << action;
 
-    qDebug() << "serverConnection (myReadReady) : action : " << action;
-    qDebug() << "serverConnection (myReadReady) : action : " << action;
+    qDebug() << "MyTcpSocket (myReadReady) : action : " << action;
+    qDebug() << "MyTcpSocket (myReadReady) : action : " << action;
 
     switch (action)
     {
@@ -107,7 +135,7 @@ void MyTcpSocket::myReadyRead()
         // android management
         case ALLAction::error :
         {
-            qDebug() << "serverConnection (myReadReady) : list : " << dataIn;
+            qDebug() << "MyTcpSocket (myReadReady) : list : " << dataIn;
             break;
         }
         case ALLAction::getTotaltableNo :
@@ -119,7 +147,7 @@ void MyTcpSocket::myReadyRead()
             QString name;
             in >> name;
 
-            qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : client name : " << name ;
+            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::getTotaltableNo : client name : " << name ;
 
 
             WaiterName* waiter = new WaiterName;
@@ -142,11 +170,11 @@ void MyTcpSocket::myReadyRead()
             out << i;
             out << tblNo;
 
-            qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << dataOut ;
+            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << dataOut ;
             int size = socket->write(dataOut);
             socket->flush();
 
-            qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : sending msg size : " << size ;
+            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::getTotaltableNo : sending msg size : " << size ;
 
             break;
 
@@ -161,9 +189,9 @@ void MyTcpSocket::myReadyRead()
             qint16 i = ALLAction::menuData;
             out << i;
 
-            //databaseCon d;
+            databaseCon d;
             QString cmd = "select * from mstTblMenu order by id" ;
-            QSqlQuery* q = runSqlQuery(cmd); //d.execute(cmd);
+            QSqlQuery* q = d.execute(cmd);
 
             qint16 count = 0 ;
             for( ; q->next() ; ++count);
@@ -176,10 +204,10 @@ void MyTcpSocket::myReadyRead()
                 out << q->value("id").toString() << q->value("itemName").toString() << q->value("category").toString() << q->value("Price").toDouble();
             }
 
-            qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << dataOut ;
+            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << dataOut ;
             int bytes = socket->write(dataOut);
             socket->flush();
-            qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : sending total byets : " << bytes ;
+            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::getTotaltableNo : sending total byets : " << bytes ;
 
             delete q;
             break;
@@ -197,12 +225,12 @@ void MyTcpSocket::myReadyRead()
 
             QString name =  XmlManipulation::getData(g.getTagName(g.customerNameMblNo)+QString::number(tblNo),list.at(1));
             QString mblNo =  XmlManipulation::getData(g.getTagName(g.customerNameMblNo)+QString::number(tblNo),list.at(0));
-            qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : customer data : " << name <<":"<< mblNo ;
+            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::getTotaltableNo : customer data : " << name <<":"<< mblNo ;
 
             qint16 i = ALLAction::getCustInfo;
             out << i << name << mblNo;
 
-            qDebug() << "serverConnection (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << dataOut ;
+            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << dataOut ;
             socket->write(dataOut);
             socket->flush();
             break;
@@ -225,15 +253,15 @@ void MyTcpSocket::myReadyRead()
             XmlManipulation::setData(g.getTagName(GlobalData::customerNameMblNo)+QString::number(tblNo),list.at(0),mblNo);
             XmlManipulation::setData(g.getTagName(GlobalData::customerNameMblNo)+QString::number(tblNo),list.at(1),name);
 
-            qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : table no : " << tblNo;
-            qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : total item : " << count;
+            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::cartData : table no : " << tblNo;
+            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::cartData : total item : " << count;
 
 
             int lastID = 1;
 
-            //databaseCon d;
+            databaseCon d;
             QString cmd = "SELECT orderID FROM oderDataFromWaiter ORDER BY orderID desc LIMIT 1 " ;
-            QSqlQuery* q = runSqlQuery(cmd);//d.execute(cmd) ;
+            QSqlQuery* q = d.execute(cmd) ;
 
             if(q->next())
             {
@@ -249,18 +277,18 @@ void MyTcpSocket::myReadyRead()
                 in >> note;
                 in >> qty;
 
-                qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : item id : " << id;
-                qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : item note : " << note;
-                qDebug() << "serverConnection (myReadReady) : ALLAction::cartData : item qty : " << qty;
+                qDebug() << "MyTcpSocket (myReadReady) : ALLAction::cartData : item id : " << id;
+                qDebug() << "MyTcpSocket (myReadReady) : ALLAction::cartData : item note : " << note;
+                qDebug() << "MyTcpSocket (myReadReady) : ALLAction::cartData : item qty : " << qty;
 
                 double preQty = 0;
 
 
                 cmd = "INSERT INTO oderDataFromWaiter VALUES('"+id+"' ,"+QString::number(qty)+","+QString::number(tblNo)+",'sending','"+note+"',"+QString::number(lastID)+" );";
-                q = runSqlQuery(cmd);//d.execute(cmd) ;
+                q = d.execute(cmd) ;
 
                 cmd = "select * from tblTempOrder WHERE table_no =" + QString::number(tblNo) +" AND item_id = '" + id + "'";
-                q= runSqlQuery(cmd);// d.execute(cmd);
+                q=  d.execute(cmd);
 
                 int size;
                 for (size = 0; size < q->next(); ++size)
@@ -271,12 +299,12 @@ void MyTcpSocket::myReadyRead()
                 if(size == 0)
                 {
                     cmd = "INSERT INTO tblTempOrder VALUES("+QString::number(tblNo)+",'"+id+"','"+QString::number(qty)+"')" ;
-                    q = runSqlQuery(cmd);// d.execute(cmd);
+                    q = d.execute(cmd);
                 }
                 else
                 {
                     cmd = "UPDATE tblTempOrder SET qty = '"+QString::number(qty+preQty)+"' WHERE item_id = '"+id+"' ";
-                    q = runSqlQuery(cmd);// d.execute(cmd);
+                    q = d.execute(cmd);
                 }
                 delete q;
             }
@@ -324,7 +352,7 @@ void MyTcpSocket::myReadyRead()
             QString name;
             in >> name;
 
-            qDebug() << "serverConnection (myReadReady) : ALLAction::kitchenInfo : name  : " << name ;
+            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::kitchenInfo : name  : " << name ;
             WaiterName* waiter = new WaiterName;
             waiter->ID = this->socketDescriptor;
             waiter->name = name;
@@ -338,10 +366,10 @@ void MyTcpSocket::myReadyRead()
                 isKitchen = true ;
             }
 
-            qDebug() << "serverConnection (myReadReady) : ALLAction::kitchenInfo : is kichen : " << isKitchen ;
+            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::kitchenInfo : is kichen : " << isKitchen ;
 
 
-            qDebug() << "serverConnection (myReadReady) : ALLAction::kitchenInfo : name  : " << q->count() ;
+            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::kitchenInfo : name  : " << q->count() ;
 
             emit addItemInServerManagement();
 
@@ -355,9 +383,9 @@ void MyTcpSocket::myReadyRead()
             qint16 orderNo;
             QString status ;
             in >> orderNo >> status;
-            //databaseCon d;
+            databaseCon d;
             QString cmd = "UPDATE oderDataFromWaiter SET status = '"+status+"' WHERE orderID = "+QString::number(orderNo)+";";
-            delete runSqlQuery(cmd);//d.execute(cmd) ;
+            delete d.execute(cmd) ;
 
             emit updateStatusOfOrder(status,orderNo);
 
@@ -370,7 +398,7 @@ void MyTcpSocket::myReadyRead()
         }
         default:
         {
-            qDebug() << "serverConnection (myReadReady) : default case called : " << dataIn;
+            qDebug() << "MyTcpSocket (myReadReady) : default case called : " << dataIn;
         }
     }
 
@@ -387,7 +415,7 @@ void MyTcpSocket::myDisconnected()
     {
         if(list->at(i)->getSocketDescriptor() == socketDescriptor)
         {
-            list->at(i)->disconnectSocket();
+            //list->at(i)->disconnectSocket();
             list->remove(i);
             break;
         }
@@ -413,8 +441,8 @@ void MyTcpSocket::myDisconnected()
     }
 
     emit addItemInServerManagement();
-    socket->deleteLater();
-    exit(0);
+    //socket->deleteLater();
+    //exit(0);
 }
 
 bool MyTcpSocket::isKitchenSocket()
@@ -447,22 +475,22 @@ void MyTcpSocket::sendToKitchenChildThread(qint16 orderNo,qint16 tblNo,QString n
 {
     if(!isKitchen)
     {
-        qDebug() << "serverConnection (sendToKitchen) : not kitchen : " << clientName;
+        qDebug() << "MyTcpSocket (sendToKitchen) : not kitchen : " << clientName;
         return;
     }
-    qDebug() << "serverConnection (sendToKitchen) : sending msg to kitchen : " << orderNo;
-    qDebug() << "serverConnection (sendToKitchen) : sending msg to kitchen : " << tblNo;
-    qDebug() << "serverConnection (sendToKitchen) : is this kitchen thread : " << isKitchenSocket();
+    qDebug() << "MyTcpSocket (sendToKitchen) : sending msg to kitchen : " << orderNo;
+    qDebug() << "MyTcpSocket (sendToKitchen) : sending msg to kitchen : " << tblNo;
+    qDebug() << "MyTcpSocket (sendToKitchen) : is this kitchen thread : " << isKitchenSocket();
 
     QByteArray dataOut;
     QDataStream out(&dataOut,QIODevice::ReadWrite);
 
-    //databaseCon d;
+    databaseCon d;
 
     QString cmd = "SELECT a.*,b.itemName FROM oderDataFromWaiter a LEFT JOIN mstTblMenu b ON a.Item_id = b.id WHERE orderID = "+QString::number(orderNo)+"" ;
-    //QSqlQuery* q = d.execute(cmd) ;
+    QSqlQuery* q = d.execute(cmd) ;
 
-    QSqlQuery* q = runSqlQuery(cmd);
+    //QSqlQuery* q = runSqlQuery(cmd);
 
     qint16 action = ALLAction::individual;
     qint16 count = 0 ;
@@ -477,7 +505,7 @@ void MyTcpSocket::sendToKitchenChildThread(qint16 orderNo,qint16 tblNo,QString n
     out << tblNo;
     out << count;
 
-    qDebug() << "serverConnection (sendToKitchen) : count of total Item: " << count;
+    qDebug() << "MyTcpSocket (sendToKitchen) : count of total Item: " << count;
 
     enum column{i_id,iqty,itblNumber,istatus,inote,iorderID,iName};
 
@@ -487,16 +515,16 @@ void MyTcpSocket::sendToKitchenChildThread(qint16 orderNo,qint16 tblNo,QString n
         QString note = q->value(inote).toString();
         double qty = q->value(iqty).toDouble();
 
-        qDebug() << "serverConnection (sendToKitchen) : name : " << itemName;
-        qDebug() << "serverConnection (sendToKitchen) : qty : " << qty;
-        qDebug() << "serverConnection (sendToKitchen) : qty : " << note;
+        qDebug() << "MyTcpSocket (sendToKitchen) : name : " << itemName;
+        qDebug() << "MyTcpSocket (sendToKitchen) : qty : " << qty;
+        qDebug() << "MyTcpSocket (sendToKitchen) : qty : " << note;
 
         out << itemName << qty << note;
     }
 
     int sendBytes = socket->write(dataOut);
     socket->flush();
-    qDebug() << "serverConnection (sendToKitchen) : size of send data : " << sendBytes;
+    qDebug() << "MyTcpSocket (sendToKitchen) : size of send data : " << sendBytes;
     delete q;
 }
 
@@ -504,7 +532,7 @@ void MyTcpSocket::deleteOrderFromKitchen(qint16 orderNo)
 {
     if(!isKitchen)
     {
-        qDebug() << "serverConnection (deleteOrderFromKitchen) : not kitchen : " << clientName;
+        qDebug() << "MyTcpSocket (deleteOrderFromKitchen) : not kitchen : " << clientName;
         return;
     }
 
@@ -517,7 +545,7 @@ void MyTcpSocket::deleteOrderFromKitchen(qint16 orderNo)
 
     socket->write(dataOut);
     socket->flush();
-    qDebug() << "serverConnection (deleteOrderFromKitchen) : data to send : " << dataOut;
+    qDebug() << "MyTcpSocket (deleteOrderFromKitchen) : data to send : " << dataOut;
 
 }
 
@@ -581,5 +609,5 @@ qintptr MyTcpSocket::getSocketDescriptor() const
 void MyTcpSocket::disconnectSocket()
 {
     socket->disconnectFromHost();
-    exit(0);
+    //exit(0);
 }

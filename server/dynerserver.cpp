@@ -56,14 +56,14 @@ void DynerServer::incomingConnection(qintptr socketDescriptor)
 
     // connect signal/slot
     // once a thread is not needed, it will be beleted later
-    connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
+    //connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
     connect(thread, SIGNAL(dataForKitchen(qint16,qint16,QString)), this, SLOT(sendToKitchren(qint16,qint16,QString)));
     connect(thread, SIGNAL(addItemInServerManagement()), this, SLOT(addItemInServerManagement()));
     connect(thread, SIGNAL(updateStatusOfOrder(QString,int)), this, SLOT(updateStatusOfOrder(QString,int)));
     connect(this, SIGNAL(deleteOrderFromKitchen(qint16)), thread, SLOT(deleteOrderFromKitchen(qint16)));
     connect(this, SIGNAL(sendToKitchenParentThread(qint16,qint16,QString)), thread, SLOT(sendToKitchenChildThread(qint16,qint16,QString)));
 
-    thread->start();
+    //thread->start();
     clientlist->push_back(thread);
 
     for (int i = 0; i < clientlist->count(); ++i)

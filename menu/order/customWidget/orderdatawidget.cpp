@@ -26,11 +26,12 @@ orderDataWidget::orderDataWidget(int orderNo, int tblNo, QWidget *parent) :
 
     ui->label->setText(ui->label->text().append(QString::number(orderNo)));
 
-    //databaseCon d;
-    QSqlDatabase &database = databaseCon::getDatabase();
+    databaseCon d;
 
+    //QSqlDatabase &database = databaseCon::getDatabase();
     QString cmd = "SELECT a.*,b.itemName FROM oderDataFromWaiter a LEFT JOIN mstTblMenu b ON a.Item_id = b.id WHERE orderID = "+QString::number(orderNo)+"" ;
-    QSqlQuery* q = new QSqlQuery(database); //d.execute(cmd);
+    QSqlQuery* q = d.execute(cmd);
+    //QSqlQuery* q = new QSqlQuery(database); //d.execute(cmd);
 
     enum column{i_id,iqty,itblNumber,istatus,inote,iorderID,iName};
 
