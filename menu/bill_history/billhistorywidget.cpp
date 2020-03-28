@@ -36,119 +36,26 @@ void BillHistoryWidget::SelectionChange()
 
     if(ui->rdbToday->isChecked())
     {
-        QString year = QString::number(QDate::currentDate().year());
-        QString month = QString::number(QDate::currentDate().month());
-        QString day = QString::number(QDate::currentDate().day());
-
-        QString date = year+"-"+month+"-"+day;
+        QString date = QDate::currentDate().toString("yyyy-M-d");
 
         cmd = "SELECT a.*,b.Name FROM mstTblBill a LEFT JOIN mstTblcust b ON a.custMblNo = b.custMblNo WHERE a.Date = '"+date+"' ORDER BY a.Date ;" ;
         qDebug() << "billhistorywidget.cpp (SelectionChange) : Today Date : " << date ;
     }
-    else if(ui->rdbYesterday->isChecked())
-    {
-        QString year = QString::number(QDate::currentDate().year());
-        QString month = QString::number(QDate::currentDate().month());
-        QString day = QString::number(QDate::currentDate().day()-1);
-
-        QString date = year+"-"+month+"-"+day;
-
-        cmd = "SELECT a.*,b.Name FROM mstTblBill a LEFT JOIN mstTblcust b ON a.custMblNo = b.custMblNo WHERE a.Date = '"+date+"' ORDER BY a.Date ;" ;
-        qDebug() << "billhistorywidget.cpp (SelectionChange) : Today Date : " << date ;
-
-    }else if(ui->rdbWeekly->isChecked())
+    else if(ui->rdbWeekly->isChecked())
     {
         QDate mDate = QDate::currentDate();
-        int dayOfWeek = mDate.dayOfWeek();
+        QDate nDate = mDate.addDays(-7);
+        qDebug() << "billhistorywidget.cpp (SelectionChange) : Start Date : " << nDate.toString("yyyy-MM-dd") ;
 
-        QString year = QString::number(QDate::currentDate().year());
-        QString month = QString::number(QDate::currentDate().month());
-        QString day = QString::number(QDate::currentDate().day()-dayOfWeek);
-
-        if(day.length() == 1)
-        {
-            day = "0"+day;
-        }
-
-        QString startDate = year+"-"+month+"-"+day;
-
-        year = QString::number(QDate::currentDate().year());
-        month = QString::number(QDate::currentDate().month());
-        day = QString::number(QDate::currentDate().day());
-
-
-        if(day.length() == 1)
-        {
-            day = "0"+day;
-        }
-
-        QString todayDate = year+"-"+month+"-"+day;
+        QString startDate = nDate.toString("yyyy-M-d");
+        QString todayDate = mDate.toString("yyyy-M-d");
 
         cmd = "SELECT a.*,b.Name FROM mstTblBill a LEFT JOIN mstTblcust b ON a.custMblNo = b.custMblNo WHERE a.Date BETWEEN '"+startDate+"' AND '"+todayDate+"' ORDER BY a.Date ;" ;
-        qDebug() << "billhistorywidget.cpp (SelectionChange) : Today Date : " << startDate ;
+        qDebug() << "billhistorywidget.cpp (SelectionChange) : Start Date : " << startDate ;
         qDebug() << "billhistorywidget.cpp (SelectionChange) : Today Date : " << todayDate ;
 
-    }else if(ui->rdb15Day->isChecked()){
-
-        QString year = QString::number(QDate::currentDate().year());
-        QString month = QString::number(QDate::currentDate().month());
-        QString day = QString::number(QDate::currentDate().day()-15);
-
-
-        if(day.length() == 1)
-        {
-            day = "0"+day;
-        }
-
-        QString startDate = year+"-"+month+"-"+day;
-
-        year = QString::number(QDate::currentDate().year());
-        month = QString::number(QDate::currentDate().month());
-        day = QString::number(QDate::currentDate().day());
-
-
-        if(day.length() == 1)
-        {
-            day = "0"+day;
-        }
-
-        QString todayDate = year+"-"+month+"-"+day;
-
-        cmd = "SELECT a.*,b.Name FROM mstTblBill a LEFT JOIN mstTblcust b ON a.custMblNo = b.custMblNo WHERE a.Date BETWEEN '"+startDate+"' AND '"+todayDate+"' ORDER BY a.Date ;" ;
-        qDebug() << "billhistorywidget.cpp (SelectionChange) : Today Date : " << startDate ;
-        qDebug() << "billhistorywidget.cpp (SelectionChange) : Today Date : " << todayDate ;
-
-    }else if(ui->rdbMonthly->isChecked()){
-
-        QString year = QString::number(QDate::currentDate().year());
-        QString month = QString::number(QDate::currentDate().month());
-        QString day = "01";
-
-
-        if(day.length() == 1)
-        {
-            day = "0"+day;
-        }
-
-        QString startDate = year+"-"+month+"-"+day;
-
-        year = QString::number(QDate::currentDate().year());
-        month = QString::number(QDate::currentDate().month());
-        day = QString::number(QDate::currentDate().day());
-
-
-        if(day.length() == 1)
-        {
-            day = "0"+day;
-        }
-
-        QString todayDate = year+"-"+month+"-"+day;
-
-        cmd = "SELECT a.*,b.Name FROM mstTblBill a LEFT JOIN mstTblcust b ON a.custMblNo = b.custMblNo WHERE a.Date BETWEEN '"+startDate+"' AND '"+todayDate+"' ORDER BY a.Date ;" ;
-        qDebug() << "billhistorywidget.cpp (SelectionChange) : Today Date : " << startDate ;
-        qDebug() << "billhistorywidget.cpp (SelectionChange) : Today Date : " << todayDate ;
-
-    }else if(ui->rdbFromToDate->isChecked())
+    }
+    else if(ui->rdbFromToDate->isChecked())
     {
         ui->deFromDate->show();
         ui->deToDate->show();
@@ -158,32 +65,12 @@ void BillHistoryWidget::SelectionChange()
         QDate toDate = ui->deToDate->date();
         QDate fromDate = ui->deFromDate->date();
 
+        QString startDate = fromDate.toString("yyyy-M-d");
 
-        QString year = QString::number(fromDate.year());
-        QString month = QString::number(fromDate.month());
-        QString day = QString::number(fromDate.day());
-
-
-        if(day.length() == 1)
-        {
-            day = "0"+day;
-        }
-
-        QString startDate = year+"-"+month+"-"+day;
-
-        year = QString::number(toDate.year());
-        month = QString::number(toDate.month());
-        day = QString::number(toDate.day());
-
-        if(day.length() == 1)
-        {
-            day = "0"+day;
-        }
-
-        QString todayDate = year+"-"+month+"-"+day;
+        QString todayDate = toDate.toString("yyyy-M-d");
 
         cmd = "SELECT a.*,b.Name FROM mstTblBill a LEFT JOIN mstTblcust b ON a.custMblNo = b.custMblNo WHERE a.Date BETWEEN '"+startDate+"' AND '"+todayDate+"' ORDER BY a.Date ;" ;
-        qDebug() << "billhistorywidget.cpp (SelectionChange) : Today Date : " << startDate ;
+        qDebug() << "billhistorywidget.cpp (SelectionChange) : Start Date : " << startDate ;
         qDebug() << "billhistorywidget.cpp (SelectionChange) : Today Date : " << todayDate ;
     }
 

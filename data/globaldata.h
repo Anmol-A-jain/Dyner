@@ -22,7 +22,7 @@ public:
 
     static void printBill(QString name, int billId, QWidget *parent);
 
-    static void setShadow(QWidget* widget, QColor color = QColor(0,0,0),qreal real = 0.0,qreal radius = 5.0);
+    static void setShadow(QWidget* widget, QColor color = QColor(0,0,0),qreal real = 0.0,qreal radius = 10.0);
 
 
     // storing waiter data came from android

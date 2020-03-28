@@ -1,7 +1,6 @@
 #ifndef ALLACTION_H
 #define ALLACTION_H
 
-
 class ALLAction
 {
 public:
