@@ -1,12 +1,14 @@
 #include "paymentmathod.h"
 #include "ui_paymentmathod.h"
 #include "data/databasecon.h"
+#include "data/globaldata.h"
 #include <QDebug>
 #include <QDate>
 #include <QMessageBox>
 #include "../orderwidget.h"
 #include "dyner.h"
 #include "server/mytcpsocket.h"
+
 
 paymentMathod::paymentMathod(double netamt,double discount,double tax,int tblno,QString custno,QString ordertype,QString custnm,QVector<displayWidget*> list,QWidget *parent) :
     QDialog(parent),
@@ -144,7 +146,7 @@ void paymentMathod::insertData(QString paymentType)
             qDebug() << "OrderWidget (on_btnPlaceOrder_clicked) : item id : " << id;
             qDebug() << "OrderWidget (on_btnPlaceOrder_clicked) : item qty : " << qty;
 
-            cmd = "INSERT INTO oderDataFromWaiter VALUES('"+id+"' ,"+QString::number(qty)+",'"+QString::number(tblno)+"','sending','',"+QString::number(orderLastID)+" );";
+            cmd = "INSERT INTO oderDataFromWaiter VALUES('"+id+"' ,"+QString::number(qty)+",'"+QString::number(tblno)+"','sending','',"+QString::number(orderLastID)+",'"+QString::number(lastID)+"' );";
             q = d.execute(cmd) ;
         }
 
@@ -164,6 +166,14 @@ void paymentMathod::insertData(QString paymentType)
     parent->resetTotalAmount();
 
     QMessageBox::information(this,"Information","Order has been Placed by <span style='color:green'>"+paymentType+"</span>");
+
+    QMessageBox::StandardButton reply = QMessageBox::information(this,"Print Bill","Do you want to print a copy of bill",QMessageBox::StandardButton::Yes|QMessageBox::StandardButton::No,QMessageBox::StandardButton::Yes);
+
+    if(reply == QMessageBox::StandardButton::Yes)
+    {
+        GlobalData::printBill(custnm,lastID,this);
+    }
+
     this->accept();
 }
 

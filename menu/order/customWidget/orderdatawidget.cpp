@@ -5,24 +5,27 @@
 #include "../orderwidget.h"
 #include "nestedCustomWidget/statusorderitem.h"
 #include "dyner.h"
+#include "../DialogBox/statusdialogbox.h"
 #include <QDebug>
 #include <QMessageBox>
 
-orderDataWidget::orderDataWidget(int orderNo, int tblNo, QWidget *parent) :
+orderDataWidget::orderDataWidget(int orderNo, int tblNo,QWidget *grandParent, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::orderDataWidget)
 {
     ui->setupUi(this);
     GlobalData::setShadow(this);
     myParent = parent;
+    myGrandParent = grandParent;
+
     this->orderNo = orderNo;
     this->tblNo = tblNo;
     ui->btnDelete->setText(QString("\U0001F5D1"));
 
-    if(tblNo == 0)
-    {
-        ui->btnDelete->hide();
-    }
+//    if(tblNo == 0)
+//    {
+//        ui->btnDelete->hide();
+//    }
 
     ui->label->setText(ui->label->text().append(QString::number(orderNo)));
 
@@ -33,7 +36,7 @@ orderDataWidget::orderDataWidget(int orderNo, int tblNo, QWidget *parent) :
     QSqlQuery* q = d.execute(cmd);
     //QSqlQuery* q = new QSqlQuery(database); //d.execute(cmd);
 
-    enum column{i_id,iqty,itblNumber,istatus,inote,iorderID,iName};
+    enum column{i_id,iqty,itblNumber,istatus,inote,iorderID,Billid,iName};
 
     if(q->exec(cmd))
     {
@@ -143,12 +146,33 @@ void orderDataWidget::on_btnDelete_clicked()
             delete d.execute(cmd);
         }
 
-        cmd = "DELETE FROM oderDataFromWaiter WHERE orderID = "+QString::number(this->orderNo)+"";
-        delete d.execute(cmd);
+        if(tblNo == 0)
+        {
+            cmd = "SELECT DISTINCT BillID  FROM oderDataFromWaiter WHERE orderID = "+QString::number(this->orderNo)+" ";
+            QSqlQuery* q = d.execute(cmd);
+            int billID = 0;
+            while(q->next())
+            {
+                billID = q->value(0).toInt();
+            }
+            cmd = "DELETE FROM oderDataFromWaiter WHERE BillID = "+QString::number(billID)+" ";
+            delete d.execute(cmd);
+        }
+        else
+        {
+            cmd = "DELETE FROM oderDataFromWaiter WHERE orderID = "+QString::number(this->orderNo)+"" ;
+            delete d.execute(cmd);
+            static_cast<OrderWidget*>(myGrandParent)->loadData();
+        }
 
-        static_cast<OrderWidget*>(myParent)->loadData();
-        QMessageBox::information(this,"order Deleted","Orderhas been deleted success fully");
+
+
+        QMessageBox::information(this,"order Deleted","Order has been deleted success fully");
         emit refresh();
+
+        //static_cast<StatusDialogBox*>(myParent)->loadData();
+        qDebug() << "orderDataWidget (on_btnDelete_clicked) : delete order :";
+
         DynerServer* server = Dyner::getServer();
         server->deleteOrderSignal(orderNo);
     }

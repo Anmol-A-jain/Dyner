@@ -507,7 +507,7 @@ void MyTcpSocket::sendToKitchenChildThread(qint16 orderNo,qint16 tblNo,QString n
 
     qDebug() << "MyTcpSocket (sendToKitchen) : count of total Item: " << count;
 
-    enum column{i_id,iqty,itblNumber,istatus,inote,iorderID,iName};
+    enum column{i_id,iqty,itblNumber,istatus,inote,iorderID,Billid,iName};
 
     while(q->next())
     {

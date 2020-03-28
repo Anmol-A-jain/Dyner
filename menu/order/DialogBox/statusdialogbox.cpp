@@ -3,6 +3,7 @@
 #include "../customWidget/orderdatawidget.h"
 #include "data/databasecon.h"
 #include <QMessageBox>
+#include <QDebug>
 
 StatusDialogBox::StatusDialogBox(int tblno, QWidget *parent) :
     QDialog(parent),
@@ -37,7 +38,7 @@ void StatusDialogBox::loadData()
     {
         ui->btnComplete->hide();
         ui->orderNoList->hide();
-        this->setWindowTitle("table Order Status : " + QString::number(tblno));
+        this->setWindowTitle("Table Order Status : " + QString::number(tblno));
 
         databaseCon d;
         QString cmd = "SELECT DISTINCT orderID FROM oderDataFromWaiter WHERE tblNo = "+QString::number(tblno)+"" ;
@@ -46,7 +47,7 @@ void StatusDialogBox::loadData()
         while (q->next())
         {
             int orderNo = q->value("orderID").toInt();
-            orderDataWidget* item = new orderDataWidget(orderNo,tblno,myParent);
+            orderDataWidget* item = new orderDataWidget(orderNo,tblno,myParent,this);
             ui->orderContainer->addWidget(item);
             list.push_back(item);
             connect(item,SIGNAL(refresh()),this,SLOT(refresh()));
@@ -56,13 +57,24 @@ void StatusDialogBox::loadData()
     else
     {
         ui->orderNoList->clear();
-        this->setWindowTitle("table Order Status : parcel ");
+        this->setWindowTitle("Table Order Status : parcel ");
         databaseCon d;
         QString cmd = "SELECT DISTINCT orderID FROM oderDataFromWaiter WHERE tblNo = "+QString::number(tblno)+" ORDER BY orderID DESC" ;
         QSqlQuery* q = d.execute(cmd);
 
+        int count = 0;
+        for(count = 0;q->next();++count);
+
+        q->seek(-1);
+
+        if(count==0)
+        {
+            return;
+        }
+
         while (q->next())
         {
+            qDebug() << "StatusDialogBox (loadData()) : orderId :" << q->value("orderID").toString() ;
             QString tag = q->value("orderID").toString();
             ui->orderNoList->addItem(tag);
         }
@@ -75,11 +87,14 @@ void StatusDialogBox::on_orderNoList_currentIndexChanged(const QString &arg1)
 {
     deleteVectorData();
 
-    orderDataWidget* item = new orderDataWidget(arg1.toInt(),tblno);
-    ui->orderContainer->addWidget(item);
-    list.push_back(item);
+    if(!arg1.isEmpty())
+    {
+        orderDataWidget* item = new orderDataWidget(arg1.toInt(),tblno);
+        ui->orderContainer->addWidget(item);
+        list.push_back(item);
 
-    connect(item,SIGNAL(refresh()),this,SLOT(refresh()));
+        connect(item,SIGNAL(refresh()),this,SLOT(refresh()));
+    }
 }
 
 void StatusDialogBox::on_btnComplete_clicked()

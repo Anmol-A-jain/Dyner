@@ -14,7 +14,7 @@ class orderDataWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit orderDataWidget(int orderNo,int tblNo,QWidget *parent = nullptr);
+    explicit orderDataWidget(int orderNo, int tblNo, QWidget *grandParent = nullptr, QWidget *parent = nullptr);
     ~orderDataWidget();
     void deleteVectorData();
 
@@ -33,6 +33,7 @@ signals:
 private:
     Ui::orderDataWidget *ui;
     QWidget* myParent;
+    QWidget* myGrandParent;
     int orderNo;
     QVector<statusOrderItem*> list;
     QString status;

@@ -86,6 +86,7 @@ QVector<MyTcpSocket *> *DynerServer::getClientlist()
 
 void DynerServer::deleteOrderSignal(qint16 orderNo)
 {
+    qDebug() << "DynerServer (deleteOrderSignal) : status :" << orderNo;
     emit deleteOrderFromKitchen(orderNo);
 }
 

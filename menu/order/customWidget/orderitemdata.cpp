@@ -56,7 +56,7 @@ void OrderItemData::on_btnAddOrder_clicked()
     databaseCon d;
 
     int tblNo = static_cast<OrderWidget*>(myparent)->getTblNo();
-    QString cmd = "select * from tblTempOrder WHERE table_no =" + QString::number(tblNo) + " AND item_id = " + ui->lblId->text() ;
+    QString cmd = "select * from tblTempOrder WHERE table_no =" + QString::number(tblNo) + " AND item_id = '" + ui->lblId->text()+"'" ;
     QSqlQuery* q = d.execute(cmd);
 
     while (q->next())
