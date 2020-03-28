@@ -284,7 +284,7 @@ void MyTcpSocket::myReadyRead()
                 double preQty = 0;
 
 
-                cmd = "INSERT INTO oderDataFromWaiter VALUES('"+id+"' ,"+QString::number(qty)+","+QString::number(tblNo)+",'sending','"+note+"',"+QString::number(lastID)+" );";
+                cmd = "INSERT INTO oderDataFromWaiter(Item_id,qty,tblNo,status,note,orderID) VALUES('"+id+"' ,"+QString::number(qty)+","+QString::number(tblNo)+",'sending','"+note+"',"+QString::number(lastID)+" );";
                 q = d.execute(cmd) ;
 
                 cmd = "select * from tblTempOrder WHERE table_no =" + QString::number(tblNo) +" AND item_id = '" + id + "'";

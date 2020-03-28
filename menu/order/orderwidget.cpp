@@ -130,7 +130,7 @@ void OrderWidget::deleteCustomerData()
 void OrderWidget::resetTotalAmount()
 {
     ui->txtAmount->clear();
-    ui->txtDiscount->clear();
+    //ui->txtDiscount->clear();
     ui->taxValue->clear();
     ui->txtTotalAmount->clear();
 }
@@ -319,6 +319,7 @@ void OrderWidget::on_btnClear_clicked()
 
     XmlManipulation::setData(g.getTagName(GlobalData::customerNameMblNo)+QString::number(getTblNo()),list.at(0),"");
     XmlManipulation::setData(g.getTagName(GlobalData::customerNameMblNo)+QString::number(getTblNo()),list.at(1),"");
+    this->resetTotalAmount();
 }
 
 void OrderWidget::on_txtMblNo_textChanged(const QString &arg1)
