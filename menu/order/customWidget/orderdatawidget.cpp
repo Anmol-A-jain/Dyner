@@ -155,7 +155,7 @@ void orderDataWidget::on_btnDelete_clicked()
             {
                 billID = q->value(0).toInt();
             }
-            cmd = "DELETE FROM oderDataFromWaiter WHERE BillID = "+QString::number(billID)+" ";
+            cmd = "DELETE FROM mstTblBill WHERE BillID = "+QString::number(billID)+" ";
             delete d.execute(cmd);
         }
         else

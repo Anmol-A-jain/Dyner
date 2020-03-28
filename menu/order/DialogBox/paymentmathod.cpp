@@ -151,8 +151,6 @@ void paymentMathod::insertData(QString paymentType)
         //OrderWidget* parent = static_cast<OrderWidget*>(myparent);
         //parent->sendToDataKitchen(orderLastID,tblno,custnm);
         Dyner::getServer()->sendToKitchenParentThread(orderLastID,tblno,custnm);
-        QMessageBox::information(this,"Information","Order has been Placed by <span style='color:green'>"+paymentType+"</span>\nOrder NO : " + QString::number(orderLastID) );
-
     }
 
 

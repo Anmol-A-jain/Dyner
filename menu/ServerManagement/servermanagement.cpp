@@ -6,6 +6,7 @@
 #include "server/dynerserver.h"
 #include "QMessageBox"
 #include <QDebug>
+#include "dyner.h"
 
 ServerManagement::ServerManagement(QWidget *parent) :
     QWidget(parent),
@@ -22,6 +23,10 @@ ServerManagement::ServerManagement(QWidget *parent) :
         }
     }
     this->loadData();
+
+    QString status = (Dyner::getServer()->isListening()) ? "On" : "off";
+
+    ui->lblServerStatus->setText(ui->lblServerStatus->text().append(status));
 
     GlobalData::setShadow(ui->btnDisconnect,QColor(255,0,0),0,10);
     GlobalData::setShadow(ui->btnRefresh,QColor(67, 134, 244),0,10);
