@@ -165,7 +165,7 @@ void paymentMathod::insertData(QString paymentType)
 
     if(reply == QMessageBox::StandardButton::Yes)
     {
-        GlobalData::printBill(custnm,lastID,this);
+        GlobalData::printBill(custnm,lastID,netAmount,this);
     }
 
     this->accept();

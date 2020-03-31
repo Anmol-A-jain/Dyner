@@ -34,16 +34,16 @@ QString GlobalData::getattribute(int tagname)
     return this->attribute[tagname];
 }
 
-void GlobalData::printBill(QString name, int billId,QWidget* parent)
+void GlobalData::printBill(QString name, int billId,QString netAmount,QWidget* parent)
 {
     databaseCon d;
     QString cmd = "SELECT * FROM tblBill WHERE billId = "+QString::number(billId)+"";
     QSqlQuery* q = d.execute(cmd);
 
-    double netAmount = 0;
+    //double netAmount = 0;
 
     QTextEdit edit;
-    QString header = QString("%1\t\tBill No:%2").arg(name,billId);
+    QString header = QString("%1\t\tBill No:%2").arg(name,QString::number(billId));
     edit.append(header);
     edit.append("\n");
     edit.append(QString("Name\t\tQty\tPrice"));
@@ -53,8 +53,6 @@ void GlobalData::printBill(QString name, int billId,QWidget* parent)
         QString itemName = q->value("ItemName").toString();
         double qty = q->value("QTY").toDouble();
         double price = q->value("price").toDouble();
-
-        netAmount += (qty*price);
 
         QString record = QString("%1\t\t%2\t%3\n").arg(itemName,QString::number(qty),QString::number(price));
         edit.append(record);
