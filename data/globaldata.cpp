@@ -34,7 +34,7 @@ QString GlobalData::getattribute(int tagname)
     return this->attribute[tagname];
 }
 
-void GlobalData::printBill(QString name, int billId,QString netAmount,QWidget* parent)
+void GlobalData::printBill(QString name, int billId, QString netAmount, QString tax,QString discount,QString finalAmount, QWidget* parent)
 {
     databaseCon d;
     QString cmd = "SELECT * FROM tblBill WHERE billId = "+QString::number(billId)+"";
@@ -43,7 +43,7 @@ void GlobalData::printBill(QString name, int billId,QString netAmount,QWidget* p
     //double netAmount = 0;
 
     QTextEdit edit;
-    QString header = QString("%1\t\tBill No:%2").arg(name,QString::number(billId));
+    QString header = QString("Name: %1\nBill No:%2").arg(name,QString::number(billId));
     edit.append(header);
     edit.append("\n");
     edit.append(QString("Name\t\tQty\tPrice"));
@@ -54,15 +54,37 @@ void GlobalData::printBill(QString name, int billId,QString netAmount,QWidget* p
         double qty = q->value("QTY").toDouble();
         double price = q->value("price").toDouble();
 
-        QString record = QString("%1\t\t%2\t%3\n").arg(itemName,QString::number(qty),QString::number(price));
+        int charLimit = 15;
+
+        if(itemName.length() < charLimit ) {itemName.append("\t");}
+        else
+        {
+            int loopCount = (itemName.length()/charLimit);
+
+            for (int i = 1; i <= loopCount; ++i)
+            {
+                itemName.insert((i*charLimit),'\n');
+            }
+            itemName.append("\t");
+        }
+        QString record = QString("%1\t%2\t%3\n").arg(itemName,QString::number(qty),QString::number(price));
         edit.append(record);
     }
     edit.append("---------------------------------------------------------------------");
 
-    QString footer = QString("\t\tBill Amount (Rs) : %1").arg(netAmount);
+    QString footer = QString("\tNet Amount (Rs) :\t %1").arg(netAmount);
     edit.append(footer);
-    edit.append("\tThank you");
 
+    QString dicountRow = QString("\tDiscount (in %) :\t %1").arg(discount);
+    edit.append(dicountRow);
+
+    QString taxRow = QString("\tTax (Rs) :\t\t %1").arg(tax);
+    edit.append(taxRow);
+
+    QString finalAmountRow = QString("\tTotal Amount (Rs) :\t %1").arg(finalAmount);
+    edit.append(finalAmountRow);
+
+    edit.append("\n\n\tThank you");
 
     QPrinter print;
     print.setPrinterName("Printing Bill");

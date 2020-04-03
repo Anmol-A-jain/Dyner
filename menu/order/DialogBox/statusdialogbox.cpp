@@ -119,6 +119,8 @@ void StatusDialogBox::on_btnComplete_clicked()
     QString cmd = "DELETE FROM oderDataFromWaiter WHERE orderID = "+ui->orderNoList->currentText()+"";
     delete d.execute(cmd);
 
+    QMessageBox::information(this,"Completed",QString("Order No:%1 Complete").arg(ui->orderNoList->currentText()));
+
     loadData();
 }
 

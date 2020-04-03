@@ -165,7 +165,8 @@ void paymentMathod::insertData(QString paymentType)
 
     if(reply == QMessageBox::StandardButton::Yes)
     {
-        GlobalData::printBill(custnm,lastID,netAmount,this);
+        QString totalAmount = QString::number(((this->netamt - this->discount) + this->tax));
+        GlobalData::printBill(custnm,lastID,netAmount,tax,discount,totalAmount,this);
     }
 
     this->accept();
