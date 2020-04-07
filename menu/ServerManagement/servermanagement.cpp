@@ -34,6 +34,7 @@ ServerManagement::ServerManagement(QWidget *parent) :
 
 ServerManagement::~ServerManagement()
 {
+    deleteVectordata();
     delete ui;
 }
 

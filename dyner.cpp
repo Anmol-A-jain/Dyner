@@ -63,6 +63,7 @@ QWidget *Dyner::newFrame(int option)
      * 1. bill history
      * 2. bill req
      * 3. admin
+     * 4. server management
      * */
 
     switch (option)

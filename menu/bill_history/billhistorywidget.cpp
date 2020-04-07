@@ -19,6 +19,7 @@ BillHistoryWidget::BillHistoryWidget(QWidget *parent) :
 
 BillHistoryWidget::~BillHistoryWidget()
 {
+    this->deleteVectorData();
     delete ui;
 }
 

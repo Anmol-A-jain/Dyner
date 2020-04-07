@@ -20,6 +20,7 @@ AddOrderItem::AddOrderItem(QWidget *parent) :
 
 AddOrderItem::~AddOrderItem()
 {
+    deleteVecterData();
     delete ui;
 }
 
