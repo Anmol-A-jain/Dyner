@@ -10,14 +10,14 @@
 #include "server/mytcpsocket.h"
 
 
-paymentMathod::paymentMathod(double netamt,double discount,double tax,int tblno,QString custno,QString ordertype,QString custnm,QVector<displayWidget*> list,QWidget *parent) :
+paymentMathod::paymentMathod(double amt,double discount,double tax,int tblno,QString custno,QString ordertype,QString custnm,QVector<displayWidget*> list,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::paymentMathod)
 {
     ui->setupUi(this);
     myparent = parent;
 
-    this->netamt = netamt;
+    this->amt = amt;
     this->discount = discount;
     this->tax = tax;
     this->tblno = tblno;
@@ -76,7 +76,7 @@ void paymentMathod::insertData(QString paymentType)
     }
 
     // inserting bill in mstTblBill
-    QString netAmount = QString::number(this->netamt);
+    QString netAmount = (QString::number(this->amt - (this->amt * this->discount/100) + this->tax ));
     QString discount = QString::number(this->discount);
     QString tax = QString::number(this->tax);
 
@@ -165,8 +165,8 @@ void paymentMathod::insertData(QString paymentType)
 
     if(reply == QMessageBox::StandardButton::Yes)
     {
-        QString totalAmount = QString::number(((this->netamt - this->discount) + this->tax));
-        GlobalData::printBill(custnm,lastID,netAmount,tax,discount,totalAmount,this);
+        QString totalAmount = QString::number(((this->amt )));
+        GlobalData::printBill(custnm,lastID,totalAmount,tax,QString::number(this->discount*this->amt/100),netAmount,this);
     }
 
     this->accept();

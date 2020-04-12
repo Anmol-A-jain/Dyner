@@ -14,7 +14,7 @@ class paymentMathod : public QDialog
     Q_OBJECT
 
 public:
-    explicit paymentMathod(double netamt,double discount,double tax,int tblno,QString custno,QString ordertype,QString custnm,QVector<displayWidget*> list,QWidget *parent = nullptr);
+    explicit paymentMathod(double amt, double discount, double tax, int tblno, QString custno, QString ordertype, QString custnm, QVector<displayWidget*> list, QWidget *parent = nullptr);
     ~paymentMathod();
     void insertData(QString paymentType);
 
@@ -25,7 +25,7 @@ private slots:
 
 private:
     Ui::paymentMathod *ui;
-    double netamt;
+    double amt;
     double discount;
     double tax;
     int tblno;

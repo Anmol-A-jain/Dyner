@@ -282,11 +282,11 @@ void OrderWidget::on_btnPlaceOrder_clicked()
     else
     {
         QString orderType = ui->cmbOrrderType->currentText();
-        double netAmt = ui->txtTotalAmount->text().toDouble();
+        double amt = ui->txtAmount->text().toDouble();
         double discount = ui->txtDiscount->text().toDouble();
         double tax = ui->taxValue->text().toDouble();
 
-        paymentMathod* p = new paymentMathod(netAmt,discount,tax,this->getTblNo(),custNo,orderType,custName,this->list,this);
+        paymentMathod* p = new paymentMathod(amt,discount,tax,this->getTblNo(),custNo,orderType,custName,this->list,this);
         p->exec();
     }
 }

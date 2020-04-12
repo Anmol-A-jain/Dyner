@@ -34,7 +34,7 @@ QString GlobalData::getattribute(int tagname)
     return this->attribute[tagname];
 }
 
-void GlobalData::printBill(QString name, int billId, QString netAmount, QString tax,QString discount,QString finalAmount, QWidget* parent)
+void GlobalData::printBill(QString name, int billId, QString amount, QString tax,QString discount,QString finalAmount, QWidget* parent)
 {
     databaseCon d;
     QString cmd = "SELECT * FROM tblBill WHERE billId = "+QString::number(billId)+"";
@@ -72,10 +72,10 @@ void GlobalData::printBill(QString name, int billId, QString netAmount, QString 
     }
     edit.append("---------------------------------------------------------------------");
 
-    QString footer = QString("\tNet Amount (Rs) :\t %1").arg(netAmount);
+    QString footer = QString("\tAmount (Rs) :\t\t %1").arg(amount);
     edit.append(footer);
 
-    QString dicountRow = QString("\tDiscount (in %) :\t %1").arg(discount);
+    QString dicountRow = QString("\tDiscount (Rs) :\t\t %1").arg(discount);
     edit.append(dicountRow);
 
     QString taxRow = QString("\tTax (Rs) :\t\t %1").arg(tax);
