@@ -28,6 +28,8 @@ public:
 
     void sendToDataKitchen(qint16 orderNo, qint16 tblNo, QString name);
 
+    bool isOrderCompleted();
+
 private slots:
     void on_cmbOrrderType_currentIndexChanged(int index);
 

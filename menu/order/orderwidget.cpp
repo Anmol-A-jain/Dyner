@@ -54,7 +54,7 @@ OrderWidget::OrderWidget(QWidget *parent) :
     GlobalData::setShadow(ui->cmbOrrderType);
     GlobalData::setShadow(ui->txtTotalAmount);
 
-    GlobalData::setShadow(ui->btnPlaceOrder,QColor(255,0,0),0,10);
+    GlobalData::setShadow(ui->btnPlaceOrder,QColor(1, 225, 102),0,10);
     GlobalData::setShadow(ui->btnStatus,QColor(67, 134, 244),0,10);
 
 }
@@ -173,6 +173,25 @@ void OrderWidget::sendToDataKitchen(qint16 orderNo, qint16 tblNo, QString name)
     static_cast<Dyner*>(myParent)->sendToDataKitchen(orderNo,tblNo,name);
 }
 
+bool OrderWidget::isOrderCompleted()
+{
+    databaseCon d;
+
+    int count = 0;
+    QString tblNo = QString::number(this->getTblNo());
+
+    QString cmd = "SELECT * FROM oderDataFromWaiter WHERE tblNo = "+tblNo+" AND status NOT IN ('finished') LIMIT 1 ;" ;
+    QSqlQuery* q = d.execute(cmd);
+
+    while (q->next())
+    {
+        count++;
+    }
+
+    delete q;
+    return (count!=0) ? false  : true ;
+}
+
 void OrderWidget::on_cmbOrrderType_currentIndexChanged(int index)
 {
     qDebug() << "orderwidget.cpp (on_cmbOrrderType_currentIndexChanged ) : index : " << index;
@@ -254,6 +273,11 @@ void OrderWidget::on_cmbOrrderType_currentTextChanged(const QString &arg1)
 
 void OrderWidget::on_btnPlaceOrder_clicked()
 {
+    if(!this->isOrderCompleted())
+    {
+        QMessageBox::critical(this,"All Order Not Completed","All Order For Table No :"+QString::number(getTblNo())+" Has Been Not Completed");
+        return;
+    }
     if(!list.count())
     {
         QMessageBox::information(this,"Information","Cart Is Empty");
