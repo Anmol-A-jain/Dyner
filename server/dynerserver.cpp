@@ -13,6 +13,7 @@ DynerServer::DynerServer(QObject *parent)
 
 DynerServer::~DynerServer()
 {
+    closeAllConnection();
     delete clientlist;
 }
 
@@ -66,9 +67,13 @@ void DynerServer::incomingConnection(qintptr socketDescriptor)
     //thread->start();
     clientlist->push_back(thread);
 
+    qDebug() << "DynerServer (incomingConnection) : size" << clientlist->count();
+
     for (int i = 0; i < clientlist->count(); ++i)
     {
         int id =clientlist->at(i)->getSocketDescriptor();
+        qDebug() << "DynerServer (incomingConnection) : id" << id;
+
         if(id == socketDescriptor)
         {
             if(clientlist->at(i) == nullptr)

@@ -273,7 +273,7 @@ void OrderWidget::on_cmbOrrderType_currentTextChanged(const QString &arg1)
 
 void OrderWidget::on_btnPlaceOrder_clicked()
 {
-    if(!this->isOrderCompleted())
+    if(!this->isOrderCompleted() && getTblNo() != 0 )
     {
         QMessageBox::critical(this,"All Order Not Completed","All Order For Table No :"+QString::number(getTblNo())+" Has Been Not Completed");
         return;

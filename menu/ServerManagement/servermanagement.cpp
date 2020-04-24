@@ -84,19 +84,24 @@ void ServerManagement::on_btnDisconnect_clicked()
 
     QVector<MyTcpSocket *>* clientlist = DynerServer::getClientlist();
 
-    for (int i = 0; i < clientlist->count(); ++i)
+    qDebug() << "WaiterInformation (on_btnDisconnect_clicked) : Size" << clientlist->size() ;
+
+    for (int i = 0; i <= clientlist->count(); ++i)
     {
-        int id =clientlist->at(i)->getSocketDescriptor();
+        qDebug() << "WaiterInformation (on_btnDisconnect_clicked) : Size" << clientlist->size() ;
+        int id = clientlist->at(i)->getSocketDescriptor();
+
         if(clientlist->at(i) == nullptr)
         {
-            qDebug() << "WaiterInformation (on_btnDisconnect_clicked) : nullptr at " << i;
-            return;
+            qDebug() << "WaiterInformation (on_btnDisconnect_clicked) : nullptr at " << i << "ID :" <<id;
+            continue;
         }
         clientlist->at(i)->disconnectSocket();
-        removeData(id);
-        return;
-
+        //removeData(id);
+        //return;
     }
+    deleteVectordata();
+
 }
 
 void ServerManagement::on_btnRefresh_clicked()

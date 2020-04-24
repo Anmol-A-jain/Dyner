@@ -409,7 +409,7 @@ void MyTcpSocket::myDisconnected()
 {
     qDebug() << "MyTcpSocket (myDisconnected) : id :" << socketDescriptor << " Disconnected";
 
-    QVector<MyTcpSocket*>* list =DynerServer::getClientlist();
+    QVector<MyTcpSocket*>* list = DynerServer::getClientlist();
 
     for (int i = 0; i < list->count(); ++i)
     {
@@ -427,7 +427,10 @@ void MyTcpSocket::myDisconnected()
     {
         if(q->at(i)->ID == socketDescriptor)
         {
+
+            qDebug() << "MyTcpSocket (myDisconnected) : size :" << q->size() << " ";
             q->remove(i);
+            qDebug() << "MyTcpSocket (myDisconnected) : size :" << q->size() << " ";
         }
     }
 
@@ -608,6 +611,7 @@ qintptr MyTcpSocket::getSocketDescriptor() const
 
 void MyTcpSocket::disconnectSocket()
 {
+    socket->flush();
     socket->disconnectFromHost();
     //exit(0);
 }
