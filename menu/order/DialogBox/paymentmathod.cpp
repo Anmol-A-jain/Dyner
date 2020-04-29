@@ -71,9 +71,14 @@ void paymentMathod::insertData(QString paymentType)
     if(!q->next())
     {
         cmd = "INSERT INTO mstTblcust VALUES('"+this->custno+"','"+this->custnm+"');";
-        delete q;
         delete d.execute(cmd);
     }
+    else
+    {
+        cmd = "UPDATE mstTblcust SET Name = '"+this->custnm+"' WHERE custMblNo = '"+this->custno+"'";
+        delete d.execute(cmd);
+    }
+    delete q;
 
     // inserting bill in mstTblBill
     QString netAmount = (QString::number(this->amt - (this->amt * this->discount/100) + this->tax ));

@@ -62,7 +62,7 @@ void WaiterInformation::on_btnDisconnect_clicked()
             if(clientlist->at(i) == nullptr)
             {
                 qDebug() << "WaiterInformation (on_btnDisconnect_clicked) : nullptr at " << i;
-                return;
+                continue;
             }
             clientlist->at(i)->disconnectSocket();
             static_cast<ServerManagement*>(myParent)->removeData(id);

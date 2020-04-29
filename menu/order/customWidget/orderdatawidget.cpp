@@ -137,7 +137,7 @@ void orderDataWidget::on_btnDelete_clicked()
         databaseCon d;
         QString cmd ;
 
-        for (int i = 0; i < list.count(); ++i)
+        for (int i = 0; i < list.count() && tblNo !=0 ; ++i)
         {
             QString id = list.at(i)->getId();
             QString qty = list.at(i)->getQty();
