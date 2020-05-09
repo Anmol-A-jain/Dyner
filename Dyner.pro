@@ -43,6 +43,11 @@ SOURCES += \
     menu/order/DialogBox/addorderitem.cpp \
     menu/order/orderwidget.cpp \
     menu/order/DialogBox/paymentmathod.cpp \
+    menu/staff/customWidget/staffwidget.cpp \
+    menu/staff/dialogBox/adddesignation.cpp \
+    menu/staff/dialogBox/addstaff.cpp \
+    menu/staff/dialogBox/editstaff.cpp \
+    menu/staff/staff.cpp \
     server/dynerserver.cpp \
     server/mytcpsocket.cpp \
     menu/ServerManagement/customWidget/waiterinformation.cpp
@@ -74,6 +79,11 @@ HEADERS += \
     menu/order/customWidget/orderitemdata.h \
     menu/order/orderwidget.h \
     menu/order/DialogBox/paymentmathod.h \
+    menu/staff/customWidget/staffwidget.h \
+    menu/staff/dialogBox/adddesignation.h \
+    menu/staff/dialogBox/addstaff.h \
+    menu/staff/dialogBox/editstaff.h \
+    menu/staff/staff.h \
     server/dynerserver.h \
     server/mytcpsocket.h \
     menu/ServerManagement/customWidget/waiterinformation.h
@@ -100,7 +110,12 @@ FORMS += \
     menu/order/customWidget/orderitemdata.ui \
     menu/order/DialogBox/addorderitem.ui \
     menu/order/DialogBox/paymentmathod.ui \
-    menu/ServerManagement/customWidget/waiterinformation.ui
+    menu/ServerManagement/customWidget/waiterinformation.ui \
+    menu/staff/customWidget/staffwidget.ui \
+    menu/staff/dialogBox/adddesignation.ui \
+    menu/staff/dialogBox/addstaff.ui \
+    menu/staff/dialogBox/editstaff.ui \
+    menu/staff/staff.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

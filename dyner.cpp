@@ -5,6 +5,9 @@
 #include "menu/bill_history/billhistorywidget.h"
 #include "menu/order/orderwidget.h"
 #include "menu/ServerManagement/servermanagement.h"
+#include "menu/staff/staff.h"
+
+//#include "menu/admin/login/login.h"
 
 #include "data/databasecon.h"
 #include "data/xmlmanipulation.h"
@@ -61,9 +64,9 @@ QWidget *Dyner::newFrame(int option)
     /*
      * 0. oreder
      * 1. bill history
-     * 2. bill req
-     * 3. admin
-     * 4. server management
+     * 2. admin
+     * 3. server management
+     * 4. staff management
      * */
 
     switch (option)
@@ -96,6 +99,12 @@ QWidget *Dyner::newFrame(int option)
             serverWindow = new ServerManagement(this);
             return serverWindow;
         }
+        case buttonName::Staff :
+        {
+
+            staffWindow = new staff(this);
+            return staffWindow;
+        }
     }
     return childFrame;
 }
@@ -126,6 +135,12 @@ void Dyner::serverButtonClick()
 {
     emit on_parentButtonManagement_clicked();
 }
+
+void Dyner::staffButtonClick()
+{
+    emit on_parentButtonStaff_clicked();
+}
+
 
 void Dyner::setShadow(QWidget *widget, QColor color)
 {
@@ -255,7 +270,25 @@ void Dyner::on_parentButtonManagement_clicked()
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
 }
 
+void Dyner::on_parentButtonStaff_clicked()
+{
+    loadWidgetWindow(buttonName::Staff);
+    if(isMenuHidden)
+    {
+        isMenuHidden = false;
+        ui->menuList->show();
+    }
+
+    currentShaddowEffect->setGraphicsEffect(nullptr);
+    currentShaddowEffect = ui->parentButtonStaff;
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+
+    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
+}
+
+
 DynerServer *Dyner::getServer()
 {
     return server;
 }
+
