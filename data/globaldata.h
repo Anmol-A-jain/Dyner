@@ -20,6 +20,7 @@ public:
     QString getattribute(int tagname);
     enum data{QtyTable,Discount,Tax,customerNameMblNo};
 
+
     static void printBill(QString name, int billId, QString amount , QString tax, QString discount, QString finalAmount, QWidget *parent = nullptr);
 
     static void setShadow(QWidget* widget, QColor color = QColor(0,0,0),qreal real = 0.0,qreal radius = 10.0);

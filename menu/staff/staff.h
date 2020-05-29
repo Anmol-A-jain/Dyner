@@ -26,12 +26,13 @@ public:
     void loadComboBoxData();
      void btnAddDesignationClicked();
 
+     void resetTotalsal();
+     void updateTotalsal();
+
     ~staff();
 
 private slots:
     void on_btnAddDesignation_clicked();
-
-    void on_btnLoginReport_clicked();
 
     void on_btnAddEmp_clicked();
 
@@ -48,6 +49,7 @@ private slots:
 private:
     Ui::staff *ui;
     QVector<staffwidget*> stafflist;
+
 };
 
 #endif // STAFF_H

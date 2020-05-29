@@ -14,8 +14,10 @@ class staffwidget : public QWidget
 public:
     explicit staffwidget(QWidget *parent = nullptr);
 
-    void setData(QString id,QString name,QString username,QString designation,QString salary,QString mblno,QString address,QString city);
+    void setData(int sr,QString id,QString name,QString username,QString designation,QString salary,QString mblno,QString address,QString city,QString dob,QString doj);
     ~staffwidget();
+//QString dob,,QString doj
+    double getTotal();
 
 private slots:
     void on_editbtn_clicked();

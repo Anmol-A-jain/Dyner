@@ -35,72 +35,6 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="8">
-      <widget class="QPushButton" name="btnStaff">
-       <property name="minimumSize">
-        <size>
-         <width>180</width>
-         <height>105</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>300</width>
-         <height>175</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton
-{
-	border-radius: 20px;
-	color : white;
-	border-image: url(:/img/img/ButtonBackground.jpg);
-	font: 24pt &quot;MS Shell Dlg 2&quot;;
-}</string>
-       </property>
-       <property name="text">
-        <string>Staff </string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QPushButton" name="btnBillHistory">
-       <property name="minimumSize">
-        <size>
-         <width>180</width>
-         <height>105</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>300</width>
-         <height>175</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <family>MS Shell Dlg 2</family>
-         <pointsize>24</pointsize>
-         <weight>50</weight>
-         <italic>false</italic>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton
-{
-	border-radius: 20px;
-	color : white;
-	border-image: url(:/img/img/ButtonBackground.jpg);
-	font: 24pt &quot;MS Shell Dlg 2&quot;;
-}
-</string>
-       </property>
-       <property name="text">
-        <string>HISTORY</string>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="0">
       <widget class="QPushButton" name="btnOrder">
        <property name="minimumSize">
@@ -197,37 +131,43 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="5">
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Maximum</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
+     <item row="1" column="2">
+      <widget class="QPushButton" name="btnBillHistory">
+       <property name="minimumSize">
         <size>
-         <width>40</width>
-         <height>20</height>
+         <width>180</width>
+         <height>105</height>
         </size>
        </property>
-      </spacer>
-     </item>
-     <item row="0" column="0">
-      <spacer name="verticalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Preferred</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
+       <property name="maximumSize">
         <size>
-         <width>20</width>
-         <height>40</height>
+         <width>300</width>
+         <height>175</height>
         </size>
        </property>
-      </spacer>
+       <property name="font">
+        <font>
+         <family>MS Shell Dlg 2</family>
+         <pointsize>24</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton
+{
+	border-radius: 20px;
+	color : white;
+	border-image: url(:/img/img/ButtonBackground.jpg);
+	font: 24pt &quot;MS Shell Dlg 2&quot;;
+}
+</string>
+       </property>
+       <property name="text">
+        <string>HISTORY</string>
+       </property>
+      </widget>
      </item>
      <item row="1" column="3">
       <spacer name="horizontalSpacer_3">
@@ -244,6 +184,78 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item row="1" column="9">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Maximum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="10">
+      <widget class="QPushButton" name="btnlogin">
+       <property name="minimumSize">
+        <size>
+         <width>190</width>
+         <height>105</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>310</width>
+         <height>175</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton
+{
+	border-radius: 20px;
+	color : white;
+	border-image: url(:/img/img/ButtonBackground.jpg);
+	font: 24pt &quot;MS Shell Dlg 2&quot;;
+}</string>
+       </property>
+       <property name="text">
+        <string>Login Report</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="8">
+      <widget class="QPushButton" name="btnStaff">
+       <property name="minimumSize">
+        <size>
+         <width>180</width>
+         <height>105</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>300</width>
+         <height>175</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton
+{
+	border-radius: 20px;
+	color : white;
+	border-image: url(:/img/img/ButtonBackground.jpg);
+	font: 24pt &quot;MS Shell Dlg 2&quot;;
+}</string>
+       </property>
+       <property name="text">
+        <string>Staff </string>
+       </property>
+      </widget>
      </item>
      <item row="3" column="0">
       <spacer name="verticalSpacer_2">
@@ -298,7 +310,7 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="7">
+     <item row="1" column="5">
       <spacer name="horizontalSpacer_4">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -310,6 +322,38 @@
         <size>
          <width>40</width>
          <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="7">
+      <spacer name="horizontalSpacer_6">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Maximum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="0">
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Preferred</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
         </size>
        </property>
       </spacer>

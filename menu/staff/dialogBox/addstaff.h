@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QAbstractButton>
+#include <QRegExpValidator>
 
 namespace Ui {
 class addStaff;
@@ -26,8 +27,12 @@ private slots:
 
     void on_name_textChanged(const QString &arg1);
 
+    void on_btncancel_clicked();
+
 private:
     Ui::addStaff *ui;
+    QRegExpValidator* r1;
+    QRegExpValidator* r2;
     QWidget* myParent;
 };
 

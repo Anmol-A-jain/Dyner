@@ -1,6 +1,7 @@
 #include "history.h"
 #include "ui_history.h"
 #include "data/globaldata.h"
+#include "../billhistorywidget.h"
 #include "../DialogBox/orderdata.h"
 
 History::History(int srNo, QString billId, QString custName, QString date, QString tblNo, QString orderType, QString paymentMethod, QString discount, QString tax, QString netAmount, QWidget *parent) :
@@ -22,11 +23,19 @@ History::History(int srNo, QString billId, QString custName, QString date, QStri
 
     GlobalData::setShadow(this);
     GlobalData::setShadow(ui->btnReport,QColor(255,0,0));
+ //  static_cast<BillHistoryWidget*>(myparent)->updateTotalSales();
+
 }
 
 History::~History()
 {
     delete ui;
+}
+
+double History::getTotal()
+{
+    return (ui->lblamt->text().toDouble());
+
 }
 
 void History::on_btnReport_clicked()

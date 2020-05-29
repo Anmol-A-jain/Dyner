@@ -6,7 +6,7 @@
 #include <QMessageBox>
 #include "data/databasecon.h"
 
-editStaff::editStaff(QString id,QString name,QString username,QString designation,double salary,QString mblno,QString address,QString city ,QWidget *parent) :
+editStaff::editStaff(QString id,QString name,QString username,QString designation,double salary,QString mblno,QString address,QString city ,QDate dob,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::editStaff)
 {
@@ -22,11 +22,10 @@ editStaff::editStaff(QString id,QString name,QString username,QString designatio
     ui->txtmbl->setText(mblno);
     ui->txtaddress->setText(address);
     ui->txtcity->setText(city);
+    ui->dateEdit->setDate(dob);
 
     databaseCon d;
-  //  QString desig = ui->txtDesig->currentText();
     QString cmd = "SELECT designation,salary FROM tblDesignation ORDER BY designation" ;
-    //where designation = '"+desig+"'
     QSqlQuery* q = d.execute(cmd);
 
     while(q->next())
@@ -60,10 +59,11 @@ void editStaff::on_btnUpdate_clicked()
    QString address =  ui->txtaddress->text();
    QString city =  ui->txtcity->text();
 
+   QString dob = ui->dateEdit->date().toString("d-MM-yyyy");
 
     if(!id.isEmpty() && !name.isEmpty() && !username.isEmpty() && !designation.isEmpty() && !mbl.isEmpty() && !address.isEmpty() && !city.isEmpty() )
     {
-        QString cmd = "UPDATE mstTblStaff SET name = '"+name+"',address = '"+address+"' ,city = '"+city+"',mbl_no = '"+mbl+"', designation = '"+designation+"' , username = '"+username + "' where staff_id = '"+id+"' " ;
+        QString cmd = "UPDATE mstTblStaff SET name = '"+name+"',address = '"+address+"' ,city = '"+city+"',mbl_no = '"+mbl+"', designation = '"+designation+"' , username = '"+username + "', DOB = '"+dob+"' where staff_id = '"+id+"' " ;
         QSqlQuery* q = d.execute(cmd);
         delete q;
         static_cast<staff*>(myParent)->loadData();
@@ -123,4 +123,9 @@ void editStaff::on_txtDesig_currentIndexChanged(const QString &arg1)
         QString salary = q->value("salary").toString();
         ui->sal->setText(salary);
     }
+}
+
+void editStaff::on_buttonBox_rejected()
+{
+    this->reject();
 }

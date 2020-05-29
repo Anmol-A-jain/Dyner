@@ -28,6 +28,8 @@ private slots:
 
     void on_btnStaff_clicked();
 
+    void on_btnlogin_clicked();
+
 private:
     Ui::menuButtons *ui;
     // storing parent object

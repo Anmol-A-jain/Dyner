@@ -333,6 +333,25 @@ border-image: url(:/img/img/ButtonBackground.jpg);
              </widget>
             </item>
             <item>
+             <widget class="QPushButton" name="parentButtonlogin">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border-radius: 10px;
+color : brown;
+border-image: url(:/img/img/ButtonBackground.jpg);
+</string>
+              </property>
+              <property name="text">
+               <string>Login Report</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <spacer name="verticalSpacer">
               <property name="orientation">
                <enum>Qt::Vertical</enum>

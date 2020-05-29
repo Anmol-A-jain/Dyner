@@ -20,8 +20,9 @@ ItemWidget::ItemWidget(QWidget *parent) :
 
 }
 
-void ItemWidget::setData(QString id, QString name, QString category, QString price)
+void ItemWidget::setData(int sr,QString id, QString name, QString category, QString price)
 {
+    ui->srno->setNum(sr);
     ui->ItemId->setText(id);
     ui->name->setText(name);
     ui->Categoty->setText(category);
