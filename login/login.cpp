@@ -29,37 +29,35 @@ void login::on_btnlogin_clicked()
     if(!id.isEmpty() && !name.isEmpty())
     {
         databaseCon d;
-        QString cmd = "select staff_id, username from mstTblStaff where staff_id = '"+id+"' AND  username = '"+name+"' AND designation = 'manager' " ;
+        QString cmd = "select designation from mstTblStaff where staff_id = '"+id+"' AND  username = '"+name+"'" ;
         QSqlQuery* q = d.execute(cmd);
-        qDebug() << d.execute(cmd);
+       // qDebug() << d.execute(cmd);
 
-        if(d.execute(cmd))
-        {
-           int count=0;
-            while(q->next())
-            {
-                count++;
-            }
-            if(count == 1)
-            {
-                QMessageBox::information(this,"Login successfully","Username "+name+" has been done");
-                QString entry = QTime::currentTime().toString("HH:mm:ss");
-                QString c_date = QDate::currentDate().toString("d-MM-yyyy");
-                QString cmd1 = "INSERT INTO tblLogin (S_id,entry,module_name,date) VALUES('" + id + "','" + entry + "','admin','" + c_date + "')" ;
-                q = d.execute(cmd1);
-                delete q;
-                emit this->accept();
-            }
 
-           else if(count < 1)
-           {
-               QMessageBox::critical(this,"STOP","You have no right to access it");
-           }
-        }
-        else
+       int count=0;
+        while(q->next())
         {
-            qDebug()<<  "query no execute";
+            count++;
         }
+
+        if(count == 1)
+        {
+            QString designation = q->value("designation").toString();
+
+
+
+            QMessageBox::information(this,"Login successfully","Username "+name+" has been done");
+            QString entry = QTime::currentTime().toString("HH:mm:ss");
+            QString c_date = QDate::currentDate().toString("d-MM-yyyy");
+            QString cmd1 = "INSERT INTO tblLogin (S_id,entry,module_name,date) VALUES('" + id + "','" + entry + "','admin','" + c_date + "')" ;
+            delete  d.execute(cmd1);
+            this->accept();
+        }
+
+       else if(count < 1)
+       {
+           QMessageBox::critical(this,"STOP","You have no right to access it");
+       }
 
         delete q;
     }
@@ -79,3 +77,4 @@ void login::on_btnlogin_clicked()
     }
 
 }
+

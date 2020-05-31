@@ -51,6 +51,12 @@ Dyner::Dyner(QWidget *parent)
     server = new DynerServer(this);
     server->startServer();
 
+    login log;
+
+
+
+    log.exec();
+
 }
 
 Dyner::~Dyner()
@@ -244,23 +250,19 @@ void Dyner::on_parentButtonBillHistory_clicked()
 
 void Dyner::on_parentButtonAdmin_clicked()
 {
-    login log(this);
-   if( log.exec())
+
+    loadWidgetWindow(buttonName::admin);
+    if(isMenuHidden)
     {
-
-        loadWidgetWindow(buttonName::admin);
-        if(isMenuHidden)
-        {
-            isMenuHidden = false;
-            ui->menuList->show();
-        }
-
-        currentShaddowEffect->setGraphicsEffect(nullptr);
-        currentShaddowEffect = ui->parentButtonAdmin;
-        this->setShadow(currentShaddowEffect,QColor(150,75,0));
-
-        ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
+        isMenuHidden = false;
+        ui->menuList->show();
     }
+
+    currentShaddowEffect->setGraphicsEffect(nullptr);
+    currentShaddowEffect = ui->parentButtonAdmin;
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+
+    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
 
 }
 
