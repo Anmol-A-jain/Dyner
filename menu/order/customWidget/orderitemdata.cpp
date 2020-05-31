@@ -18,16 +18,22 @@ OrderItemData::OrderItemData(QString id,QString name,QString category,QString pr
     ui->lblCategory->setText(category);
     ui->lblRate->setText(prc);
 
+<<<<<<< HEAD
 
     //QSqlDatabase &database = databaseCon::getDatabase();
 
+=======
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
     databaseCon d;
     int tblNo = static_cast<OrderWidget*>(myparent)->getTblNo();
     QString cmd = "select * from tblTempOrder WHERE table_no =" + QString::number(tblNo) ;
     QSqlQuery* q = d.execute(cmd);
 
+<<<<<<< HEAD
     //QSqlQuery* q = new QSqlQuery(database); //d.execute(cmd);
 
+=======
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
     while( q->next() )
     {
 

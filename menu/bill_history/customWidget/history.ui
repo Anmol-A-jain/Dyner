@@ -6,8 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
     <width>821</width>
     <height>83</height>
+=======
+    <width>744</width>
+    <height>77</height>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,26 +36,55 @@
        <widget class="QLabel" name="lblSrNo">
         <property name="maximumSize">
          <size>
+<<<<<<< HEAD
           <width>100</width>
           <height>16777215</height>
          </size>
         </property>
+=======
+          <width>60</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
         <property name="text">
          <string>SR NO</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
+<<<<<<< HEAD
+=======
+        <property name="margin">
+         <number>5</number>
+        </property>
+        <property name="indent">
+         <number>2</number>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="lblId">
         <property name="maximumSize">
          <size>
+<<<<<<< HEAD
           <width>100</width>
           <height>16777215</height>
          </size>
         </property>
+=======
+          <width>80</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
@@ -60,10 +94,28 @@
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
+<<<<<<< HEAD
+=======
+        <property name="margin">
+         <number>5</number>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="lblName">
+<<<<<<< HEAD
+=======
+        <property name="maximumSize">
+         <size>
+          <width>250</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
@@ -73,16 +125,63 @@
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
+<<<<<<< HEAD
+=======
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+        <property name="margin">
+         <number>5</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblmbl">
+        <property name="maximumSize">
+         <size>
+          <width>140</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Mobile no.</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+        <property name="margin">
+         <number>5</number>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="lblDate">
         <property name="maximumSize">
          <size>
+<<<<<<< HEAD
           <width>250</width>
           <height>16777215</height>
          </size>
         </property>
+=======
+          <width>100</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
@@ -92,16 +191,38 @@
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
+<<<<<<< HEAD
+=======
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+        <property name="margin">
+         <number>5</number>
+        </property>
+        <property name="indent">
+         <number>-1</number>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="lblTblNo">
         <property name="maximumSize">
          <size>
+<<<<<<< HEAD
           <width>150</width>
           <height>16777215</height>
          </size>
         </property>
+=======
+          <width>75</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
@@ -111,16 +232,32 @@
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
+<<<<<<< HEAD
+=======
+        <property name="margin">
+         <number>5</number>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="lblOrderType">
         <property name="maximumSize">
          <size>
+<<<<<<< HEAD
           <width>200</width>
           <height>16777215</height>
          </size>
         </property>
+=======
+          <width>150</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
@@ -130,6 +267,12 @@
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
+<<<<<<< HEAD
+=======
+        <property name="margin">
+         <number>5</number>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
        </widget>
       </item>
       <item>
@@ -140,6 +283,12 @@
           <height>16777215</height>
          </size>
         </property>
+<<<<<<< HEAD
+=======
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
@@ -149,16 +298,32 @@
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
+<<<<<<< HEAD
+=======
+        <property name="margin">
+         <number>5</number>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="lblDisc">
         <property name="maximumSize">
          <size>
+<<<<<<< HEAD
           <width>100</width>
           <height>16777215</height>
          </size>
         </property>
+=======
+          <width>125</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
@@ -168,16 +333,32 @@
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
+<<<<<<< HEAD
+=======
+        <property name="margin">
+         <number>5</number>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="lblTax">
         <property name="maximumSize">
          <size>
+<<<<<<< HEAD
           <width>100</width>
           <height>16777215</height>
          </size>
         </property>
+=======
+          <width>75</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
@@ -187,16 +368,32 @@
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
+<<<<<<< HEAD
+=======
+        <property name="margin">
+         <number>5</number>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="lblamt">
         <property name="maximumSize">
          <size>
+<<<<<<< HEAD
           <width>200</width>
           <height>16777215</height>
          </size>
         </property>
+=======
+          <width>150</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
@@ -206,6 +403,12 @@
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
+<<<<<<< HEAD
+=======
+        <property name="margin">
+         <number>5</number>
+        </property>
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
        </widget>
       </item>
       <item>

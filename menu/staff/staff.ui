@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AdminWidget</class>
- <widget class="QWidget" name="AdminWidget">
+ <class>staff</class>
+ <widget class="QWidget" name="staff">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,10 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true"/>
-  </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QHBoxLayout" name="horizontalLayout_3">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <property name="bottomMargin">
@@ -66,22 +63,53 @@
          </spacer>
         </item>
         <item>
-         <widget class="QLabel" name="tableLable">
-          <property name="text">
-           <string>Tables</string>
+         <widget class="QComboBox" name="menuColumn">
+          <item>
+           <property name="text">
+            <string>ALL</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>ID</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>UserName</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Name</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Designation</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>City</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="SearchTextBox">
+          <property name="placeholderText">
+           <string>Search</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="noOfTable">
-          <property name="inputMask">
-           <string/>
-          </property>
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-          <property name="placeholderText">
-           <string>No Of Tables</string>
+         <widget class="QComboBox" name="DesignationList"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="SearchButton">
+          <property name="text">
+           <string>Search</string>
           </property>
          </widget>
         </item>
@@ -97,70 +125,6 @@
            </size>
           </property>
          </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="discountLable">
-          <property name="text">
-           <string>Discount</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="discount">
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-          <property name="placeholderText">
-           <string>Discount %</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Tax</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="txtTax">
-          <property name="placeholderText">
-           <string>TAX (GST %)</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_6">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="editButton">
-          <property name="text">
-           <string>edit</string>
-          </property>
-         </widget>
         </item>
        </layout>
       </widget>
@@ -181,62 +145,79 @@
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Maximum</enum>
+            </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>20</width>
               <height>20</height>
              </size>
             </property>
            </spacer>
           </item>
           <item>
-           <widget class="QComboBox" name="menuColumn">
-            <item>
-             <property name="text">
-              <string>ALL</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>ID</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Name</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Category</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Price</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="SearchTextBox">
-            <property name="placeholderText">
-             <string>Search</string>
+           <widget class="QLabel" name="label_2">
+            <property name="font">
+             <font>
+              <family>Arial Black</family>
+              <pointsize>11</pointsize>
+              <weight>10</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
             </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="categoryList"/>
-          </item>
-          <item>
-           <widget class="QPushButton" name="SearchButton">
+            <property name="styleSheet">
+             <string notr="true">font: 87 11pt &quot;Arial Black&quot;;</string>
+            </property>
             <property name="text">
-             <string>Search</string>
+             <string>Total Salary</string>
             </property>
            </widget>
           </item>
           <item>
-           <spacer name="horizontalSpacer_5">
+           <spacer name="horizontalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Maximum</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>15</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="t_sal">
+            <property name="maximumSize">
+             <size>
+              <width>75</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>MS Shell Dlg 2</family>
+              <pointsize>10</pointsize>
+              <weight>9</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_6">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -249,18 +230,50 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="btnEditCategory">
+           <widget class="QPushButton" name="btnAddEmp">
             <property name="text">
-             <string>Edit Category</string>
+             <string>Add Employee</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="AddItem">
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Maximum</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>50</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnAddDesignation">
             <property name="text">
-             <string>Add Item</string>
+             <string>Edit Designation</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Maximum</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>30</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>
@@ -284,9 +297,7 @@ background-color: rgb(231, 231, 231);</string>
             <number>13</number>
            </property>
            <item>
-<<<<<<< HEAD
-=======
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="label_3">
              <property name="maximumSize">
               <size>
                <width>50</width>
@@ -294,16 +305,15 @@ background-color: rgb(231, 231, 231);</string>
               </size>
              </property>
              <property name="text">
-              <string>SR. No.</string>
+              <string>SR. NO.</string>
              </property>
             </widget>
            </item>
            <item>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
             <widget class="QLabel" name="label_id">
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>50</width>
                <height>16777215</height>
               </size>
              </property>
@@ -314,34 +324,145 @@ background-color: rgb(231, 231, 231);</string>
            </item>
            <item>
             <widget class="QLabel" name="label_name">
-             <property name="text">
-              <string>Name</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_category">
              <property name="maximumSize">
               <size>
-               <width>250</width>
+               <width>200</width>
                <height>16777215</height>
               </size>
              </property>
              <property name="text">
-              <string>Category</string>
+              <string>           Name</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_price">
+            <widget class="QLabel" name="label_dob">
              <property name="maximumSize">
               <size>
-               <width>210</width>
+               <width>100</width>
                <height>16777215</height>
               </size>
              </property>
              <property name="text">
-              <string>Price</string>
+              <string>             Date Of Birth</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_user">
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>     Username</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_Desig">
+             <property name="maximumSize">
+              <size>
+               <width>125</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>         Designation</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_sal">
+             <property name="maximumSize">
+              <size>
+               <width>75</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>       Salary</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_mbl">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>   Mobile No.</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_address">
+             <property name="maximumSize">
+              <size>
+               <width>300</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Address</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_city">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>City</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_doj">
+             <property name="maximumSize">
+              <size>
+               <width>125</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Date Of Joining</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
@@ -403,11 +524,7 @@ background-color: rgb(231, 231, 231);</string>
              <x>0</x>
              <y>0</y>
              <width>1111</width>
-<<<<<<< HEAD
-             <height>634</height>
-=======
-             <height>633</height>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
+             <height>631</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">

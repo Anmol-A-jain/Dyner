@@ -30,11 +30,19 @@ void AdminWidget::loadData()
     databaseCon d;
     QString cmd = "select * from mstTblMenu order by id" ;
     QSqlQuery* q = d.execute(cmd);
+<<<<<<< HEAD
     while( q->next())
     {
         ItemWidget *item = new ItemWidget(this);
         itemlist.push_back(item);
         item->setData(q->value("id").toString(),q->value("itemName").toString(),q->value("category").toString(),q->value("Price").toString());
+=======
+     for(int i = 0;q->next();++i)
+    {
+        ItemWidget *item = new ItemWidget(this);
+        itemlist.push_back(item);
+        item->setData(i+1,q->value("id").toString(),q->value("itemName").toString(),q->value("category").toString(),q->value("Price").toString());
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
         ui->displayAddMenu->addWidget(item);
     }
 
@@ -168,11 +176,19 @@ void AdminWidget::on_SearchButton_clicked()
     this->deleteVecterData();
     databaseCon d;
     QSqlQuery* q = d.execute(cmd);
+<<<<<<< HEAD
     while( q->next() )
     {
         ItemWidget *item = new ItemWidget(this);
         itemlist.push_back(item);
         item->setData(q->value("id").toString(),q->value("itemName").toString(),q->value("category").toString(),q->value("Price").toString());
+=======
+     for(int i = 0;q->next();++i)
+    {
+        ItemWidget *item = new ItemWidget(this);
+        itemlist.push_back(item);
+        item->setData(i+1,q->value("id").toString(),q->value("itemName").toString(),q->value("category").toString(),q->value("Price").toString());
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
         ui->displayAddMenu->addWidget(item);
     }
     delete q;

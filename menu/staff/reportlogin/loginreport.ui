@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>BillHistoryWidget</class>
- <widget class="QWidget" name="BillHistoryWidget">
+ <class>LoginReport</class>
+ <widget class="QWidget" name="LoginReport">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_7">
+  <layout class="QVBoxLayout" name="verticalLayout_6">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
@@ -174,83 +174,12 @@
            </property>
           </widget>
          </item>
-<<<<<<< HEAD
-=======
-         <item>
-          <spacer name="horizontalSpacer_6">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Maximum</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>60</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <item>
-            <widget class="QLabel" name="label_7">
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Arial Black</family>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Total Sales&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_4">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Maximum</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="txttotalsales">
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
         </layout>
        </item>
       </layout>
      </item>
      <item>
-      <widget class="QWidget" name="OrderMenu" native="true">
+      <widget class="QWidget" name="reportlogin" native="true">
        <property name="styleSheet">
         <string notr="true">#OrderMenu
 {
@@ -259,7 +188,7 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QWidget" name="billHeader" native="true">
+         <widget class="QWidget" name="reportHeader" native="true">
           <property name="styleSheet">
            <string notr="true">background-color: rgb(234, 234, 234);</string>
           </property>
@@ -283,11 +212,7 @@
             <widget class="QLabel" name="label_5">
              <property name="maximumSize">
               <size>
-<<<<<<< HEAD
                <width>100</width>
-=======
-               <width>75</width>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
                <height>16777215</height>
               </size>
              </property>
@@ -301,7 +226,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="lblBillId">
+            <widget class="QLabel" name="lblStaffd">
              <property name="maximumSize">
               <size>
                <width>100</width>
@@ -316,19 +241,15 @@
               <enum>QFrame::NoFrame</enum>
              </property>
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;BILL ID&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;STAFF ID&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="lblItemName">
+            <widget class="QLabel" name="lbluserName">
              <property name="maximumSize">
               <size>
-<<<<<<< HEAD
-               <width>16777215</width>
-=======
-               <width>500</width>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
+               <width>300</width>
                <height>16777215</height>
               </size>
              </property>
@@ -340,21 +261,35 @@
               <enum>QFrame::NoFrame</enum>
              </property>
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;CUSTOMER NAME&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;USER NAME&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
            <item>
-<<<<<<< HEAD
-            <widget class="QLabel" name="label">
+            <widget class="QLabel" name="lblmodule">
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border-right:2px solid white;
+</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;MODULE&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelentry">
              <property name="maximumSize">
               <size>
                <width>250</width>
-=======
-            <widget class="QLabel" name="label_8">
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
                <height>16777215</height>
               </size>
              </property>
@@ -363,181 +298,26 @@
 </string>
              </property>
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Mobile Number&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;ENTRY DATE / TIME&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label">
+            <widget class="QLabel" name="lblexit">
              <property name="maximumSize">
               <size>
-               <width>125</width>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
+               <width>250</width>
                <height>16777215</height>
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">border-right:2px solid white;
-</string>
-             </property>
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;DATE&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lblQty">
-             <property name="maximumSize">
-              <size>
-<<<<<<< HEAD
-               <width>150</width>
-=======
-               <width>75</width>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-right:2px solid white;
-</string>
+              <string notr="true"/>
              </property>
              <property name="frameShape">
               <enum>QFrame::NoFrame</enum>
              </property>
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;TABLE NO&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lblRate">
-             <property name="maximumSize">
-              <size>
-<<<<<<< HEAD
-               <width>200</width>
-=======
-               <width>150</width>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-right:2px solid white;
-</string>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
-             </property>
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;ORDER TYPE&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lblAmt">
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-right:2px solid white;
-</string>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
-             </property>
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;PAYMENT MODE&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_2">
-             <property name="maximumSize">
-              <size>
-<<<<<<< HEAD
-               <width>100</width>
-=======
-               <width>125</width>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-right:2px solid white;
-</string>
-             </property>
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;DISCOUNT (%)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_3">
-             <property name="maximumSize">
-              <size>
-<<<<<<< HEAD
-               <width>100</width>
-=======
-               <width>75</width>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-right:2px solid white;
-</string>
-             </property>
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;TAX (Rs)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_4">
-             <property name="maximumSize">
-              <size>
-<<<<<<< HEAD
-               <width>200</width>
-=======
-               <width>150</width>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-right:2px solid white;
-</string>
-             </property>
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;NET AMOUNT&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_6">
-             <property name="minimumSize">
-              <size>
-               <width>150</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>REPORT</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;EXIT DATE / TIME&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
@@ -567,11 +347,7 @@
              <x>0</x>
              <y>0</y>
              <width>1271</width>
-<<<<<<< HEAD
-             <height>684</height>
-=======
-             <height>681</height>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
+             <height>683</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -609,7 +385,7 @@
                 <number>0</number>
                </property>
                <item>
-                <layout class="QVBoxLayout" name="displayOrderRow">
+                <layout class="QVBoxLayout" name="displayloginrRow">
                  <property name="spacing">
                   <number>0</number>
                  </property>
@@ -642,14 +418,6 @@
    </item>
   </layout>
  </widget>
- <tabstops>
-  <tabstop>rdbToday</tabstop>
-  <tabstop>rdbWeekly</tabstop>
-  <tabstop>rdbFromToDate</tabstop>
-  <tabstop>deFromDate</tabstop>
-  <tabstop>deToDate</tabstop>
-  <tabstop>scrollArea</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>

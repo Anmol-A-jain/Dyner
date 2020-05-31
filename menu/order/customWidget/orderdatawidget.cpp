@@ -22,10 +22,14 @@ orderDataWidget::orderDataWidget(int orderNo, int tblNo,QWidget *grandParent, QW
     this->tblNo = tblNo;
     ui->btnDelete->setText(QString("\U0001F5D1"));
 
+<<<<<<< HEAD
 //    if(tblNo == 0)
 //    {
 //        ui->btnDelete->hide();
 //    }
+=======
+
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
 
     ui->label->setText(ui->label->text().append(QString::number(orderNo)));
 
@@ -169,8 +173,11 @@ void orderDataWidget::on_btnDelete_clicked()
 
         QMessageBox::information(this,"order Deleted","Order has been deleted success fully");
         emit refresh();
+<<<<<<< HEAD
 
         //static_cast<StatusDialogBox*>(myParent)->loadData();
+=======
+>>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
         qDebug() << "orderDataWidget (on_btnDelete_clicked) : delete order :";
 
         DynerServer* server = Dyner::getServer();
