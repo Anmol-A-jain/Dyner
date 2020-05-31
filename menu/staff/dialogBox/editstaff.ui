@@ -6,26 +6,30 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>259</width>
-    <height>240</height>
+    <width>290</width>
+    <height>369</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>UPDATE EMPLOYEE</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <widget class="QLabel" name="label_6">
+     <property name="styleSheet">
+      <string notr="true">font: 87 10pt &quot;Arial Black&quot;;
+color: rgb(172, 172, 172);</string>
+     </property>
+     <property name="text">
+      <string>Employee Information</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="3" column="0">
-      <widget class="QLabel" name="Category">
-       <property name="text">
-        <string>Designation</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="2">
-      <widget class="QLineEdit" name="txtmbl"/>
-     </item>
      <item row="2" column="0">
       <widget class="QLabel" name="label_4">
        <property name="text">
@@ -33,52 +37,71 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="id">
-       <property name="text">
-        <string>Staff ID</string>
+     <item row="11" column="2">
+      <widget class="QLineEdit" name="txtcity">
+       <property name="placeholderText">
+        <string>ENTER EMPLOYEE'S CITY</string>
        </property>
       </widget>
      </item>
-     <item row="6" column="2">
-      <widget class="QLineEdit" name="txtaddress"/>
+     <item row="9" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Mobile No.</string>
+       </property>
+      </widget>
      </item>
-     <item row="6" column="0">
+     <item row="8" column="2">
+      <widget class="QDateEdit" name="dateEdit">
+       <property name="minimumDateTime">
+        <datetime>
+         <hour>0</hour>
+         <minute>0</minute>
+         <second>0</second>
+         <year>1950</year>
+         <month>1</month>
+         <day>1</day>
+        </datetime>
+       </property>
+       <property name="minimumDate">
+        <date>
+         <year>1950</year>
+         <month>1</month>
+         <day>1</day>
+        </date>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="2">
+      <widget class="QLineEdit" name="txtaddress">
+       <property name="placeholderText">
+        <string>ENTER EMPLOYEE'S ADDRESS</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0" colspan="3">
+      <widget class="QLabel" name="label_7">
+       <property name="styleSheet">
+        <string notr="true">font: 87 10pt &quot;Arial Black&quot;;
+color: rgb(172, 172, 172);</string>
+       </property>
+       <property name="text">
+        <string>Personal Information</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
         <string>Address</string>
        </property>
       </widget>
-     </item>
-     <item row="7" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>City</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="name">
-       <property name="text">
-        <string>Name</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QLineEdit" name="txtName"/>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>Salary</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="2">
-      <widget class="QLineEdit" name="txtcity"/>
-     </item>
-     <item row="2" column="2">
-      <widget class="QLineEdit" name="txtuser"/>
      </item>
      <item row="3" column="2">
       <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -87,20 +110,19 @@
        </item>
       </layout>
      </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Mobile No.</string>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="2">
       <widget class="QLineEdit" name="txtId">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="maxLength">
+        <number>5</number>
+       </property>
        <property name="readOnly">
         <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>ENTER EMPLOYEE'S ID</string>
        </property>
       </widget>
      </item>
@@ -114,6 +136,75 @@
        </property>
        <property name="text">
         <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Salary</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>City</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="name">
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>DOB</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="Category">
+       <property name="text">
+        <string>Designation</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="2">
+      <widget class="QLineEdit" name="txtmbl">
+       <property name="maxLength">
+        <number>10</number>
+       </property>
+       <property name="placeholderText">
+        <string>ENTER EMPLOYEE'S MOBILE NO.</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="id">
+       <property name="text">
+        <string>Staff ID</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="2">
+      <widget class="QLineEdit" name="txtName">
+       <property name="placeholderText">
+        <string>ENTER EMPLOYEE'S NAME</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QLineEdit" name="txtuser">
+       <property name="maxLength">
+        <number>20</number>
+       </property>
+       <property name="placeholderText">
+        <string>ENTER USERNAME</string>
        </property>
       </widget>
      </item>

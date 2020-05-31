@@ -173,3 +173,8 @@ void addDesignation::on_searchBox_textChanged(const QString &arg1)
 
     delete q;
 }
+
+void addDesignation::on_buttonBox_rejected()
+{
+    this->reject();
+}

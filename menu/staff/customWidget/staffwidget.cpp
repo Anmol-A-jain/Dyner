@@ -4,6 +4,7 @@
 #include "../staff.h"
 #include "menu/staff/dialogBox/editstaff.h"
 #include "data/databasecon.h"
+#include <QDateTime>
 #include <QMessageBox>
 #include "data/globaldata.h"
 
@@ -19,9 +20,16 @@ staffwidget::staffwidget(QWidget *parent) :
     ui->editbtn->setText(QString("\U0001F58A"));
     GlobalData::setShadow(this);
 }
-
-void staffwidget::setData(QString id,QString name,QString username,QString designation,QString salary,QString mblno,QString address,QString city)
+double staffwidget::getTotal()
 {
+    return (ui->Salary->text().toDouble());
+
+}
+
+void staffwidget::setData(int sr,QString id,QString name,QString username,QString designation,QString salary,QString mblno,QString address,QString city, QString dob,QString doj)
+{
+                              //,QString doj,QString dob
+  ui->sr->setNum(sr);
    ui->EmpId->setText(id);
    ui->Name->setText(name);
    ui->username->setText(username);
@@ -30,7 +38,8 @@ void staffwidget::setData(QString id,QString name,QString username,QString desig
    ui->Mblno->setText(mblno);
    ui->Address->setText(address);
    ui->city->setText(city);
-
+   ui->dob->setText(dob);
+   ui->doj->setText(doj);
 }
 
 staffwidget::~staffwidget()
@@ -48,10 +57,13 @@ void staffwidget::on_editbtn_clicked()
     QString mblno = ui->Mblno->text() ;
     QString address = ui->Address->text() ;
     QString city = ui->city->text() ;
+    QString s_dob = ui->dob->text();
+    QDate d_dob = QDate::fromString(s_dob,"d-MM-yyyy");
 
 
-    editStaff e(id,name,username,designation,salary,mblno,address,city,myParent);
+    editStaff e(id,name,username,designation,salary,mblno,address,city,d_dob,myParent);
     e.exec();
+
 }
 
 void staffwidget::on_deletebtn_clicked()
@@ -69,5 +81,8 @@ void staffwidget::on_deletebtn_clicked()
           delete q;
       }
     }
+    static_cast<staff*>(myParent)->resetTotalsal();
     static_cast<staff*>(myParent)->loadData();
+
+
 }

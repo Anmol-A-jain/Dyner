@@ -31,6 +31,8 @@ private slots:
 
     void on_searchBox_textChanged(const QString &arg1);
 
+    void on_buttonBox_rejected();
+
 private:
     Ui::addDesignation *ui;
      QWidget* myParent;

@@ -15,6 +15,7 @@ MenuButtons::MenuButtons(QWidget *parent) :
     this->setShadow(ui->btnBillHistory,color);
     this->setShadow(ui->btnServer,color);
     this->setShadow(ui->btnStaff,color);
+    this->setShadow(ui->btnlogin,color);
 
     this->parentName = parent;
 }
@@ -56,4 +57,10 @@ void MenuButtons::setShadow(QWidget *widget, QColor color)
 void MenuButtons::on_btnStaff_clicked()
 {
     static_cast<Dyner*>(parentName)->staffButtonClick();
+}
+
+
+void MenuButtons::on_btnlogin_clicked()
+{
+    static_cast<Dyner*>(parentName)->loginReportClick();
 }

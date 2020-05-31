@@ -4,6 +4,7 @@
 #include "dialogBox/adddesignation.h"
 #include "dialogBox/addstaff.h"
 #include "dialogBox/editstaff.h"
+#include "reportlogin/loginreport.h"
 
 #include "data/databasecon.h"
 #include <QSqlRecord>
@@ -33,27 +34,35 @@ void staff::loadData()
 
 
 
-    while( q->next())
+    for(int i = 0;q->next();++i)
     {
         QString id = q->value("staff_id").toString();
         QString name = q->value("name").toString();
+        QString dob = q->value("DOB").toString();
         QString user = q->value("username").toString();
         QString desig = q->value("designation").toString();
         QString mblno = q->value("mbl_no").toString();
         QString address = q->value("address").toString();
         QString city = q->value("city").toString();
         QString salary = q->value("salary").toString();
+        QString doj = q->value("DOJ").toString();
+
 
         staffwidget *emp = new staffwidget(this);
         stafflist.push_back(emp);
 
 
-        emp->setData(id,name,user,desig,salary,mblno,address,city);
+        emp->setData(i+1,id,name,user,desig,salary,mblno,address,city,dob,doj);
+        //,dob,doj
         ui->displayAddMenu->addWidget(emp);
+
+         this->updateTotalsal();
     }
 
     delete q;
 }
+
+
 
 void staff::deleteVecterData()
 {
@@ -103,11 +112,6 @@ void staff::on_btnAddDesignation_clicked()
     addDesignation e(this);
     e.exec();
     this->loadComboBoxData();
-}
-
-void staff::on_btnLoginReport_clicked()
-{
-
 }
 
 void staff::on_btnAddEmp_clicked()
@@ -227,12 +231,37 @@ void staff::on_SearchButton_clicked()
     this->deleteVecterData();
     databaseCon d;
     QSqlQuery* q = d.execute(cmd);
-    while( q->next() )
+    for(int i = 0;q->next();++i)
     {
         staffwidget *emp = new staffwidget(this);
         stafflist.push_back(emp);
-        emp->setData(q->value("staff_id").toString(),q->value("name").toString(),q->value("username").toString(),q->value("designation").toString(),q->value("salary").toString(),q->value("mbl_no").toString(),q->value("address").toString(),q->value("city").toString());
+        emp->setData(i+1,q->value("staff_id").toString(),q->value("name").toString(),q->value("username").toString(),q->value("designation").toString(),
+                     q->value("salary").toString(),q->value("mbl_no").toString(),q->value("address").toString(),q->value("city").toString(),q->value("DOB").toString(),q->value("DOJ").toString());
+        //,q->value("DOB").toString,q->value("DOJ").toString()
         ui->displayAddMenu->addWidget(emp);
     }
     delete q;
+}
+
+void staff::resetTotalsal()
+{
+    ui->t_sal->clear();
+    //ui->t_emp->clear();
+}
+void staff::updateTotalsal()
+{
+    double sal = 0;
+   //int c_emp=0;
+    for (int i = 0; i < stafflist.count(); ++i)
+    {
+        qDebug() << "orderwidget.cpp (updateTotalAmmount ) :  Updated total amount : " << stafflist[i]->getTotal() ;
+        sal += stafflist[i]->getTotal();
+      //  c_emp += stafflist[i];
+    }
+
+    ui->t_sal->setText(QString::number(sal));
+ //   ui->t_emp->setText(QString::number(C_emp));
+
+
+    qDebug() << "staff.cpp (updateTotalAmmount ) :  Updated total amount : " << sal ;//c_emp
 }

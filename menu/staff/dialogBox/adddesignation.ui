@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>510</width>
+    <width>337</width>
     <height>188</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>ADD DESIGNATION</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -36,7 +36,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="designationText"/>
+        <widget class="QLineEdit" name="designationText">
+         <property name="maxLength">
+          <number>15</number>
+         </property>
+         <property name="placeholderText">
+          <string>ENTER DESIGNATION NAME</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -52,7 +59,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="salaryText"/>
+      <widget class="QLineEdit" name="salaryText">
+       <property name="maxLength">
+        <number>5</number>
+       </property>
+       <property name="placeholderText">
+        <string>ENTER SALARY ACCORDING DESIGNATION</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

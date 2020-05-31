@@ -18,17 +18,13 @@ public:
     ~BillHistoryWidget();
     void SelectionChange();
     void deleteVectorData();
+     void updateTotalSales();
+     void resetTotalSales();
 
 private slots:
     void on_rdbToday_clicked();
 
-    void on_rdbYesterday_clicked();
-
     void on_rdbWeekly_clicked();
-
-    void on_rdb15Day_clicked();
-
-    void on_rdbMonthly_clicked();
 
     void on_rdbFromToDate_clicked();
 
@@ -37,6 +33,7 @@ private slots:
 private:
     Ui::BillHistoryWidget *ui;
     QVector<History*> list;
+
 };
 
 #endif // BILLHISTORYWIDGET_H

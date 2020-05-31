@@ -6,6 +6,8 @@
 #include "menu/order/orderwidget.h"
 #include "menu/ServerManagement/servermanagement.h"
 #include "menu/staff/staff.h"
+#include "login/reportlogin/loginreport.h"
+#include "login/login.h"
 
 //#include "menu/admin/login/login.h"
 
@@ -49,6 +51,12 @@ Dyner::Dyner(QWidget *parent)
     server = new DynerServer(this);
     server->startServer();
 
+    login log;
+
+
+
+    log.exec();
+
 }
 
 Dyner::~Dyner()
@@ -67,7 +75,9 @@ QWidget *Dyner::newFrame(int option)
      * 2. admin
      * 3. server management
      * 4. staff management
+     * 5. login report
      * */
+
 
     switch (option)
     {
@@ -75,6 +85,7 @@ QWidget *Dyner::newFrame(int option)
         {
             menuWindow = new MenuButtons(this);
             return menuWindow;
+
         }
         case buttonName::order :
         {
@@ -105,15 +116,24 @@ QWidget *Dyner::newFrame(int option)
             staffWindow = new staff(this);
             return staffWindow;
         }
+        case buttonName::L_Report :
+        {
+            l_reportWindow = new LoginReport(this);
+            return l_reportWindow;
+        }
     }
     return childFrame;
+
 }
 
 void Dyner::loadWidgetWindow(int option)
 {
+
+
     childFrame->deleteLater();
     childFrame = newFrame(option);
     ui->windowContainer->addWidget( childFrame );
+
 }
 
 void Dyner::orderButtonClick()
@@ -139,6 +159,11 @@ void Dyner::serverButtonClick()
 void Dyner::staffButtonClick()
 {
     emit on_parentButtonStaff_clicked();
+}
+
+void Dyner::loginReportClick()
+{
+    emit on_parentButtonlogin_clicked();
 }
 
 
@@ -225,6 +250,7 @@ void Dyner::on_parentButtonBillHistory_clicked()
 
 void Dyner::on_parentButtonAdmin_clicked()
 {
+
     loadWidgetWindow(buttonName::admin);
     if(isMenuHidden)
     {
@@ -286,9 +312,26 @@ void Dyner::on_parentButtonStaff_clicked()
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
 }
 
+void Dyner::on_parentButtonlogin_clicked()
+{
+    loadWidgetWindow(buttonName::L_Report);
+    if(isMenuHidden)
+    {
+        isMenuHidden = false;
+        ui->menuList->show();
+    }
+
+    currentShaddowEffect->setGraphicsEffect(nullptr);
+    currentShaddowEffect = ui->parentButtonlogin;
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+
+    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
+}
+
 
 DynerServer *Dyner::getServer()
 {
     return server;
 }
+
 

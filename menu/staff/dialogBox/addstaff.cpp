@@ -9,6 +9,7 @@
 #include <QMessageBox>
 #include <QSqlError>
 #include <QKeyEvent>
+#include <QDateTime>
 
 addStaff::addStaff(QWidget *parent) :
     QDialog(parent),
@@ -17,6 +18,10 @@ addStaff::addStaff(QWidget *parent) :
     ui->setupUi(this);
 
       int size = ui->designation->height() - 5 ;
+
+//      QDateTime doj = QDateTime::currentDateTime();
+//      QString Doj = doj.toString();
+//      ui->dateTimeEdit->setDateTime(Doj);
 
       ui->btnaddDesignation->setMinimumSize(size,size);
       ui->btnaddDesignation->setMaximumSize(size,size);
@@ -117,19 +122,26 @@ void addStaff::on_btnadd_clicked()
     }
     delete q;
 
+ //   r_Mbl = new QRegExpValidator(QRegExp("[0-9]*"), ui->mblNo);
+  //  r_Name = new QRegExpValidator(QRegExp("[A-Za-z ]*"), ui->name);
+
     QString name = ui->name->text();
     QString username = ui->usename->text();
     QString designation = ui->designation->currentText();
+
     QString salary = ui->salary->text();
     QString mbl = ui->mblNo->text();
     QString address = ui->address->text();
     QString city = ui->city->text();
 
+    QString dob = ui->dateEdit->date().toString("d-MM-yyyy");
+
+    QString doj = QDateTime::currentDateTime().toString("d-MM-yyyy HH:mm:ss");
 
 
     if(!id.isEmpty() && !name.isEmpty() && !username.isEmpty() && !designation.isEmpty() && !mbl.isEmpty() && !address.isEmpty() && !city.isEmpty() )
     {
-        cmd = "INSERT INTO mstTblStaff VALUES('" + id + "','" + name + "','" + address + "','" + city + "','" + mbl + "','" + designation + "','" + username + "')" ;
+        cmd = "INSERT INTO mstTblStaff VALUES('" + id + "','" + name + "','" + address + "','" + city + "','" + mbl + "','" + designation + "','" + username + "','" + doj + "','" + dob + "')" ;
         q = d.execute(cmd);
         delete q;
 
@@ -198,5 +210,10 @@ void addStaff::on_designation_currentIndexChanged(const QString &arg1)
 
 void addStaff::on_name_textChanged(const QString &arg1)
 {
-    ui->usename->setText(ui->name->text().append("@Dyner"));
+    ui->usename->setText(arg1 +"@Dyner");
+}
+
+void addStaff::on_btncancel_clicked()
+{
+    this->reject();
 }

@@ -284,6 +284,19 @@ background-color: rgb(231, 231, 231);</string>
             <number>13</number>
            </property>
            <item>
+            <widget class="QLabel" name="label_2">
+             <property name="maximumSize">
+              <size>
+               <width>50</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>SR. No.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QLabel" name="label_id">
              <property name="maximumSize">
               <size>
@@ -387,7 +400,7 @@ background-color: rgb(231, 231, 231);</string>
              <x>0</x>
              <y>0</y>
              <width>1111</width>
-             <height>634</height>
+             <height>633</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">

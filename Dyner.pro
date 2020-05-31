@@ -19,6 +19,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     data/allaction.cpp \
     dyner.cpp \
+    login/login.cpp \
+    login/reportlogin/customwidget/report.cpp \
+    login/reportlogin/loginreport.cpp \
     main.cpp \
     data/databasecon.cpp \
     data/globaldata.cpp \
@@ -59,6 +62,9 @@ HEADERS += \
     data/databasecon.h \
     data/globaldata.h \
     data/xmlmanipulation.h \
+    login/login.h \
+    login/reportlogin/customwidget/report.h \
+    login/reportlogin/loginreport.h \
     menu/ServerManagement/servermanagement.h \
     menu/admin/adminwidget.h \
     menu/admin/customWidget/itemwidget.h \
@@ -90,6 +96,9 @@ HEADERS += \
 
 FORMS += \
     dyner.ui \
+    login/login.ui \
+    login/reportlogin/customwidget/report.ui \
+    login/reportlogin/loginreport.ui \
     menu/ServerManagement/servermanagement.ui \
     menu/admin/adminwidget.ui \
     menu/admin/customWidget/itemwidget.ui \

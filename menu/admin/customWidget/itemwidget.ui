@@ -65,6 +65,19 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
+         <widget class="QLabel" name="srno">
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="ItemId">
           <property name="maximumSize">
            <size>
