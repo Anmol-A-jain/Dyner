@@ -74,12 +74,7 @@ void displayWidget::on_doubleSpinBox_valueChanged(double arg1)
         ui->lblamt->setText(QString::number(amt));
 
         databaseCon d;
-<<<<<<< HEAD
         QString cmd = "UPDATE tblTempOrder SET qty = '"+ui->doubleSpinBox->text()+"' WHERE item_id = '"+ui->lblId->text()+"' AND table_no ="+ QString::number(tblNo) +" " ;//"SELECT * FROM tblTempOrder";
-=======
-        QString cmd = "UPDATE tblTempOrder SET qty = '"+ui->doubleSpinBox->text()+"' WHERE item_id = '"+ui->lblId->text()+"' AND table_no ="+ QString::number(tblNo) +" " ;
-
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
         QSqlQuery* q = d.execute(cmd);
 
         qDebug() << "displayWidget.cpp (on_doubleSpinBox_valueChanged) : value changed " << arg1;

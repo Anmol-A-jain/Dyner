@@ -26,11 +26,6 @@ public:
     void billHistoryButtonClick(); // emits bill history button
     void adminButtonClick(); // emits admin button
     void serverButtonClick(); // emits server button
-<<<<<<< HEAD
-=======
-    void staffButtonClick();// emits staff button
-    void loginReportClick();//emits login report button
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
     void setShadow(QWidget *widget, QColor color); // setting shadow to widget and formating widget title
     void closeEvent(QCloseEvent *event) override;
 
@@ -54,21 +49,9 @@ private slots:
 
     void on_parentButtonManagement_clicked();
 
-<<<<<<< HEAD
 private:
     Ui::Dyner *ui;
     enum buttonName{home,order,billHistory,admin,serverManagement}; // enum for buttons
-=======
-    void on_parentButtonStaff_clicked();
-
-    void on_parentButtonlogin_clicked();
-
-
-
-private:
-    Ui::Dyner *ui;
-    enum buttonName{home,order,billHistory,admin,serverManagement,Staff,L_Report}; // enum for buttons
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
     bool isMenuHidden; // track if menu is hidden or not
     QPushButton* currentShaddowEffect; // to track which button have currently shadow effect
     static DynerServer* server; // creating server object
@@ -77,12 +60,6 @@ private:
     QWidget* orderWindow;
     QWidget* historyWindow;
     QWidget* adminWindow;
-<<<<<<< HEAD
-=======
-    QWidget* staffWindow;
-    QWidget* l_reportWindow;
-    QWidget* myParent;
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
 
 };
 #endif // DYNER_H

@@ -284,22 +284,6 @@ background-color: rgb(231, 231, 231);</string>
             <number>13</number>
            </property>
            <item>
-<<<<<<< HEAD
-=======
-            <widget class="QLabel" name="label_2">
-             <property name="maximumSize">
-              <size>
-               <width>50</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>SR. No.</string>
-             </property>
-            </widget>
-           </item>
-           <item>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
             <widget class="QLabel" name="label_id">
              <property name="maximumSize">
               <size>
@@ -403,11 +387,7 @@ background-color: rgb(231, 231, 231);</string>
              <x>0</x>
              <y>0</y>
              <width>1111</width>
-<<<<<<< HEAD
              <height>634</height>
-=======
-             <height>633</height>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">

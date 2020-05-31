@@ -19,12 +19,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     data/allaction.cpp \
     dyner.cpp \
-<<<<<<< HEAD
-=======
-    login/login.cpp \
-    login/reportlogin/customwidget/report.cpp \
-    login/reportlogin/loginreport.cpp \
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
     main.cpp \
     data/databasecon.cpp \
     data/globaldata.cpp \
@@ -49,14 +43,6 @@ SOURCES += \
     menu/order/DialogBox/addorderitem.cpp \
     menu/order/orderwidget.cpp \
     menu/order/DialogBox/paymentmathod.cpp \
-<<<<<<< HEAD
-=======
-    menu/staff/customWidget/staffwidget.cpp \
-    menu/staff/dialogBox/adddesignation.cpp \
-    menu/staff/dialogBox/addstaff.cpp \
-    menu/staff/dialogBox/editstaff.cpp \
-    menu/staff/staff.cpp \
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
     server/dynerserver.cpp \
     server/mytcpsocket.cpp \
     menu/ServerManagement/customWidget/waiterinformation.cpp
@@ -68,12 +54,6 @@ HEADERS += \
     data/databasecon.h \
     data/globaldata.h \
     data/xmlmanipulation.h \
-<<<<<<< HEAD
-=======
-    login/login.h \
-    login/reportlogin/customwidget/report.h \
-    login/reportlogin/loginreport.h \
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
     menu/ServerManagement/servermanagement.h \
     menu/admin/adminwidget.h \
     menu/admin/customWidget/itemwidget.h \
@@ -94,26 +74,12 @@ HEADERS += \
     menu/order/customWidget/orderitemdata.h \
     menu/order/orderwidget.h \
     menu/order/DialogBox/paymentmathod.h \
-<<<<<<< HEAD
-=======
-    menu/staff/customWidget/staffwidget.h \
-    menu/staff/dialogBox/adddesignation.h \
-    menu/staff/dialogBox/addstaff.h \
-    menu/staff/dialogBox/editstaff.h \
-    menu/staff/staff.h \
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
     server/dynerserver.h \
     server/mytcpsocket.h \
     menu/ServerManagement/customWidget/waiterinformation.h
 
 FORMS += \
     dyner.ui \
-<<<<<<< HEAD
-=======
-    login/login.ui \
-    login/reportlogin/customwidget/report.ui \
-    login/reportlogin/loginreport.ui \
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
     menu/ServerManagement/servermanagement.ui \
     menu/admin/adminwidget.ui \
     menu/admin/customWidget/itemwidget.ui \
@@ -134,16 +100,7 @@ FORMS += \
     menu/order/customWidget/orderitemdata.ui \
     menu/order/DialogBox/addorderitem.ui \
     menu/order/DialogBox/paymentmathod.ui \
-<<<<<<< HEAD
     menu/ServerManagement/customWidget/waiterinformation.ui
-=======
-    menu/ServerManagement/customWidget/waiterinformation.ui \
-    menu/staff/customWidget/staffwidget.ui \
-    menu/staff/dialogBox/adddesignation.ui \
-    menu/staff/dialogBox/addstaff.ui \
-    menu/staff/dialogBox/editstaff.ui \
-    menu/staff/staff.ui
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

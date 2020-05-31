@@ -30,10 +30,6 @@ void BillHistoryWidget::SelectionChange()
     ui->deToDate->hide();
     ui->lblTo->hide();
     ui->lblFrom->hide();
-<<<<<<< HEAD
-=======
-    ui->btnSearch->hide();
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
 
     databaseCon d;
 
@@ -66,10 +62,6 @@ void BillHistoryWidget::SelectionChange()
         ui->deToDate->show();
         ui->lblTo->show();
         ui->lblFrom->show();
-<<<<<<< HEAD
-=======
-        ui->btnSearch->show();
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
 
         QDate toDate = ui->deToDate->date();
         QDate fromDate = ui->deFromDate->date();
@@ -101,11 +93,6 @@ void BillHistoryWidget::SelectionChange()
         ui->displayOrderRow->addWidget(item);
 
         list.push_back(item);
-<<<<<<< HEAD
-=======
-
-            this->updateTotalSales();
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
     }
 }
 
@@ -120,21 +107,16 @@ void BillHistoryWidget::deleteVectorData()
 
 void BillHistoryWidget::on_rdbToday_clicked()
 {
-<<<<<<< HEAD
     this->SelectionChange();
 }
 
 void BillHistoryWidget::on_rdbYesterday_clicked()
 {
-=======
-    this->resetTotalSales();
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
     this->SelectionChange();
 }
 
 void BillHistoryWidget::on_rdbWeekly_clicked()
 {
-<<<<<<< HEAD
     this->SelectionChange();
 }
 
@@ -156,39 +138,4 @@ void BillHistoryWidget::on_rdbFromToDate_clicked()
 void BillHistoryWidget::on_btnSearch_clicked()
 {
     this->SelectionChange();
-=======
-    this->resetTotalSales();
-    this->SelectionChange();
-}
-
-void BillHistoryWidget::on_rdbFromToDate_clicked()
-{
-    this->resetTotalSales();
-    this->SelectionChange();
-}
-
-void BillHistoryWidget::on_btnSearch_clicked()
-{
-   this->resetTotalSales();
-    this->SelectionChange();
-}
-
-void BillHistoryWidget::resetTotalSales()
-{
-    ui->txttotalsales->clear();
-
-}
-void BillHistoryWidget::updateTotalSales()
-{
-    double amount = 0;
-    for (int i = 0; i < list.count(); ++i)
-    {
-        qDebug() << "BillHistoryWidget.cpp (updateTotalSales ) :  Updated total sales : " << list[i]->getTotal() ;
-        amount += list[i]->getTotal();
-    }
-
-    ui->txttotalsales->setText(QString::number(amount));
-
-    qDebug() << "BillHistoryWidget.cpp (updateTotalSales ) :  Updated total sales : " << amount ;
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
 }

@@ -18,16 +18,10 @@ public:
     ~BillHistoryWidget();
     void SelectionChange();
     void deleteVectorData();
-<<<<<<< HEAD
-=======
-     void updateTotalSales();
-     void resetTotalSales();
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
 
 private slots:
     void on_rdbToday_clicked();
 
-<<<<<<< HEAD
     void on_rdbYesterday_clicked();
 
     void on_rdbWeekly_clicked();
@@ -36,10 +30,6 @@ private slots:
 
     void on_rdbMonthly_clicked();
 
-=======
-    void on_rdbWeekly_clicked();
-
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
     void on_rdbFromToDate_clicked();
 
     void on_btnSearch_clicked();
@@ -47,10 +37,6 @@ private slots:
 private:
     Ui::BillHistoryWidget *ui;
     QVector<History*> list;
-<<<<<<< HEAD
-=======
-
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
 };
 
 #endif // BILLHISTORYWIDGET_H

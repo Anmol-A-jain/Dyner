@@ -174,77 +174,6 @@
            </property>
           </widget>
          </item>
-<<<<<<< HEAD
-=======
-         <item>
-          <spacer name="horizontalSpacer_6">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Maximum</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>60</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <item>
-            <widget class="QLabel" name="label_7">
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Arial Black</family>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Total Sales&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_4">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Maximum</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="txttotalsales">
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
         </layout>
        </item>
       </layout>
@@ -283,11 +212,7 @@
             <widget class="QLabel" name="label_5">
              <property name="maximumSize">
               <size>
-<<<<<<< HEAD
                <width>100</width>
-=======
-               <width>75</width>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
                <height>16777215</height>
               </size>
              </property>
@@ -324,11 +249,7 @@
             <widget class="QLabel" name="lblItemName">
              <property name="maximumSize">
               <size>
-<<<<<<< HEAD
                <width>16777215</width>
-=======
-               <width>500</width>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
                <height>16777215</height>
               </size>
              </property>
@@ -345,37 +266,10 @@
             </widget>
            </item>
            <item>
-<<<<<<< HEAD
             <widget class="QLabel" name="label">
              <property name="maximumSize">
               <size>
                <width>250</width>
-=======
-            <widget class="QLabel" name="label_8">
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-right:2px solid white;
-</string>
-             </property>
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Mobile Number&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label">
-             <property name="maximumSize">
-              <size>
-               <width>125</width>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
                <height>16777215</height>
               </size>
              </property>
@@ -392,11 +286,7 @@
             <widget class="QLabel" name="lblQty">
              <property name="maximumSize">
               <size>
-<<<<<<< HEAD
                <width>150</width>
-=======
-               <width>75</width>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
                <height>16777215</height>
               </size>
              </property>
@@ -416,11 +306,7 @@
             <widget class="QLabel" name="lblRate">
              <property name="maximumSize">
               <size>
-<<<<<<< HEAD
                <width>200</width>
-=======
-               <width>150</width>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
                <height>16777215</height>
               </size>
              </property>
@@ -460,11 +346,7 @@
             <widget class="QLabel" name="label_2">
              <property name="maximumSize">
               <size>
-<<<<<<< HEAD
                <width>100</width>
-=======
-               <width>125</width>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
                <height>16777215</height>
               </size>
              </property>
@@ -481,11 +363,7 @@
             <widget class="QLabel" name="label_3">
              <property name="maximumSize">
               <size>
-<<<<<<< HEAD
                <width>100</width>
-=======
-               <width>75</width>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
                <height>16777215</height>
               </size>
              </property>
@@ -502,11 +380,7 @@
             <widget class="QLabel" name="label_4">
              <property name="maximumSize">
               <size>
-<<<<<<< HEAD
                <width>200</width>
-=======
-               <width>150</width>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
                <height>16777215</height>
               </size>
              </property>
@@ -567,11 +441,7 @@
              <x>0</x>
              <y>0</y>
              <width>1271</width>
-<<<<<<< HEAD
              <height>684</height>
-=======
-             <height>681</height>
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_2">

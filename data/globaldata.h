@@ -19,11 +19,6 @@ public:
     QString getTagName(int tagname);
     QString getattribute(int tagname);
     enum data{QtyTable,Discount,Tax,customerNameMblNo};
-<<<<<<< HEAD
-=======
-    enum designation{manager,assistant_manager,Waiter,chief,trainee,worker};
-
->>>>>>> 24f7eebdf8c0d81e98db20e676926fa1df9acbc6
 
     static void printBill(QString name, int billId, QString amount , QString tax, QString discount, QString finalAmount, QWidget *parent = nullptr);
 
