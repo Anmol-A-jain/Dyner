@@ -5,6 +5,7 @@
 #include "menu/bill_history/billhistorywidget.h"
 #include "menu/order/orderwidget.h"
 #include "menu/ServerManagement/servermanagement.h"
+#include "menu/login/login.h"
 
 #include "data/databasecon.h"
 #include "data/xmlmanipulation.h"
@@ -28,14 +29,16 @@ Dyner::Dyner(QWidget *parent)
 
     //hiding menu list and setting menuButton to window container
     ui->menuList->hide();
+    ui->menuButton->hide();
     isMenuHidden = true;
-    QWidget* menuButtons  = new MenuButtons(this);
-    childFrame = menuButtons;
+    ui->btnLogout->hide();
+    QWidget* login  = new Login(this);
+    childFrame = login;
     ui->windowContainer->addWidget(childFrame);
 
     //setting shadow to homeButton in ui
     currentShaddowEffect = ui->parentButtonHome;
-    this->setShadow(currentShaddowEffect,QColor(150,75,0)); //calling UDF
+    //this->setShadow(currentShaddowEffect,QColor(150,75,0)); //calling UDF
 
     // removing alpha color from ui->horizontalFrame for first time load
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;}");
@@ -96,6 +99,11 @@ QWidget *Dyner::newFrame(int option)
             serverWindow = new ServerManagement(this);
             return serverWindow;
         }
+        case buttonName::login:
+        {
+            loginWindow = new Login(this);
+            return loginWindow;
+        }
     }
     return childFrame;
 }
@@ -125,6 +133,11 @@ void Dyner::adminButtonClick()
 void Dyner::serverButtonClick()
 {
     emit on_parentButtonManagement_clicked();
+}
+
+void Dyner::homeWidget()
+{
+    emit on_parentButtonHome_clicked();
 }
 
 void Dyner::setShadow(QWidget *widget, QColor color)
@@ -165,6 +178,11 @@ void Dyner::on_parentButtonHome_clicked()
     isMenuHidden = true;
     ui->menuList->hide();
 
+    if(ui->menuButton->isHidden())
+    {
+        ui->btnLogout->show();
+        ui->menuButton->show();
+    }
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonHome;
     this->setShadow(currentShaddowEffect,QColor(150,75,0));
@@ -258,4 +276,14 @@ void Dyner::on_parentButtonManagement_clicked()
 DynerServer *Dyner::getServer()
 {
     return server;
+}
+
+void Dyner::on_btnLogout_clicked()
+{
+    ui->btnLogout->hide();
+    ui->menuButton->hide();
+    ui->menuList->hide();
+    loadWidgetWindow(buttonName::login);
+
+    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: }");
 }
