@@ -7,6 +7,8 @@
 
 QVector<WaiterName*> GlobalData::waiter;
 
+bool GlobalData::isAdmin = false;
+
 GlobalData::GlobalData()
 {
     this->tagname.insert(data::QtyTable,"QtyTable");
@@ -21,6 +23,8 @@ GlobalData::GlobalData()
     this->tagname.insert(data::customerNameMblNo,"tableNo:");
     this->attribute.insert(data::customerNameMblNo,"MblNo-Name");
 
+    this->tagname.insert(data::loginData,"admin");
+    this->attribute.insert(data::loginData,"password");
 
 }
 

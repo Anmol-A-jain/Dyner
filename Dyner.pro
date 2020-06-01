@@ -34,6 +34,7 @@ SOURCES += \
     menu/bill_history/billhistorywidget.cpp \
     menu/bill_history/customWidget/history.cpp \
     menu/bill_history/customWidget/orderdatarecord.cpp \
+    menu/login/DialogBox/changepassword.cpp \
     menu/login/login.cpp \
     menu/menu_buttons/menubuttons.cpp \
     menu/order/DialogBox/statusdialogbox.cpp \
@@ -66,6 +67,7 @@ HEADERS += \
     menu/bill_history/billhistorywidget.h \
     menu/bill_history/customWidget/history.h \
     menu/bill_history/customWidget/orderdatarecord.h \
+    menu/login/DialogBox/changepassword.h \
     menu/login/login.h \
     menu/menu_buttons/menubuttons.h \
     menu/order/DialogBox/addorderitem.h \
@@ -93,6 +95,7 @@ FORMS += \
     menu/bill_history/billhistorywidget.ui \
     menu/bill_history/customWidget/history.ui \
     menu/bill_history/customWidget/orderdatarecord.ui \
+    menu/login/DialogBox/changepassword.ui \
     menu/login/login.ui \
     menu/menu_buttons/menubuttons.ui \
     menu/order/DialogBox/statusdialogbox.ui \

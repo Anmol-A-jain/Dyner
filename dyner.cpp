@@ -14,6 +14,7 @@
 #include <QDebug>
 #include <QtXml>
 #include <QCloseEvent>
+#include <QMessageBox>
 
 DynerServer* Dyner::server;
 QWidget* Dyner::childFrame;
@@ -49,6 +50,13 @@ Dyner::Dyner(QWidget *parent)
     server = new DynerServer(this);
     server->startServer();
 
+    GlobalData g;
+    QString adminPass = XmlManipulation::getData(g.getTagName(g.loginData),g.getattribute(g.loginData) );
+    if(adminPass == "")
+    {
+        GlobalData g;
+        XmlManipulation::setData(g.getTagName(g.loginData),g.getattribute(g.loginData),"admin");
+    }
 }
 
 Dyner::~Dyner()
@@ -174,6 +182,15 @@ void Dyner::serverSideAddItem()
 
 void Dyner::on_parentButtonHome_clicked()
 {
+    if(!GlobalData::isAdmin)
+    {
+        ui->parentButtonAdmin->hide();
+    }
+    else
+    {
+        ui->parentButtonAdmin->show();
+    }
+
     loadWidgetWindow(buttonName::home);
     isMenuHidden = true;
     ui->menuList->hide();
@@ -280,10 +297,16 @@ DynerServer *Dyner::getServer()
 
 void Dyner::on_btnLogout_clicked()
 {
-    ui->btnLogout->hide();
-    ui->menuButton->hide();
-    ui->menuList->hide();
-    loadWidgetWindow(buttonName::login);
+    QMessageBox::StandardButton no = QMessageBox::StandardButton::No;
+    QMessageBox::StandardButton yes = QMessageBox::StandardButton::Yes;
 
-    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: }");
+    if(QMessageBox::warning(this,"Logout?","Do you want to log out", no|yes , no ) == yes)
+    {
+        ui->btnLogout->hide();
+        ui->menuButton->hide();
+        ui->menuList->hide();
+        loadWidgetWindow(buttonName::login);
+
+        ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: }");
+    }
 }

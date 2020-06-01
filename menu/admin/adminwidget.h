@@ -46,6 +46,8 @@ private slots:
 
     void on_categoryList_currentIndexChanged(int index);
 
+    void on_btnPassword_clicked();
+
 private:
     Ui::AdminWidget *ui;
     QVector<ItemWidget*> itemlist;

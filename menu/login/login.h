@@ -16,7 +16,15 @@ public:
     ~Login();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_btnLogin_clicked();
+
+    void on_txtName_returnPressed();
+
+    void on_txtPass_returnPressed();
+
+    void on_btnSkip_clicked();
+
+    void on_btnChangePAss_clicked();
 
 private:
     Ui::Login *ui;

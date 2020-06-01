@@ -16,6 +16,11 @@ MenuButtons::MenuButtons(QWidget *parent) :
     this->setShadow(ui->btnServer,color);
 
     this->parentName = parent;
+
+    if(!GlobalData::isAdmin)
+    {
+        ui->btnAdmin->hide();
+    }
 }
 
 MenuButtons::~MenuButtons()

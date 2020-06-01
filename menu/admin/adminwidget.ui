@@ -262,6 +262,13 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="btnPassword">
+            <property name="text">
+             <string>Change Password</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
@@ -387,7 +394,7 @@ background-color: rgb(231, 231, 231);</string>
              <x>0</x>
              <y>0</y>
              <width>1111</width>
-             <height>634</height>
+             <height>633</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">

@@ -10,6 +10,7 @@
 #include <QScrollBar>
 #include "data/xmlmanipulation.h"
 #include "data/globaldata.h"
+#include "menu/login/DialogBox/changepassword.h"
 
 
 AdminWidget::AdminWidget(QWidget *parent) :
@@ -222,4 +223,10 @@ void AdminWidget::on_categoryList_currentIndexChanged(int index)
     {
         this->loadData();
     }
+}
+
+void AdminWidget::on_btnPassword_clicked()
+{
+    ChangePassword c;
+    c.exec();
 }

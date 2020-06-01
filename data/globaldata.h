@@ -18,7 +18,7 @@ public:
     GlobalData();
     QString getTagName(int tagname);
     QString getattribute(int tagname);
-    enum data{QtyTable,Discount,Tax,customerNameMblNo};
+    enum data{QtyTable,Discount,Tax,customerNameMblNo,loginData};
 
     static void printBill(QString name, int billId, QString amount , QString tax, QString discount, QString finalAmount, QWidget *parent = nullptr);
 
@@ -27,6 +27,8 @@ public:
 
     // storing waiter data came from android
     static QVector<WaiterName*> waiter;
+
+    static bool isAdmin;
 
 private:
     QHash<int,QString> tagname;
