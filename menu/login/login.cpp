@@ -31,7 +31,7 @@ void Login::on_btnLogin_clicked()
 
     bool isvalid = ( (name == "admin") & (pass == adminPass) );
 
-    bool isMasterPaswword = ( (name == "admin") & (pass == "welcom@dyner") );
+    bool isMasterPaswword = ( (name == "admin") & (pass == "welcome@dyner") );
 
     if(isvalid || isMasterPaswword)
     {
