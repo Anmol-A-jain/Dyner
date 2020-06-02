@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>510</width>
-    <height>147</height>
+    <height>158</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Edit Category</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../res.qrc">
+   <iconset resource="../../../res.qrc">
     <normaloff>:/img/img/icon1.png</normaloff>:/img/img/icon1.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -87,7 +87,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../res.qrc"/>
+  <include location="../../../res.qrc"/>
  </resources>
  <connections>
   <connection>

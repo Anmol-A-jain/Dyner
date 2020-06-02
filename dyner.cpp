@@ -6,6 +6,7 @@
 #include "menu/order/orderwidget.h"
 #include "menu/ServerManagement/servermanagement.h"
 #include "menu/login/login.h"
+#include "menu/staff/staff.h"
 
 #include "data/databasecon.h"
 #include "data/xmlmanipulation.h"
@@ -112,6 +113,11 @@ QWidget *Dyner::newFrame(int option)
             loginWindow = new Login(this);
             return loginWindow;
         }
+        case buttonName::staff:
+        {
+            staffWidget = new Staff(this);
+            return staffWidget  ;
+        }
     }
     return childFrame;
 }
@@ -146,6 +152,11 @@ void Dyner::serverButtonClick()
 void Dyner::homeWidget()
 {
     emit on_parentButtonHome_clicked();
+}
+
+void Dyner::staffButtonClick()
+{
+    emit on_parentButtonStaff_clicked();
 }
 
 void Dyner::setShadow(QWidget *widget, QColor color)
@@ -185,10 +196,12 @@ void Dyner::on_parentButtonHome_clicked()
     if(!GlobalData::isAdmin)
     {
         ui->parentButtonAdmin->hide();
+        ui->parentButtonStaff->hide();
     }
     else
     {
         ui->parentButtonAdmin->show();
+        ui->parentButtonStaff->show();
     }
 
     loadWidgetWindow(buttonName::home);
@@ -285,6 +298,22 @@ void Dyner::on_parentButtonManagement_clicked()
 
     currentShaddowEffect->setGraphicsEffect(nullptr);
     currentShaddowEffect = ui->parentButtonManagement;
+    this->setShadow(currentShaddowEffect,QColor(150,75,0));
+
+    ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");
+}
+
+void Dyner::on_parentButtonStaff_clicked()
+{
+    loadWidgetWindow(buttonName::staff);
+    if(isMenuHidden)
+    {
+        isMenuHidden = false;
+        ui->menuList->show();
+    }
+
+    currentShaddowEffect->setGraphicsEffect(nullptr);
+    currentShaddowEffect = ui->parentButtonStaff;
     this->setShadow(currentShaddowEffect,QColor(150,75,0));
 
     ui->horizontalFrame->setStyleSheet("#horizontalFrame{border-radius : 10px;background-color: rgba(238, 238, 236,0.5);}");

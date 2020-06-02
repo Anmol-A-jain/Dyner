@@ -12,7 +12,7 @@ class ChangePassword : public QDialog
     Q_OBJECT
 
 public:
-    explicit ChangePassword(QWidget *parent = nullptr);
+    explicit ChangePassword(bool isOldPassrequired = true,QWidget *parent = nullptr);
     ~ChangePassword();
 
 private slots:
@@ -20,6 +20,7 @@ private slots:
 
 private:
     Ui::ChangePassword *ui;
+    bool isOldPassrequired;
 };
 
 #endif // CHANGEPASSWORD_H

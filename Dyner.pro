@@ -45,6 +45,9 @@ SOURCES += \
     menu/order/DialogBox/addorderitem.cpp \
     menu/order/orderwidget.cpp \
     menu/order/DialogBox/paymentmathod.cpp \
+    menu/staff/Dialog/addstaff.cpp \
+    menu/staff/customWidget/staffrow.cpp \
+    menu/staff/staff.cpp \
     server/dynerserver.cpp \
     server/mytcpsocket.cpp \
     menu/ServerManagement/customWidget/waiterinformation.cpp
@@ -78,6 +81,9 @@ HEADERS += \
     menu/order/customWidget/orderitemdata.h \
     menu/order/orderwidget.h \
     menu/order/DialogBox/paymentmathod.h \
+    menu/staff/Dialog/addstaff.h \
+    menu/staff/customWidget/staffrow.h \
+    menu/staff/staff.h \
     server/dynerserver.h \
     server/mytcpsocket.h \
     menu/ServerManagement/customWidget/waiterinformation.h
@@ -106,7 +112,10 @@ FORMS += \
     menu/order/customWidget/orderitemdata.ui \
     menu/order/DialogBox/addorderitem.ui \
     menu/order/DialogBox/paymentmathod.ui \
-    menu/ServerManagement/customWidget/waiterinformation.ui
+    menu/ServerManagement/customWidget/waiterinformation.ui \
+    menu/staff/Dialog/addstaff.ui \
+    menu/staff/customWidget/staffrow.ui \
+    menu/staff/staff.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

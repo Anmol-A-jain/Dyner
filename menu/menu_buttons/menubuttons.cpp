@@ -14,12 +14,14 @@ MenuButtons::MenuButtons(QWidget *parent) :
     this->setShadow(ui->btnOrder,color);
     this->setShadow(ui->btnBillHistory,color);
     this->setShadow(ui->btnServer,color);
+    this->setShadow(ui->btnStaff,color);
 
     this->parentName = parent;
 
     if(!GlobalData::isAdmin)
     {
         ui->btnAdmin->hide();
+        ui->btnStaff->hide();
     }
 }
 
@@ -48,6 +50,11 @@ void MenuButtons::on_btnServer_clicked()
     static_cast<Dyner*>(parentName)->serverButtonClick();
 }
 
+void MenuButtons::on_btnStaff_clicked()
+{
+    static_cast<Dyner*>(parentName)->staffButtonClick();
+}
+
 void MenuButtons::setShadow(QWidget *widget, QColor color)
 {
     auto effect = new QGraphicsDropShadowEffect();
@@ -56,3 +63,4 @@ void MenuButtons::setShadow(QWidget *widget, QColor color)
     effect->setColor(color);
     widget->setGraphicsEffect(effect);
 }
+

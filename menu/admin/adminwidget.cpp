@@ -60,11 +60,6 @@ void AdminWidget::deleteVecterData()
     qDebug() << "AdminWidget.cpp (deleteVecterData) : vector data has been deleted";
 }
 
-void AdminWidget::paintEvent(QPaintEvent *event)
-{
-    QWidget::paintEvent(event);
-    ui->categoryList->setSizePolicy(ui->SearchTextBox->sizePolicy());
-}
 
 void AdminWidget::loadComboBoxData()
 {
@@ -227,6 +222,12 @@ void AdminWidget::on_categoryList_currentIndexChanged(int index)
 
 void AdminWidget::on_btnPassword_clicked()
 {
-    ChangePassword c;
+    ChangePassword c(false);
     c.exec();
+}
+
+void AdminWidget::paintEvent(QPaintEvent *event)
+{
+    QWidget::paintEvent(event);
+    ui->categoryList->setSizePolicy(ui->SearchTextBox->sizePolicy());
 }

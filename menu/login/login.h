@@ -24,7 +24,7 @@ private slots:
 
     void on_btnSkip_clicked();
 
-    void on_btnChangePAss_clicked();
+    void on_btnChangePass_clicked();
 
 private:
     Ui::Login *ui;

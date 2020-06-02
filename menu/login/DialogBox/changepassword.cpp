@@ -2,14 +2,19 @@
 #include "ui_changepassword.h"
 #include "data/globaldata.h"
 #include "data/xmlmanipulation.h"
-
 #include <QMessageBox>
 
-ChangePassword::ChangePassword(QWidget *parent) :
+ChangePassword::ChangePassword(bool isOldPassrequired, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ChangePassword)
 {
     ui->setupUi(this);
+
+    this->isOldPassrequired = isOldPassrequired;
+    if(!isOldPassrequired)
+    {
+        ui->oldPassContainer->hide();
+    }
 }
 
 ChangePassword::~ChangePassword()
@@ -26,12 +31,11 @@ void ChangePassword::on_btnLogin_clicked()
     GlobalData g;
     QString adminPass = XmlManipulation::getData(g.getTagName(g.loginData),g.getattribute(g.loginData) );
 
-    if(!(oldPass == adminPass))
+    if((oldPass != adminPass) && isOldPassrequired )
     {
         QMessageBox::critical(this,"Alert","Old Password is wrong");
     }
-
-    else if(!(newPass == confirmPass))
+    else if(newPass != confirmPass)
     {
         QMessageBox::critical(this,"Alert","New password is not same");
     }

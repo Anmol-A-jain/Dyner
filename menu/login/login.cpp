@@ -25,13 +25,12 @@ void Login::on_btnLogin_clicked()
     QString name = ui->txtName->text();
     QString pass = ui->txtPass->text();
 
-
     GlobalData g;
     QString adminPass = XmlManipulation::getData(g.getTagName(g.loginData),g.getattribute(g.loginData) );
 
-    bool isvalid = ( (name == "admin") & (pass == adminPass) );
+    bool isvalid = ( (name == "admin") && (pass == adminPass) );
 
-    bool isMasterPaswword = ( (name == "admin") & (pass == "welcome@dyner") );
+    bool isMasterPaswword = ( (name == "admin") && (pass == "welcome@dyner") );
 
     if(isvalid || isMasterPaswword)
     {
@@ -60,8 +59,8 @@ void Login::on_btnSkip_clicked()
     static_cast<Dyner*>(myParent)->homeWidget();
 }
 
-void Login::on_btnChangePAss_clicked()
+void Login::on_btnChangePass_clicked()
 {
-    ChangePassword c;
+    ChangePassword c(true);
     c.exec();
 }

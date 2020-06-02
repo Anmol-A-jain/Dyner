@@ -27,6 +27,7 @@ public:
     void adminButtonClick(); // emits admin button
     void serverButtonClick(); // emits server button
     void homeWidget();
+    void staffButtonClick();
     void setShadow(QWidget *widget, QColor color); // setting shadow to widget and formating widget title
     void closeEvent(QCloseEvent *event) override;
 
@@ -38,7 +39,7 @@ public:
 
     static QWidget* childFrame; // to track wich widget is currently in windowContainer
 
-    enum buttonName{home,order,billHistory,admin,serverManagement,login}; // enum for buttons
+    enum buttonName{home,order,billHistory,admin,serverManagement,login,staff}; // enum for buttons
 
 private slots:
     void on_parentButtonOrder_clicked();
@@ -55,6 +56,8 @@ private slots:
 
     void on_btnLogout_clicked();
 
+    void on_parentButtonStaff_clicked();
+
 private:
     Ui::Dyner *ui;
     bool isMenuHidden; // track if menu is hidden or not
@@ -66,6 +69,7 @@ private:
     QWidget* historyWindow;
     QWidget* adminWindow;
     QWidget* loginWindow;
+    QWidget* staffWidget;
 
 };
 #endif // DYNER_H
