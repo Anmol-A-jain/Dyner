@@ -41,8 +41,9 @@ void Staff::loadData()
         QString Name = q->value(1).toString();
         QString Designation = q->value(2).toString();
         QString password = q->value(3).toString();
+        QString username = q->value(4).toString();
 
-        row->setData(ID,Name,Designation,password);
+        row->setData(ID,Name,Designation,password,username);
         ui->rowContainer->addWidget(row);
         list.push_back(row);
     }
@@ -127,8 +128,9 @@ void Staff::on_SearchTextBox_textChanged(const QString &arg1)
         QString Name = q->value(1).toString();
         QString Designation = q->value(2).toString();
         QString password = q->value(3).toString();
+        QString username = q->value(4).toString();
 
-        row->setData(ID,Name,Designation,password);
+        row->setData(ID,Name,Designation,password,username);
         ui->rowContainer->addWidget(row);
         list.push_back(row);
     }
@@ -160,8 +162,9 @@ void Staff::on_List_currentIndexChanged(const QString &arg1)
         QString Name = q->value(1).toString();
         QString Designation = q->value(2).toString();
         QString password = q->value(3).toString();
+        QString username = q->value(4).toString();
 
-        row->setData(ID,Name,Designation,password);
+        row->setData(ID,Name,Designation,password,username);
         ui->rowContainer->addWidget(row);
         list.push_back(row);
     }

@@ -59,7 +59,36 @@ border-radius:10px;</string>
            </size>
           </property>
           <property name="text">
+           <string>id</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="username">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="text">
            <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="txtUsername">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>username</string>
           </property>
          </widget>
         </item>
@@ -86,12 +115,15 @@ border-radius:10px;</string>
           <property name="styleSheet">
            <string notr="true"/>
           </property>
+          <property name="text">
+           <string>name</string>
+          </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="name">
           <property name="text">
-           <string/>
+           <string>name</string>
           </property>
          </widget>
         </item>

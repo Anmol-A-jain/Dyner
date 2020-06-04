@@ -22,8 +22,9 @@ void addStaff::on_btnAdd_clicked()
     QString name = ui->txtName->text();
     QString designation = ui->List->currentText();
     QString password = ui->txtPassword->text();
+    QString username = ui->txtUsername->text();
 
-    bool ifNotValid = ID.isEmpty() || name.isEmpty() || designation.isEmpty() || password.isEmpty();
+    bool ifNotValid = ID.isEmpty() || name.isEmpty() || designation.isEmpty() || password.isEmpty() || username.isEmpty();
 
     if(ifNotValid)
     {
@@ -42,14 +43,28 @@ void addStaff::on_btnAdd_clicked()
     {
         count++;
     }
+    delete q;
 
-    if(count)
+    cmd = "SELECT ID FROM tblStaff WHERE username='"+username+"';";
+    q = d.execute(cmd);
+    int userCount = 0;
+
+    while(q->next())
     {
-        QMessageBox::information(this,"ID not valid","ID: "+ID+" is not available");
+        userCount++;
+    }
+
+    QString errMsg ;
+    errMsg = (count != 0)? "ID: "+ID+" is not available\n" : "";
+    errMsg = (userCount != 0)? "Username: "+username+" is not available" : "";
+
+    if(errMsg != "")
+    {
+        QMessageBox::information(this,"Not valid",errMsg);
         return;
     }
 
-    cmd = "INSERT INTO tblStaff VALUES('"+ID+"','"+name+"','"+designation+"','"+password+"');";
+    cmd = "INSERT INTO tblStaff VALUES('"+ID+"','"+name+"','"+designation+"','"+password+"','"+username+"');";
     delete d.execute(cmd);
 
     accept();

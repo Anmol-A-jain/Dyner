@@ -15,7 +15,7 @@ public:
     explicit StaffRow(QWidget *parent = nullptr);
     ~StaffRow();
 
-    void setData(QString ID,QString name,QString designation,QString password);
+    void setData(QString ID, QString name, QString designation, QString password, QString username);
 
 private slots:
     void on_showPass_clicked();

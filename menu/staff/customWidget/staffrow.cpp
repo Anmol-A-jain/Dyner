@@ -20,8 +20,10 @@ StaffRow::StaffRow(QWidget *parent) :
     GlobalData::setShadow(this);
     GlobalData::setShadow(ui->txtName);
     GlobalData::setShadow(ui->List);
+    GlobalData::setShadow(ui->txtUsername);
 
     ui->txtName->hide();
+    ui->txtUsername->hide();
     ui->List->hide();
 }
 
@@ -30,12 +32,13 @@ StaffRow::~StaffRow()
     delete ui;
 }
 
-void StaffRow::setData(QString ID, QString name, QString designation, QString password)
+void StaffRow::setData(QString ID, QString name, QString designation, QString password,QString username)
 {
     ui->ID->setText(ID);
     ui->name->setText(name);
     ui->designation->setText(designation);
     ui->password->setText(password);
+    ui->username->setText(username);
 }
 
 void StaffRow::on_showPass_clicked()
@@ -59,11 +62,14 @@ void StaffRow::on_editbtn_clicked()
 
         ui->txtName->show();
         ui->List->show();
+        ui->txtUsername->show();
 
         ui->name->hide();
         ui->designation->hide();
+        ui->username->hide();
 
         ui->txtName->setText(ui->name->text());
+        ui->txtUsername->setText(ui->username->text());
 
         int index = ui->List->findText(ui->designation->text());
         ui->List->setCurrentIndex(index);
@@ -79,11 +85,14 @@ void StaffRow::on_editbtn_clicked()
 
         ui->txtName->hide();
         ui->List->hide();
+        ui->txtUsername->hide();
 
         ui->name->show();
         ui->designation->show();
+        ui->username->show();
 
         ui->name->setText(ui->txtName->text());
+        ui->username->setText(ui->txtUsername->text());
 
         ui->designation->setText(ui->List->currentText());
 
@@ -95,7 +104,7 @@ void StaffRow::on_editbtn_clicked()
         databaseCon d;
         QString cmd;
 
-        cmd = "UPDATE tblStaff SET name = '"+ui->name->text()+"',designation = '"+ui->designation->text()+"',password = '"+ui->password->text()+"' WHERE ID = '"+ui->ID->text()+"';";
+        cmd = "UPDATE tblStaff SET name = '"+ui->name->text()+"',designation = '"+ui->designation->text()+"',password = '"+ui->password->text()+"',username = '"+ui->username->text()+"' WHERE ID = '"+ui->ID->text()+"';";
         delete d.execute(cmd);
 
         QLineEdit::EchoMode echoMode = ui->password->echoMode();
@@ -103,7 +112,6 @@ void StaffRow::on_editbtn_clicked()
         {
             on_showPass_clicked();
         }
-
     }
 }
 

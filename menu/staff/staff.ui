@@ -191,6 +191,13 @@ background-color: rgb(231, 231, 231);</string>
             </widget>
            </item>
            <item>
+            <widget class="QLabel" name="label_username">
+             <property name="text">
+              <string>Username</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QLabel" name="label_name">
              <property name="text">
               <string>Name</string>

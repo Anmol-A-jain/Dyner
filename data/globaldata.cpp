@@ -50,13 +50,14 @@ void GlobalData::printBill(QString name, int billId, QString amount, QString tax
     QString header = QString("Name: %1\nBill No:%2").arg(name,QString::number(billId));
     edit.append(header);
     edit.append("\n");
-    edit.append(QString("Name\t\tQty\tPrice"));
-    edit.append("--------------------------------------------------------------------");
+    edit.append(QString("Name\t\tQty\tPrice\tTotal"));
+    edit.append("------------------------------------------------------------------------------------");
     while(q->next())
     {
         QString itemName = q->value("ItemName").toString();
         double qty = q->value("QTY").toDouble();
         double price = q->value("price").toDouble();
+        double total = qty*price;
 
         int charLimit = 15;
 
@@ -71,21 +72,21 @@ void GlobalData::printBill(QString name, int billId, QString amount, QString tax
             }
             itemName.append("\t");
         }
-        QString record = QString("%1\t%2\t%3\n").arg(itemName,QString::number(qty),QString::number(price));
+        QString record = QString("%1\t%2\t%3\t%4").arg(itemName,QString::number(qty),QString::number(price),QString::number(total));
         edit.append(record);
     }
-    edit.append("---------------------------------------------------------------------");
+    edit.append("-------------------------------------------------------------------------------------");
 
-    QString footer = QString("\tAmount (Rs) :\t\t %1").arg(amount);
+    QString footer = QString("\t\tAmount (Rs) :\t\t %1").arg(amount);
     edit.append(footer);
 
-    QString dicountRow = QString("\tDiscount (Rs) :\t\t %1").arg(discount);
+    QString dicountRow = QString("\t\tDiscount (Rs) :\t\t %1").arg(discount);
     edit.append(dicountRow);
 
-    QString taxRow = QString("\tTax (Rs) :\t\t %1").arg(tax);
+    QString taxRow = QString("\t\tTax (Rs) :\t\t %1").arg(tax);
     edit.append(taxRow);
 
-    QString finalAmountRow = QString("\tTotal Amount (Rs) :\t %1").arg(finalAmount);
+    QString finalAmountRow = QString("\t\tTotal Amount (Rs) :\t %1").arg(finalAmount);
     edit.append(finalAmountRow);
 
     edit.append("\n\n\tThank you");

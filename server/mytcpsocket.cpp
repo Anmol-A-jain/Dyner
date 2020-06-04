@@ -114,6 +114,7 @@ void MyTcpSocket::myReadyRead()
     in >> action;
 
     QString msg;
+    QString msgTitle;
     qint16 type = 0;
 
     enum msgType{warning,informative,critical};
@@ -138,6 +139,7 @@ void MyTcpSocket::myReadyRead()
             qDebug() << "MyTcpSocket (myReadReady) : list : " << dataIn;
             break;
         }
+
         case ALLAction::getTotaltableNo :
         {
             //sending total table Quantity..
@@ -345,6 +347,63 @@ void MyTcpSocket::myReadyRead()
 
 
         // kitchen management
+        case ALLAction::loginKitchen :
+        {
+            QString user,pass;
+
+            in >> user >> pass;
+            GlobalData g;
+            QString adminPass = XmlManipulation::getData(g.getTagName(g.loginData),g.getattribute(g.loginData) );
+
+
+            databaseCon d;
+            QString cmd;
+
+            cmd = "SELECT password FROM tblStaff WHERE (ID = '"+user+"' OR username = '"+user+"')  AND (designation = 'Chef' OR designation = 'Assistant Manager' OR designation = 'Manager');";
+            QSqlQuery* q = d.execute(cmd);
+
+
+            QString password = "";
+
+            if(q->next())
+            {
+                password = q->value(0).toString();
+            }
+            qDebug() << "MyTcpSocket (myReadyRead) : password :" <<password;
+
+            bool isCorrectPass = (pass == password);
+
+            if(isCorrectPass)
+            {
+
+                QByteArray dataOut;
+                QDataStream out(&dataOut,QIODevice::ReadWrite);
+
+                qint16 sendAction = ALLAction::loginKitchen;
+
+                out << sendAction ;
+
+                socket->write(dataOut);
+                socket->flush();
+            }
+            else
+            {
+                QByteArray dataOut;
+                QDataStream out(&dataOut,QIODevice::ReadWrite);
+
+                qint16 sendAction = ALLAction::notification;
+                QString errMsg = "User Id or password is wrong";
+                QString errTitle = "Login failed";
+                type = critical;
+
+                out << sendAction << type << errMsg ;
+
+                socket->write(dataOut);
+                socket->flush();
+            }
+
+            break;
+        }
         case ALLAction::kitchenInfo:
         {
             QVector<WaiterName*>* q = &GlobalData::waiter;
