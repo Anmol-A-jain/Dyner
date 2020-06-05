@@ -146,37 +146,110 @@ void MyTcpSocket::myReadyRead()
 
             QVector<WaiterName*>* q = &GlobalData::waiter;
 
-            QString name;
-            in >> name;
+            QString username,pass;
+            in >> username >> pass;
 
-            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::getTotaltableNo : client name : " << name ;
+            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::getTotaltableNo : client name : " << username ;
+
+            databaseCon d;
+            QString cmd;
+
+            cmd = "SELECT password,name FROM tblStaff WHERE (ID = '"+username+"' OR username = '"+username+"')  AND (designation = 'Waiter' OR designation = 'Assistant Manager' OR designation = 'Manager');";
+            QSqlQuery* query = d.execute(cmd);
 
 
-            WaiterName* waiter = new WaiterName;
-            waiter->ID = this->socketDescriptor;
-            waiter->name = name;
+            QString password = "";
 
-            q->push_back(waiter);
+            if(query->next())
+            {
+                password = query->value(0).toString();
+            }
+            qDebug() << "MyTcpSocket (myReadyRead) : password :" <<password;
 
-            emit addItemInServerManagement();
+            bool isCorrectPass = (pass == password);
 
-            QByteArray dataOut ;
+            if(isCorrectPass)
+            {
+                QString name = query->value(1).toString();
 
-            QDataStream out(&dataOut,QIODevice::ReadWrite);
+                WaiterName* waiter = new WaiterName;
+                waiter->ID = this->socketDescriptor;
+                waiter->name = name;
 
-            GlobalData g;
-            qint16 tblNo =  XmlManipulation::getData(g.getTagName(g.QtyTable),g.getattribute(g.QtyTable) ).toInt();
-            qint16 i = ALLAction::getTotaltableNo;
+                q->push_back(waiter);
 
-            //sending action and total table no
-            out << i;
-            out << tblNo;
+                emit addItemInServerManagement();
 
-            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << dataOut ;
-            int size = socket->write(dataOut);
-            socket->flush();
+                QByteArray dataOut;
+                QDataStream out(&dataOut,QIODevice::ReadWrite);
 
-            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::getTotaltableNo : sending msg size : " << size ;
+//                qint16 sendAction = ALLAction::getTotaltableNo;
+
+//                out << sendAction ;
+
+//                socket->write(dataOut);
+//                socket->flush();
+
+                GlobalData g;
+                qint16 tblNo =  XmlManipulation::getData(g.getTagName(g.QtyTable),g.getattribute(g.QtyTable) ).toInt();
+                qint16 i = ALLAction::getTotaltableNo;
+
+                //sending action and total table no
+                out << i;
+                out << tblNo;
+
+                qDebug() << "MyTcpSocket (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << dataOut ;
+                int size = socket->write(dataOut);
+                socket->flush();
+
+                qDebug() << "MyTcpSocket (myReadReady) : ALLAction::getTotaltableNo : sending msg size : " << size ;
+            }
+            else
+            {
+                QByteArray dataOut;
+                QDataStream out(&dataOut,QIODevice::ReadWrite);
+
+                qint16 sendAction = ALLAction::showNotification;
+                QString errMsg = "User Id or password is wrong";
+                type = critical;
+
+                out << sendAction << type << errMsg ;
+
+                socket->write(dataOut);
+                socket->flush();
+            }
+
+
+
+            /*-----------------------------------------------*/
+
+
+
+//            WaiterName* waiter = new WaiterName;
+//            waiter->ID = this->socketDescriptor;
+//            waiter->name = username;
+
+//            q->push_back(waiter);
+
+//            emit addItemInServerManagement();
+
+//            QByteArray dataOut ;
+
+//            QDataStream out(&dataOut,QIODevice::ReadWrite);
+
+//            GlobalData g;
+//            qint16 tblNo =  XmlManipulation::getData(g.getTagName(g.QtyTable),g.getattribute(g.QtyTable) ).toInt();
+//            qint16 i = ALLAction::getTotaltableNo;
+
+//            //sending action and total table no
+//            out << i;
+//            out << tblNo;
+
+//            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::getTotaltableNo : sending msg : " << dataOut ;
+//            int size = socket->write(dataOut);
+//            socket->flush();
+
+//            qDebug() << "MyTcpSocket (myReadReady) : ALLAction::getTotaltableNo : sending msg size : " << size ;
 
             break;
 
