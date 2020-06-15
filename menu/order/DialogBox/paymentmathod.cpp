@@ -85,7 +85,7 @@ void paymentMathod::insertData(QString paymentType)
     QString discount = QString::number(this->discount);
     QString tax = QString::number(this->tax);
 
-    QString date = QDate::currentDate().toString("yyyy-M-d");
+    QString date = QDate::currentDate().toString("yyyy-MM-dd");
 
     if(isEmpty)
     {
